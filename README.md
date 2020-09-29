@@ -1,7 +1,7 @@
 # Home Together
 Home Together is an online hub for all things home-sharing.
 
-Documentation:
+## Documentation
 [Documentation](https://github.com/JadenBalogh/home-together-b/tree/documentation/Documentation)
 
 ## Our Team

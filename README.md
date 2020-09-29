@@ -1,6 +1,9 @@
 # Home Together
 Home Together is an online hub for all things home-sharing.
 
+Documentation can be found here:
+[Dcumentation](https://github.com/JadenBalogh/home-together-b) 
+
 ## Our Team
 This is the repository for Group B of the capstone project for Home Together. Here's our team:
 

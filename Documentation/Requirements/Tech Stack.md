@@ -11,15 +11,15 @@ Frameworks should be popular and widespread to better allow future developers to
 
 ### React.js front-end
 [React.js Website](https://reactjs.org/) <br />
-React is a library that is mainly used for creating user interfaces.
+React is a library that is mainly used for creating user interfaces. Would be the better choice in determining how the user will see the site. Smaller size, so loads faster. Fully backwards compatible, making it easier to pick up in the future. Highly popular with developers, so more likely to find someone to pick the project up in the future.
 
 ### Angular.js front-end
 [Angular.js Website](https://angularjs.org/) <br />
-Angluar is a library for developing and testing single page applications. 
+Angluar is a library for developing and testing single page applications. Simpler to work with due to both one and two-way data binding. Each update to Angular requires updates between versions, so less backwards compatible.
 
 ### Vue.js front-end
 [Vue.js Website](https://vuejs.org/) <br />
-Vue is a library for building user interfaces and single page applications, made to be a lightweight version of Angular.js.
+Vue is a library for building user interfaces and single page applications, made to be a lightweight version of Angular.js. Better for rapid prototyping and simple applications. 
 
 ### Express.js back-end 
 [Express.js Website](https://expressjs.com/) <br />

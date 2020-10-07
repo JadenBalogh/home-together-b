@@ -1,13 +1,14 @@
 # Tech Stack
-- The following frameworks are popular and widespread, so future developers will be able to pick up where we left off as requested by the client.
 
 ## Website Hosting
-Client has requested that the server is located in Canada
-    * Self-Hosted via a rented Canadian VPS such as [ovh](https://www.ovhcloud.com/en-ca/vps/)
-    * Cloud based dynamic hosting services such as [Amazon EC2](https://aws.amazon.com/ec2/)
-    * Cloud Based Website Hosting service such as [Amazon Lightsail](https://aws.amazon.com/lightsail/)
+Client has requested that the server is located in Canada, potential options include:
+1. Self-Hosted via a rented Canadian VPS such as [ovh](https://www.ovhcloud.com/en-ca/vps/)
+2. Cloud based dynamic hosting services such as [Amazon EC2](https://aws.amazon.com/ec2/) 
+3. Cloud Based Website Hosting service such as [Amazon Lightsail](https://aws.amazon.com/lightsail/) 
 
 ## Website Tech Stack
+Frameworks should be popular and widespread to better allow future developers to pick up where we left; The use of a common framework was requested by the client.
+
 ### React.js front-end
 [React.js Website](https://reactjs.org/) <br />
 React is a library that is mainly used for creating user interfaces.

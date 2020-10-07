@@ -31,4 +31,4 @@ Research and integrate continuous integration for code formatting\
 Create milestone timeline\
 Add list of all feature ideas to backlog\
 Document tech stack\
-Document user group\
+Document user group

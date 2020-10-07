@@ -1,8 +1,10 @@
-## Group Meeting Minutes
+# Group Meeting Minutes
 
-October 2nd
+## October 2nd
 
-12:30pm-1:10pm :Created feature hierarchy 
+###### 12:30pm-1:10pm :
+
+Created feature hierarchy 
 Talked about the general fetures we want to implement, including:
 
 User's account info(create account/login)
@@ -21,7 +23,10 @@ User's account info(edit profile)
 Map
 
 
-1:10pm-2:30pm : Created new issues, including:
+###### 1:10pm-2:30pm :
+
+Created new issues, including:
+
 Research and integrate continuous integration for code formatting
 Create milestone timeline
 Add list of all feature ideas to backlog

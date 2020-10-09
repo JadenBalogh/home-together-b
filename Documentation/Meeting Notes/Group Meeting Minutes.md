@@ -32,3 +32,16 @@ Create milestone timeline\
 Add list of all feature ideas to backlog\
 Document tech stack\
 Document user group
+
+
+
+## October 2nd
+
+###### 12:30-1:00pm: 
+Reading the requirements of Capstone
+
+###### 1:00-1:20:
+Assigning the tasks
+
+###### 1:20-1:40: 
+Discussing details of the tasks

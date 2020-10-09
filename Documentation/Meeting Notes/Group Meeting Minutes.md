@@ -35,7 +35,7 @@ Document user group
 
 
 
-## October 2nd
+## October 9th
 
 ###### 12:30-1:00pm: 
 Reading the requirements of Capstone

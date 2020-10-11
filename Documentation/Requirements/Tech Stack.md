@@ -30,28 +30,112 @@ Client has requested that the server is located in Canada.
 #### Cons:
 * Low flexability, a pre-configured locked down EC2 instance. 
 * Poor scaling, not as flexable as EC2 or other services.
+## Front-end Language
+Languages should be popular and widespread to better allow future developers to pick up where we left; The use of common languages was requested by the client.
+
+### [HTML](https://html.spec.whatwg.org)
+
+HTML is the standard markup language.
+
+#### Pros:
+* Easy to use and understand
+* All browers supprt HTML
+* Most develpment tool support HTML
+* Integrate easily with other languages
+* Display Changes Instantly
+* Search engine friendly
+* Simple to edit
 
 #### Cons:
-## Website Front End
-Frameworks should be popular and widespread to better allow future developers to pick up where we left; The use of a common framework was requested by the client.
+* Takes time to learn the syntax
 
-### React.js front-end
-[React.js Website](https://reactjs.org/) <br />
-React is a library that is mainly used for creating user interfaces. Would be the better choice in determining how the user will see the site. Smaller size, so loads faster. Fully backwards compatible, making it easier to pick up in the future. Highly popular with developers, so more likely to find someone to pick the project up in the future.
 
-### Angular.js front-end
-[Angular.js Website](https://angularjs.org/) <br />
-Angluar is a library for developing and testing single page applications. Simpler to work with due to both one and two-way data binding. Each update to Angular requires updates between versions, so less backwards compatible.
+### [CSS]https://www.w3.org/Style/CSS/Overview.en.html
+CSS is a style sheet language.
 
-### Vue.js front-end
-[Vue.js Website](https://vuejs.org/) <br />
-Vue is a library for building user interfaces and single page applications, made to be a lightweight version of Angular.js. Better for rapid prototyping and simple applications. 
+#### Pros:
+* Code can be reused in multiple HTML pages
+* Easy maintenance 
+* Search engine friendly
+* Fast webpage loading
+* Printer Friendly
 
-## Website Back-End
+#### Cons:
+* Need to test across multiple browsers for compatibility
+* Need to pay attention to different level of CSS （i.e. CSS2，CSS3， etc.）
+ 
+ 
+### [JavaScript](https://www.javascript.com)
+ JavaScript is a scripting language.
+ 
+#### Pros:
+* Comparatively fast for the end user
+* Platform independent
+* Easy to debug and test
+* Extended functionality to web pages
+* Rich interfaces
 
-### Express.js back-end 
-[Express.js Website](https://expressjs.com/) <br />
+#### Cons:
+* Single Inheritance
+
+
+## Front-end Framework
+Frameworks should be popular and widespread to better allow future developers to pick up where we left; The use of common frameworks was requested by the client.
+
+### [jQuery](https://jquery.com)
+jQuery is a JavaScript Library.
+
+#### Pros:
+* Pages load faster
+* Search engine friendly
+* Large library
+* Ajax support
+* Strong opensource community
+* JavaScript enhancement, no need to learn new syntax
+
+#### Cons:
+* A huge library to import
+
+
+### [React](https://reactjs.org/)
+React is a library that is mainly used for creating user interfaces.
+
+#### Pros:
+* Good choice in determining how the user will see the site
+* Smaller size, loads faster 
+* Fully backwards compatible, making it easier to pick up in the future
+* Highly popular with developers, so more likely to find someone to pick the project up in the future
+
+### [Angular](https://angularjs.org/)
+Angluar is a library for developing and testing single page applications. 
+#### Pros:
+* Simpler to work with due to both one and two-way data binding. 
+* Each update to Angular requires updates between versions, so less backwards compatible
+
+### [Vue](https://vuejs.org/)
+Vue is a library for building user interfaces and single page applications, made to be a lightweight version of Angular.js. 
+
+#### Pros:
+* Better for rapid prototyping and simple applications
+
+
+## Back-End Language
+
+### PHP
+PHP is a general-purpose server scripting language.
+
+#### Pros:
+* Easily connected with the database
+* Easy maintenance
+* easier to protect the web applications
+* more stable
+
+## Back-end Framework
+
+### [Express](https://expressjs.com/)
+
 A backend framework that is highly used, used by companies such as PayPal, Uber, and IBM. Flexible, as features come in as plugins.
+
 
 ## Database
 ### MySQL

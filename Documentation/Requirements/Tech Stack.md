@@ -25,7 +25,7 @@ Client has requested that the server is located in Canada.
 ### Cloud based website hosting service such as [Amazon Lightsail](https://aws.amazon.com/lightsail/) 
 #### Pros:
 * Lower engineering costs, Amazon provideds a per-configured enviroment. 
-* Extremely simple management, you don't even need to know how to SSH.
+* Extremely simple management, you don't even need to know how to use SSH.
 
 #### Cons:
 * Low flexability, a pre-configured locked down EC2 instance. 
@@ -55,16 +55,39 @@ A backend framework that is highly used, used by companies such as PayPal, Uber,
 
 ## Database
 ### MySQL
+MySQL is a RDBMS based Database. 
 #### Pros:
 * MySQL is one of the most well know relational databases. 
 * It's the database taught in the Introduction to Databases course at UBCO so most students will be familiar with it. 
 * MySQL is easy to learn and the code is relatively user-readable. 
 * Due to its ubiquity it is supported on most cloud platforms.
+* Commercial support will be available for the forseeable future, no worry about the project dying. 
 
 #### Cons:
 * MySQL is also quite old; it was originally realeased in 1995 and has accumulated a lot of cruft and non-standard behaviour compared to newer database engines. 
 * The client is not entriely open source, there is an enterprise edition which has a [cost](https://shop.oracle.com/pls/ostore/product?p1=MySQL).
-* MySQL has limited verticle scalability and often has to rely on horizontal scaling to imporve performance. Which has increased engineering and complexity costs
+* MySQL has limited verticle scalability and often has to rely on horizontal scaling to imporve performance. Which has increased engineering and complexity costs.
+
+
+### MariaDB
+MariaDB is an open source fork of MySQL and is touted as a "Drop In" replacement for MySQL. 
+#### Pros:
+* Offers most/all the features of Enterprise MySQL for free. 
+* Open Source.
+* High performance vs MySQL. 
+* Quicker security patches vs MySQL. 
+
+#### Cons:
+* Limited commercial support.
+* Less popular than MySQL.
+* Difficuly to scale like MySQL. 
+
+
+
+### DATABASE 3
+#### Pros:
+
+#### Cons:
 
 
 

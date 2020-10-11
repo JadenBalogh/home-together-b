@@ -19,46 +19,47 @@ Client has requested that the server is located in Canada.
 * High scalability, can accomodate any number of users by spinning up more EC2 instances and balancing load.
 
 #### Cons:
-* Expensive, you are paying for the elasticity.
+* Expensive, you are paying for the elasticity/resource availability.
 * Due to the amount of vendor specifity it would be a technical challenge to migrate to another platform.
+* Extreme network complexity unless the site is expecting a very large amount of traffic. 
 
 ### Cloud based website hosting service such as [Amazon Lightsail](https://aws.amazon.com/lightsail/) 
 #### Pros:
 * Lower engineering costs, Amazon provideds a per-configured enviroment. 
-* Extremely simple management, you don't even need to know how to use SSH.
+* Extremely simple management, the admin doesn't even need to know how to use SSH.
 
 #### Cons:
-* Low flexability, a pre-configured locked down EC2 instance. 
+* Low flexability, Lightsail is basically a pre-configured and locked down EC2 instance. 
 * Poor scaling, not as flexable as EC2 or other services.
+* Expensive. 
+
 ## Front-end Language
 Languages should be popular and widespread to better allow future developers to pick up where we left; The use of common languages was requested by the client.
 
 ### [HTML](https://html.spec.whatwg.org)
 
-HTML is the standard markup language.
+HTML 5 is the standard modern web markup language. It is understood by all modern web browsers by design and is a defacto web standard.
 
 #### Pros:
-* Easy to use and understand
-* All browers supprt HTML
-* Most develpment tool support HTML
-* Integrate easily with other languages
-* Display Changes Instantly
-* Search engine friendly
-* Simple to edit
+* Easy to use and understand, human readable by design.
+* All browers support basic HTML.
+* Most develpment tools support HTML.
+* HTML is a markup language easily modified and analyised by other programs.
+* Search engine friendly, having accessable and proper HTML is important for SEO.
+* Simple to edit, does not require any sort of compilation or virtual machine to run. Changes can be viewed in near real-time. 
 
 #### Cons:
-* Takes time to learn the syntax
-
+* Takes time to learn the syntax. 
 
 ### [CSS]https://www.w3.org/Style/CSS/Overview.en.html
-CSS is a style sheet language.
+CSS aka cascading Style Sheets is used to transform the raw markup in HTML into a dynamic stylization adjusted based on the users device and the designers intentions. It is a defacto web standard. 
 
 #### Pros:
-* Code can be reused in multiple HTML pages
-* Easy maintenance 
-* Search engine friendly
-* Fast webpage loading
-* Printer Friendly
+* Reusable, the same CSS can be applied to multiple HTML files to ensure design consistency.
+* Easy maintenance, an external CSS file can be referenced by multiple HTML files allowing consistent changes throughout a design
+* Search engine friendly.
+* Fast webpage loading.
+* Printer Friendly.
 
 #### Cons:
 * Need to test across multiple browsers for compatibility
@@ -148,8 +149,8 @@ MySQL is a RDBMS based Database.
 * Commercial support will be available for the forseeable future, no worry about the project dying. 
 
 #### Cons:
-* MySQL is also quite old; it was originally realeased in 1995 and has accumulated a lot of cruft and non-standard behaviour compared to newer database engines. 
-* The client is not entriely open source, there is an enterprise edition which has a [cost](https://shop.oracle.com/pls/ostore/product?p1=MySQL).
+* MySQL is quite old; it was originally realeased in 1995 and has accumulated a lot of cruft and non-standard behaviour compared to newer database engines. 
+* The client is not entriely open source, there is an enterprise edition which has an additional [cost](https://shop.oracle.com/pls/ostore/product?p1=MySQL).
 * MySQL has limited verticle scalability and often has to rely on horizontal scaling to imporve performance. Which has increased engineering and complexity costs.
 
 

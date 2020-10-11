@@ -1,15 +1,2 @@
 # Project Summary
-Home Together is a non-profit hub for all things homesharing.
-
-Home Together does not offer a particular service, but rather aims to maximize the number of people and services available in one place. Users can use the website to browse local homesharing services and find people in a particular geographical location, and filter these results by their specific needs.
-
-General features include:
- - Search people and services that match an entered set of filters 
-    - e.g: A user could search by working status, location, pets, and budget. 
-
- - Anonymous and secure sign up.
-    - User enters information on site to verify identity but it is hidden from other users. If user wishes to share personal information with another member they can do so via the site message system. 
-
- - Private no-risk messaging within the website, with email notifications. 
-
- - Rating system for both home sharers and listed services
+Home Together is the non-profit hub for all things homesharing. It aims to not just offer a particular service but to bring together everything related to home sharing into one unified platform. Users can browse local homesharing services, look for potential housemates, and connect with local classes, seminars, and more. HomeTogether is aimed at everyone from the retired to the freshly graduated. Buisnesses will be able to list their services via the classified system, non-profits and community events will be able to list for free. Users will be able to filter for matches by things such as working status, location, pets and, budget. Users and businesses will be verified by site admins. User information is hidden from other users unless they explicity choose to share it with another user. They can communicate on site via a messaging system with e-mail notifications. Users will be able to rate other users and listed services. 

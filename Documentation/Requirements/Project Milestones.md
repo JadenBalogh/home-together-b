@@ -59,6 +59,7 @@ This stage of the project is for finalizing the user interface, and adding safet
   - Report other users
   - Block other users
   - Verification process for business account and classifieds
+  - Payment process for non-homesharing listings
 - Administration
   - Ban feature with reason field
   - View reports/complaints

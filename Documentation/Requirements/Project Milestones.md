@@ -1,5 +1,5 @@
 # Project Milsestones
-Milestones and their features are cumulative of the previous milsestones, and therefore include the previously listed features.
+This is a listing of all functional requirements for the Home Together project, organized by milestone and website section.
 
 # Requirements and Design - October 14
 This milestone involves building documentation, requirements and initial design.

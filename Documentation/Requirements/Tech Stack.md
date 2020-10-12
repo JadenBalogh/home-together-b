@@ -6,11 +6,11 @@ Client has requested that the server is located in Canada.
 ### Self-Hosted via a rented Canadian VPS such as [ovh](https://www.ovhcloud.com/en-ca/vps/)
 #### Pros:
 * Inexpensive. 
-* Full control over the system, given root access. 
+* Full control over the system. The admin is given root access to the server. 
 * Easy to migrate to another provider. 
 
 #### Cons:
-* Inelastic, cannot handle sudden spikes in traffic.
+* Inelastic; cannot handle sudden spikes in traffic.
 * Difficult to scale. Adding additional performance requires an increase in network complexity.
 
 ### Cloud based dynamic hosting service such as [Amazon EC2 + Amazon RDS + Amazon S3 + Elastic Load Balancer (ELB)](https://aws.amazon.com/ec2/) 
@@ -33,11 +33,11 @@ Client has requested that the server is located in Canada.
 * Poor scaling, not as flexable as EC2 or other services.
 * Expensive. 
 
+
 ## Front-end Language
 Languages should be popular and widespread to better allow future developers to pick up where we left; The use of common languages was requested by the client.
 
 ### [HTML](https://html.spec.whatwg.org)
-
 HTML 5 is the standard modern web markup language. It is understood by all modern web browsers by design and is a defacto web standard.
 
 #### Pros:
@@ -62,9 +62,8 @@ CSS aka cascading Style Sheets is used to transform the raw markup in HTML into 
 * Printer Friendly.
 
 #### Cons:
-* Need to test across multiple browsers for compatibility
-* Need to pay attention to different level of CSS （i.e. CSS2，CSS3， etc.）
- 
+* CSS can behave differently across multiple implimentations and so multiple browsers and clients need to be tested for compatibility.
+* Need to pay attention to different level of CSS （e.g CSS2，CSS3， etc.）
  
 ### [JavaScript](https://www.javascript.com)
  JavaScript is a scripting language.
@@ -97,13 +96,11 @@ jQuery is a JavaScript Library.
 #### Cons:
 * A huge library to import
 
-###[Layui](https://www.layui.com)
+### [Layui](https://www.layui.com)
 Layui is a front-end UI framework.
 #### Pros:
 * Light weight
 * Esay to learn
-
-
 
 ### [React](https://reactjs.org/)
 React is a library that is mainly used for creating user interfaces.
@@ -204,14 +201,20 @@ MariaDB is an open source fork of MySQL and is touted as a "Drop In" replacement
 * Difficuly to scale like MySQL. 
 
 
+### MongoDB
+MongoDB is a Document-Oriented NoSQL database program. 
 
-### DATABASE 3
 #### Pros:
-
+* Uses user-readable rich JSON documents. 
+* Uses JSON Querys giving more user-readable queries.
+* Highly scalable, supports seamless horizontal scalability. 
+* Provides high level APIs to work with data. 
+* Does not require as much up-front design work, database can be adjust more on the fly than a traditional RDBMS database.
 #### Cons:
-
-
-
+* Less relaibality than an Atomic RDBMS implimentation. 
+* Less performant for complex queries. 
+* Less popular than MySQL databases. 
+* MongoDB queries are less structured than tradtional SQL queries.
 
 ## Map API
 The client has requested that we use [Google Maps](https://cloud.google.com/maps-platform/maps).

@@ -1,4 +1,4 @@
-# Project Milsestones
+# Project Milestones
 This is a listing of all functional requirements for the Home Together project, organized by milestone and website section.
 
 # Requirements and Design - October 14

@@ -97,6 +97,13 @@ jQuery is a JavaScript Library.
 #### Cons:
 * A huge library to import
 
+###[Layui](https://www.layui.com)
+Layui is a front-end UI framework.
+#### Pros:
+* Light weight
+* Esay to learn
+
+
 
 ### [React](https://reactjs.org/)
 React is a library that is mainly used for creating user interfaces.
@@ -135,12 +142,40 @@ PHP is a general-purpose server scripting language.
 
 ### [Express](https://expressjs.com/)
 
-A backend framework that is highly used, used by companies such as PayPal, Uber, and IBM. Flexible, as features come in as plugins.
+Express is a backend framework that is highly used, used by companies such as PayPal, Uber, and IBM. Flexible, as features come in as plugins.
+
+### [thinkphp](https://whatcms.org/c/ThinkPHP)
+Thinkphp PHP is an open source framework of PHP.
+
+#### Pros:
+* Advanced model: it can support serialization field, text field, read-only field, delay write, optimistic lock, data sub table and other advanced features easily.
+* View model: easily and dynamically create database view, multi table query is relatively simple.
+* Association model: it allows you to complete the association operation of multiple tables in unexpected simple and flexible way.
+* Template engine: an excellent XML based compiler template engine is built in the system, which supports two types of template tags, integrates Smarty and JSP tag library ideas, and supports tag library expansion. The driver can also support the third-party template engines such as Smarty, easetemplate, templatelite and smart.
+* Cache mechanism: the system supports a variety of dynamic data cache types, including file mode, APC, DB, Memcache, shmop, eaccelerator and Xcache, as well as customizable static cache rules, and provides shortcut methods for access operation.
+* Class library import: ThinkPHP first uses the method based on class library package and namespace to import class library, which makes the class library import more simple and clear, and also supports conflict detection and alias import. In order to facilitate the cross platform migration of the project, the system can also strictly check the case of the loaded file.
+* Extension mechanism: the system supports powerful and flexible extension mechanisms, including class library extension, driver extension, application extension, model extension, controller extension, tag library extension, template engine extension, widget extension, behavior extension and pattern extension, so that you are no longer limited by the lack of core and at a loss, and you can do your own DIY framework and extended application.
+* URL mode: the system supports the URL mode of common mode, pathinfo mode, rewrite mode and compatibility mode, supports the deployment of different servers and operation modes, and cooperates with the URL routing function, so that you can build the required URL address and optimize SEO at will.
+* Compilation mechanism: the original core compilation and project dynamic compilation mechanism can effectively reduce the performance cost of file loading in OOP development. 
+* ORM: simple and lightweight ORM implementation, combined with simple curd and AR mode, makes development efficiency everywhere.
+* Query language: built in rich query mechanisms, including composite query, composite query, interval query, statistical query, positioning query, dynamic query and native query, make your data query concise and efficient.
+* Dynamic model: without creating any corresponding model class, curd operation can be easily completed, dynamic switching between multiple models can be supported, and you can enjoy the incomparable pleasure and best experience of data operation.
+* Group module: don't worry about the division of labor, coordination and deployment of large projects. Group modules help you solve cross project problems.
+* Ajax support: built in ajax data return method, support JSON, XML and eval format return to the client, and the system does not bind any Ajax class library, you can use your own familiar Ajax class library for operation.
+* Multi language support: the system supports the function of language pack. Projects and modules can have separate language packs, and can automatically detect the browser language and automatically load the corresponding language pack.
+* Multi language support: the system supports the function of language pack. Projects and modules can have separate language packs, and can automatically detect the browser language and automatically load the corresponding language pack.
+* Mode extension: in addition to the standard mode, the system has built-in Lite, thin and cli patterns, providing the best core framework for different levels of application development, and can also customize the mode extension.
+* Automatic verification and completion: automatically complete the verification and filtering of form data, and generate safe data objects.
+* Multi language support: the system supports the function of language pack. Projects and modules can have separate language packs, and can automatically detect the browser language and automatically load the corresponding language pack.
+* Field type detection: field type cast to ensure more secure data writing and query.
+* Database features: the system supports multi database connection and dynamic switch mechanism, and supports distributed database. 
+* Multi language support: the system supports the function of language pack. Projects and modules can have separate language packs, and can automatically detect the browser language and automatically load the corresponding language pack.
 
 
 ## Database
 ### MySQL
 MySQL is a RDBMS based Database. 
+
 #### Pros:
 * MySQL is one of the most well know relational databases. 
 * It's the database taught in the Introduction to Databases course at UBCO so most students will be familiar with it. 
@@ -155,7 +190,8 @@ MySQL is a RDBMS based Database.
 
 
 ### MariaDB
-MariaDB is an open source fork of MySQL and is touted as a "Drop In" replacement for MySQL. 
+MariaDB is an open source fork of MySQL and is touted as a "Drop In" replacement for MySQL.
+
 #### Pros:
 * Offers most/all the features of Enterprise MySQL for free. 
 * Open Source.

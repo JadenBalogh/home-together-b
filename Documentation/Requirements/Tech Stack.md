@@ -111,6 +111,10 @@ React is a library that is mainly used for creating user interfaces.
 * Fully backwards compatible, making it easier to pick up in the future
 * Highly popular with developers, so more likely to find someone to pick the project up in the future
 
+#### Cons:
+* A huge library to import
+
+
 ### [Angular](https://angularjs.org/)
 Angluar is a library for developing and testing single page applications. 
 #### Pros:
@@ -122,7 +126,13 @@ Vue is a library for building user interfaces and single page applications, made
 
 #### Pros:
 * Better for rapid prototyping and simple applications
+* flexible
+* great tooling
+* Tiny size
 
+#### Cons:
+* part of its content and discussions is in chinese
+* Limited resources
 
 ## Back-End Language
 
@@ -139,7 +149,17 @@ PHP is a general-purpose server scripting language.
 
 ### [Express](https://expressjs.com/)
 
-Express is a backend framework that is highly used, used by companies such as PayPal, Uber, and IBM. Flexible, as features come in as plugins.
+Express is a backend framework that is highly used, used by companies such as PayPal, Uber, and IBM.
+
+#### Pros:
+* Flexible, as features come in as plugins.
+* Highly Extensible
+* Easy to learn
+* High Performance
+* Has a large community
+
+#### Cons:
+* problems with callbacks
 
 ### [thinkphp](https://whatcms.org/c/ThinkPHP)
 Thinkphp PHP is an open source framework of PHP.

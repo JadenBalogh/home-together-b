@@ -45,3 +45,14 @@ Assigning the tasks
 
 ###### 1:20-1:40: 
 Discussing details of the tasks
+
+
+
+## October 16th
+
+###### 12:30-12:40pm: 
+Discussing/finalizing tech stack choice
+
+###### 12:40-12:55pm:
+Discussing report and assigning parts
+

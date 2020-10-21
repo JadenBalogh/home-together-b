@@ -10,10 +10,10 @@ Businesses looking to advertise\
 Non-profit/community organizers
 
 
-Users looking for housemates (external entity) sends the request of homesharing listing to the Access HomeTogether System. It receives information of housemates form the system.
+The external entity of users looking for housemates sends the request of homesharing listing to the Access HomeTogether System. It receives information of housemates from the system.
 
-Users looking for services (external entity) sends the request of service listing to the Access HomeTogether System. It receives information of services providers form the system.
+The external entity of users looking for services sends the request of service listing to the Access HomeTogether System. It receives information of services providers from the system.
 
-Businesses looking to advertise (external entity) sends the services that the business provide to the Access HomeTogether System. It receives users’ information (i.e. the users’ requests) of interested users form the system.
+The external entity of businesses looking to advertise sends the services that the business provide to the Access HomeTogether System. It receives users’ information (i.e. the users’ requests) of interested users from the system.
 
-Non-profit/community organizers (external entity) sends the services that the business provide to the Access HomeTogether System. It receives users’ information (i.e. the users’ requests) of interested users form the system.
+The external entity of non-profit/community organizers sends the services that the business provide to the Access HomeTogether System. It receives users’ information (i.e. the users’ requests) of interested users from the system.

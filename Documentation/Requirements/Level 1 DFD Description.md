@@ -4,8 +4,8 @@
 Housing Query System\
 Services Query System\
 Business Advertisement System\
-Non-profit/Community Advertisment Posting System\
-Advertisment Management System\
+Non-profit/Community Advertisement Posting System\
+Advertisement Management System\
 User Management System
 
 
@@ -25,3 +25,4 @@ Services queried\
 Non-profit/community organizers service\
 Business info\
 Non-profit/community organizers info
+

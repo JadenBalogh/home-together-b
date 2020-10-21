@@ -25,7 +25,7 @@ HTML 5 is the standard modern web markup language. It is understood by all moder
 * Takes time to learn the syntax.
 * HTML is very fault tolerant and so writing optimal can be tricky for people unfamiliar with it.
 
-### [CSS - Cascading Style Sheets]https://www.w3.org/Style/CSS/Overview.en.html
+### [CSS - Cascading Style Sheets](https://www.w3.org/Style/CSS/Overview.en.html)
 CSS is used to transform the raw markup in HTML into a dynamic stylization adjusted based on the users device and the designers intentions. It is a defacto web standard. 
 
 #### Pros:

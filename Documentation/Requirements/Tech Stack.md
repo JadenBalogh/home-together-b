@@ -53,9 +53,7 @@ JavaScript is a scripting language.
 * Single Inheritance
 
 ## Front-end Framework
-Frameworks should be popular and widespread to better allow future developers to pick up where we left; The use of common frameworks was requested by the client.
-
-### [React](https://reactjs.org/)
+### [React.js](https://reactjs.org/)
 React is a library that is mainly used for creating user interfaces.
 
 #### Pros:
@@ -68,7 +66,7 @@ React is a library that is mainly used for creating user interfaces.
 * A huge library to import
 
 ## Back-end Framework
-### [Express](https://expressjs.com/)
+### [Express.js](https://expressjs.com/)
 Express is a backend framework that is highly used, used by companies such as PayPal, Uber, and IBM.
 
 #### Pros:
@@ -78,8 +76,22 @@ Express is a backend framework that is highly used, used by companies such as Pa
 * High Performance
 * Has a large community
 
+## Runtime Libary 
+### [Node.js](https://nodejs.org/en/)
+Node.js is a runtime enviroment that's based on the V8 Javascript engine.
+
+#### Pros:
+* Uses JavaScript like the rest of our tech-stack, allows us to work in one language.
+* Supports Asychronous processing and event handling.
+* Supported by IBM, Microsoft, and PayPal. 
+* Excellent JSON Support which allows it to communicate easily with our MongoDB Database.
+
+#### Cons:
+* Node can performance bottleneck on CPU heavy tasks as it's primarily single threaded.
+* Code can rapidly become messy with Callbacks, requires solid documentation to keep code maintainable.
+
 ## Database
-### MongoDB
+### [MongoDB](https://www.mongodb.com/)
 MongoDB is a Document-Oriented NoSQL database program. 
 
 #### Pros:

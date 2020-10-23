@@ -56,3 +56,12 @@ Discussing/finalizing tech stack choice
 ###### 12:40-12:55pm:
 Discussing report and assigning parts
 
+
+
+## October 23rd
+
+###### 11:15-11:20 pm: 
+Discussing the weekly plans
+
+###### 11:20-12:06 pm: 
+Creating issues and assigning parts

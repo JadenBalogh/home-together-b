@@ -1,8 +1,12 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+// import React from 'react';
+// import { shallow } from 'enzyme';
+// import { ServerInput } from './App';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+// test('checks value of input', () => {
+//   const serverInput = shallow(<ServerInput />);
+//   expect(serverInput.text()).toEqual('');
+// });
+
+test('example test', () => {
+  expect(1+1).toEqual(2);
 });

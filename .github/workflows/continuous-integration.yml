@@ -11,8 +11,10 @@ jobs:
         with:
           node-version: '12.x'
       - name: Install Dependencies
-        run: cd client
-        run: npm install
+        run: |
+          cd client
+          npm install
       - name: Test
-        run: cd client
-        run: npm test
+        run: |
+          cd client
+          npm test

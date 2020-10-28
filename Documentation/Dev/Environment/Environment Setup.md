@@ -5,7 +5,7 @@ Steps required to setup and run the app in your local development environment.
 These steps are only required once for each computer you are working on.  
 ### Install Visual Studio Code: https://code.visualstudio.com/  
 ### Install Node.js: https://nodejs.org/en/
-### Install MySQL: https://www.mysql.com/products/community/
+### Install MySQL: https://www.mysql.com/products/community/ - Download "Community Server" I'd use the windows installer but you can install manually.
 1. Use the config type: Development Computer
 2. Use the default ports.
 If either of these ports is taken by something already message the group and we can discuss changing ports. As per this [List of TCP & UDP Port Numbers](https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers) it should be free. 

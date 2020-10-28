@@ -36,6 +36,11 @@ As rootDB user then execute the code below to create our database.
 CREATE DATABASE HTDB; 
 ``` 
 
+To Test that everything is working set open your terminal in vscode to the /server directory and then run, you should see the sample code output in the console.
+```cmd
+node demodb.js
+``` 
+
 
 ### Install the MySQL2 Node.js Driver
 The mySQL2 node.js driver is included in the server package.json and should be grabbed when doing npm install (See below). [An Absolute Beginner's Guide to Using npm](https://nodesource.com/blog/an-absolute-beginners-guide-to-using-npm/) is linked if you're unfamiliar. We have to use the MySQL2 because the mySQL driver doesn't support the new MySQL 8 Secure DB authentication. See [StackOverflow Discussion](https://stackoverflow.com/questions/50093144/mysql-8-0-client-does-not-support-authentication-protocol-requested-by-server) and [GitHub MySQL Issue](https://github.com/mysqljs/mysql/pull/1962).

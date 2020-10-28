@@ -81,4 +81,7 @@ Discussing the gitstats strategy
 
 ###### 1:50-3:00pm:
 Creating issues, assigning parts and discussing the plans of next week 
-
+- we decided to change from MongoDB to MySQL to save time (since we've all used relational databases before)
+ - everyone needs to comment and review (NOT merge) on every pull request for this week by 9pm tonight - note that Jared still needs to create a pull request for the documentation so that'll also require comments and reviews
+ - we've assigned the tasks for this week; we're primarily focusing on the database creation but Athena is setting up the mysql connection on the server and we've assigned you to create a front-end interface to show database results that are sent by the server
+ - all the issues are updated on the github for more info

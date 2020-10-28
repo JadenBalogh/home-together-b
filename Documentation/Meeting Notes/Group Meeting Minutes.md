@@ -65,3 +65,20 @@ Discussing the weekly plans
 
 ###### 11:20-12:06 pm: 
 Creating issues and assigning parts
+
+
+
+
+
+
+## October 27th
+
+###### 1:30-1:40pm: 
+Introducing the progress
+
+###### 1:40-1:50pm:
+Discussing the gitstats strategy
+
+###### 1:50-3:00pm:
+Creating issues, assigning parts and discussing the plans of next week 
+

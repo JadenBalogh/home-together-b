@@ -68,3 +68,29 @@ Discussing the gitstats strategy
  - We've assigned the tasks for this week; we're primarily focusing on the database creation but Athena is setting up the mysql connection on the server and we've assigned you to create a front-end interface to show database results that are sent by the server
  - All the issues are updated on the github for more info
 
+
+
+## November 3rd
+###### 1:30-2:00pm: 
+Reviewing each other's work
+
+###### 2:00-2:45pm:
+Discussing the plan for next week
+
+###### 2:45-3:05pm:
+Creating issues and assigning parts\
+issues created:\
+Add linting to the Continuous integration setup\
+Create the MemberList component which gets and displays users in a table from /get-users on the server\
+Research and document the approach to creating pages in React\
+Create the UserSearch.js file in client/src/ \
+Create an Express Get route called /get-users in server.js\
+Create the getUsers function in server.js\
+Standardize the local database setup process\
+Add 5 example rows to the User table\
+Create the User table in the database
+
+
+
+
+

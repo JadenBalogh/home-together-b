@@ -1,59 +1,82 @@
-import React, { Component } from 'react';
-import './App.css';
+import React from 'react';
+import './index.css';
+import reportWebVitals from './reportWebVitals';
+import MemberList from './MemberList';
 
-class ServerInput extends Component {
+class MemberListClass extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = {
-      value: "",
-      response: ""
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+      super(props);
+      this.state = { total: 0 }
+      var rows = props.data;
+      var queriedResult = [];
+      this.isClicked = this.isClicked.bind(this);
+      this.memberQuery = this.memberQuery.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({
-      value: event.target.value
-    });
+  createMemberData(id, username, gender, age) {
+      return { id, username, gender, age };
   }
 
-  handleSubmit() {
-    const options = {
-      method: 'POST',
-      body: JSON.stringify({ data: this.state.value }),
-      headers: { 'Content-Type': 'application/json' }
-    };
-    fetch(process.env.REACT_APP_SERVER_URL, options)
-      .then(res => res.text())
-      .then(txt => {
-        this.setState({
-          response: txt
-        });
+  memberQuery() {//!!!Currently unused!!!
+      var mysql = require('mysql');
+
+      //Connection information
+      var con = mysql.createConnection({
+          host: "localhost",
+          user: "test",
+          password: "Test!1"
+      });
+
+      con.connect(function (err) {
+          if (err) throw err;
+          console.log("Connected.")
+          //Queries done here
+          con.query("SELECT * FROM MEMBERS", function (err, result) {
+              if (err) throw err;
+              Object.keys(result).forEach(function (key) {
+                  this.queriedResult = result[key];
+              });
+          })
       });
   }
 
-  render() {
-    return (
-      <div>
-        <p>
-          <input type='text' value={this.state.value} onChange={this.handleChange} />
-          <button onClick={this.handleSubmit}>Submit</button>
-        </p>
-        {this.state.response}
-      </div>
-    );
+  isClicked() {
+      this.setState(state => ({ butText: "updt" }));
+      this.queriedResult = [
+          this.createMemberData(0, 'testUser1', 'F', 32),
+          this.createMemberData(1, 'testUser2', 'M', 24),
+          this.createMemberData(2, 'testUser3', 'F', 62),
+          this.createMemberData(3, 'testUser4', 'M', 45),
+          this.createMemberData(4, 'testUser5', 'F', 84),
+          this.createMemberData(5, 'testUser6', 'M', 27),
+      ];
+
   }
+
+  render() {
+      return (
+          <div>
+              <MemberList data={this.queriedResult} />
+              <button onClick={this.isClicked}>
+                  {"Test query"}
+              </button>
+          </div>
+      );
+  }
+
 }
 
 function App() {
   return (
     <div className='App'>
-      <h1>Hello World</h1>
-      <p>Enter a string and the server will return the uppercase result:</p>
-      <ServerInput />
+      <MemberListClass/>
     </div>
   );
 }
 
 export default App;
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();

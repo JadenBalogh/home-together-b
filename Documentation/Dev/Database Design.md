@@ -4,7 +4,7 @@ I'd like to add the MySQL Datatypes to this but I'm not sure if that's overkill.
 ## Entities
  ### Members
  - UserID - Primary Key 
- - Username
+ - Username 
  - First Name
  - Last Name
  - Birth Year
@@ -15,9 +15,9 @@ I'd like to add the MySQL Datatypes to this but I'm not sure if that's overkill.
  - Contact Phone # (Use Friend's / Relative's if they don't have one)
  - Gender (M/F/Other)
  - Age Group (Can this be taken from birth year?)
- - Family Size # (Number of people in the household)
- - Kids (#)
- - Maximum Monthly Rental Budget (To nearest $50.00)
+ - Household Size (Docs say Family Status (Married, Single, Etc) However household size is more accurate and is more relevant than if someone is Married.)
+ - Number of Household Members under 19 (AKA # of Kids, with the household size above we can get an accurate picture of what the people are looking for.)
+ - Monthly Budget (Rounded to nearest $100.00)
  - Are you willing to purchase a home with others (Y/N)
  - Do you have a home to share? (Y/N)
  - Do you have pets (Y/N)
@@ -40,7 +40,7 @@ I'd like to add the MySQL Datatypes to this but I'm not sure if that's overkill.
  ### E-Mail Log
  - E-Mail ID - Primary Key
  - E-Mail Status (Send, Failed, Not-Sent) - Uses INT values where # is a status code
- - Target E-Mail (In case user changes e-mails) - email VARCHAR(100)
+ - Target E-Mail (In case user changes e-mails)
  - Target UserID (So we can look up the user the e-mail is meant for)
  - E-Mail Message
  

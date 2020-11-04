@@ -27,24 +27,28 @@ Copy the following json into that file, replace "YOUR_USERNAME" & "YOUR_PASSWORD
 7. Configure MySQL as a windows service.
 Note: You can run MySQL as a non-service but on Windows it can be quite a pain, so this guide will only cover running it as a service.
 
-8. I have it installed as a service but not in my PATH so I navigate to the mySQL install directory via `CMD`:
+8. Navigate to the mySQL install directory via `CMD`(Not required if MySQL is in your PATH):
 ```cmd
 cd C:\Program Files\MySQL\MySQL Server 8.0\bin\
 ``` 
 
-Then you will have to sign into your MySQL Server via CMD with your ROOT password:
+9. Then you will have to sign into your MySQL Server via CMD with your ROOT password:
 ```cmd
 mysql -u root -p
 ``` 
 
-As the root DB user we will now create our database. I'm calling it HTDB; short for "Home Together Database". You can call it whatever you want.
+10. As the root DB user we will now create our database. I'm calling it HTDB; short for "Home Together Database". You can call it whatever you want.
 ```cmd
 CREATE DATABASE HTDB; 
 ``` 
-Replace "YOUR_DATABASE_NAME" in localSetup.json with whatever you used.
+11. Replace "YOUR_DATABASE_NAME" in localSetup.json with whatever you used.
 
-Note: Before you run this example you must complete the "Updating your Local Version" section of the documentation in order for the MySQL Driver to be installed.
-To test that everything is working set open your terminal in vscode to the /server directory and then run: 
+12. Start the console in your home-together-b directory in VScode, CD to the server directory and then run npm install for the MySQL Driver to be installed.
+```cmd
+cd server
+npm install
+```
+13. To test that everything working run the demodb.js file with node: 
 ```cmd
 node demodb.js
 ``` 

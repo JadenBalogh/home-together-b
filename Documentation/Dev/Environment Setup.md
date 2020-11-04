@@ -13,16 +13,18 @@ If either of these ports is taken by something already message the group and we 
 4. Setup your MySQL Root Password. 
 5. Setup a dev user, this is the account we should be using to test our development setup.
 
-NOTE: Having Usernames and Password in github IS VERY INSECURE, DO NOT EXPOSE YOUR DB TO THE INTERNET. This username and password is something I made up just for this.
+Note: Having Usernames and Password in github IS VERY INSECURE, DO NOT EXPOSE YOUR DB TO THE INTERNET. This username and password is something I made up just for this.
 ```cmd
 User-type: DB Admin
 Username: notAdmin
 Password: notAdmin99!!
 ``` 
 
-6. Optional: Configure MySQL as a windows service.
+Note: You may have to create a "data" directory in "C:\Program Files\MySQL\MySQL Server 8.0" if you aren't running it as a service. 
 
-I don't have it installed as a service or in my PATH so I navigate to the mySQL install directory via `CMD`:
+6. Configure MySQL as a windows service.
+
+I have it installed as a service but not in my PATH so I navigate to the mySQL install directory via `CMD`:
 ```cmd
 cd C:\Program Files\MySQL\MySQL Server 8.0\bin\
 ``` 
@@ -31,7 +33,7 @@ Then you will have to sign into your MySQL Server via CMD with:
 mysql -u root -p
 ``` 
 
-As rootDB user then execute the code below to create our database. 
+As rootDB user then execute the code below to create our database. I'm calling it HTDB; short for "Home Together Database".
 ```cmd
 CREATE DATABASE HTDB; 
 ``` 
@@ -66,6 +68,15 @@ npm install
 
 ## Running the App Locally
 Every time you want to test your changes or run the app locally, you should do the following steps. Note that both the client and the server will automatically update if you save changes to their respective files while they are running, so restarting the client and server after every code change is not required.
+
+### Starting the DB
+See https://www.mysqltutorial.org/mysql-adminsitration/start-mysql/
+If you installed as a service above when you start your computer the MySQL database should already be running as a service but you can manually control it with the linked commands.
+Then run the following commands if you wish to reset your MySQL DB to empty, it does this by dropping all the tables and re-creating them rather than deleting and re-creating the entire Database. 
+```cmd
+cd server
+node DBSetup.js
+```
 
 ### Client-side
 Open VS Code and open a new Terminal window. In the terminal, change to the `/client` directory and run the client using `npm`:

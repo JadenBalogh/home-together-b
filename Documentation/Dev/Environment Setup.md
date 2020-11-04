@@ -13,7 +13,7 @@ If either of these ports is taken by something already message the group and we 
 4. Setup your MySQL Root Password. 
 5. Setup a dev user, this is the account we should be using to test our development setup.
 6. Create a file in "/server" named "localSetup.json", this file should be ignored by git and will not be pulled/pushed to github.
-Copy the following json into that file, replacing the ALL_CAPS with the information you from your DEV user, NOT your root user.
+Copy the following json into that file, replace "YOUR_USERNAME" & "YOUR_PASSWORD" with the information you from your DEV user, NOT your root user.
 ```
 {
     "databaseParameters": {
@@ -25,14 +25,14 @@ Copy the following json into that file, replacing the ALL_CAPS with the informat
 }
 ``` 
 7. Configure MySQL as a windows service.
-Note: You can run MySQL as a non-service but on Windows it can be quite a pain, so this guide will only conver running it as a service.
+Note: You can run MySQL as a non-service but on Windows it can be quite a pain, so this guide will only cover running it as a service.
 
 8. I have it installed as a service but not in my PATH so I navigate to the mySQL install directory via `CMD`:
 ```cmd
 cd C:\Program Files\MySQL\MySQL Server 8.0\bin\
 ``` 
 
-Then you will have to sign into your MySQL Server via CMD with:
+Then you will have to sign into your MySQL Server via CMD with your ROOT password:
 ```cmd
 mysql -u root -p
 ``` 
@@ -41,11 +41,10 @@ As the root DB user we will now create our database. I'm calling it HTDB; short 
 ```cmd
 CREATE DATABASE HTDB; 
 ``` 
-
 Replace "YOUR_DATABASE_NAME" in localSetup.json with whatever you used.
 
 Note: Before you run this example you must complete the "Updating your Local Version" section of the documentation in order for the MySQL Driver to be installed.
-To Test that everything is working set open your terminal in vscode to the /server directory and then run: 
+To test that everything is working set open your terminal in vscode to the /server directory and then run: 
 ```cmd
 node demodb.js
 ``` 

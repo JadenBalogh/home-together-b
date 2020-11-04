@@ -12,31 +12,37 @@ If either of these ports is taken by something already message the group and we 
 3. Use Strong Password Encryption for Authentication (The Default).
 4. Setup your MySQL Root Password. 
 5. Setup a dev user, this is the account we should be using to test our development setup.
-
-Note: Having Usernames and Password in github IS VERY INSECURE, DO NOT EXPOSE YOUR DB TO THE INTERNET. This username and password is something I made up just for this.
-```cmd
-User-type: DB Admin
-Username: notAdmin
-Password: notAdmin99!!
+6. Create a file in "/server" named "localSetup.json", this file should be ignored by git and will not be pulled/pushed to github.
+Copy the following json into that file, replacing the ALL_CAPS with the information you from your DEV user, NOT your root user.
+```
+{
+    "databaseParameters": {
+        "host": "localhost",
+        "user": "YOUR_USERNAME",
+        "password": "YOUR_PASSWORD",
+        "database": "YOUR_DATABASE_NAME"
+    }
+}
 ``` 
+7. Configure MySQL as a windows service.
+Note: You can run MySQL as a non-service but on Windows it can be quite a pain, so this guide will only conver running it as a service.
 
-Note: You may have to create a "data" directory in "C:\Program Files\MySQL\MySQL Server 8.0" if you aren't running it as a service. 
-
-6. Configure MySQL as a windows service.
-
-I have it installed as a service but not in my PATH so I navigate to the mySQL install directory via `CMD`:
+8. I have it installed as a service but not in my PATH so I navigate to the mySQL install directory via `CMD`:
 ```cmd
 cd C:\Program Files\MySQL\MySQL Server 8.0\bin\
 ``` 
+
 Then you will have to sign into your MySQL Server via CMD with:
 ```cmd
 mysql -u root -p
 ``` 
 
-As rootDB user then execute the code below to create our database. I'm calling it HTDB; short for "Home Together Database".
+As the root DB user we will now create our database. I'm calling it HTDB; short for "Home Together Database". You can call it whatever you want.
 ```cmd
 CREATE DATABASE HTDB; 
 ``` 
+
+Replace "YOUR_DATABASE_NAME" in localSetup.json with whatever you used.
 
 Note: Before you run this example you must complete the "Updating your Local Version" section of the documentation in order for the MySQL Driver to be installed.
 To Test that everything is working set open your terminal in vscode to the /server directory and then run: 
@@ -71,8 +77,9 @@ Every time you want to test your changes or run the app locally, you should do t
 
 ### Starting the DB
 See https://www.mysqltutorial.org/mysql-adminsitration/start-mysql/
-If you installed as a service above when you start your computer the MySQL database should already be running as a service but you can manually control it with the linked commands.
-Then run the following commands if you wish to reset your MySQL DB to empty, it does this by dropping all the tables and re-creating them rather than deleting and re-creating the entire Database. 
+If you installed as a service above when you start your computer the MySQL database should already be running. You can manually control it with the commands linked above if need be.
+Then run the following commands if you wish to reset your MySQL DB to empty, it does this by dropping all the tables and re-creating them rather than deleting and re-creating the entire Database. It pulls your DB Specific information from the "localSetup.json" file in the "/server" directory. localSetup.js may also create example entries in the database for testing, refer to the lastest file on github.
+
 ```cmd
 cd server
 node DBSetup.js

@@ -43,6 +43,26 @@ drop('AgeGroupType');
 
 // Create Tables
 create(
+  'GenderType (' +
+    'id INT AUTO_INCREMENT PRIMARY KEY,' +
+    'name VARCHAR(20)' +
+  ')'
+);
+create(
+  'FamilyStatusType (' +
+    'id INT AUTO_INCREMENT PRIMARY KEY,' +
+    'name VARCHAR(20)' +
+  ')'
+);
+create(
+  'AgeGroupType (' +
+    'id INT AUTO_INCREMENT PRIMARY KEY, ' +
+    'name VARCHAR(20), ' +
+    'minAge INT, ' +
+    'maxAge INT' +
+  ')'
+);
+create(
   'Member (' +
     'id INT AUTO_INCREMENT PRIMARY KEY,' +
     'firstName VARCHAR(50),' +
@@ -72,26 +92,6 @@ create(
     'FOREIGN KEY (genderID) REFERENCES GenderType(id),' +
     'FOREIGN KEY (ageGroupID) REFERENCES AgeGroupType(id),' +
     'FOREIGN KEY (familyStatusID) REFERENCES FamilyStatusType(id)' +
-  ')'
-);
-create(
-  'GenderType (' +
-    'id INT AUTO_INCREMENT PRIMARY KEY,' +
-    'name VARCHAR(20)' +
-  ')'
-);
-create(
-  'FamilyStatusType (' +
-    'id INT AUTO_INCREMENT PRIMARY KEY,' +
-    'name VARCHAR(20)' +
-  ')'
-);
-create(
-  'AgeGroupType (' +
-    'id INT AUTO_INCREMENT PRIMARY KEY, ' +
-    'name VARCHAR(20), ' +
-    'minAge INT, ' +
-    'maxAge INT' +
   ')'
 );
 

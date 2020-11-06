@@ -48,9 +48,9 @@ CREATE DATABASE HTDB;
 cd server
 npm install
 ```
-13. To test that everything working run the demodb.js file with node: 
+13. To test that everything working run the DBSetup.js file with node: 
 ```cmd
-node demodb.js
+node DBSetup.js
 ``` 
 you should see the sample code output in the console.
 

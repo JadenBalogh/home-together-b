@@ -27,3 +27,8 @@ Finally, add a new `<Route>` with the exact path you want for your component:
 ```js
 <Route exact path='/my-page' component={MyPage} />
 ```
+
+## References
+
+For a complete reference on setting up `react-router`, see:  
+https://blog.pusher.com/getting-started-with-react-router-v4/

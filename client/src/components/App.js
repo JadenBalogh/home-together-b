@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../stylesheets/App.css';
-import '../components/Home.js';
 import Main from './Main';
 import NavBar from './NavBar';
 import reportWebVitals from '../reportWebVitals';

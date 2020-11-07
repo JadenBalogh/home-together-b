@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import Home from './Home';
+import Members from './Members';
 import '../index.css';
 
 // Main component that renders all pages in our app

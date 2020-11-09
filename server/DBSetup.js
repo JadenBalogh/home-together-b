@@ -33,15 +33,15 @@ function insert(table, values) {
   con.query(sql, [values], (err, results) => printQuery(err, results));
 }
 
-// Drop Tables
-drop('Member');
-drop('SearchableInfo');
+// Drop Tables (MUST BE REVERSE ORDER OF Create STATEMENTS BELOW)
 drop('SearchPrefs');
-drop('GenderType');
-drop('FamilyStatusType');
+drop('SearchableInfo');
+drop('Member');
 drop('AgeGroupType');
+drop('FamilyStatusType');
+drop('GenderType');
 
-// Create Tables
+// Create Tables (ORDER MATTERS FOR FK CONSTRAINTS)
 create(
   'GenderType (' +
     'id INT AUTO_INCREMENT PRIMARY KEY,' +

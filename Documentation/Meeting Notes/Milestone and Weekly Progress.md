@@ -4,23 +4,35 @@
  - sample database connection code
  - database is setup but needs review
  - sample front-end table display code
+ - review the database for users
+ - get users from database on server
 
 ### Still needed:
  - about page front-end (static page - no database)
  - listings page front-end
  - user search page front-end
- - google maps integration (for both listings and users)
- - review the database for listings and users
- - get users from database on server
+ - get listings from database on server
+ - get users from server onto the client
+ - get listings from server onto the client
+ - create listing tables in database
+ - add listings test data to database
+
+### This week:
+Athena:
+ - about page front-end (static page - no database)
+ - listings page front-end
+
+Jaden:
  - get listings from database on server
  - get users from server onto the client
  - get listings from server onto the client
 
-### This week:
- - setting up the database to have a users table with some sample data
- - get users from database on server with parameters
- - get users from server onto the client
+Alvin:
  - user search page front-end
+
+Jared:
+ - create listing tables in database
+ - add listings test data to database
 
 # Weekly Progress
 ## Nov 3-10

@@ -97,6 +97,7 @@ Create the User table in the database
 Reviewing each other's work\
 Searching preferences right now forces users to only choose one(eg. only looking for male). Think about how to implement multi-preference choices (eg. looking for male and female).\
 Implementing Saturday noon check-in where each person submits what they are doing and the branch they are working on.\
+Adding a note: All team members need to review the environment setup document and ensure they are up to date with the new steps.\
 Setting up the meeting schedule:\
 Scrum Meeting - 1:30 PM on Tuesdays
  - All team members must attend in group-b-voice for a review of the past week, gitstats report and planning for the following week\

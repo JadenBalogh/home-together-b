@@ -92,5 +92,8 @@ Create the User table in the database
 
 
 
-
-
+## November 10th
+###### 1:30-2:00pm: 
+Reviewing each other's work
+Search preferences right now forces users to only choose one(eg. only looking for male). Think about how to implement multi-preference choices (eg. looking for male and female).
+Implement Saturday noon check-in where each person submits what they are doing and the branch they are working on.

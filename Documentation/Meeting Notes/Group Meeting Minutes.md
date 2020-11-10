@@ -94,6 +94,23 @@ Create the User table in the database
 
 ## November 10th
 ###### 1:30-2:00pm: 
-Reviewing each other's work
-Search preferences right now forces users to only choose one(eg. only looking for male). Think about how to implement multi-preference choices (eg. looking for male and female).
-Implement Saturday noon check-in where each person submits what they are doing and the branch they are working on.
+Reviewing each other's work\
+Searching preferences right now forces users to only choose one(eg. only looking for male). Think about how to implement multi-preference choices (eg. looking for male and female).\
+Implementing Saturday noon check-in where each person submits what they are doing and the branch they are working on.\
+Setting up the meeting schedule:\
+Scrum Meeting - 1:30 PM on Tuesdays
+ - All team members must attend in group-b-voice for a review of the past week, gitstats report and planning for the following week\
+Virtual Standup - due by 1 PM on Saturdays
+ - All team members should send a text summary to the #group-b-general channel of what've worked on so far, along with the branch and changes that require review
+ 
+###### 2:00-2:33pm: 
+Creating issues and assigning parts
+
+###### 2:33-2:37pm:
+Closing a pull request
+
+###### 2:37-2:46pm:
+Discussing the tasks of front-end static page
+
+###### 2:46-2:34pm:
+Discussing UI design of front-end static page

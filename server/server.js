@@ -35,6 +35,7 @@ app.get('/get-members-by-name', (req, res) => {
 
 // Expects url like: server-url/get-members?genderID=2&minAge=21&... etc
 app.get('/get-members', (req, res) => {
+  console.log('received request');
   getMembers(
     req.query.genderID,
     req.query.minAge,
@@ -42,6 +43,7 @@ app.get('/get-members', (req, res) => {
     req.query.familyStatusID,
     req.query.maxMonthlyBudget
   ).then((members) => {
+    console.log('sent response');
     res.send(members);
   });
 });

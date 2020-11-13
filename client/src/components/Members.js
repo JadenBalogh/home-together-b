@@ -14,15 +14,12 @@ class Members extends Component {
       maxMonthlyBudget: '',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChangeGenderID = this.handleChangeGenderID.bind(this);
-    this.handleChangeMinAge = this.handleChangeMinAge.bind(this);
-    this.handleChangeMaxAge = this.handleChangeMaxAge.bind(this);
-    this.handleChangeFamilyStatusID = this.handleChangeFamilyStatusID.bind(this);
-    this.handleChangeMaxMonthlyBudget = this.handleChangeMaxMonthlyBudget.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleSubmit(event) {
     event.preventDefault();
+    
     const options = {
       method: 'GET',
     };
@@ -34,8 +31,8 @@ class Members extends Component {
       &familyStatusID=${this.state.familyStatusID}\
       &maxMonthlyBudget=${this.state.maxMonthlyBudget}`
     ).toString();
-    console.log(params);
     const url = process.env.REACT_APP_SERVER_URL + route + params;
+
     fetch(url, options)
       .then((res) => res.text())
       .then((txt) => {
@@ -46,33 +43,9 @@ class Members extends Component {
       });
   }
 
-  handleChangeGenderID(event) {
+  handleChange(event) {
     this.setState({
-      genderID: event.target.value,
-    });
-  }
-
-  handleChangeMinAge(event) {
-    this.setState({
-      minAge: event.target.value,
-    });
-  }
-
-  handleChangeMaxAge(event) {
-    this.setState({
-      maxAge: event.target.value,
-    });
-  }
-
-  handleChangeFamilyStatusID(event) {
-    this.setState({
-      familyStatusID: event.target.value,
-    });
-  }
-
-  handleChangeMaxMonthlyBudget(event) {
-    this.setState({
-      maxMonthlyBudget: event.target.value,
+      [event.target.name]: event.target.value,
     });
   }
 
@@ -80,13 +53,13 @@ class Members extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <h1>Members Page</h1>
-        <p>Gender ID: <input type='text' value={this.state.genderID} onChange={this.handleChangeGenderID} /></p>
-        <p>Min Age: <input type='text' value={this.state.minAge} onChange={this.handleChangeMinAge} /></p>
-        <p>Max Age: <input type='text' value={this.state.maxAge} onChange={this.handleChangeMaxAge} /></p>
-        <p>Family Status ID: <input type='text' value={this.state.familyStatusID} onChange={this.handleChangeFamilyStatusID} /></p>
-        <p>Max Monthly Budget: <input type='text' value={this.state.maxMonthlyBudget} onChange={this.handleChangeMaxMonthlyBudget} /></p>
+        <p>Gender ID: <input type='text' name='genderID' value={this.state.genderID} onChange={this.handleChange} /></p>
+        <p>Min Age: <input type='text' name='minAge' value={this.state.minAge} onChange={this.handleChange} /></p>
+        <p>Max Age: <input type='text' name='maxAge' value={this.state.maxAge} onChange={this.handleChange} /></p>
+        <p>Family Status ID: <input type='text' name='familyStatusID' value={this.state.familyStatusID} onChange={this.handleChange} /></p>
+        <p>Max Monthly Budget: <input type='text' name='maxMonthlyBudget' value={this.state.maxMonthlyBudget} onChange={this.handleChange} /></p>
         <input type='submit'></input>
-        <p>{this.state.members}</p>
+        <p>{this.state.genderID}</p>
       </form>
     );
   }

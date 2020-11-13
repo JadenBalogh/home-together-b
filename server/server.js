@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 
 // Expects url like: server-url/get-members-by-name?firstName=John
 app.get('/get-members-by-name', (req, res) => {
-  getMembersByName(req.query.firstName).then((members) => {
+  getMembersByName(req.query.firstName).then(members => {
     res.send(members);
   });
 });
@@ -46,6 +46,13 @@ app.get('/get-members', (req, res) => {
   });
 });
 
+// Expects url like: server-url/get-listings?category=Rentals
+app.get('/get-listings', (req, res) => {
+  getListings(req.query.category).then(listings => {
+    res.send(listings);
+  })
+});
+
 app.listen(3001, () => {
   console.log('Server started on port 3001');
 });
@@ -60,8 +67,17 @@ function getMembers(genderID, minAge, maxAge, familyStatusID, maxMonthlyBudget) 
 }
 
 function getMembersByName(firstName) {
-  var sql = 'SELECT * \
-  FROM Member m \
-  WHERE firstName = ?';
+  var sql =
+    'SELECT * \
+    FROM Member \
+    WHERE firstName = ?';
   return query(sql, [firstName]);
+}
+
+function getListings(category) {
+  var sql =
+    'SELECT * \
+    FROM Listing \
+    WHERE category = ?';
+  return query(sql, [category]);
 }

@@ -60,12 +60,13 @@ app.listen(3001, () => {
 });
 
 function getMembers(genderID, minAge, maxAge, familyStatusID, maxMonthlyBudget) {
+  var year = new Date().getFullYear();
   var sql =
     'SELECT * \
     FROM SearchableInfo s \
     JOIN Member m ON m.id = s.memberID \
-    WHERE genderID = ? AND birthYear >= ? AND birthYear <= ? AND familyStatusID = ? AND maxMonthlyBudget = ?';
-  return query(sql, [genderID, minAge, maxAge, familyStatusID, maxMonthlyBudget]);
+    WHERE genderID = ? AND birthYear <= ? AND birthYear >= ? AND familyStatusID = ? AND maxMonthlyBudget >= ?';
+  return query(sql, [genderID, year - minAge, year - maxAge, familyStatusID, maxMonthlyBudget]);
 }
 
 function getMembersByName(firstName) {

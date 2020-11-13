@@ -34,11 +34,11 @@ class Members extends Component {
     const url = process.env.REACT_APP_SERVER_URL + route + params;
 
     fetch(url, options)
-      .then((res) => res.text())
-      .then((txt) => {
-        console.log(txt);
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json);
         this.setState({
-          members: txt,
+          members: json,
         });
       });
   }
@@ -59,7 +59,6 @@ class Members extends Component {
         <p>Family Status ID: <input type='text' name='familyStatusID' value={this.state.familyStatusID} onChange={this.handleChange} /></p>
         <p>Max Monthly Budget: <input type='text' name='maxMonthlyBudget' value={this.state.maxMonthlyBudget} onChange={this.handleChange} /></p>
         <input type='submit'></input>
-        <p>{this.state.members}</p>
       </form>
     );
   }

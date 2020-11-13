@@ -2,7 +2,6 @@
 import mysql from 'mysql2';
 // This is required to read from the .env.local file
 import localenv from 'localenv';
-
 var con = mysql.createConnection({
   host: process.env.HOST,
   user: process.env.USER,
@@ -17,6 +16,7 @@ function printQuery(err, results) {
     console.log(results);
   }
 }
+
 
 function drop(table) {
   var sql = 'DROP TABLE IF EXISTS ' + table;
@@ -33,6 +33,21 @@ function insert(table, values) {
   con.query(sql, [values], (err, results) => printQuery(err, results));
 }
 
+// Gets the members age by subtracting their birth year from the current year e.g: 2020 - 2000 = 20 (Member is 20 years old)
+// function getAge(memberID) {
+//   var age = new Date().getFullYear() - con.query("SELECT birthYear FROM SearchableInfo WHERE memberID=" + memberID);
+//   console.log("Member's age is: " + age);
+//   return age
+//  }
+ 
+//  function getMemberIds() {
+//    var ids = new Date().getFullYear() - con.query("SELECT id FROM member");
+//    console.log("Member IDs:" + ids);
+//    return ids
+//   }
+
+
+ 
 // Drop Tables (MUST BE REVERSE ORDER OF Create STATEMENTS BELOW)
 drop('SearchPrefs');
 drop('SearchableInfo');
@@ -48,12 +63,26 @@ create(
     'name VARCHAR(20)' +
   ')'
 );
+// Inserts a set of default values into the gender table
+insert('GenderType(name)', [
+  ['Male'],
+  ['Female'],
+  ['Other'],
+]);
+
 create(
   'FamilyStatusType (' +
     'id INT AUTO_INCREMENT PRIMARY KEY,' +
     'name VARCHAR(20)' +
   ')'
 );
+
+insert('FamilyStatusType(name)', [
+  ['Single'],
+  ['Married'],
+  ['Divorced'],
+]);
+
 create(
   'AgeGroupType (' +
     'id INT AUTO_INCREMENT PRIMARY KEY, ' +
@@ -62,6 +91,16 @@ create(
     'maxAge INT' +
   ')'
 );
+
+insert('AgeGroupType(name, minAge, maxAge)', [
+  ['Baby', 0, 3],
+  ['Child', 4, 12],
+  ['Teen', 13, 18],
+  ['Young Adult', 19, 24],
+  ['Adult', 25, 64],
+  ['Senior', 65, 120],
+]);
+
 create(
   'Member (' +
     'id INT AUTO_INCREMENT PRIMARY KEY,' +
@@ -69,6 +108,7 @@ create(
     'lastName VARCHAR(50)' +
   ')'
 );
+
 create(
   'SearchableInfo (' +
     'memberID INT PRIMARY KEY,' +
@@ -81,6 +121,7 @@ create(
     'FOREIGN KEY (familyStatusID) REFERENCES FamilyStatusType(id)' +
   ')'
 );
+
 create(
   'SearchPrefs (' +
     'memberID INT PRIMARY KEY,' +
@@ -95,25 +136,30 @@ create(
   ')'
 );
 
-// Insert into Tables
 insert('Member(firstName, lastName)', [
   ['Jim', 'Bam'],
-]);
-insert('Member(firstName, lastName)', [
   ['John', 'Smith'],
   ['Peter', 'Daniels'],
   ['Amy', 'Shu'],
   ['Hannah', 'Montana'],
-  ['Michael', 'Jackson'],
-  ['Sandy', 'Blumann'],
-  ['Betty', 'Greengrass'],
-  ['Richard', 'Sky'],
-  ['Susan', 'Oneway'],
-  ['Vicky', 'Yellowgarden'],
-  ['Ben', 'Parklane'],
-  ['William', 'Central'],
-  ['Chuck', 'Roads'],
-  ['Viola', 'Sideway'],
+]);
+
+// The way the DB is setup we currently can only have 1 age group/Family Status/Gender preference (e.g Only Male Roommates) 
+// We may need to refactor to allow for more flexible searching
+insert('SearchPrefs(memberID, genderID, ageGroupID, familyStatusID, maxMonthlyBudget)', [
+  [1, 1, 5, 2, 1100],
+  [2, 1, 6, 2, 1200],
+  [3, 2, 3, 2, 1300],
+  [4, 2, 4, 2, 1400],
+  [5, 3, 4, 2, 1500],
+]);
+
+insert('SearchableInfo(memberID, genderID, birthYear, familyStatusID, maxMonthlyBudget)', [
+  [1, 1, 1997, 2, 1100],
+  [2, 1, 1954, 2, 1200],
+  [3, 2, 1984, 2, 1300],
+  [4, 2, 1988, 2, 1400],
+  [5, 3, 2001, 2, 1500],
 ]);
 
 // Close the DB connection

@@ -19,7 +19,7 @@ class Members extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    
+
     const options = {
       method: 'GET',
     };
@@ -59,7 +59,7 @@ class Members extends Component {
         <p>Family Status ID: <input type='text' name='familyStatusID' value={this.state.familyStatusID} onChange={this.handleChange} /></p>
         <p>Max Monthly Budget: <input type='text' name='maxMonthlyBudget' value={this.state.maxMonthlyBudget} onChange={this.handleChange} /></p>
         <input type='submit'></input>
-        <p>{this.state.genderID}</p>
+        <p>{this.state.members}</p>
       </form>
     );
   }

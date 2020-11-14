@@ -26,16 +26,8 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Expects url like: server-url/get-members-by-name?firstName=John
-app.get('/get-members-by-name', (req, res) => {
-  getMembersByName(req.query.firstName).then(members => {
-    res.send(members);
-  });
-});
-
 // Expects url like: server-url/get-members?genderID=2&minAge=21&... etc
 app.get('/get-members', (req, res) => {
-  console.log('received request');
   getMembers(
     req.query.genderID,
     req.query.minAge,
@@ -43,7 +35,6 @@ app.get('/get-members', (req, res) => {
     req.query.familyStatusID,
     req.query.maxMonthlyBudget
   ).then((members) => {
-    console.log('sent response');
     res.send(members);
   });
 });
@@ -67,14 +58,6 @@ function getMembers(genderID, minAge, maxAge, familyStatusID, maxMonthlyBudget) 
     JOIN Member m ON m.id = s.memberID \
     WHERE genderID = ? AND birthYear <= ? AND birthYear >= ? AND familyStatusID = ? AND maxMonthlyBudget >= ?';
   return query(sql, [genderID, year - minAge, year - maxAge, familyStatusID, maxMonthlyBudget]);
-}
-
-function getMembersByName(firstName) {
-  var sql =
-    'SELECT * \
-    FROM Member \
-    WHERE firstName = ?';
-  return query(sql, [firstName]);
 }
 
 function getListings(category) {

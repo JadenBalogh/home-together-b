@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
 import '../index.css';
+import MemberList from './MemberList'
+import Select from 'react-select'
 
 // Search page for members
 class Members extends Component {
   constructor(props) {
     super(props);
+    const genderOptions = [
+      { value: 'Male', label: 'Male' },
+      { value: 'Female', label: 'Female' },
+      { value: 'Other', label: 'Other' }
+    ]
+    const statusOptions = [
+      { value: 'Single', label: 'Single' },
+      { value: 'Couple', label: 'Couple' },
+      { value: 'ParentChild', label: 'Couple with Children' },
+      { value: 'SingleParent', label: 'Single Parent' },
+      { value: 'Group', label: 'Existing Group' }
+    ]
     this.state = {
       members: [],
       genderID: '',
@@ -49,17 +63,50 @@ class Members extends Component {
     });
   }
 
+  //react-select documentation https://react-select.com/props
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <h1>Members Page</h1>
-        <p>Gender ID: <input type='text' name='genderID' value={this.state.genderID} onChange={this.handleChange} /></p>
-        <p>Min Age: <input type='text' name='minAge' value={this.state.minAge} onChange={this.handleChange} /></p>
-        <p>Max Age: <input type='text' name='maxAge' value={this.state.maxAge} onChange={this.handleChange} /></p>
-        <p>Family Status ID: <input type='text' name='familyStatusID' value={this.state.familyStatusID} onChange={this.handleChange} /></p>
-        <p>Max Monthly Budget: <input type='text' name='maxMonthlyBudget' value={this.state.maxMonthlyBudget} onChange={this.handleChange} /></p>
-        <input type='submit'></input>
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <h1>Members Page</h1>
+          <p>Gender ID: <Select
+            isMulti
+            name="genderID"
+            options={[
+              { value: 'Male', label: 'Male' },
+              { value: 'Female', label: 'Female' },
+              { value: 'Other', label: 'Other' }
+            ]}
+            value={this.state.genderID}
+            onChange={this.handleChange}
+            isClearable true
+            className="basic-multi-select"
+            classNamePrefix="select"
+          /></p>
+          <p>Min Age: <input type='text' name='minAge' value={this.state.minAge} onChange={this.handleChange} /></p>
+          <p>Max Age: <input type='text' name='maxAge' value={this.state.maxAge} onChange={this.handleChange} /></p>
+          <p>Family Status ID: <Select
+            isMulti
+            name="familyStatusID"
+            options={[
+              { value: 'Single', label: 'Single' },
+              { value: 'Couple', label: 'Couple' },
+              { value: 'ParentChild', label: 'Couple with Children' },
+              { value: 'SingleParent', label: 'Single Parent' },
+              { value: 'Group', label: 'Existing Group' }
+            ]}
+            value={this.state.familyStatusID}
+            onChange={this.handleChange}
+            isClearable true
+            className="basic-multi-select"
+            classNamePrefix="select"
+          /></p>
+          <p>Max Monthly Budget: <input type='text' name='maxMonthlyBudget' value={this.state.maxMonthlyBudget} onChange={this.handleChange} /></p>
+          <input type='submit'></input>
+        </form>
+
+        <MemberList data={this.state.members} />
+      </div>
     );
   }
 }

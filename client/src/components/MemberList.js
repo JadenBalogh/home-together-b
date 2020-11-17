@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,8 +8,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-var rows = [];
-
 const useStyles = makeStyles({
     table: {
         minWidth: 650,
@@ -18,26 +15,12 @@ const useStyles = makeStyles({
 });
 
 //Info stored: username, gender*, age*, status*, budget*
-function createMemberData(id, username, gender, age, status, budget) {
-    return { id, username, gender, age, status, budget };
-}
-
 export default function MemberList(props) {
-    const [state, setState] = useState(0);
-    // if (state > 0) {
-    //     isClicked();
-    //     //rows = props.data;
-    // }
-    // if (state == 0) {
-    //     isClicked2();
-    //     //rows = props.data;
-    // }
-    if (props.data !== undefined) {
-        if(rows !== props.data) {
-            rows = props.data;
-            setState(0);
+    const [rows, setRows] = useState([]);
+    if (props.members !== undefined) {
+        if (rows !== props.members) {
+            setRows(props.members);
         }
-        
     }
     const classes = useStyles();
     return (

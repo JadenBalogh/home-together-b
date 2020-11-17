@@ -8,16 +8,16 @@ class Members extends Component {
   constructor(props) {
     super(props);
     const genderOptions = [
-      { value: 'Male', label: 'Male' },
-      { value: 'Female', label: 'Female' },
-      { value: 'Other', label: 'Other' }
+      { value: 1, label: 'Male' },
+      { value: 2, label: 'Female' },
+      { value: 3, label: 'Other' }
     ]
     const statusOptions = [
-      { value: 'Single', label: 'Single' },
-      { value: 'Couple', label: 'Couple' },
-      { value: 'ParentChild', label: 'Couple with Children' },
-      { value: 'SingleParent', label: 'Single Parent' },
-      { value: 'Group', label: 'Existing Group' }
+      { value: 1, label: 'Single' },
+      { value: 2, label: 'Couple' },
+      { value: 3, label: 'Couple with Children' },
+      { value: 4, label: 'Single Parent' },
+      { value: 5, label: 'Existing Group' }
     ]
     this.state = {
       members: [],
@@ -63,6 +63,15 @@ class Members extends Component {
     });
   }
 
+  handleGenderDropdown = (value) => {
+    this.setState({genderID: value});
+    console.log(`changed to: `, this.state.genderID);
+  }
+
+  handleGenderDropdown = (value) => {
+    this.setState({familyStatusID: value});
+  }
+
   //react-select documentation https://react-select.com/props
   render() {
     return (
@@ -73,12 +82,11 @@ class Members extends Component {
             isMulti
             name="genderID"
             options={[
-              { value: 'Male', label: 'Male' },
-              { value: 'Female', label: 'Female' },
-              { value: 'Other', label: 'Other' }
+              { value: 1, label: 'Male' },
+              { value: 2, label: 'Female' },
+              { value: 3, label: 'Other' }
             ]}
-            value={this.state.genderID}
-            onChange={this.handleChange}
+            onChange={this.handleGenderDropdown}
             isClearable true
             className="basic-multi-select"
             classNamePrefix="select"
@@ -89,14 +97,13 @@ class Members extends Component {
             isMulti
             name="familyStatusID"
             options={[
-              { value: 'Single', label: 'Single' },
-              { value: 'Couple', label: 'Couple' },
-              { value: 'ParentChild', label: 'Couple with Children' },
-              { value: 'SingleParent', label: 'Single Parent' },
-              { value: 'Group', label: 'Existing Group' }
+              { value: 1, label: 'Single' },
+              { value: 2, label: 'Couple' },
+              { value: 3, label: 'Couple with Children' },
+              { value: 4, label: 'Single Parent' },
+              { value: 5, label: 'Existing Group' }
             ]}
-            value={this.state.familyStatusID}
-            onChange={this.handleChange}
+            onChange={this.handleStatusDropdown}
             isClearable true
             className="basic-multi-select"
             classNamePrefix="select"
@@ -105,7 +112,7 @@ class Members extends Component {
           <input type='submit'></input>
         </form>
 
-        <MemberList data={this.state.members} />
+        <MemberList members={this.state.members} />
       </div>
     );
   }

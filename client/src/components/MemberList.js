@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -14,40 +14,43 @@ const useStyles = makeStyles({
     },
 });
 
-function createMemberData(id, username, gender, age) {
-    return { id, username, gender, age };
-}
-
-var rows = [];
-
+//Info stored: username, gender*, age*, status*, budget*
 export default function MemberList(props) {
-    //window.alert(props.data);
-    if(props.data !== undefined) {
-        rows = props.data;
+    const [rows, setRows] = useState([]);
+    if (props.members !== undefined) {
+        if (rows !== props.members) {
+            setRows(props.members);
+        }
     }
     const classes = useStyles();
     return (
-        <TableContainer component={Paper}>
-            <Table className={classes.table} size="small" aria-label="a dense table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>User</TableCell>
-                        <TableCell align="right">Gender</TableCell>
-                        <TableCell align="right">Age</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {rows.map((row) => (
-                        <TableRow key={row.id}>
-                            <TableCell component="th" scope="row">
-                                {row.username}
-                            </TableCell>
-                            <TableCell align="right">{row.gender}</TableCell>
-                            <TableCell align="right">{row.age}</TableCell>
+        <div>
+            <TableContainer component={Paper}>
+                <Table className={classes.table} size="small" aria-label="a dense table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>User</TableCell>
+                            <TableCell align="right">Gender</TableCell>
+                            <TableCell align="right">Age</TableCell>
+                            <TableCell align="right">Status</TableCell>
+                            <TableCell align="right">Budget</TableCell>
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+                    </TableHead>
+                    <TableBody>
+                        {rows.map((row) => (
+                            <TableRow key={row.id}>
+                                <TableCell component="th" scope="row">
+                                    {row.username}
+                                </TableCell>
+                                <TableCell align="right">{row.gender}</TableCell>
+                                <TableCell align="right">{row.age}</TableCell>
+                                <TableCell align="right">{row.status}</TableCell>
+                                <TableCell align="right">{row.budget}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </div>
     );
 }

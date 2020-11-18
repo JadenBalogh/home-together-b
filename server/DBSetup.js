@@ -33,22 +33,11 @@ function insert(table, values) {
   con.query(sql, [values], (err, results) => printQuery(err, results));
 }
 
-// Gets the members age by subtracting their birth year from the current year e.g: 2020 - 2000 = 20 (Member is 20 years old)
-// function getAge(memberID) {
-//   var age = new Date().getFullYear() - con.query("SELECT birthYear FROM SearchableInfo WHERE memberID=" + memberID);
-//   console.log("Member's age is: " + age);
-//   return age
-//  }
- 
-//  function getMemberIds() {
-//    var ids = new Date().getFullYear() - con.query("SELECT id FROM member");
-//    console.log("Member IDs:" + ids);
-//    return ids
-//   }
-
-
  
 // Drop Tables (MUST BE REVERSE ORDER OF Create STATEMENTS BELOW)
+drop('Listing');
+drop('CategoryType');
+drop('Organization');
 drop('SearchPrefs');
 drop('SearchableInfo');
 drop('Member');
@@ -56,14 +45,17 @@ drop('AgeGroupType');
 drop('FamilyStatusType');
 drop('GenderType');
 
+
 // Create Tables (ORDER MATTERS FOR FK CONSTRAINTS)
+// Creates Member related tables
 create(
   'GenderType (' +
     'id INT AUTO_INCREMENT PRIMARY KEY,' +
     'name VARCHAR(20)' +
   ')'
 );
-// Inserts a set of default values into the gender table
+
+// TODO: Update this table based on the docs
 insert('GenderType(name)', [
   ['Male'],
   ['Female'],
@@ -77,6 +69,7 @@ create(
   ')'
 );
 
+// TODO: Update this table based on the docs
 insert('FamilyStatusType(name)', [
   ['Single'],
   ['Married'],
@@ -92,6 +85,7 @@ create(
   ')'
 );
 
+// TODO: Update this table based on the docs
 insert('AgeGroupType(name, minAge, maxAge)', [
   ['Baby', 0, 3],
   ['Child', 4, 12],
@@ -136,6 +130,61 @@ create(
   ')'
 );
 
+// Creates orginization related tables.
+create(
+  'Orginization (' +
+    'id INT AUTO_INCREMENT PRIMARY KEY,' +
+    // Only verified organizations can make listings
+    'verified BOOLEAN,' +
+    // This is the public information made available for this organization.
+    'name VARCHAR(100),' +
+    'website VARCHAR(100),' +
+    'phone VARCHAR(20),' +
+    'email VARCHAR(100),' +
+    'streetAddress VARCHAR (200),' +
+    'postalCode VARCHAR(10),' +
+    'incorporated BOOLEAN,' +
+    // TODO: Setup login with salted and hashed information
+    // 'loginName VARCHAR(200),' +
+    // 'loginPassword VARCHAR(1000),' +
+  ')'
+);
+
+// Creates Listing related tables.
+create(
+  'CategoryType (' +
+    'id INT AUTO_INCREMENT PRIMARY KEY, ' +
+    'name VARCHAR(100), ' +
+    'paymentRequired BOOLEAN, ' +
+  ')'
+);
+
+// TODO: Update this table based on the docs
+insert('CategoryType(name, paymentRequired)', [
+  ['Non-Profit', false],
+  ['For-profit', true],
+  ['Other', false],
+]);
+
+create(
+  'Listing (' +
+    'listingID INT AUTO_INCREMENT PRIMARY KEY,' +
+    'approvalStatus BOOLEAN,' +
+    // Public information
+    'title VARCHAR(30),' +
+    'website VARCHAR(100),' +
+    'phone VARCHAR(20),' +
+    'email VARCHAR(100),' +
+    'description VARCHAR(10000),' +
+    'imageURL VARCHAR(200),' +
+    'categoryID INT,' +
+    'orginizationID INT,' +
+    'FOREIGN KEY (categoryID) REFERENCES CategoryType(id),' +
+    'FOREIGN KEY (orginizationID) REFERENCES Orginization(id),' +
+  ')'
+);
+
+// Inserts example data for testing.
 insert('Member(firstName, lastName)', [
   ['Jim', 'Bam'],
   ['John', 'Smith'],

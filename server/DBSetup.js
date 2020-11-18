@@ -130,9 +130,9 @@ create(
   ')'
 );
 
-// Creates orginization related tables.
+// Creates Organization related tables.
 create(
-  'Orginization (' +
+  'Organization (' +
     'id INT AUTO_INCREMENT PRIMARY KEY,' +
     // Only verified organizations can make listings
     'verified BOOLEAN,' +
@@ -143,7 +143,7 @@ create(
     'email VARCHAR(100),' +
     'streetAddress VARCHAR (200),' +
     'postalCode VARCHAR(10),' +
-    'incorporated BOOLEAN,' +
+    'incorporated BOOLEAN' +
     // TODO: Setup login with salted and hashed information
     // 'loginName VARCHAR(200),' +
     // 'loginPassword VARCHAR(1000),' +
@@ -155,7 +155,7 @@ create(
   'CategoryType (' +
     'id INT AUTO_INCREMENT PRIMARY KEY, ' +
     'name VARCHAR(100), ' +
-    'paymentRequired BOOLEAN, ' +
+    'paymentRequired BOOLEAN ' +
   ')'
 );
 
@@ -167,24 +167,45 @@ insert('CategoryType(name, paymentRequired)', [
 ]);
 
 create(
-  'Listing (' +
+  'Listing(' +
     'listingID INT AUTO_INCREMENT PRIMARY KEY,' +
     'approvalStatus BOOLEAN,' +
     // Public information
-    'title VARCHAR(30),' +
+    'title VARCHAR(200),' +
     'website VARCHAR(100),' +
     'phone VARCHAR(20),' +
     'email VARCHAR(100),' +
     'description VARCHAR(10000),' +
     'imageURL VARCHAR(200),' +
     'categoryID INT,' +
-    'orginizationID INT,' +
+    'organizationID INT,' +
     'FOREIGN KEY (categoryID) REFERENCES CategoryType(id),' +
-    'FOREIGN KEY (orginizationID) REFERENCES Orginization(id),' +
+    'FOREIGN KEY (organizationID) REFERENCES Organization(id)' +
   ')'
 );
 
+
 // Inserts example data for testing.
+insert('Organization(verified, name, website, phone, email, streetAddress, postalCode, incorporated)', [
+  [true,'Larry\'s Lizard Shack', 'larryzlizards.com', '250-555-1234', 'larry@larryzlizards.com', '1111 Alabama Way', 'V1X3P6', true],
+  [true,'The Grass Assassins', 'grassassassins.com', '250-555-0987', 'contact@grassassassins.com', '1234 Montreal Road, Armstrong, BC', 'V1Z 9P6', true],
+  [true,'Grass B Gone', 'grassbgone.ca', '413-555-1983', 'info@grassbgone.ca', 'Unit 400 1234 Apartment Street, Kelowna, BC, Canada', 'V1Z3PZ', false],
+  [false,'Dog Walking CORP', 'legitdogwalkingcomapany.xyz', '250-555-1111', 'walking@dogCorp.xyz', 'PO BOX 11113, Montreal CANADA', 'T4Xu8x', true],
+  [true,'BC Housing Assistance', 'housingassistance.gov.bc.ca', '250-555-1331', 'HousingAssistance@gov.bc.ca', '1234 Parliment Way, Ottowa, Canada, ', 'K1A 0A6', false],
+]);
+
+// Value Template
+// [approvalStatus,'Title', 'Website', 'Phone', 'E-Mail', 'Description', 'imageURL', 'categoryID','organizationID'],
+insert('Listing(approvalStatus, title, website, phone, email, description, imageURL, categoryID, organizationID)', [
+  [true,'Larry\'s Lizard Rental Service', 'larryzlizards.com', '250-555-1234', 'larry@larryzlizards.com', 'Description', 'imageURL', 2,1],
+  [true,'Grass Assassins Grass Cutting Service', 'grassassassins.com', '250-555-0987', 'contact@grassassassins.com', 'We will cut your grass for a fair and reasonable price, our specialty is cutting grass so quiet you would never hear it', 'NO IMAGE', 2,2],
+  [true,'Grass B Gone Landscaping Service', 'grassbgone.ca', '413-555-1983', 'info@grassbgone.ca', 'Tired of watering the lawn every week? Tired of paying to get your lawn mowed? Contact us about our xeroscaping services, never water again!', '/image/testimage/test.jpg', 2,3],
+  [true,'BC Housing - Housing Placement Service', 'placement.housingassistance.gov.bc.ca', '1-250-555-8000', 'HousingAssistance@gov.bc.ca', 'We\'ll help you find an afforable place to live', '/image/testimage/BCGOVLOGO.png', 1,5],
+  [true,'BC Housing - Lease Assistance Service', 'leasehelp.housingassistance.gov.bc.ca', '1-250-555-8001', 'HousingAssistance@gov.bc.ca', 'We\'ll help you create, mange disputes, and understand lease agreements in BC', '/image/testimage/BCGOVLOGO.png', 1,5],
+  [false,'Dog Walking - CHEAP', 'legitdogwalkingcomapany.xyz', '250-555-1111', 'walking@dogCorp.xyz', 'Will walk your dog for cheap, please pay via Monero Money Transfer', 'No Image', 3,2],
+
+]);
+
 insert('Member(firstName, lastName)', [
   ['Jim', 'Bam'],
   ['John', 'Smith'],

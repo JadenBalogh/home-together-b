@@ -2,6 +2,7 @@
 import mysql from 'mysql2';
 // This is required to read from the .env.local file
 import localenv from 'localenv';
+
 var con = mysql.createConnection({
   host: process.env.HOST,
   user: process.env.USER,
@@ -16,7 +17,6 @@ function printQuery(err, results) {
     console.log(results);
   }
 }
-
 
 function drop(table) {
   var sql = 'DROP TABLE IF EXISTS ' + table;
@@ -33,12 +33,16 @@ function insert(table, values) {
   con.query(sql, [values], (err, results) => printQuery(err, results));
 }
 
- 
+
+
 // Drop Tables (MUST BE REVERSE ORDER OF Create STATEMENTS BELOW)
 drop('Listing');
 drop('CategoryType');
 drop('Organization');
-drop('SearchPrefs');
+drop('MiscSearchPrefs');
+drop('GenderSearchPrefs');
+drop('AgeSearchPrefs');
+drop('FamilyStatusSearchPrefs');
 drop('SearchableInfo');
 drop('Member');
 drop('AgeGroupType');
@@ -118,19 +122,19 @@ create(
 );
 
 create(
-  'miscSearchPrefs (' +
+  'MiscSearchPrefs (' +
     'memberId INT PRIMARY KEY,' +
     'maxMonthlyBudget INT,' +
-    'FOREIGN KEY (memberId) REFERENCES Member(id),' +
+    'FOREIGN KEY (memberId) REFERENCES Member(id)' +
   ')'
 );
 
 create(
   'GenderSearchPrefs (' +
     'memberId INT PRIMARY KEY,' +
-    'genderId BOOLEAN,' +
+    'genderId INT,' +
     'FOREIGN KEY (memberId) REFERENCES Member(id),' +
-    'FOREIGN KEY (genderId) REFERENCES GenderType(id),' +
+    'FOREIGN KEY (genderId) REFERENCES GenderType(id)' +
   ')'
 );
 
@@ -139,16 +143,16 @@ create(
     'memberId INT PRIMARY KEY,' +
     'ageGroupId INT,' +
     'FOREIGN KEY (memberId) REFERENCES Member(id),' +
-    'FOREIGN KEY (ageGroupId) REFERENCES AgeGroupType(id),' +
+    'FOREIGN KEY (ageGroupId) REFERENCES AgeGroupType(id)' +
   ')'
 );
 
 create(
-  'FamiltStatusSearchPrefs (' +
+  'FamilyStatusSearchPrefs (' +
     'memberId INT PRIMARY KEY,' +
     'familyStatusId INT,' +
     'FOREIGN KEY (memberId) REFERENCES Member(id),' +
-    'FOREIGN KEY (familyStatusId) REFERENCES FamilyStatusType(id),' +
+    'FOREIGN KEY (familyStatusId) REFERENCES FamilyStatusType(id)' +
   ')'
 );
 

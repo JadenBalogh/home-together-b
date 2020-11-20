@@ -106,28 +106,49 @@ create(
 
 create(
   'SearchableInfo (' +
-    'memberID INT PRIMARY KEY,' +
-    'genderID INT,' +
+    'memberId INT PRIMARY KEY,' +
+    'genderId INT,' +
     'birthYear INT,' +
-    'familyStatusID INT,' +
+    'familyStatusId INT,' +
     'maxMonthlyBudget INT,' +
-    'FOREIGN KEY (memberID) REFERENCES Member(id),' +
-    'FOREIGN KEY (genderID) REFERENCES GenderType(id),' +
-    'FOREIGN KEY (familyStatusID) REFERENCES FamilyStatusType(id)' +
+    'FOREIGN KEY (memberId) REFERENCES Member(id),' +
+    'FOREIGN KEY (genderId) REFERENCES GenderType(id),' +
+    'FOREIGN KEY (familyStatusId) REFERENCES FamilyStatusType(id)' +
   ')'
 );
 
 create(
-  'SearchPrefs (' +
-    'memberID INT PRIMARY KEY,' +
-    'genderID INT,' +
-    'ageGroupID INT,' +
-    'familyStatusID INT,' +
+  'miscSearchPrefs (' +
+    'memberId INT PRIMARY KEY,' +
     'maxMonthlyBudget INT,' +
-    'FOREIGN KEY (memberID) REFERENCES Member(id),' +
-    'FOREIGN KEY (genderID) REFERENCES GenderType(id),' +
-    'FOREIGN KEY (ageGroupID) REFERENCES AgeGroupType(id),' +
-    'FOREIGN KEY (familyStatusID) REFERENCES FamilyStatusType(id)' +
+    'FOREIGN KEY (memberId) REFERENCES Member(id),' +
+  ')'
+);
+
+create(
+  'GenderSearchPrefs (' +
+    'memberId INT PRIMARY KEY,' +
+    'genderId BOOLEAN,' +
+    'FOREIGN KEY (memberId) REFERENCES Member(id),' +
+    'FOREIGN KEY (genderId) REFERENCES GenderType(id),' +
+  ')'
+);
+
+create(
+  'AgeSearchPrefs (' +
+    'memberId INT PRIMARY KEY,' +
+    'ageGroupId INT,' +
+    'FOREIGN KEY (memberId) REFERENCES Member(id),' +
+    'FOREIGN KEY (ageGroupId) REFERENCES AgeGroupType(id),' +
+  ')'
+);
+
+create(
+  'FamiltStatusSearchPrefs (' +
+    'memberId INT PRIMARY KEY,' +
+    'familyStatusId INT,' +
+    'FOREIGN KEY (memberId) REFERENCES Member(id),' +
+    'FOREIGN KEY (familyStatusId) REFERENCES FamilyStatusType(id),' +
   ')'
 );
 
@@ -190,7 +211,7 @@ insert('CategoryType(name, paymentRequired)', [
 
 create(
   'Listing(' +
-    'listingID INT AUTO_INCREMENT PRIMARY KEY,' +
+    'listingId INT AUTO_INCREMENT PRIMARY KEY,' +
     'approvalStatus BOOLEAN,' +
     // Public information
     'title VARCHAR(200),' +
@@ -199,10 +220,10 @@ create(
     'email VARCHAR(100),' +
     'description VARCHAR(10000),' +
     'imageURL VARCHAR(200),' +
-    'categoryID INT,' +
-    'organizationID INT,' +
-    'FOREIGN KEY (categoryID) REFERENCES CategoryType(id),' +
-    'FOREIGN KEY (organizationID) REFERENCES Organization(id)' +
+    'categoryId INT,' +
+    'organizationId INT,' +
+    'FOREIGN KEY (categoryId) REFERENCES CategoryType(id),' +
+    'FOREIGN KEY (organizationId) REFERENCES Organization(id)' +
   ')'
 );
 
@@ -217,8 +238,8 @@ insert('Organization(verified, organizationName, registrationDate, organizationW
 ]);
 
 // Value Template
-// [approvalStatus,'Title', 'Website', 'Phone', 'E-Mail', 'Description', 'imageURL', categoryID, organizationID],
-insert('Listing(approvalStatus, title, website, phone, email, description, imageURL, categoryID, organizationID)', [
+// [approvalStatus,'Title', 'Website', 'Phone', 'E-Mail', 'Description', 'imageURL', categoryId, organizationId],
+insert('Listing(approvalStatus, title, website, phone, email, description, imageURL, categoryId, organizationId)', [
   [true,'Larry\'s Lizard Rental Service', 'larryzlizards.com', '250-555-1234', 'larry@larryzlizards.com', 'Description', 'imageURL', 2,1],
   [true,'Grass Assassins Grass Cutting Service', 'grassassassins.com', '250-555-0987', 'contact@grassassassins.com', 'We will cut your grass for a fair and reasonable price, our specialty is cutting grass so quiet you would never hear it', 'NO IMAGE', 2,2],
   [true,'Grass B Gone Landscaping Service', 'grassbgone.ca', '413-555-1983', 'info@grassbgone.ca', 'Tired of watering the lawn every week? Tired of paying to get your lawn mowed? Contact us about our xeroscaping services, never water again!', '/image/testimage/test.jpg', 2,3],
@@ -236,17 +257,9 @@ insert('Member(firstName, lastName)', [
   ['Hannah', 'Montana'],
 ]);
 
-// The way the DB is setup we currently can only have 1 age group/Family Status/Gender preference (e.g Only Male Roommates) 
-// We may need to refactor to allow for more flexible searching
-insert('SearchPrefs(memberID, genderID, ageGroupID, familyStatusID, maxMonthlyBudget)', [
-  [1, 1, 5, 2, 1100],
-  [2, 1, 6, 2, 1200],
-  [3, 2, 3, 2, 1300],
-  [4, 2, 4, 2, 1400],
-  [5, 3, 4, 2, 1500],
-]);
+//TODO: Insert new sample data based on the new search preferences table.
 
-insert('SearchableInfo(memberID, genderID, birthYear, familyStatusID, maxMonthlyBudget)', [
+insert('SearchableInfo(memberId, genderId, birthYear, familyStatusId, maxMonthlyBudget)', [
   [1, 1, 1997, 2, 1100],
   [2, 1, 1954, 2, 1200],
   [3, 2, 1984, 2, 1300],

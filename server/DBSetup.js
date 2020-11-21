@@ -123,7 +123,8 @@ create(
 
 create(
   'MiscSearchPrefs (' +
-    'memberId INT PRIMARY KEY,' +
+    'id INT AUTO_INCREMENT PRIMARY KEY, ' +
+    'memberId INT,' +
     'maxMonthlyBudget INT,' +
     'FOREIGN KEY (memberId) REFERENCES Member(id)' +
   ')'
@@ -131,7 +132,8 @@ create(
 
 create(
   'GenderSearchPrefs (' +
-    'memberId INT PRIMARY KEY,' +
+    'id INT AUTO_INCREMENT PRIMARY KEY, ' +
+    'memberId INT,' +
     'genderId INT,' +
     'FOREIGN KEY (memberId) REFERENCES Member(id),' +
     'FOREIGN KEY (genderId) REFERENCES GenderType(id)' +
@@ -140,7 +142,8 @@ create(
 
 create(
   'AgeSearchPrefs (' +
-    'memberId INT PRIMARY KEY,' +
+    'id INT AUTO_INCREMENT PRIMARY KEY, ' +
+    'memberId INT,' +
     'ageGroupId INT,' +
     'FOREIGN KEY (memberId) REFERENCES Member(id),' +
     'FOREIGN KEY (ageGroupId) REFERENCES AgeGroupType(id)' +
@@ -149,7 +152,8 @@ create(
 
 create(
   'FamilyStatusSearchPrefs (' +
-    'memberId INT PRIMARY KEY,' +
+    'id INT AUTO_INCREMENT PRIMARY KEY, ' +
+    'memberId INT,' +
     'familyStatusId INT,' +
     'FOREIGN KEY (memberId) REFERENCES Member(id),' +
     'FOREIGN KEY (familyStatusId) REFERENCES FamilyStatusType(id)' +
@@ -260,6 +264,52 @@ insert('Member(firstName, lastName)', [
   ['Amy', 'Shu'],
   ['Hannah', 'Montana'],
 ]);
+
+// Misc, Gender, Age, Family
+insert('MiscSearchPrefs(memberId, maxMonthlyBudget)', [
+  [1, 600],
+  [2, 800],
+  [3, 1000],
+  [4, 400],
+  [5, 900],
+]);
+
+
+insert('GenderSearchPrefs(memberId, genderId)', [
+  [1, 1],
+  [1, 2],
+  [1, 3],
+  [2, 1],
+  [2, 3],
+  [3, 2],
+  [5, 2],
+]);
+
+insert('AgeSearchPrefs(memberId, ageGroupId)', [
+  [1, 1],
+  [1, 4],
+  [1, 3],
+  [2, 1],
+  [2, 3],
+  [3, 4],
+  [5, 5],
+  [2, 3],
+  [3, 4],
+  [5, 5],
+]);
+
+insert('FamilyStatusSearchPrefs(memberId, familyStatusId)', [
+  [1, 1],
+  [2, 3],
+  [3, 3],
+  [4, 2],
+  [5, 3],
+  [1, 4],
+  [3, 5],
+  [5, 5],
+
+]);
+
 
 //TODO: Insert new sample data based on the new search preferences table.
 

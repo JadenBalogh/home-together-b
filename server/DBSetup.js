@@ -33,6 +33,11 @@ function insert(table, values) {
   con.query(sql, [values], (err, results) => printQuery(err, results));
 }
 
+function simpleSelect(entry, table) {
+  var sql = 'SELECT ' + entry + ' FROM ' + table;
+  con.query(sql, (err, results) => printQuery(err, results));
+}
+
 
 
 // Drop Tables (MUST BE REVERSE ORDER OF Create STATEMENTS BELOW)
@@ -130,11 +135,13 @@ create(
   ')'
 );
 
+// Gender, Age, Family Status tables all use composite primary keys as they are non-entity tables representing many to many relationships
+// The table works under the assumption that an entry means that the user wants to see that group, we could add a seprate "preference BOOLEAN" if we want to store true AND false
 create(
   'GenderSearchPrefs (' +
-    'id INT AUTO_INCREMENT PRIMARY KEY, ' +
     'memberId INT,' +
     'genderId INT,' +
+    'PRIMARY KEY (memberId, genderId),' +
     'FOREIGN KEY (memberId) REFERENCES Member(id),' +
     'FOREIGN KEY (genderId) REFERENCES GenderType(id)' +
   ')'
@@ -142,9 +149,9 @@ create(
 
 create(
   'AgeSearchPrefs (' +
-    'id INT AUTO_INCREMENT PRIMARY KEY, ' +
     'memberId INT,' +
     'ageGroupId INT,' +
+    'PRIMARY KEY (memberId, ageGroupId),' +
     'FOREIGN KEY (memberId) REFERENCES Member(id),' +
     'FOREIGN KEY (ageGroupId) REFERENCES AgeGroupType(id)' +
   ')'
@@ -152,9 +159,9 @@ create(
 
 create(
   'FamilyStatusSearchPrefs (' +
-    'id INT AUTO_INCREMENT PRIMARY KEY, ' +
     'memberId INT,' +
     'familyStatusId INT,' +
+    'PRIMARY KEY (memberId, familyStatusId),' +
     'FOREIGN KEY (memberId) REFERENCES Member(id),' +
     'FOREIGN KEY (familyStatusId) REFERENCES FamilyStatusType(id)' +
   ')'
@@ -293,7 +300,7 @@ insert('AgeSearchPrefs(memberId, ageGroupId)', [
   [2, 3],
   [3, 4],
   [5, 5],
-  [2, 3],
+  [2, 2],
   [3, 4],
   [5, 5],
 ]);
@@ -310,9 +317,6 @@ insert('FamilyStatusSearchPrefs(memberId, familyStatusId)', [
 
 ]);
 
-
-//TODO: Insert new sample data based on the new search preferences table.
-
 insert('SearchableInfo(memberId, genderId, birthYear, familyStatusId, maxMonthlyBudget)', [
   [1, 1, 1997, 2, 1100],
   [2, 1, 1954, 2, 1200],
@@ -321,5 +325,6 @@ insert('SearchableInfo(memberId, genderId, birthYear, familyStatusId, maxMonthly
   [5, 3, 2001, 2, 1500],
 ]);
 
+simpleSelect('*', 'genderSearchPrefs');
 // Close the DB connection
 con.end();

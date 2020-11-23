@@ -1,53 +1,36 @@
 import React, { Component } from 'react';
-import '../index.css';
-import MemberList from './MemberList'
-import Select from 'react-select'
+import MemberList from './MemberList';
+import MembersFilter from './MembersFilter';
+import '../stylesheets/Members.css';
 
 // Search page for members
 class Members extends Component {
   constructor(props) {
     super(props);
-    const genderOptions = [
-      { value: 1, label: 'Male' },
-      { value: 2, label: 'Female' },
-      { value: 3, label: 'Other' }
-    ]
-    const statusOptions = [
-      { value: 1, label: 'Single' },
-      { value: 2, label: 'Couple' },
-      { value: 3, label: 'Couple with Children' },
-      { value: 4, label: 'Single Parent' },
-      { value: 5, label: 'Existing Group' }
-    ]
     this.state = {
       members: [],
-      genderID: '',
-      minAge: '',
-      maxAge: '',
-      familyStatusID: '',
-      maxMonthlyBudget: '',
+      genderIds: [],
+      ageGroupIds: [],
+      familyStatusIds: [],
+      maxMonthlyBudget: 0,
     };
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.updateMembers = this.updateMembers.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleDropdownChange = this.handleDropdownChange.bind(this);
+    this.updateMembers();
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-
-    const options = {
-      method: 'GET',
-    };
+  updateMembers() {
     const route = '/get-members?';
     const params = new URLSearchParams(
-      `genderID=${this.state.genderID}\
-      &minAge=${this.state.minAge}\
-      &maxAge=${this.state.maxAge}\
-      &familyStatusID=${this.state.familyStatusID}\
-      &maxMonthlyBudget=${this.state.maxMonthlyBudget}`
+      `${this.state.genderIds.map((x) => 'genderIds=' + x).join('&')}` +
+        `&${this.state.ageGroupIds.map((x) => 'ageGroupIds=' + x).join('&')}` +
+        `&${this.state.familyStatusIds.map((x) => 'familyStatusIds=' + x).join('&')}` +
+        `&maxMonthlyBudget=${this.state.maxMonthlyBudget}`
     ).toString();
     const url = process.env.REACT_APP_SERVER_URL + route + params;
 
-    fetch(url, options)
+    fetch(url)
       .then((res) => res.json())
       .then((json) => {
         console.log(json);
@@ -57,61 +40,38 @@ class Members extends Component {
       });
   }
 
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
+  handleInputChange(event) {
+    this.setState(
+      {
+        [event.target.name]: event.target.value,
+      },
+      () => this.updateMembers()
+    );
   }
 
-  handleGenderDropdown = (value) => {
-    this.setState({genderID: value});
-    console.log(`changed to: `, this.state.genderID);
+  handleDropdownChange(selection, action) {
+    let ids = selection
+      ? selection.map((x) => {
+          return x.value;
+        })
+      : [];
+    this.setState(
+      {
+        [action.name]: ids,
+      },
+      () => this.updateMembers()
+    );
   }
 
-  handleGenderDropdown = (value) => {
-    this.setState({familyStatusID: value});
-  }
-
-  //react-select documentation https://react-select.com/props
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <h1>Members Page</h1>
-          <p>Gender ID: <Select
-            isMulti
-            name="genderID"
-            options={[
-              { value: 1, label: 'Male' },
-              { value: 2, label: 'Female' },
-              { value: 3, label: 'Other' }
-            ]}
-            onChange={this.handleGenderDropdown}
-            isClearable true
-            className="basic-multi-select"
-            classNamePrefix="select"
-          /></p>
-          <p>Min Age: <input type='text' name='minAge' value={this.state.minAge} onChange={this.handleChange} /></p>
-          <p>Max Age: <input type='text' name='maxAge' value={this.state.maxAge} onChange={this.handleChange} /></p>
-          <p>Family Status ID: <Select
-            isMulti
-            name="familyStatusID"
-            options={[
-              { value: 1, label: 'Single' },
-              { value: 2, label: 'Couple' },
-              { value: 3, label: 'Couple with Children' },
-              { value: 4, label: 'Single Parent' },
-              { value: 5, label: 'Existing Group' }
-            ]}
-            onChange={this.handleStatusDropdown}
-            isClearable true
-            className="basic-multi-select"
-            classNamePrefix="select"
-          /></p>
-          <p>Max Monthly Budget: <input type='text' name='maxMonthlyBudget' value={this.state.maxMonthlyBudget} onChange={this.handleChange} /></p>
-          <input type='submit'></input>
-        </form>
-
+      <div className='members-container'>
+        <h2>Find other members looking to homeshare...</h2>
+        <MembersFilter
+          dropdownHandler={this.handleDropdownChange}
+          inputHandler={this.handleInputChange}
+          maxMonthlyBudget={this.state.maxMonthlyBudget}
+        />
         <MemberList members={this.state.members} />
       </div>
     );

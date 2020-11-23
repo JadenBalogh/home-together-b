@@ -301,8 +301,6 @@ insert('AgeSearchPrefs(memberId, ageGroupId)', [
   [3, 4],
   [5, 5],
   [2, 2],
-  [3, 4],
-  [5, 5],
 ]);
 
 insert('FamilyStatusSearchPrefs(memberId, familyStatusId)', [

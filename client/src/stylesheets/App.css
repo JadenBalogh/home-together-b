@@ -1,5 +1,12 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+nav {
+  width: 100%;
 }
 
 nav ul {
@@ -18,21 +25,21 @@ nav ul li a {
   text-decoration: none;
 }
 
-
 /*
  * @Descripttion: [shadow]
  */
- .hover-shadow{
+.hover-shadow {
   -webkit-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
- }
- .hover-shadow:hover{
+}
+.hover-shadow:hover {
   box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15) !important;
- }
+}
+
 /*
  * @Descripttion: [round corner]
  */
- .round-20{
+.round-20 {
   border-radius: 20px;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
@@ -43,47 +50,50 @@ nav ul li a {
 /*
  * @Descripttion: [border]
  */
-.border{
-  border:1px solid #f2f2f2;
+.border {
+  border: 1px solid #f2f2f2;
 }
+
 /*
  * @Descripttion: [padding]
  */
- .p-20{
-  padding:20px;
+.p-20 {
+  padding: 20px;
 }
-.pr-20{
-  padding-right:20px;
+.pr-20 {
+  padding-right: 20px;
 }
-.pl-20{
-  padding-left:20px;
+.pl-20 {
+  padding-left: 20px;
 }
+
 /*
  * @Descripttion: [margin]
  */
- .mt-20{
-  margin-top:20px;
+.mt-20 {
+  margin-top: 20px;
 }
-.mb-20{
-  margin-bottom:20px;
+.mb-20 {
+  margin-bottom: 20px;
 }
+
 /*
  * @Descripttion: [flex layout]
  */
- .flex{
+.flex {
   display: -ms-flexbox !important;
   display: flex !important;
- }
-.flex-justify-between{
+}
+.flex-justify-between {
   -ms-flex-pack: justify !important;
   justify-content: space-between !important;
 }
- .flex-item-center{
+.flex-item-center {
   -ms-flex-align: center !important;
   align-items: center !important;
- }
+}
 
-.flex-grow-1{
+.flex-grow-1 {
   -ms-flex-positive: 1 !important;
   flex-grow: 1 !important;
 }
@@ -131,18 +141,15 @@ nav ul li a {
   background-color: rgba(0, 0, 0, 0.9);
 }
 
-
 .a-dropmenu li ul li a span {
   font-size: 11px;
   color: rgba(255, 255, 255, 0.5);
-  padding-left:10px;
+  padding-left: 10px;
 }
 .a-dropmenu li ul li a span:first-child {
   font-size: 14px;
-  color: #FFF;
+  color: #fff;
 }
-
-
 
 .a-dropmenu li ul li ul {
   top: 0;
@@ -163,25 +170,24 @@ nav ul li a {
   -o-border-radius: 20px 20px 0 0;
 }
 
-.about{
+.about {
   width: 1140px;
   margin: 0 auto;
-  
 }
 
 .about h1 {
-  font-size:32px;
+  font-size: 32px;
 }
-.about div{
+.about div {
   text-align: left;
 }
 
-.about img{
+.about img {
   width: 580px;
 }
-.about p{
+.about p {
   line-height: 1.5;
-  color:#666;
+  color: #666;
   margin-bottom: 20px;
 }
 /*  [dropdown menu] end */

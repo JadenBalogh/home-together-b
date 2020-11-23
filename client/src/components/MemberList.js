@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,50 +7,49 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import '../stylesheets/MemberList.css';
 
+const year = new Date().getFullYear();
 const useStyles = makeStyles({
-    table: {
-        minWidth: 650,
-    },
+  table: {
+    minWidth: 650,
+  },
 });
 
 //Info stored: username, gender*, age*, status*, budget*
-export default function MemberList(props) {
-    const [rows, setRows] = useState([]);
-    if (props.members !== undefined) {
-        if (rows !== props.members) {
-            setRows(props.members);
-        }
-    }
-    const classes = useStyles();
-    return (
-        <div>
-            <TableContainer component={Paper}>
-                <Table className={classes.table} size="small" aria-label="a dense table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>User</TableCell>
-                            <TableCell align="right">Gender</TableCell>
-                            <TableCell align="right">Age</TableCell>
-                            <TableCell align="right">Status</TableCell>
-                            <TableCell align="right">Budget</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows.map((row) => (
-                            <TableRow key={row.id}>
-                                <TableCell component="th" scope="row">
-                                    {row.username}
-                                </TableCell>
-                                <TableCell align="right">{row.gender}</TableCell>
-                                <TableCell align="right">{row.age}</TableCell>
-                                <TableCell align="right">{row.status}</TableCell>
-                                <TableCell align="right">{row.budget}</TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </div>
-    );
+function MemberList(props) {
+  const classes = useStyles();
+  return (
+    <div className='list-container'>
+      <h3>Members Found</h3>
+      <TableContainer component={Paper}>
+        <Table className={classes.table} size='small' aria-label='a dense table'>
+          <TableHead>
+            <TableRow>
+              <TableCell><b>User</b></TableCell>
+              <TableCell align='right'><b>Gender</b></TableCell>
+              <TableCell align='right'><b>Age</b></TableCell>
+              <TableCell align='right'><b>Status</b></TableCell>
+              <TableCell align='right'><b>Budget</b></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {props.members.map((member) => (
+              <TableRow key={member.id}>
+                <TableCell component='th' scope='row'>
+                  {`${member.firstName} ${member.lastName}`}
+                </TableCell>
+                <TableCell align='right'>{member.gender}</TableCell>
+                <TableCell align='right'>{year - member.birthYear}</TableCell>
+                <TableCell align='right'>{member.familyStatus}</TableCell>
+                <TableCell align='right'>{member.maxMonthlyBudget}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
+  );
 }
+
+export default MemberList;

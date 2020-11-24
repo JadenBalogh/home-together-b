@@ -127,5 +127,13 @@ Creating issues and assigning parts
 
 
 
+## November 24th
+###### 1:30-2:10pm: 
+Reviewing the work from past week\
+Discussing the questionnaire 
+
+
+###### 2:10-2:41pm: 
+Creating issues and assigning parts
 
 

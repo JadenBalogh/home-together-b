@@ -115,3 +115,17 @@ Discussing the tasks of front-end static page
 
 ###### 2:46-2:34pm:
 Discussing UI design of front-end static page
+
+
+
+## November 17th
+###### 1:30-1:57pm: 
+Reviewing the work from past week
+
+###### 1:57-3:15pm: 
+Creating issues and assigning parts
+
+
+
+
+

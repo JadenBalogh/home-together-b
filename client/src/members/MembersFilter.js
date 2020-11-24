@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import FilterSelect from './FilterSelect';
-import './MembersFilter.css';
 
 // Filter component for the members page
 function MembersFilter(props) {

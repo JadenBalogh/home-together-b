@@ -9,7 +9,9 @@
 .infobox {
   background-color:#aaaaaa;
 }
-
+h2 {
+  color: #233f43;
+}
 nav {
   width: 100%;
 }

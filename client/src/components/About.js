@@ -16,7 +16,7 @@ class About extends Component {
         <h1>Welcome to HomeTogether.ca</h1>
         <div class="infobox flex flex-justify-between flex-item-center border mt-20 mb-20 p-20 round-20 hover-shadow">
           <div class="flex-grow-1 pr-20">
-            <h3>Our Purpose...</h3>
+            <h3>Our Purpose</h3>
             <p>
               HomeTogether is the non-profit hub for all things home sharing. Differing from other for-profit enterprises in the same space HomeTogether aims to compete with nobody, by offering fair promotion of everyone.
               </p>
@@ -33,10 +33,10 @@ class About extends Component {
             <img class='round-20' src={floorPlanImg} />
           </div>
           <div class="flex-grow-1 pl-20">
-            <h3>Our History...</h3>
+            <h3>Our History</h3>
 
             <p>
-              Built on a modern web-stack of MySQL, Express, Node, and React HomeTogether.ca was made for the 20th Century. 
+              Built on a modern web-stack of MySQL, Express, Node, and React; HomeTogether.ca was made for the 21st Century. 
               </p>
           </div>
         </div>
@@ -44,7 +44,9 @@ class About extends Component {
           <div class="flex-grow-1 pr-20">
             <h3>Contact Us</h3>
             <p>
-              Currently no contact methods are available, please check back later.
+              Phone: 111-222-3333 <br/>
+              E-Mail: Contact@HomeTogether.ca <br/>
+              Address: 1234 Home Together Street, Vancouver, BC, Canada. <br/>
             </p>
           </div>
           <div>

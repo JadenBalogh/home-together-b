@@ -21,7 +21,7 @@ function MemberList(props) {
   const classes = useStyles();
   return (
     <div className='list-container'>
-      <h3>Members Found</h3>
+      <h3>Members Found:</h3>
       <TableContainer component={Paper}>
         <Table className={classes.table} size='small' aria-label='a dense table'>
           <TableHead>

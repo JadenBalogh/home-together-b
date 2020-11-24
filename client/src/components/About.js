@@ -1,43 +1,55 @@
 import React, { Component } from 'react';
 
-import teamImg from '../images/team.jpg'
+import vintageHouseImg from '../images/pixabay-vintage-house-bicycle-home-1149558.jpg'
+import floorPlanImg from '../images/pixabay-architecture-blueprint-floor-plan-1857175.jpg'
+import writingImg from '../images/pixabay-writing-write-person-paperwork-828911.jpg'
+
 import '../index.css';
 
 // About page
 class About extends Component {
   render() {
     return (
+
+
       <div class="about">
-        <h1>Welcome To HomeTogether.ca</h1>
-        <div class="flex flex-justify-between flex-item-center border p-20 round-20 hover-shadow">
+        <h1>Welcome to HomeTogether.ca</h1>
+        <div class="infobox flex flex-justify-between flex-item-center border mt-20 mb-20 p-20 round-20 hover-shadow">
           <div class="flex-grow-1 pr-20">
             <h3>Our Purpose...</h3>
-              <p>
-              As an established and ambitious international Management School, research is at the heart of our success and informs our teaching, pushes boundaries and transforms lives. Through our collaborative approach and cutting edge knowledge we strive to be a beacon for top talent.
+            <p>
+              HomeTogether is the non-profit hub for all things home sharing. Differing from other for-profit enterprises in the same space HomeTogether aims to compete with nobody, by offering fair promotion of everyone.
               </p>
-              <p>
-              As an established and ambitious international Management School, research is at the heart of our success and informs our teaching, pushes boundaries and transforms lives. Through our collaborative approach and cutting edge knowledge we strive to be a beacon for top talent.
+            <p>
+              Users can browse local services, search for potential housemates, connect with local classes and seminars, seek out legal advice, and more. Organizations can list their services, events and more via our listing system for a small fee taken via PayPal which helps cover site costs. Organizations and Members directly involved in home sharing (e.g Government Shared Housing Projects) can list for free.
               </p>
           </div>
           <div>
-            <img class='round-20' src={teamImg} />
+            <img class='round-20' src={vintageHouseImg} />
           </div>
         </div>
-        <div class="flex flex-justify-between flex-item-center border mt-20 mb-20 p-20 round-20 hover-shadow">
-        <div>
-            <img class='round-20' src={teamImg} />
+        <div class="infobox flex flex-justify-between flex-item-center border mt-20 mb-20 p-20 round-20 hover-shadow">
+          <div>
+            <img class='round-20' src={floorPlanImg} />
           </div>
           <div class="flex-grow-1 pl-20">
             <h3>Our History...</h3>
-            
-              <p>
-              As an established and ambitious international Management School, research is at the heart of our success and informs our teaching, pushes boundaries and transforms lives. Through our collaborative approach and cutting edge knowledge we strive to be a beacon for top talent.
-              </p>
-              <p>
-              As an established and ambitious international Management School, research is at the heart of our success and informs our teaching, pushes boundaries and transforms lives. Through our collaborative approach and cutting edge knowledge we strive to be a beacon for top talent.
+
+            <p>
+              Built on a modern web-stack of MySQL, Express, Node, and React HomeTogether.ca was made for the 20th Century. 
               </p>
           </div>
-          
+        </div>
+        <div class="infobox flex flex-justify-between flex-item-center border mt-20 mb-20 p-20 round-20 hover-shadow">
+          <div class="flex-grow-1 pr-20">
+            <h3>Contact Us</h3>
+            <p>
+              Currently no contact methods are available, please check back later.
+            </p>
+          </div>
+          <div>
+            <img class='round-20' src={writingImg} />
+          </div>
         </div>
       </div>
     );

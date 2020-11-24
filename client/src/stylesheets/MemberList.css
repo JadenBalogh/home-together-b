@@ -2,6 +2,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #CFE5F8;
+  background-color:rgba(35, 63, 67, 0.9);
   margin: 20px;
+}
+
+h3 {
+  color: whitesmoke;
 }

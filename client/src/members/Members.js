@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MemberList from './MemberList';
 import MembersFilter from './MembersFilter';
-import '../stylesheets/Members.css';
+import './Members.css';
 
 // Search page for members
 class Members extends Component {
@@ -36,7 +36,6 @@ class Members extends Component {
     fetch(url)
       .then((res) => res.json())
       .then((json) => {
-        console.log(json);
         this.setState({
           members: json,
         });

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import ListingList from './ListingList';
-import '../stylesheets/Listings.css';
+import './Listings.css';
 
 // Search page for members
 function Listings(props) {
@@ -16,7 +16,6 @@ function Listings(props) {
     const route = '/get-listings?';
     const params = new URLSearchParams(`categoryId=${categoryId}`).toString();
     const url = process.env.REACT_APP_SERVER_URL + route + params;
-    console.log(params);
 
     fetch(url)
       .then((res) => res.json())

@@ -7,8 +7,9 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import '../stylesheets/List.css';
+import '../shared/List.css';
 
+const year = new Date().getFullYear();
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -16,42 +17,42 @@ const useStyles = makeStyles({
 });
 
 //Info stored: username, gender*, age*, status*, budget*
-function ListingList(props) {
+function MemberList(props) {
   const classes = useStyles();
   return (
     <div className='list-container'>
-      <h3>Services Found:</h3>
+      <h3>Members Found:</h3>
       <TableContainer component={Paper}>
         <Table className={classes.table} size='small' aria-label='a dense table'>
           <TableHead>
             <TableRow>
               <TableCell>
-                <b>Title</b>
+                <b>User</b>
               </TableCell>
               <TableCell align='right'>
-                <b>Website</b>
+                <b>Gender</b>
               </TableCell>
               <TableCell align='right'>
-                <b>Phone</b>
+                <b>Age</b>
               </TableCell>
               <TableCell align='right'>
-                <b>Email</b>
+                <b>Status</b>
               </TableCell>
               <TableCell align='right'>
-                <b>Category</b>
+                <b>Budget</b>
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {props.listings.map((listing) => (
-              <TableRow key={listing.id}>
+            {props.members.map((member) => (
+              <TableRow key={member.id}>
                 <TableCell component='th' scope='row'>
-                  {listing.title}
+                  {`${member.firstName} ${member.lastName}`}
                 </TableCell>
-                <TableCell align='right'>{listing.website}</TableCell>
-                <TableCell align='right'>{listing.phone}</TableCell>
-                <TableCell align='right'>{listing.email}</TableCell>
-                <TableCell align='right'>{listing.categoryName}</TableCell>
+                <TableCell align='right'>{member.gender}</TableCell>
+                <TableCell align='right'>{year - member.birthYear}</TableCell>
+                <TableCell align='right'>{member.familyStatus}</TableCell>
+                <TableCell align='right'>{member.maxMonthlyBudget}</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -61,4 +62,4 @@ function ListingList(props) {
   );
 }
 
-export default ListingList;
+export default MemberList;

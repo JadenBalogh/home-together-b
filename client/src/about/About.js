@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 
-import vintageHouseImg from '../images/pixabay-vintage-house-bicycle-home-1149558.jpg'
-import floorPlanImg from '../images/pixabay-architecture-blueprint-floor-plan-1857175.jpg'
-import writingImg from '../images/pixabay-writing-write-person-paperwork-828911.jpg'
-
-import '../index.css';
+import vintageHouseImg from './stock-bike.jpg'
+import floorPlanImg from './stock-blueprints.jpg'
+import writingImg from './stock-person-writing.jpg'
 
 // About page
 class About extends Component {

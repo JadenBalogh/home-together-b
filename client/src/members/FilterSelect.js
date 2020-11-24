@@ -1,6 +1,6 @@
 import React from 'react';
 import Select from 'react-select'
-import '../stylesheets/FilterSelect.css';
+import './FilterSelect.css';
 
 // Select box for filter panel
 function FilterSelect(props) {

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import '../index.css';
 
 // Main navigation bar that is at the top of every page
 class NavBar extends Component {

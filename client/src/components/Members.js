@@ -17,6 +17,9 @@ class Members extends Component {
     this.updateMembers = this.updateMembers.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
+  }
+
+  componentDidMount() {
     this.updateMembers();
   }
 

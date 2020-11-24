@@ -1,55 +1,62 @@
-import React, { Component } from 'react';
-import '../index.css';
+import React, { useState, useEffect } from 'react';
+import Select from 'react-select';
+import ListingList from './ListingList';
+import '../stylesheets/Listings.css';
 
 // Search page for members
-class Listings extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      listings: [],
-      category: ''
-    };
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
+function Listings(props) {
+  const [listings, setListings] = useState([]);
+  const [categoryOptions, setCategoryOptions] = useState([]);
+  const [categoryId, setCategoryId] = useState(-1);
 
-  handleSubmit(event) {
-    event.preventDefault();
+  useEffect(fetchCategoryOptions, []);
+  useEffect(updateListings, [categoryId]);
 
-    const options = {
-      method: 'GET',
-    };
+  function updateListings() {
     const route = '/get-listings?';
-    const params = new URLSearchParams(
-      `category=${this.state.category}`
-    ).toString();
+    const params = new URLSearchParams(`categoryId=${categoryId}`).toString();
     const url = process.env.REACT_APP_SERVER_URL + route + params;
+    console.log(params);
 
-    fetch(url, options)
+    fetch(url)
       .then((res) => res.json())
       .then((json) => {
-        console.log(json);
-        this.setState({
-          listings: json,
-        });
+        setListings(json);
       });
   }
 
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
+  function handleDropdownChange(selection) {
+    let id = selection ? selection.value : -1;
+    setCategoryId(id);
   }
 
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <h1>Listings Page</h1>
-        <p>Category: <input type='text' name='category' value={this.state.category} onChange={this.handleChange} /></p>
-        <input type='submit'></input>
-      </form>
-    );
+  function fetchCategoryOptions() {
+    fetch(process.env.REACT_APP_SERVER_URL + '/get-category-types')
+      .then((res) => res.json())
+      .then((json) => {
+        let options = json.map((x) => {
+          return { value: x.id, label: x.name };
+        });
+        setCategoryOptions(options);
+      });
   }
+
+  return (
+    <div className='listings-container'>
+      <h2>Find services that are relevant to you...</h2>
+      <div className='listing-select-container'>
+        <label>Select a Category:</label>
+        <Select
+          isClearable
+          className='listing-select'
+          name={'categoryId'}
+          options={categoryOptions}
+          onChange={handleDropdownChange}
+        />
+      </div>
+      <ListingList listings={listings}></ListingList>
+    </div>
+  );
 }
 
 export default Listings;

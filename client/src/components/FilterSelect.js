@@ -5,12 +5,12 @@ import '../stylesheets/FilterSelect.css';
 // Select box for filter panel
 function FilterSelect(props) {
   return (
-    <div className='select-container'>
+    <div className='filter-select-container'>
       <label>{props.label}</label>
       <Select
         isMulti
         isClearable={false}
-        className='select'
+        className='filter-select'
         name={props.name}
         options={props.options}
         onChange={props.onChange}

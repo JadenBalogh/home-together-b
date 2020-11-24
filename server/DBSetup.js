@@ -215,18 +215,19 @@ insert('CategoryType(name, paymentRequired)', [
   // These listing categories require payment (paymentRequired == true)
   ['Rental', true],
   ['House & Yard Services', true],
-  ['Legal & Sales', true],
-  ['Classes, Clubs, and Events', true],
+  ['Individual & Group Services', true],
+  ['Legal, Sales & Insurance Agencies', true],
+  ['Classes, Clubs & Events', true],
   // These listin' categories are free (paymentRequired == false)
-  ['Cohousing, Co-ops, Intergenerational, and Planned Neighborhoods', false],
-  ['Home Share Facilitation & Matching Services, and Planned Neighborhoods', false],
-  ['Government & Non-Profit / Shared Living Supports and Services ', false],
+  ['Shared & Community Living Initiatives', false],
+  ['Sharing Facilitation, Matching & Educational Services', false],
+  ['Governmental Supports & Services', false],
   ['Members with Homes to Share', false],
 ]);
 
 create(
   'Listing(' +
-    'listingId INT AUTO_INCREMENT PRIMARY KEY,' +
+    'id INT AUTO_INCREMENT PRIMARY KEY,' +
     'approvalStatus BOOLEAN,' +
     // Public information
     'title VARCHAR(200),' +
@@ -258,8 +259,8 @@ insert('Listing(approvalStatus, title, website, phone, email, description, image
   [true,'Larry\'s Lizard Rental Service', 'larryzlizards.com', '250-555-1234', 'larry@larryzlizards.com', 'Description', 'imageURL', 2,1],
   [true,'Grass Assassins Grass Cutting Service', 'grassassassins.com', '250-555-0987', 'contact@grassassassins.com', 'We will cut your grass for a fair and reasonable price, our specialty is cutting grass so quiet you would never hear it', 'NO IMAGE', 2,2],
   [true,'Grass B Gone Landscaping Service', 'grassbgone.ca', '413-555-1983', 'info@grassbgone.ca', 'Tired of watering the lawn every week? Tired of paying to get your lawn mowed? Contact us about our xeroscaping services, never water again!', '/image/testimage/test.jpg', 2,3],
-  [true,'BC Housing - Housing Placement Service', 'placement.housingassistance.gov.bc.ca', '1-250-555-8000', 'HousingAssistance@gov.bc.ca', 'We\'ll help you find an afforable place to live', '/image/testimage/BCGOVLOGO.png', 7,5],
-  [true,'BC Housing - Lease Assistance Service', 'leasehelp.housingassistance.gov.bc.ca', '1-250-555-8001', 'HousingAssistance@gov.bc.ca', 'We\'ll help you create, mange disputes, and understand lease agreements in BC', '/image/testimage/BCGOVLOGO.png', 7,5],
+  [true,'BC Housing - Housing Placement Service', 'placement.housingassistance.gov.bc.ca', '1-250-555-8000', 'HousingAssistance@gov.bc.ca', 'We\'ll help you find an afforable place to live', '/image/testimage/BCGOVLOGO.png', 8,5],
+  [true,'BC Housing - Lease Assistance Service', 'leasehelp.housingassistance.gov.bc.ca', '1-250-555-8001', 'HousingAssistance@gov.bc.ca', 'We\'ll help you create, mange disputes, and understand lease agreements in BC', '/image/testimage/BCGOVLOGO.png', 8,5],
   [false,'Dog Walking - CHEAP', 'legitdogwalkingcomapany.xyz', '250-555-1111', 'walking@dogCorp.xyz', 'Will walk your dog for cheap, please pay via Monero Money Transfer', 'No Image', 3,2],
 
 ]);

@@ -40,7 +40,7 @@ app.get('/get-members', (req, res) => {
 
 // Expects: /get-listings?category=Rentals
 app.get('/get-listings', (req, res) => {
-  getListings(req.query.category).then(listings => {
+  getListings(req.query.categoryId).then(listings => {
     res.send(listings);
   })
 });
@@ -63,6 +63,13 @@ app.get('/get-family-status-types', (req, res) => {
 app.get('/get-age-group-types', (req, res) => {
   getAgeGroupTypes().then(ageGroups => {
     res.send(ageGroups);
+  })
+});
+
+// Expects: /get-category-types
+app.get('/get-category-types', (req, res) => {
+  getCategoryTypes().then(categories => {
+    res.send(categories);
   })
 });
 
@@ -109,33 +116,49 @@ function getMembers(genderIds = [], ageGroupIds = [], familyStatusIds = [], maxM
       // cause prepared statements suck at dealing with this
       var year = new Date().getFullYear();
       getAgeRanges(ageGroupIds).then(ageRanges => {
-        let filteredResult = results.filter(x => {
+        let filteredResults = results.filter(x => {
           let doesGenderMatch = genderIds.length > 0 ?
             genderIds.includes(x.genderId.toString()) : true;
 
           let doesFamilyMatch = familyStatusIds.length > 0 ?
             familyStatusIds.includes(x.familyStatusId.toString()) : true;
 
-          let doesAgeMatch = ageRanges.length > 0 ? ageRanges.some(ageRange => {
-            return year - Number(ageRange.minAge) >= x.birthYear
-                && year - Number(ageRange.maxAge) <= x.birthYear;
-          }) : true;
+          let doesAgeMatch = ageRanges.length > 0 ?
+            ageRanges.some(ageRange => {
+              return year - Number(ageRange.minAge) >= x.birthYear
+                  && year - Number(ageRange.maxAge) <= x.birthYear;
+            }) : true;
 
           return doesGenderMatch && doesFamilyMatch && doesAgeMatch;
         });
 
-        resolve(filteredResult);
+        resolve(filteredResults);
       });
     });
   });
 }
 
-function getListings(category) {
-  var sql =
-    'SELECT * \
-    FROM Listing \
-    WHERE category = ?';
-  return query(sql, [category]);
+function getListings(categoryId) {
+  return new Promise((resolve) => {
+    var sql =
+      'SELECT \
+        l.id, \
+        title, \
+        website, \
+        phone, \
+        email, \
+        c.id AS categoryId, \
+        c.name AS categoryName \
+      FROM Listing l \
+      JOIN CategoryType c ON l.categoryId = c.id';
+    query(sql).then(results => {
+      let filteredResults = results;
+      if (categoryId > 0) {
+        filteredResults = results.filter(x => x.categoryId == categoryId);
+      }
+      resolve(filteredResults);
+    });
+  });
 }
 
 function getGenderTypes() {
@@ -156,5 +179,12 @@ function getAgeGroupTypes() {
   var sql = 
     'SELECT id, name, minAge, maxAge \
     FROM AgeGroupType';
+  return query(sql);
+}
+
+function getCategoryTypes() {
+  var sql = 
+    'SELECT id, name \
+    FROM CategoryType';
   return query(sql);
 }

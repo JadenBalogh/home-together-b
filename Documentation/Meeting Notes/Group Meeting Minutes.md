@@ -1,11 +1,15 @@
 # Group Meeting Minutes
 
+
+
+
+
 ## October 2nd
 
 ###### 12:30pm-1:10pm :
 
-Created feature hierarchy 
-Talked about the general fetures we want to implement, including:
+1.Created feature hierarchy 
+2.Talked about the general fetures we want to implement, including:
 
 User's account info(create account/login)
 
@@ -37,7 +41,7 @@ Map
 
 ###### 1:10pm-2:30pm :
 
-Created new issues, including:
+1.Created new issues, including:
 
 Research and integrate continuous integration for code formatting
 
@@ -48,6 +52,10 @@ Add list of all feature ideas to backlog
 Document tech stack
 
 Document user group
+
+
+
+
 
 ## October 9th
 
@@ -73,6 +81,10 @@ Discussing/finalizing tech stack choice
 
 Discussing report and assigning parts
 
+
+
+
+
 ## October 23rd
 
 ###### 11:15-11:20 pm: 
@@ -82,6 +94,8 @@ Discussing the weekly plans
 ###### 11:20-12:06 pm: 
 
 Creating issues and assigning parts
+
+
 
 
 
@@ -97,15 +111,19 @@ Discussing the gitstats strategy
 
 ###### 1:50-3:00pm:
 
- - Creating issues, assigning parts and discussing the plans of next week 
+1.Creating issues, assigning parts and discussing the plans of next week 
  
- - We decided to change from MongoDB to MySQL to save time (since we've all used relational databases before)
+Key point:
+We decided to change from MongoDB to MySQL to save time (since we've all used relational databases before)
  
+2.Updating rules:
  - Everyone needs to comment and review (NOT merge) on every pull request for this week by 9pm tonight - note that Jared still needs to create a pull request for the documentation so that'll also require comments and reviews
  
  - We've assigned the tasks for this week; we're primarily focusing on the database creation but Athena is setting up the mysql connection on the server and we've assigned you to create a front-end interface to show database results that are sent by the server
  
  - All the issues are updated on the github for more info
+
+
 
 
 
@@ -145,13 +163,15 @@ Create the User table in the database
 
 
 
+
+
 ## November 10th
 
 ###### 1:30-2:00pm: 
 
-Reviewing each other's work
+1.Reviewing each other's work
 
-Searching preferences right now forces users to only choose one(eg. only looking for male). Think about how to implement multi-preference choices (eg. looking for male and female).
+2.Searching preferences right now forces users to only choose one(eg. only looking for male). Think about how to implement multi-preference choices (eg. looking for male and female).
 
 Implementing Saturday noon check-in where each person submits what they are doing and the branch they are working on.
 
@@ -185,6 +205,8 @@ Discussing UI design of front-end static page
 
 
 
+
+
 ## November 17th
 
 ###### 1:30-1:57pm: 
@@ -193,11 +215,12 @@ Reviewing the work from past week
 
 ###### 1:57-3:15pm: 
 
-Creating issues and assigning parts:
+Creating issues and assigning parts
 
-Create use case tasks for the Member user group
+The issues are:\
+Creating use case tasks for the Member user group
 
-Create description of system for heuristic evaluations
+Creating description of system for heuristic evaluations
 
 Sign up for peer evaluations on the website
 
@@ -215,6 +238,8 @@ Create Listing-related tables and relationships in database
 
 
 
+
+
 ## November 24th
 
 ###### 1:30-2:10pm: 
@@ -228,11 +253,17 @@ some information of database is not accurate
 Discussing the questionnaire:https://forms.gle/gwZP3jrnoo26Frih7
 
 
+
+
+
 ###### 2:10-2:41pm: 
 
 Creating issues and assigning parts:
 
+The issues are:\
+
 Report: Review and submit
+
 Report: Average and graph the quantitative eval results
 
 Report: Create list of issues from eval notes and prioritize them 

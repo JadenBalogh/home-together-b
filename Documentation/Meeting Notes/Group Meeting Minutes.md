@@ -123,17 +123,34 @@ Discussing UI design of front-end static page
 Reviewing the work from past week
 
 ###### 1:57-3:15pm: 
-Creating issues and assigning parts
+Creating issues and assigning parts:\
+Create use case tasks for the Member user group\
+Create description of system for heuristic evaluations\
+Sign up for peer evaluations on the website\
+Setup the google form for heuristic evaluation\
+Setup remote desktop\
+Integrate updated front-end and back-end changes between client and server\ok
 
 
 
 ## November 24th
 ###### 1:30-2:10pm: 
-Reviewing the work from past week\
-Discussing the questionnaire 
+Reviewing the work from past week:\
+the about page has some formatting issues which are going to be reviewed today
+some information of database is not accurate
+Discussing the questionnaire:https://forms.gle/gwZP3jrnoo26Frih7
 
 
 ###### 2:10-2:41pm: 
-Creating issues and assigning parts
+Creating issues and assigning parts:\
+Report: Review and submit\
+Report: Average and graph the quantitative eval results\
+Report: Create list of issues from eval notes and prioritize them \
+Report: Compile list of all group B eval recordings\
+Report: Compile list of user tasks used in evaluations\
+Report: Compile participant information into table\
+Report: System description and feature list\
+Write peer evals\
+Create the demo video for milestone 1\
 
 

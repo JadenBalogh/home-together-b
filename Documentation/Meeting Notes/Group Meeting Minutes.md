@@ -217,7 +217,8 @@ Reviewing the work from past week
 
 Creating issues and assigning parts
 
-The issues are:\
+The issues are:
+
 Creating use case tasks for the Member user group
 
 Creating description of system for heuristic evaluations
@@ -253,14 +254,11 @@ some information of database is not accurate
 Discussing the questionnaire:https://forms.gle/gwZP3jrnoo26Frih7
 
 
-
-
-
 ###### 2:10-2:41pm: 
 
 Creating issues and assigning parts:
 
-The issues are:\
+The issues are:
 
 Report: Review and submit
 
@@ -281,3 +279,25 @@ Write peer evals
 Create the demo video for milestone 1
 
 
+
+## December 1st
+
+###### 1:30-1:43pm:
+
+Closing the issues from past week
+
+###### 1:43-2:12pm:
+
+Discussing the plan during the winter break, creating issues and assigning parts
+
+The issues are:
+
+Research and determine the front-end library to use
+
+Research google maps implementation with React
+
+Create front-end design prototypes
+
+Complete database backend
+
+Add linting and code formatting project settings

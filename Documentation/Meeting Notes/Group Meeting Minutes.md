@@ -301,3 +301,27 @@ Create front-end design prototypes
 Complete database backend
 
 Add linting and code formatting project settings
+
+
+
+## December 12th
+
+###### 1:30-1:44pm:
+
+Dicussing the issues done in the winter break (the UI design and the research of map feature)
+
+closing these issues
+
+###### 1:43-2:22pm:
+
+Discussing the questions to ask Twilla (about map feature and UI design)
+The optional UI design can be found [here](https://github.com/JadenBalogh/home-together-b/tree/ui-design/Documentation/Prototypes/Website%20Design/UI%20Design)
+
+Discussing the meeting times and the content of discussion for the meetings
+The current way is to have a scrum meeting every Tuesday at 1:30 pm, and have a work meeting every Saturday at 1:00 pm
+
+###### 2:22-2:37pm:
+
+Discussing the plan for this week and creating new issues
+
+

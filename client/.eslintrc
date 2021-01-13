@@ -1,0 +1,10 @@
+{
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": ["error"]
+  },
+  "eslintConfig": {
+    "extends": ["react-app", "plugin:prettier/recommended"]
+  }
+}

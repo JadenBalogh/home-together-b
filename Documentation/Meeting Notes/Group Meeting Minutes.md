@@ -304,7 +304,7 @@ Add linting and code formatting project settings
 
 
 
-## December 12th
+## January 12th
 
 ###### 1:30-1:44pm:
 

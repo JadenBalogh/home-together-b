@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import dbutils from '../helpers/dbutils.js';
-import authconfig from '../config/authconfig';
+import authconfig from '../config/authconfig.js';
 
 function checkAvailable(username, email) {
   return new Promise((resolve) => {

@@ -1,4 +1,6 @@
+import jwt from 'jsonwebtoken';
 import dbutils from '../helpers/dbutils.js';
+import authconfig from '../config/authconfig';
 
 function checkAvailable(username, email) {
   return new Promise((resolve) => {
@@ -13,6 +15,13 @@ function checkAvailable(username, email) {
       });
     });
   });
+}
+
+function verifyToken(token) {
+  jwt.verify(token, authconfig.secret, (decoded) => {
+    // TODO: implement token verification
+    console.log(decoded.id);
+  })
 }
 
 export default {

@@ -13,6 +13,7 @@ class NavBar extends Component {
           <li><NavLink to='/members'>Find People</NavLink></li>
           <li><NavLink to='/listings'>Find Services</NavLink></li>
           <li><NavLink to='/map'>Map</NavLink></li>
+          <li><NavLink to='/signup'>Signup</NavLink></li>
         </ul>
       </nav>
     );

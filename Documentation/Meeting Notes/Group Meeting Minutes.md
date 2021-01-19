@@ -1,54 +1,56 @@
 # Group Meeting Minutes
 
 
+
 ## October 2nd, 2020
 
 ###### 12:30pm-1:10pm :
 
-1.Created feature hierarchy 
-2.Talked about the general fetures we want to implement, including:
+Created feature hierarchy 
+Talked about the general fetures we want to implement, including:
 
-User's account info(create account/login)
+ User's account info(create account/login)
 
-User's account info(edit profile)
+ User's account info(edit profile)
 
-Filter panel (service filters)
+ Filter panel (service filters)
 
-Filter panel (user filters)
+ Filter panel (user filters)
 
-User search (rate services)
+ User search (rate services)
 
-User search (advertising)
+ User search (advertising)
 
-User search (view service profile)
+ User search (view service profile)
 
-Service search(scrollable listing)
+ Service search(scrollable listing)
 
-User search (messaging)
+ User search (messaging)
 
-User search (scrollable listing)
+ User search (scrollable listing)
 
-User search (rate people)
+ User search (rate people)
 
-User search (view profile)
+ User search (view profile)
 
-User's account info(edit profile)
+ User's account info(edit profile)
 
-Map
+ Map
 
 ###### 1:10pm-2:30pm :
 
-1.Created new issues, including:
+Created new issues, including:
 
-Research and integrate continuous integration for code formatting
+ Research and integrate continuous integration for code formatting
 
-Create milestone timeline
+ Create milestone timeline
 
-Add list of all feature ideas to backlog
+ Add list of all feature ideas to backlog
 
-Document tech stack
+ Document tech stack
 
-Document user group
+ Document user group
+
 
 
 
@@ -93,7 +95,6 @@ Creating issues and assigning parts
 
 
 
-
 ## October 27th, 2020
 
 ###### 1:30-1:40pm: 
@@ -106,17 +107,18 @@ Discussing the gitstats strategy
 
 ###### 1:50-3:00pm:
 
-1.Creating issues, assigning parts and discussing the plans of next week 
+Creating issues, assigning parts and discussing the plans of next week 
  
-Key point:
-We decided to change from MongoDB to MySQL to save time (since we've all used relational databases before)
+ Key point:
+ We decided to change from MongoDB to MySQL to save time (since we've all used relational databases before)
  
-2.Updating rules:
- - Everyone needs to comment and review (NOT merge) on every pull request for this week by 9pm tonight - note that Jared still needs to create a pull request for the documentation so that'll also require comments and reviews
+Updating rules:
+
+ Everyone needs to comment and review (NOT merge) on every pull request for this week by 9pm tonight - note that Jared still needs to create a pull request for the documentation so that'll also require comments and reviews
  
- - We've assigned the tasks for this week; we're primarily focusing on the database creation but Athena is setting up the mysql connection on the server and we've assigned you to create a front-end interface to show database results that are sent by the server
+ We've assigned the tasks for this week; we're primarily focusing on the database creation but Athena is setting up the mysql connection on the server and we've assigned you to create a front-end interface to show database results that are sent by the server
  
- - All the issues are updated on the github for more info
+ All the issues are updated on the github for more info
 
 
 
@@ -162,9 +164,9 @@ Create the User table in the database
 
 ###### 1:30-2:00pm: 
 
-1.Reviewing each other's work
+Reviewing each other's work
 
-2.Searching preferences right now forces users to only choose one(eg. only looking for male). Think about how to implement multi-preference choices (eg. looking for male and female).
+Searching preferences right now forces users to only choose one(eg. only looking for male). Think about how to implement multi-preference choices (eg. looking for male and female).
 
 Implementing Saturday noon check-in where each person submits what they are doing and the branch they are working on.
 
@@ -174,11 +176,11 @@ Setting up the meeting schedule:
 
 Scrum Meeting - 1:30 PM on Tuesdays
 
- - All team members must attend in group-b-voice for a review of the past week, gitstats report and planning for the following week
+ All team members must attend in group-b-voice for a review of the past week, gitstats report and planning for the following week
  
 Virtual Standup - due by 1 PM on Saturdays
 
- - All team members should send a text summary to the #group-b-general channel of what've worked on so far, along with the branch and changes that require review
+ All team members should send a text summary to the #group-b-general channel of what've worked on so far, along with the branch and changes that require review
  
 ###### 2:00-2:33pm: 
 
@@ -210,23 +212,23 @@ Creating issues and assigning parts
 
 The issues are:
 
-Creating use case tasks for the Member user group
+ Creating use case tasks for the Member user group
 
-Creating description of system for heuristic evaluations
+ Creating description of system for heuristic evaluations
 
-Sign up for peer evaluations on the website
+ Sign up for peer evaluations on the website
 
-Setup the google form for heuristic evaluation
+ Setup the google form for heuristic evaluation
 
-Setup remote desktop
+ Setup remote desktop
 
-Integrate updated front-end and back-end changes between client and server
+ Integrate updated front-end and back-end changes between client and server
 
-Revamp the Members db tables to fit the multi-value inputs
+ Revamp the Members db tables to fit the multi-value inputs
+ 
+ Add test data to Listing-related tables in database
 
-Add test data to Listing-related tables in database
-
-Create Listing-related tables and relationships in database 
+ Create Listing-related tables and relationships in database 
 
 
 
@@ -249,23 +251,23 @@ Creating issues and assigning parts:
 
 The issues are:
 
-Report: Review and submit
+ Report: Review and submit
 
-Report: Average and graph the quantitative eval results
+ Report: Average and graph the quantitative eval results
 
-Report: Create list of issues from eval notes and prioritize them 
+ Report: Create list of issues from eval notes and prioritize them 
 
-Report: Compile list of all group B eval recordings
+ Report: Compile list of all group B eval recordings
+ 
+ Report: Compile list of user tasks used in evaluations
 
-Report: Compile list of user tasks used in evaluations
+ Report: Compile participant information into table
 
-Report: Compile participant information into table
+ Report: System description and feature list
 
-Report: System description and feature list
+ Write peer evals
 
-Write peer evals
-
-Create the demo video for milestone 1
+ Create the demo video for milestone 1
 
 
 
@@ -331,15 +333,16 @@ Discussing the plan before next Tuesday and nest week
 
 Assigning parts
 
- - Alvin: work on implementing the signup/login form in React with Material-UI components. 
+  Alvin: work on implementing the signup/login form in React with Material-UI components. 
  
- Use the most recent designs posted by Athena above (images, background and specifics can be changed, but the layout is mostly final).
+  Use the most recent designs posted by Athena above (images, background and specifics can be changed, but the layout is mostly final).
  
- - Athena: work on finalizing design for the account view/edit forms, and start on implementation in React with Material-UI.
+  Athena: work on finalizing design for the account view/edit forms, and start on implementation in React with Material-UI.
  
- - Jared: let us know your availability, no tasks assigned for now.
+  Jared: let us know your availability, no tasks assigned for now.
  
- - Jaden: Implement backend for signup/login - server and db.
+  Jaden: Implement backend for signup/login - server and db.
+
 
 
 
@@ -355,11 +358,11 @@ Discussing Athena's progress (UI design)
 
 a few points to think about:
 
-- moving the search shortcuts to a top navbar above the specific page itself
+ moving the search shortcuts to a top navbar above the specific page itself
 
-- expand feature for advanced filters
+ expand feature for advanced filters
 
-- navbar: about, member search, service search, profile OR login
+ navbar: about, member search, service search, profile OR login
 
 ###### 1:52-1:56pm:
 
@@ -367,20 +370,20 @@ Discussing Jared's progress(database implementation)
 
 ###### 1:56-2:10pm:
 
-Discussing the plan during the winter break, creating issues and assigning parts
+Discussing the plan during the winter break, creating issues and assigning parts:
 
- - server side authentication routes
+  server side authentication routes
  
- - server side account routes
+  server side account routes
  
- - update database for authentication
+  update database for authentication
  
- - implement account view page
+  implement account view page
  
- - implement account edit page
+  implement account edit page
  
- - implement signup page
+  implement signup page
  
- - implement login page
+  implement login page
  
- - Edit account page designs
+  Edit account page designs

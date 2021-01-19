@@ -1,10 +1,7 @@
 # Group Meeting Minutes
 
 
-
-
-
-## October 2nd
+## October 2nd, 2020
 
 ###### 12:30pm-1:10pm :
 
@@ -55,9 +52,7 @@ Document user group
 
 
 
-
-
-## October 9th
+## October 9th, 2020
 
 ###### 12:30-1:00pm: 
 
@@ -85,7 +80,7 @@ Discussing report and assigning parts
 
 
 
-## October 23rd
+## October 23rd, 2020
 
 ###### 11:15-11:20 pm: 
 
@@ -99,7 +94,7 @@ Creating issues and assigning parts
 
 
 
-## October 27th
+## October 27th, 2020
 
 ###### 1:30-1:40pm: 
 
@@ -127,7 +122,7 @@ We decided to change from MongoDB to MySQL to save time (since we've all used re
 
 
 
-## November 3rd
+## November 3rd, 2020
 
 ###### 1:30-2:00pm:
 
@@ -163,9 +158,7 @@ Create the User table in the database
 
 
 
-
-
-## November 10th
+## November 10th, 2020
 
 ###### 1:30-2:00pm: 
 
@@ -205,9 +198,7 @@ Discussing UI design of front-end static page
 
 
 
-
-
-## November 17th
+## November 17th, 2020
 
 ###### 1:30-1:57pm: 
 
@@ -239,9 +230,7 @@ Create Listing-related tables and relationships in database
 
 
 
-
-
-## November 24th
+## November 24th, 2020
 
 ###### 1:30-2:10pm: 
 
@@ -280,7 +269,7 @@ Create the demo video for milestone 1
 
 
 
-## December 1st
+## December 1st, 2020
 
 ###### 1:30-1:43pm:
 
@@ -304,7 +293,7 @@ Add linting and code formatting project settings
 
 
 
-## January 12th
+## January 12th, 2021
 
 ###### 1:30-1:44pm:
 
@@ -315,9 +304,11 @@ closing these issues
 ###### 1:43-2:22pm:
 
 Discussing the questions to ask Twilla (about map feature and UI design)
+
 The optional UI design can be found [here](https://github.com/JadenBalogh/home-together-b/tree/ui-design/Documentation/Prototypes/Website%20Design/UI%20Design)
 
 Discussing the meeting times and the content of discussion for the meetings
+
 The current way is to have a scrum meeting every Tuesday at 1:30 pm, and have a work meeting every Saturday at 1:00 pm
 
 ###### 2:22-2:37pm:
@@ -325,3 +316,71 @@ The current way is to have a scrum meeting every Tuesday at 1:30 pm, and have a 
 Discussing the plan for this week and creating new issues
 
 
+
+## January 16th, 2021
+
+###### 1:00-1:16pm:
+
+Discussing the progress of UI design
+
+###### 1:16-1:21pm:
+
+Discussing the plan before next Tuesday and nest week
+
+###### 1:21-1:28pm:
+
+Assigning parts
+
+ - Alvin: work on implementing the signup/login form in React with Material-UI components. 
+ 
+ Use the most recent designs posted by Athena above (images, background and specifics can be changed, but the layout is mostly final).
+ 
+ - Athena: work on finalizing design for the account view/edit forms, and start on implementation in React with Material-UI.
+ 
+ - Jared: let us know your availability, no tasks assigned for now.
+ 
+ - Jaden: Implement backend for signup/login - server and db.
+
+
+
+## January 19th, 2021
+
+###### 1:30-1:40pm:
+
+Discussing Alvin's progress (signup/login form) and Jaden's progress (database implementation)
+
+###### 1:40-1:52pm:
+
+Discussing Athena's progress (UI design)
+
+a few points to think about:
+
+- moving the search shortcuts to a top navbar above the specific page itself
+
+- expand feature for advanced filters
+
+- navbar: about, member search, service search, profile OR login
+
+###### 1:52-1:56pm:
+
+Discussing Jared's progress(database implementation)
+
+###### 1:56-2:10pm:
+
+Discussing the plan during the winter break, creating issues and assigning parts
+
+ - server side authentication routes
+ 
+ - server side account routes
+ 
+ - update database for authentication
+ 
+ - implement account view page
+ 
+ - implement account edit page
+ 
+ - implement signup page
+ 
+ - implement login page
+ 
+ - Edit account page designs

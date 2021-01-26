@@ -387,3 +387,29 @@ Discussing the plan during the winter break, creating issues and assigning parts
   implement login page
  
   Edit account page designs
+
+
+
+## January 26th
+
+###### 1:30-1:48pm:
+
+Showing signup and login page, discussing what parts still don't work
+
+###### 1:48-2:01pm:
+
+Check DB backend
+
+###### 2:01-2:30pm:
+
+Discussing design based on Jared's heuristic discussion
+
+###### 2:30-2:50pm:
+
+Distributing issues
+
+The issues are:
+
+Finish front end of login and signup
+
+Fix database conflicts

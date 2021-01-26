@@ -88,7 +88,7 @@ export default function SignUp(props) {
               <InputLabel>
                 Birth Year
               </InputLabel>
-              <Select id="birthYear" required value={props.birthYear}>
+              <Select id="birthYear" required value={props.birthYear} onChange={props.handleDropdownChange}>
                 <MenuItem value="2020">2020</MenuItem>
                 <MenuItem value="2019">2019</MenuItem>
                 <MenuItem value="2018">2018</MenuItem>
@@ -196,7 +196,7 @@ export default function SignUp(props) {
               <InputLabel>
                 Month
               </InputLabel>
-              <Select id="birthMonth" required value={props.birthMonth}>
+              <Select id="birthMonth" required value={props.birthMonth} onChange={props.handleDropdownChange}>
                 <MenuItem value="1">January</MenuItem>
                 <MenuItem value="2">February</MenuItem>
                 <MenuItem value="3">March</MenuItem>
@@ -215,7 +215,7 @@ export default function SignUp(props) {
               <InputLabel>
                 Day
               </InputLabel>
-              <Select id="birthDay" required value={props.birthDay}>
+              <Select id="birthDay" required value={props.birthDay} onChange={props.handleDropdownChange}>
                 <MenuItem value="1">1</MenuItem>
                 <MenuItem value="2">2</MenuItem>
                 <MenuItem value="3">3</MenuItem>
@@ -318,8 +318,8 @@ export default function SignUp(props) {
                 id="confPassword"
                 autoComplete="confPassword"
                 onChange={props.changeInput}
-                error={props.handlePassword}//check if password and confPassword matches
-                helperText={props.handlePassword ? "Passwords do not match." : ""}
+                error={props.password !== props.confPassword}//check if password and confPassword matches
+                helperText={props.password !== props.confPassword ? "Passwords do not match." : ""}
                 value={props.confPassword}
               />
             </Grid>
@@ -353,7 +353,7 @@ export default function SignUp(props) {
                 value={props.phone}
               />
             </Grid>
-            <Grid item xs={12} container direction='column' alignItems='flex-start' justify='flex-start' value={props.gender}>
+            <Grid item xs={12} container direction='column' alignItems='flex-start' justify='flex-start' value={props.gender} onChange={props.changeInput}>
               <FormControl component="fieldset">
                 <FormLabel component="legend">Gender</FormLabel>
                 <RadioGroup aria-label="gender" name="gender" id="gender">
@@ -363,7 +363,7 @@ export default function SignUp(props) {
                 </RadioGroup>
               </FormControl>
             </Grid>
-            <Grid item xs={12} container direction='column' alignItems='flex-start' justify='flex-start' value={props.status}>
+            <Grid item xs={12} container direction='column' alignItems='flex-start' justify='flex-start' value={props.status} onChange={props.changeInput}>
               <FormControl component="fieldset">
                 <FormLabel component="legend">Status</FormLabel>
                 <RadioGroup aria-label="status" name="status" id="status">
@@ -375,7 +375,7 @@ export default function SignUp(props) {
                 </RadioGroup>
               </FormControl>
             </Grid>
-            <Grid item xs={12} container direction='column' alignItems='flex-start' justify='flex-start'> value={props.people}
+            <Grid item xs={12} container direction='column' alignItems='flex-start' justify='flex-start' value={props.people} onChange={props.changeInput}>
               <FormControl component="fieldset">
                 <FormLabel component="legend">Open to share with</FormLabel>
                 <RadioGroup aria-label="people" name="people" id="people">
@@ -400,7 +400,7 @@ export default function SignUp(props) {
                 value={props.monthlyBudget}
               />
             </Grid>
-            <Grid item xs={12} container direction='column' alignItems='flex-start' justify='flex-start' value={props.pet}>
+            <Grid item xs={12} container direction='column' alignItems='flex-start' justify='flex-start' value={props.pet} onChange={props.changeInput}>
               <FormControl component="fieldset">
                 <FormLabel component="legend">Are you pet friendly?</FormLabel>
                 <RadioGroup aria-label="pet" name="pet" id="pet">
@@ -409,7 +409,7 @@ export default function SignUp(props) {
                 </RadioGroup>
               </FormControl>
             </Grid>
-            <Grid item xs={12} container direction='column' alignItems='flex-start' justify='flex-start' value={props.disabilities}>
+            <Grid item xs={12} container direction='column' alignItems='flex-start' justify='flex-start' value={props.disabilities} onChange={props.changeInput}>
               <FormControl component="fieldset">
                 <FormLabel component="legend">Do you have health or mobility issues?</FormLabel>
                 <RadioGroup aria-label="disabilities" name="disabilities" id="disabilities">
@@ -418,7 +418,7 @@ export default function SignUp(props) {
                 </RadioGroup>
               </FormControl>
             </Grid>
-            <Grid item xs={12} container direction='column' alignItems='flex-start' justify='flex-start'> value={props.religious}
+            <Grid item xs={12} container direction='column' alignItems='flex-start' justify='flex-start' value={props.religious}  onChange={props.changeInput}>
               <FormControl component="fieldset">
                 <FormLabel component="legend">Are you religious?</FormLabel>
                 <RadioGroup aria-label="religious" name="religious" id="religious">
@@ -427,7 +427,7 @@ export default function SignUp(props) {
                 </RadioGroup>
               </FormControl>
             </Grid>
-            <Grid item xs={12} container direction='column' alignItems='flex-start' justify='flex-start' value={props.smoke}>
+            <Grid item xs={12} container direction='column' alignItems='flex-start' justify='flex-start' value={props.smoke} onChange={props.changeInput}>
               <FormControl component="fieldset">
                 <FormLabel component="legend">Are you a smoker or are smoking friendly?</FormLabel>
                 <RadioGroup aria-label="smoke" name="smoke" id="smoke">
@@ -436,7 +436,7 @@ export default function SignUp(props) {
                 </RadioGroup>
               </FormControl>
             </Grid>
-            <Grid item xs={12} container direction='column' alignItems='flex-start' justify='flex-start' value={props.allergy}>
+            <Grid item xs={12} container direction='column' alignItems='flex-start' justify='flex-start' value={props.allergy} onChange={props.changeInput}>
               <FormControl component="fieldset">
                 <FormLabel component="legend">Do you have allergies?</FormLabel>
                 <RadioGroup aria-label="allergy" name="allergy" id="allergy">
@@ -445,7 +445,7 @@ export default function SignUp(props) {
                 </RadioGroup>
               </FormControl>
             </Grid>
-            <Grid item xs={12} container direction='column' alignItems='flex-start' justify='flex-start' value={props.home}>
+            <Grid item xs={12} container direction='column' alignItems='flex-start' justify='flex-start' value={props.home} onChange={props.changeInput}>
               <FormControl component="fieldset">
                 <FormLabel component="legend">Do you have a home to share?</FormLabel>
                 <RadioGroup aria-label="home" name="home" id="home">

@@ -36,8 +36,12 @@ class Signup extends Component {
     //   familyStatusIds: "",
     //   maxMonthlyBudget: 0,
     };
-    this.handlePassword = this.handlePassword.bind(this);
+    this.handleDropdownChange = this.handleDropdownChange.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleUsername = this.handleUsername.bind(this);
+    this.handleEmail = this.handleEmail.bind(this);
+    this.handlePhone = this.handlePhone.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
 //   componentDidMount() {
@@ -68,44 +72,38 @@ class Signup extends Component {
       {
         [event.target.name]: event.target.value,
       },
-      //() => this.updateMembers()
     );
   }
 
-//   handleDropdownChange(selection, action) {
-//     let ids = selection
-//       ? selection.map((x) => {
-//           return x.value;
-//         })
-//       : [];
-//     this.setState(
-//       {
-//         [action.name]: ids,
-//       },
-//       () => this.updateMembers()
-//     );
-//   }
-
-    handleSubmit = () => {
-        const { password, confPassword } = this.state;
-        if(password === confPassword){
-            //
-        }
-        else
+  handleDropdownChange(selection) {
+    this.setState(
         {
-            alert("Passwords don't match.")
-        }
-    }
+          [selection.id]: selection.value,//Help, I have fallen and I can't get up
+        },
+      );
+  }
 
-    handlePassword(password, confPassword) {
-        if(password === confPassword) {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-    }
+  handleUsername(){
+      //check DB for username
+  }
+
+  handleEmail(){
+    //check DB for email
+  }
+
+  handlePhone(){
+    //check DB for phone number
+  }
+
+  handleSubmit = () => {
+      if(false){//check username, password, confpassword, email, and phone.
+          //
+      }
+      else
+      {
+          alert("Please ensure that all fields are filled correctly.")
+      }
+  }
 
   render() {
     return (
@@ -133,8 +131,8 @@ class Signup extends Component {
           smoke={this.state.smoke}
           allergy={this.state.allergy}
           home={this.state.home}
-          handlePassword={this.handlePassword}
           changeInput={this.handleInputChange}
+          handleDropdownChange={this.handleDropdownChange}
           />
       </div>
     );

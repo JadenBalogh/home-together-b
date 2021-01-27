@@ -4,9 +4,11 @@
 
 ## October 2nd, 2020
 
+
 ###### 12:30pm-1:10pm :
 
 Created feature hierarchy 
+
 Talked about the general fetures we want to implement, including:
 
  User's account info(create account/login)
@@ -37,6 +39,7 @@ Talked about the general fetures we want to implement, including:
 
  Map
 
+
 ###### 1:10pm-2:30pm :
 
 Created new issues, including:
@@ -56,23 +59,28 @@ Created new issues, including:
 
 ## October 9th, 2020
 
+
 ###### 12:30-1:00pm: 
 
 Reading the requirements of Capstone
+
 
 ###### 1:00-1:20:
 
 Assigning the tasks
 
+
 ###### 1:20-1:40: 
 
 Discussing details of the tasks
+
 
 ## October 16th
 
 ###### 12:30-12:40pm: 
 
 Discussing/finalizing tech stack choice
+
 
 ###### 12:40-12:55pm:
 
@@ -88,9 +96,11 @@ Discussing report and assigning parts
 
 Discussing the weekly plans
 
+
 ###### 11:20-12:06 pm: 
 
 Creating issues and assigning parts
+
 
 
 
@@ -101,9 +111,11 @@ Creating issues and assigning parts
 
 Introducing the progress
 
+
 ###### 1:40-1:50pm:
 
 Discussing the gitstats strategy
+
 
 ###### 1:50-3:00pm:
 
@@ -114,11 +126,11 @@ Creating issues, assigning parts and discussing the plans of next week
  
 Updating rules:
 
- Everyone needs to comment and review (NOT merge) on every pull request for this week by 9pm tonight - note that Jared still needs to create a pull request for the documentation so that'll also require comments and reviews
+  Everyone needs to comment and review (NOT merge) on every pull request for this week by 9pm tonight - note that Jared still needs to create a pull request for the documentation so that'll also require comments and reviews
  
- We've assigned the tasks for this week; we're primarily focusing on the database creation but Athena is setting up the mysql connection on the server and we've assigned you to create a front-end interface to show database results that are sent by the server
+  We've assigned the tasks for this week; we're primarily focusing on the database creation but Athena is setting up the mysql connection on the server and we've assigned you to create a front-end interface to show database results that are sent by the server
  
- All the issues are updated on the github for more info
+  All the issues are updated on the github for more info
 
 
 
@@ -130,9 +142,11 @@ Updating rules:
 
 Reviewing each other's work
 
+
 ###### 2:00-2:45pm:
 
 Discussing the plan for next week
+
 
 ###### 2:45-3:05pm:
 
@@ -140,27 +154,30 @@ Creating issues and assigning parts
 
 issues created:
 
-Add linting to the Continuous integration setup
+  Add linting to the Continuous integration setup
 
-Create the MemberList component which gets and displays users in a table from /get-users on the server
+  Create the MemberList component which gets and displays users in a table from /get-users on the server
 
-Research and document the approach to creating pages in React
+  Research and document the approach to creating pages in React
 
-Create the UserSearch.js file in client/src/ 
+  Create the UserSearch.js file in client/src/ 
 
-Create an Express Get route called /get-users in server.js
+  Create an Express Get route called /get-users in server.js
 
-Create the getUsers function in server.js
+  Create the getUsers function in server.js
 
-Standardize the local database setup process
+  Standardize the local database setup process
 
-Add 5 example rows to the User table
+  Add 5 example rows to the User table
 
-Create the User table in the database
+  Create the User table in the database
+
+
 
 
 
 ## November 10th, 2020
+
 
 ###### 1:30-2:00pm: 
 
@@ -176,12 +193,12 @@ Setting up the meeting schedule:
 
 Scrum Meeting - 1:30 PM on Tuesdays
 
- All team members must attend in group-b-voice for a review of the past week, gitstats report and planning for the following week
+  All team members must attend in group-b-voice for a review of the past week, gitstats report and planning for the following week
  
 Virtual Standup - due by 1 PM on Saturdays
 
- All team members should send a text summary to the #group-b-general channel of what've worked on so far, along with the branch and changes that require review
- 
+  All team members should send a text summary to the #group-b-general channel of what've worked on so far, along with the branch and changes that require review
+  
 ###### 2:00-2:33pm: 
 
 Creating issues and assigning parts
@@ -212,23 +229,23 @@ Creating issues and assigning parts
 
 The issues are:
 
- Creating use case tasks for the Member user group
+  Creating use case tasks for the Member user group
 
- Creating description of system for heuristic evaluations
+  Creating description of system for heuristic evaluations
 
- Sign up for peer evaluations on the website
+  Sign up for peer evaluations on the website
 
- Setup the google form for heuristic evaluation
+  Setup the google form for heuristic evaluation
 
- Setup remote desktop
+  Setup remote desktop
 
- Integrate updated front-end and back-end changes between client and server
+  Integrate updated front-end and back-end changes between client and server
 
- Revamp the Members db tables to fit the multi-value inputs
+  Revamp the Members db tables to fit the multi-value inputs
  
- Add test data to Listing-related tables in database
+  Add test data to Listing-related tables in database
 
- Create Listing-related tables and relationships in database 
+  Create Listing-related tables and relationships in database 
 
 
 
@@ -251,23 +268,23 @@ Creating issues and assigning parts:
 
 The issues are:
 
- Report: Review and submit
+  Report: Review and submit
 
- Report: Average and graph the quantitative eval results
+  Report: Average and graph the quantitative eval results
 
- Report: Create list of issues from eval notes and prioritize them 
+  Report: Create list of issues from eval notes and prioritize them 
 
- Report: Compile list of all group B eval recordings
+  Report: Compile list of all group B eval recordings
  
- Report: Compile list of user tasks used in evaluations
+  Report: Compile list of user tasks used in evaluations
 
- Report: Compile participant information into table
+  Report: Compile participant information into table
 
- Report: System description and feature list
+  Report: System description and feature list
 
- Write peer evals
+  Write peer evals
 
- Create the demo video for milestone 1
+  Create the demo video for milestone 1
 
 
 
@@ -283,15 +300,15 @@ Discussing the plan during the winter break, creating issues and assigning parts
 
 The issues are:
 
-Research and determine the front-end library to use
+ Research and determine the front-end library to use
 
-Research google maps implementation with React
+ Research google maps implementation with React
 
-Create front-end design prototypes
+ Create front-end design prototypes
 
-Complete database backend
+ Complete database backend
 
-Add linting and code formatting project settings
+ Add linting and code formatting project settings
 
 
 
@@ -333,15 +350,15 @@ Discussing the plan before next Tuesday and nest week
 
 Assigning parts
 
-  Alvin: work on implementing the signup/login form in React with Material-UI components. 
+   Alvin: work on implementing the signup/login form in React with Material-UI components. 
  
-  Use the most recent designs posted by Athena above (images, background and specifics can be changed, but the layout is mostly final).
+   Use the most recent designs posted by Athena above (images, background and specifics can be changed, but the layout is mostly final).
  
-  Athena: work on finalizing design for the account view/edit forms, and start on implementation in React with Material-UI.
+   Athena: work on finalizing design for the account view/edit forms, and start on implementation in React with Material-UI.
  
-  Jared: let us know your availability, no tasks assigned for now.
+   Jared: let us know your availability, no tasks assigned for now.
  
-  Jaden: Implement backend for signup/login - server and db.
+   Jaden: Implement backend for signup/login - server and db.
 
 
 
@@ -352,41 +369,56 @@ Assigning parts
 
 Discussing Alvin's progress (signup/login form) and Jaden's progress (database implementation)
 
+
 ###### 1:40-1:52pm:
 
 Discussing Athena's progress (UI design)
 
 a few points to think about:
 
- moving the search shortcuts to a top navbar above the specific page itself
+  moving the search shortcuts to a top navbar above the specific page itself
 
- expand feature for advanced filters
+  expand feature for advanced filters
 
- navbar: about, member search, service search, profile OR login
+  navbar: about, member search, service search, profile OR login
+  
 
 ###### 1:52-1:56pm:
 
 Discussing Jared's progress(database implementation)
 
+
 ###### 1:56-2:10pm:
 
 Discussing the plan during the winter break, creating issues and assigning parts:
 
-  server side authentication routes
+   server side authentication routes
+  
+   server side account routes
+  
+   update database for authentication
  
-  server side account routes
+   implement account view page
  
-  update database for authentication
+   implement account edit page
  
-  implement account view page
+   implement signup page
  
-  implement account edit page
- 
-  implement signup page
- 
-  implement login page
- 
-  Edit account page designs
+   implement login page
+  
+   Edit account page designs
+
+
+
+## January 23th
+
+###### 1:00-1:30pm
+
+Discussing the progress from last week:
+Alvin's progress (signup/login form)
+Jaden's progress (database implementation)
+Athena's progress (user account)
+
 
 
 
@@ -396,13 +428,16 @@ Discussing the plan during the winter break, creating issues and assigning parts
 
 Showing signup and login page, discussing what parts still don't work
 
+
 ###### 1:48-2:01pm:
 
 Check DB backend
 
+
 ###### 2:01-2:30pm:
 
 Discussing design based on Jared's heuristic discussion
+
 
 ###### 2:30-2:50pm:
 
@@ -410,6 +445,32 @@ Distributing issues
 
 The issues are:
 
-Finish front end of login and signup
+ Finish front end of login and signup
 
-Fix database conflicts
+ Fix database conflicts
+
+ Create UI design
+
+ Update documentation 
+
+ Setup Google Maps 
+ 
+ Setup heroku hosting
+
+ Setup server-side routes for view account and edit account 
+
+ Fix DB field names and confirm DB setup with Twila
+
+ Add fields to server signup route 
+
+ Front-end to Back-end connection for signin/signup
+ 
+
+###### 3:34-3:40pm:
+
+Concluding the client's requirement in the client meeting 
+
+
+###### 3:40-3:54pm:
+
+Discussing plan of next week

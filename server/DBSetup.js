@@ -39,15 +39,19 @@ function simpleSelect(entry, table) {
 }
 
 
+// TODO: Setup login with salted and hashed information
 
 // Drop Tables (MUST BE REVERSE ORDER OF Create STATEMENTS BELOW)
 drop('Listing');
 drop('CategoryType');
+drop('OrganizationReviews');
 drop('Organization');
+drop('Admin');
 drop('MiscSearchPrefs');
 drop('GenderSearchPrefs');
 drop('AgeSearchPrefs');
 drop('FamilyStatusSearchPrefs');
+drop('MemberReviews');
 drop('SearchableInfo');
 drop('Member');
 drop('AgeGroupType');
@@ -56,7 +60,7 @@ drop('GenderType');
 
 
 // Create Tables (ORDER MATTERS FOR FK CONSTRAINTS)
-// Creates Member related tables
+// ----- Member Related Tables -----
 create(
   'GenderType (' +
     'id INT AUTO_INCREMENT PRIMARY KEY,' +
@@ -64,7 +68,6 @@ create(
   ')'
 );
 
-// TODO: Update this table based on the docs
 insert('GenderType(name)', [
   ['Male'],
   ['Female'],
@@ -78,7 +81,6 @@ create(
   ')'
 );
 
-// Updated to match the requirements docs Nov 18th, 2020
 insert('FamilyStatusType(name)', [
   ['Single'],
   ['Couple'],
@@ -105,17 +107,22 @@ insert('AgeGroupType(name, minAge, maxAge)', [
   ['Senior', 65, 120],
 ]);
 
+// Holds the key information of a member, None of this information should be shared.
 create(
   'Member (' +
     'id INT AUTO_INCREMENT PRIMARY KEY,' +
     'firstName VARCHAR(50),' +
     'lastName VARCHAR(50),' +
-    'email VARCHAR(50),' +
+    'accountAddress VARCHAR(255),' +
+    'accountMailingAddress VARCHAR(255),' +
+    // Used for account Management of Member
+    'accountEmail VARCHAR(255),' +
     'username VARCHAR(50),' +
-    'password CHAR(60)' +
+    'password VARCHAR(255)' +
   ')'
 );
 
+// Searchable info is the publically viewable information of the Member group
 create(
   'SearchableInfo (' +
     'memberId INT PRIMARY KEY,' +
@@ -123,11 +130,59 @@ create(
     'birthYear INT,' +
     'familyStatusId INT,' +
     'maxMonthlyBudget INT,' +
+    // Does the member allow/want pets?
+    'petRestrictions BOOLEAN,' +
+    'petRestrictionsText VARCHAR(255),' +
+    // Does the member have any health or Mobility issues?
+    'healthRestrictions BOOLEAN,' +
+    'healthRestrictionsText VARCHAR(255),' +
+    // Is religion important to the Member?
+    'religionRestrictions BOOLEAN,' +
+    'religionRestrictionsText VARCHAR(255),' +
+    // Is the member ok with smoking?
+    'smokingRestrictions BOOLEAN,' +
+    'smokingRestrictionsText VARCHAR(255),' +
+    // Are dietary restrictions important to the member (Vegan/Halal/Fasting Restrictions)?
+    'dietRestrictions BOOLEAN,' +
+    'dietResctirtionsText VARCHAR(255),' +
+    // Does the member have any allergies?
+    'allergies BOOLEAN,' +
+    'allergiesText VARCHAR(255),' +
+    // Does the member have a place to live or are they looking for a place.
+    // TODO: Should this be a reference to a listing? If a user picks yes should they be required to make a listing?
+    'hasHousing BOOLEAN,' +
+    'housingDescription VARCHAR(255),' +
+    // Account Text Profile?
+    'profileText VARCHAR(1024),' +
     'FOREIGN KEY (memberId) REFERENCES Member(id),' +
     'FOREIGN KEY (genderId) REFERENCES GenderType(id),' +
     'FOREIGN KEY (familyStatusId) REFERENCES FamilyStatusType(id)' +
   ')'
 );
+
+// Holds each customer review, uses Foreign key to tie to member.
+create(
+  'MemberReview (' +
+    'id INT AUTO_INCREMENT PRIMARY KEY,' +
+    'memberId INT,' +
+    // TODO: Define a range for this, 1-10? 1-5? 1-100?. (Will also need to update Insert command)
+    'reviewScore INT,' +
+    'reivewText VARCHAR (2000),' +
+    // Only display if this is set to true, if this is set to false when a review moderator pulls up the moderation queue grab this.
+    'moderationApproved BOOLEAN,' +
+    'FOREIGN KEY (memberId) REFERENCES Member(id)' +
+  ')'
+);
+
+insert('MemberReview(memberId, reviewScore, reviewText, moderationApproved)', [
+  [1, 0, "Good", true],
+  [2, 1, "I didn't like the person", true],
+  [1, 2, "They smelled funny", false],
+  [4, 1, "Why can we review people?", false],
+  [3, 0, "Not bad", true],
+  [5, 5, "We ended up getting married, I guess I have to give them 5/5", true],
+]);
+
 
 create(
   'MiscSearchPrefs (' +
@@ -170,8 +225,29 @@ create(
   ')'
 );
 
-// Creates Organization related tables.
-// Tables based on "registration questions oct 2020 UBCO"
+// ----- Tables related to the Administration of the site -----
+create(
+  'Admin (' +
+    'id INT AUTO_INCREMENT PRIMARY KEY,' +
+    'username VARCHAR(50),' +
+    'password VARCHAR(255),' +
+    // Has access to edit, remove, or delete reviews.
+    'reviewModerator BOOLEAN,' + 
+    // Has access to verify member information, 
+    'memberModerator BOOLEAN,' +
+    // Has access to verify organzation information.
+    'organizationModerator BOOLEAN,' +
+    // Has access to view messages between members, can block & Ban members.
+    'messageModerator BOOLEAN,' + 
+    // Has access to all the above (Just set to TRUE for all of them) and can also view other moderator actions / review them.
+    'seniorModerator BOOLEAN,' + 
+    // Head site administrator (Sys-OP) has full access to the system and can also export data. 
+    'sysop BOOLEAN' + 
+  ')'
+);
+
+
+// ----- Tables related to Organizations / Business Accounts -----
 create(
   'Organization (' +
     'id INT AUTO_INCREMENT PRIMARY KEY,' +
@@ -186,17 +262,17 @@ create(
     'contactFirstName VARCHAR(300),' +
     'contactLastName VARCHAR(300),' +
     'contactPhone VARCHAR(300),' +
-    // TODO: Setup login with salted and hashed information
-    // 'loginName VARCHAR(200),' +
-    // 'loginPassword VARCHAR(1000),' +
+    'username VARCHAR(200),' +
+    'password VARCHAR(1000),' +
     
     //----- Publically Displayed Information (All have "organization" prefix) -----
     'organizationName VARCHAR(100),' +
     'organizationWebsite VARCHAR(100),' + // Website is not required
-    'organizationLogoURL VARCHAR(100),' +
+    'organizationLogoURL VARCHAR(100),' + // May be internally hosted
     'organizationMainPhone VARCHAR(20),' +
     'organizationAltPhone VARCHAR(20),' +
     'organizationEmail VARCHAR(100),' +
+    'national BOOLEAN,' +
     // Address Information, Only postalCode is required
     'organizationStreetAddress VARCHAR (200),' +
     'organizationMailingAddress VARCHAR(200),' +
@@ -204,7 +280,15 @@ create(
   ')'
 );
 
-// Creates Listing related tables.
+create(
+  'OrganizationReviews (' +
+    'id INT AUTO_INCREMENT PRIMARY KEY, ' +
+    'name VARCHAR(100), ' +
+    'paymentRequired BOOLEAN ' +
+  ')'
+);
+
+// ----- Creates Listing related tables. -----
 create(
   'CategoryType (' +
     'id INT AUTO_INCREMENT PRIMARY KEY, ' +
@@ -221,25 +305,33 @@ insert('CategoryType(name, paymentRequired)', [
   ['Individual & Group Services', true],
   ['Legal, Sales & Insurance Agencies', true],
   ['Classes, Clubs & Events', true],
+
   // These listin' categories are free (paymentRequired == false)
   ['Shared & Community Living Initiatives', false],
   ['Sharing Facilitation, Matching & Educational Services', false],
   ['Governmental Supports & Services', false],
-  ['Members with Homes to Share', false],
+  ['Member Shared Homes', false],
+  ['Member Holiday Home Swap', false],
 ]);
 
+// TODO: Should listings be pruned after a certain amount of time?
 create(
   'Listing(' +
     'id INT AUTO_INCREMENT PRIMARY KEY,' +
     'approvalStatus BOOLEAN,' +
     // Public information
+    'creationDate DATE,' +
     'title VARCHAR(200),' +
     'website VARCHAR(100),' +
     'phone VARCHAR(20),' +
     'email VARCHAR(100),' +
+    // Start and end date, Important for Classes / Vacation Listings
+    'startDate DATE,' +
+    'endDate DATE,' +
     'description VARCHAR(10000),' +
     'imageURL VARCHAR(200),' +
     'categoryId INT,' +
+    'subCategoryId INT,' +
     'organizationId INT,' +
     'FOREIGN KEY (categoryId) REFERENCES CategoryType(id),' +
     'FOREIGN KEY (organizationId) REFERENCES Organization(id)' +
@@ -248,7 +340,6 @@ create(
 
 
 // Inserts example data for testing.
-// TODO: Add Test Organizations that match the listing below, out of scope for current work (Nov 24th, 2020)
 insert('Organization(verified, organizationName, registrationDate, organizationWebsite, organizationMainPhone, organizationEmail, organizationStreetAddress, organizationPostalCode, incorporated)', [
   [true,'Larry\'s Lizard Shack', '2010-10-1', 'larryzlizards.com', '250-555-1234', 'larry@larryzlizards.com', '1111 Alabama Way', 'V1X3P6', true],
   [true,'The Grass Assassins', '2014-7-29', 'grassassassins.com', '250-555-0987', 'contact@grassassassins.com', '1234 Montreal Road, Armstrong, BC', 'V1Z 9P6', true],

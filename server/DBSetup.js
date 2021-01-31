@@ -44,14 +44,14 @@ function simpleSelect(entry, table) {
 // Drop Tables (MUST BE REVERSE ORDER OF Create STATEMENTS BELOW)
 drop('Listing');
 drop('CategoryType');
-drop('OrganizationReviews');
+drop('OrganizationReview');
 drop('Organization');
 drop('Admin');
 drop('MiscSearchPrefs');
 drop('GenderSearchPrefs');
 drop('AgeSearchPrefs');
 drop('FamilyStatusSearchPrefs');
-drop('MemberReviews');
+drop('MemberReview');
 drop('SearchableInfo');
 drop('Member');
 drop('AgeGroupType');
@@ -113,10 +113,10 @@ create(
     'id INT AUTO_INCREMENT PRIMARY KEY,' +
     'firstName VARCHAR(50),' +
     'lastName VARCHAR(50),' +
-    'accountAddress VARCHAR(255),' +
-    'accountMailingAddress VARCHAR(255),' +
+    'homeAddress VARCHAR(255),' +
+    'mailAddress VARCHAR(255),' +
     // Used for account Management of Member
-    'accountEmail VARCHAR(255),' +
+    'email VARCHAR(255),' +
     'username VARCHAR(50),' +
     'password VARCHAR(255)' +
   ')'
@@ -144,7 +144,7 @@ create(
     'smokingRestrictionsText VARCHAR(255),' +
     // Are dietary restrictions important to the member (Vegan/Halal/Fasting Restrictions)?
     'dietRestrictions BOOLEAN,' +
-    'dietResctirtionsText VARCHAR(255),' +
+    'dietRestrictionsText VARCHAR(255),' +
     // Does the member have any allergies?
     'allergies BOOLEAN,' +
     'allergiesText VARCHAR(255),' +
@@ -167,21 +167,21 @@ create(
     'memberId INT,' +
     // TODO: Define a range for this, 1-10? 1-5? 1-100?. (Will also need to update Insert command)
     'reviewScore INT,' +
-    'reivewText VARCHAR (2000),' +
+    'reviewText VARCHAR (2000),' +
     // Only display if this is set to true, if this is set to false when a review moderator pulls up the moderation queue grab this.
     'moderationApproved BOOLEAN,' +
     'FOREIGN KEY (memberId) REFERENCES Member(id)' +
   ')'
 );
 
-insert('MemberReview(memberId, reviewScore, reviewText, moderationApproved)', [
-  [1, 0, "Good", true],
-  [2, 1, "I didn't like the person", true],
-  [1, 2, "They smelled funny", false],
-  [4, 1, "Why can we review people?", false],
-  [3, 0, "Not bad", true],
-  [5, 5, "We ended up getting married, I guess I have to give them 5/5", true],
-]);
+// insert('MemberReview(memberId, reviewScore, reviewText, moderationApproved)', [
+//   [1, 0, "Good", true],
+//   [2, 1, "I didn't like the person", true],
+//   [1, 2, "They smelled funny", false],
+//   [4, 1, "Why can we review people?", false],
+//   [3, 0, "Not bad", true],
+//   [5, 5, "We ended up getting married, I guess I have to give them 5/5", true],
+// ]);
 
 
 create(
@@ -281,7 +281,7 @@ create(
 );
 
 create(
-  'OrganizationReviews (' +
+  'OrganizationReview (' +
     'id INT AUTO_INCREMENT PRIMARY KEY, ' +
     'name VARCHAR(100), ' +
     'paymentRequired BOOLEAN ' +

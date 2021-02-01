@@ -23,6 +23,10 @@ app.listen(port, () => {
 searchRoutes(app);
 authRoutes(app);
 
+app.get('/api/test', (req, res) => {
+  res.send('this is a test!');
+});
+
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });

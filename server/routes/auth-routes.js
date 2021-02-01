@@ -7,9 +7,12 @@ import dbutils from '../helpers/dbutils.js';
 import auth from '../services/auth.js';
 
 export default function (app) {
-  app.post('/signup', (req, res) => {
+  app.post('/api/signup', (req, res) => {
     let username = req.body.username;
     let email = req.body.email;
+
+    console.log(username);
+    console.log(req);
 
     authService.checkAvailable(username, email).then((available) => {
       if (!available) {
@@ -26,7 +29,7 @@ export default function (app) {
     });
   });
 
-  app.post('/login', (req, res) => {
+  app.post('/api/login', (req, res) => {
     let username = req.body.username;
 
     let sql = `SELECT id, username, password FROM Member WHERE username = ?`;

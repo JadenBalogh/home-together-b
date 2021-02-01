@@ -13,7 +13,7 @@ function Listings(props) {
   useEffect(updateListings, [categoryId]);
 
   function updateListings() {
-    const route = '/get-listings?';
+    const route = '/api/get-listings?';
     const params = new URLSearchParams(`categoryId=${categoryId}`).toString();
     const url = process.env.REACT_APP_SERVER_URL + route + params;
 
@@ -30,7 +30,7 @@ function Listings(props) {
   }
 
   function fetchCategoryOptions() {
-    fetch(process.env.REACT_APP_SERVER_URL + '/get-category-types')
+    fetch(process.env.REACT_APP_SERVER_URL + '/api/get-category-types')
       .then((res) => res.json())
       .then((json) => {
         let options = json.map((x) => {

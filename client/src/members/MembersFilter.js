@@ -12,7 +12,7 @@ function MembersFilter(props) {
   useEffect(() => fetchFamilyStatusOptions(), []);
 
   function fetchGenderOptions() {
-    fetch(process.env.REACT_APP_SERVER_URL + '/get-gender-types')
+    fetch(process.env.REACT_APP_SERVER_URL + '/api/get-gender-types')
       .then((res) => res.json())
       .then((json) => {
         let options = json.map((x) => {
@@ -23,7 +23,7 @@ function MembersFilter(props) {
   }
 
   function fetchAgeGroupOptions() {
-    fetch(process.env.REACT_APP_SERVER_URL + '/get-age-group-types')
+    fetch(process.env.REACT_APP_SERVER_URL + '/api/get-age-group-types')
       .then((res) => res.json())
       .then((json) => {
         let options = json.map((x) => {
@@ -35,7 +35,7 @@ function MembersFilter(props) {
   }
 
   function fetchFamilyStatusOptions() {
-    fetch(process.env.REACT_APP_SERVER_URL + '/get-family-status-types')
+    fetch(process.env.REACT_APP_SERVER_URL + '/api/get-family-status-types')
       .then((res) => res.json())
       .then((json) => {
         let options = json.map((x) => {

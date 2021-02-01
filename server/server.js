@@ -24,7 +24,8 @@ searchRoutes(app);
 authRoutes(app);
 
 app.get('/api/test', (req, res) => {
-  res.send('this is a test!');
+  console.log('Running test.');
+  res.send('This is a test!');
 });
 
 app.get('/*', (req, res) => {

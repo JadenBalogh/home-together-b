@@ -12,7 +12,6 @@ export default function (app) {
 
   // Expects: /get-listings?category=Rentals
   app.get('/api/get-listings', (req, res) => {
-    console.log('Getting listings...');
     searchService.getListings(req.query.categoryId).then((listings) => {
       res.send(listings);
     });

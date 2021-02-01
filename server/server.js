@@ -8,13 +8,16 @@ import bodyParser from 'body-parser';
 import searchRoutes from './routes/search-routes.js';
 import authRoutes from './routes/auth-routes.js';
 
+import localenv from 'localenv';
+const port = process.env.PORT || 3001;
+
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'build')));
 
-app.listen(3001, () => {
-  console.log('Server started on port 3001');
+app.listen(port, () => {
+  console.log(`Server started on port ${port}`);
 });
 
 searchRoutes(app);

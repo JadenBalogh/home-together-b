@@ -24,6 +24,7 @@ searchRoutes(app);
 authRoutes(app);
 
 app.get('/api/test', (req, res) => {
+  console.log(process.env.USER);
   console.log('Running test.');
   res.send('This is a test!');
 });

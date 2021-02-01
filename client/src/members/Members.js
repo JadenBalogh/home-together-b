@@ -31,10 +31,8 @@ class Members extends Component {
         `&${this.state.familyStatusIds.map((x) => 'familyStatusIds=' + x).join('&')}` +
         `&maxMonthlyBudget=${this.state.maxMonthlyBudget}`
     ).toString();
-    // const url = process.env.REACT_APP_SERVER_URL + route + params;
-    const url = route + params;
-
-    fetch(url)
+    const url = process.env.REACT_APP_LOCAL_URL || '';
+    fetch(url + route + params)
       .then((res) => res.json())
       .then((json) => {
         this.setState({

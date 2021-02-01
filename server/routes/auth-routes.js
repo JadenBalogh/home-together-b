@@ -2,30 +2,69 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import authconfig from '../config/authconfig.js';
 import authService from '../services/auth.js';
-import searchService from '../services/search.js';
 import dbutils from '../helpers/dbutils.js';
-import auth from '../services/auth.js';
+
+const SQL_INSERT_MEMBER = `INSERT INTO Member(
+  firstName, lastName, homeAddress, mailAddress, email, username, password)
+  VALUES (?, ?, ?, ?, ?, ?, ?)`;
+
+const SQL_INSERT_SEARCHABLE_INFO = `INSERT INTO SearchableInfo(
+  memberId, genderId, birthYear, familyStatusId, maxMonthlyBudget,
+  petRestrictions, petRestrictionsText, healthRestrictions, healthRestrictionsText,
+  religionRestrictions, religionRestrictionsText, smokingRestrictions, smokingRestrictionsText,
+  dietRestrictions, dietRestrictionsText, allergies, allergiesText,
+  hasHousing, housingDescription, profileText)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
 export default function (app) {
   app.post('/api/signup', (req, res) => {
-    let username = req.body.username;
-    let email = req.body.email;
+    let data = req.body.formData;
 
-    console.log(username);
-    console.log(req);
-
-    authService.checkAvailable(username, email).then((available) => {
+    authService.checkAvailable(data.username, data.email).then((available) => {
       if (!available) {
         res.send({ err: 'Credentials unavailable.' });
         return;
       }
 
-      let firstName = req.body.firstName;
-      let lastName = req.body.lastName;
-      let password = bcrypt.hashSync(req.body.password);
+      let pwHash = bcrypt.hashSync(data.password);
+      dbutils
+        .query(SQL_INSERT_MEMBER, [
+          data.firstName,
+          data.lastName,
+          data.homeAddress,
+          data.mailAddress,
+          data.email,
+          data.username,
+          pwHash,
+        ])
+        .then((result) => {
+          let id = result.insertId;
 
-      let sql = `INSERT INTO Member(firstName, lastName, email, username, password) VALUES (?, ?, ?, ?, ?)`;
-      dbutils.query(sql, [firstName, lastName, email, username, password]).then(() => res.end());
+          dbutils
+            .query(SQL_INSERT_SEARCHABLE_INFO, [
+              id,
+              data.genderId,
+              data.birthYear,
+              data.familyStatusId,
+              data.maxMonthlyBudget,
+              data.petRestrictions,
+              data.petRestrictionsText,
+              data.healthRestrictions,
+              data.healthRestrictionsText,
+              data.religionRestrictions,
+              data.religionRestrictionsText,
+              data.smokingRestrictions,
+              data.smokingRestrictionsText,
+              data.dietRestrictions,
+              data.dietRestrictionsText,
+              data.allergies,
+              data.allergiesText,
+              data.hasHousing,
+              data.housingDescription,
+              data.profileText,
+            ])
+            .then(() => res.end());
+        });
     });
   });
 
@@ -39,10 +78,6 @@ export default function (app) {
         res.send({ err: 'User not found.' });
         return;
       }
-
-      console.log(user);
-      console.log(req.body.password);
-      console.log(user.password);
 
       let password = req.body.password;
       if (!bcrypt.compareSync(password, user.password)) {

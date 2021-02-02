@@ -18,7 +18,7 @@ import ScrollToTop from "./plugins/ScrollToTop";
 import Header from "./views/components/Header";
 import Footer from "./views/components/Footer";
 
-// Pages
+// Page
 import Home from "./views/Home";
 import Settings from "./views/Settings";
 

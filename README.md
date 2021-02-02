@@ -14,7 +14,3 @@ This is the repository for Group B of the capstone project for Home Together. He
 [Jaden Balogh](https://github.com/JadenBalogh) - *Tech Lead*
 
 [Jared Wright](https://github.com/Jaredhw) - *QA Lead*
-
-# Licensing
-
-[Font Awesome (Icons & Fonts)](https://fontawesome.com/license/free) - [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)

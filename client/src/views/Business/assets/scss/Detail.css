@@ -1,0 +1,115 @@
+.animated-router-in-transition {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.animated-router-forward-enter {
+  opacity: 0;
+  transform: translate(30px);
+  -webkit-transform: translate(30px);
+  -moz-transform: translate(30px);
+  -ms-transform: translate(30px);
+  -o-transform: translate(30px);
+}
+
+.animated-router-forward-enter-active {
+  opacity: 1;
+  -webkit-transform: translate(0);
+          transform: translate(0);
+}
+
+.animated-router-forward-exit {
+  -webkit-transform: translate(0);
+          transform: translate(0);
+}
+
+.animated-router-forward-exit-active {
+  opacity: 0;
+  transform: translate(-30px);
+  -webkit-transform: translate(-30px);
+  -moz-transform: translate(-30px);
+  -ms-transform: translate(-30px);
+  -o-transform: translate(-30px);
+}
+
+.animated-router-backward-enter {
+  opacity: 0;
+  transform: translate(-30px);
+  -webkit-transform: translate(-30px);
+  -moz-transform: translate(-30px);
+  -ms-transform: translate(-30px);
+  -o-transform: translate(-30px);
+}
+
+.animated-router-backward-enter-active {
+  opacity: 1;
+  -webkit-transform: translate(0);
+          transform: translate(0);
+}
+
+.animated-router-backward-exit {
+  opacity: 1;
+  -webkit-transform: translate(0);
+          transform: translate(0);
+}
+
+.animated-router-backward-exit-active {
+  transform: translate(30px);
+  -webkit-transform: translate(30px);
+  -moz-transform: translate(30px);
+  -ms-transform: translate(30px);
+  -o-transform: translate(30px);
+}
+
+.animated-router-forward-enter-active,
+.animated-router-forward-exit-active,
+.animated-router-backward-enter-active,
+.animated-router-backward-exit-active {
+  transition: all 0.28s linear;
+  -webkit-transition: all 0.28s linear;
+  -moz-transition: all 0.28s linear;
+  -ms-transition: all 0.28s linear;
+  -o-transition: all 0.28s linear;
+}
+
+.animated-router-forward-exit,
+.animated-router-backward-exit {
+  position: absolute !important;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.banner {
+  position: relative;
+  z-index: 0;
+  width: 100vw;
+  height: calc(100vw * (400 / 1920));
+  background-color: #d9d9d9;
+  background: url("../images/detail/banner.jpg") no-repeat center center;
+  background-size: cover;
+}
+
+.roommate-container {
+  position: relative;
+  z-index: 1;
+  margin-top: -100px;
+}
+
+.first-item {
+  -webkit-box-shadow: 0 20px 46px 0 rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0 20px 46px 0 rgba(0, 0, 0, 0.2) !important;
+}
+
+.first-item .detail-avatar {
+  width: 120px;
+  height: 120px;
+  margin: 0px auto;
+  margin-top: -80px;
+  border: 10px solid #ffffff;
+  background-color: #ffffff;
+  -webkit-box-shadow: 0 -10px 10px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 -10px 10px 0 rgba(0, 0, 0, 0.2);
+}
+/*# sourceMappingURL=Detail.css.map */

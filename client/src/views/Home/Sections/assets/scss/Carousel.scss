@@ -1,0 +1,53 @@
+@import "../../../../../assets/scss/base";
+.home-carousel {
+  overflow: hidden;
+  &-item,
+  &-container {
+    width: 100% !important;
+    height: calc(100vw * (576 / 1920));
+    background-color: $gray-3;
+  }
+
+  &-container {
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+  }
+  &-caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-shadow: 0 0 12px rgba($color: $color-black, $alpha: 0.2);
+    color: $color-white;
+    text-align: center;
+    @include transform-set(translateX(-50%) translateY(-50%));
+    h1 {
+      font-size: 4.5rem;
+      text-transform: uppercase;
+      opacity: 0;
+      animation-delay: 2s;
+      @include transform-set(translateX(-100%));
+    }
+    p {
+      font-size: 2rem;
+      opacity: 0;
+      @include transform-set(translateX(100%));
+    }
+  }
+  .slick-active {
+    h1,
+    p {
+      opacity: 1;
+      animation-delay: 8s;
+      @include transition-set(all 1.5s ease-in-out);
+      @include transform-set(translateX(0%));
+    }
+  }
+  .slick-dots {
+    bottom: 30px;
+    li button::before {
+      font-size: 15px !important;
+    }
+  }
+}

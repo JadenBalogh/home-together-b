@@ -1,0 +1,111 @@
+.animated-router-in-transition {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.animated-router-forward-enter {
+  opacity: 0;
+  transform: translate(30px);
+  -webkit-transform: translate(30px);
+  -moz-transform: translate(30px);
+  -ms-transform: translate(30px);
+  -o-transform: translate(30px);
+}
+
+.animated-router-forward-enter-active {
+  opacity: 1;
+  -webkit-transform: translate(0);
+          transform: translate(0);
+}
+
+.animated-router-forward-exit {
+  -webkit-transform: translate(0);
+          transform: translate(0);
+}
+
+.animated-router-forward-exit-active {
+  opacity: 0;
+  transform: translate(-30px);
+  -webkit-transform: translate(-30px);
+  -moz-transform: translate(-30px);
+  -ms-transform: translate(-30px);
+  -o-transform: translate(-30px);
+}
+
+.animated-router-backward-enter {
+  opacity: 0;
+  transform: translate(-30px);
+  -webkit-transform: translate(-30px);
+  -moz-transform: translate(-30px);
+  -ms-transform: translate(-30px);
+  -o-transform: translate(-30px);
+}
+
+.animated-router-backward-enter-active {
+  opacity: 1;
+  -webkit-transform: translate(0);
+          transform: translate(0);
+}
+
+.animated-router-backward-exit {
+  opacity: 1;
+  -webkit-transform: translate(0);
+          transform: translate(0);
+}
+
+.animated-router-backward-exit-active {
+  transform: translate(30px);
+  -webkit-transform: translate(30px);
+  -moz-transform: translate(30px);
+  -ms-transform: translate(30px);
+  -o-transform: translate(30px);
+}
+
+.animated-router-forward-enter-active,
+.animated-router-forward-exit-active,
+.animated-router-backward-enter-active,
+.animated-router-backward-exit-active {
+  transition: all 0.28s linear;
+  -webkit-transition: all 0.28s linear;
+  -moz-transition: all 0.28s linear;
+  -ms-transition: all 0.28s linear;
+  -o-transition: all 0.28s linear;
+}
+
+.animated-router-forward-exit,
+.animated-router-backward-exit {
+  position: absolute !important;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.home-service .service-icon {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  background: #ff0095;
+  text-align: center;
+  color: #ffffff;
+  font-size: 36px;
+  border-radius: 50% !important;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  -ms-border-radius: 50% !important;
+  -o-border-radius: 50% !important;
+  transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+}
+
+.home-service .service-icon:hover {
+  background: #ffffff;
+  color: #ff0095;
+  -webkit-box-shadow: 0 8px 26px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 26px 0 rgba(0, 0, 0, 0.2);
+}
+/*# sourceMappingURL=Service.css.map */

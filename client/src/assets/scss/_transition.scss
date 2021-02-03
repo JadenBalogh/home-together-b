@@ -1,0 +1,72 @@
+.animated-router {
+}
+.animated-router-container {
+}
+.animated-router-in-transition {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.animated-router-forward-enter {
+  opacity: 0;
+  transform: translateY(-30px);
+  -webkit-transform: translateY(-30px);
+  -moz-transform: translateY(-30px);
+  -ms-transform: translateY(-30px);
+  -o-transform: translateY(-30px);
+}
+.animated-router-forward-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+.animated-router-forward-exit {
+  transform: translateY(0);
+}
+.animated-router-forward-exit-active {
+  opacity: 0;
+  transform: translateY(30px);
+  -webkit-transform: translateY(30px);
+  -moz-transform: translateY(30px);
+  -ms-transform: translateY(30px);
+  -o-transform: translateY(30px);
+}
+.animated-router-backward-enter {
+  opacity: 0;
+  transform: translateY(30px);
+  -webkit-transform: translateY(30px);
+  -moz-transform: translateY(30px);
+  -ms-transform: translateY(30px);
+  -o-transform: translateY(30px);
+}
+.animated-router-backward-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+.animated-router-backward-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+.animated-router-backward-exit-active {
+  transform: translateY(-30px);
+  -webkit-transform: translateY(-30px);
+  -moz-transform: translateY(-30px);
+  -ms-transform: translateY(-30px);
+  -o-transform: translateY(-30px);
+}
+.animated-router-forward-enter-active,
+.animated-router-forward-exit-active,
+.animated-router-backward-enter-active,
+.animated-router-backward-exit-active {
+  transition: all 0.28s linear;
+  -webkit-transition: all 0.28s linear;
+  -moz-transition: all 0.28s linear;
+  -ms-transition: all 0.28s linear;
+  -o-transition: all 0.28s linear;
+}
+.animated-router-forward-exit,
+.animated-router-backward-exit {
+  position: absolute !important;
+  width: 100%;
+  top: 0;
+  left: 0;
+}

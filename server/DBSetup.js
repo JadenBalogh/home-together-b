@@ -38,26 +38,44 @@ function simpleSelect(entry, table) {
   con.query(sql, (err, results) => printQuery(err, results));
 }
 
+// ══════ Current DATABASE TODOs ══════
+// Determine if the mailing address should be NULL if none is provided or "same as home address".
 
-// TODO: Setup login with salted and hashed information
+// If the member says yes to "hasHousing, should there be an optional reference to a listing?
+// If a user picks yes should they be required to make a listing?
+
+// Should there be any restriction on the text box on their account? Will it be moderated (potential source of SPAM/unwanted advertisement).
+
+// Define a score range for the Review ratings range for this, 1-10? 1-5? 1-100?. (Will also need to update Insert command)
+
+// Categories need to be updated with subcategories as per Jan 13th update, will be brought up at Feb 2nd meeting. How do we want to handle these? Changing it will
+// break the current search functionality.
+
+// Out of scope for this project but filtering the URLs server side will be required for security, may want to storing images on the server and only storing a reference.
+// Do we also want to use this method? We could create a DB that stores just images that's tied to a listing ID.
 
 // Drop Tables (MUST BE REVERSE ORDER OF Create STATEMENTS BELOW)
 drop('Listing');
 drop('CategoryType');
-drop('OrganizationReviews');
+drop('OrganizationReview');
 drop('Organization');
 drop('Admin');
 drop('MiscSearchPrefs');
 drop('GenderSearchPrefs');
 drop('AgeSearchPrefs');
 drop('FamilyStatusSearchPrefs');
-drop('MemberReviews');
+drop('MemberReview');
 drop('SearchableInfo');
 drop('Member');
 drop('AgeGroupType');
 drop('FamilyStatusType');
 drop('GenderType');
 
+// ╔═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
+// ║ Tables always start with a capital letter and any additional words are also capitalized.                                            ║ 
+// ║ There are no spaces or special characters in table names. (upper camel case aka Pascal case) E.G: TableName                         ║ 
+// ║ Columns always start with a lower case letter and any additional words are capitalized. (lower camel case) E.G: columnNameGoesHere  ║ 
+// ╚═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝
 
 // Create Tables (ORDER MATTERS FOR FK CONSTRAINTS)
 // ----- Member Related Tables -----
@@ -107,52 +125,50 @@ insert('AgeGroupType(name, minAge, maxAge)', [
   ['Senior', 65, 120],
 ]);
 
-// Holds the key information of a member, None of this information should be shared.
+// Holds the key information of a member, None of this information should be shared with other Members.
 create(
   'Member (' +
     'id INT AUTO_INCREMENT PRIMARY KEY,' +
     'firstName VARCHAR(50),' +
     'lastName VARCHAR(50),' +
-    'accountAddress VARCHAR(255),' +
-    'accountMailingAddress VARCHAR(255),' +
-    // Used for account Management of Member
-    'accountEmail VARCHAR(255),' +
+    'homeAddress VARCHAR(255),' +
+    'mailAddress VARCHAR(255),' + 
+    // Used for account management of the Member.
+    'email VARCHAR(255),' +
     'username VARCHAR(50),' +
     'password VARCHAR(255)' +
   ')'
 );
 
-// Searchable info is the publically viewable information of the Member group
+// Searchable infomation is the information other members can use to filter members.
 create(
   'SearchableInfo (' +
     'memberId INT PRIMARY KEY,' +
-    'genderId INT,' +
-    'birthYear INT,' +
+    'genderId INT,' + // References the genderType table.
+    'birthYear INT,' + // Used to calculate age.
     'familyStatusId INT,' +
     'maxMonthlyBudget INT,' +
     // Does the member allow/want pets?
     'petRestrictions BOOLEAN,' +
     'petRestrictionsText VARCHAR(255),' +
-    // Does the member have any health or Mobility issues?
+    // Does the Member have any health or mobility issues (E.G: Required wheelchair access, has a CPAP Machine)
     'healthRestrictions BOOLEAN,' +
     'healthRestrictionsText VARCHAR(255),' +
-    // Is religion important to the Member?
+    // Is Religion important to the Member?
     'religionRestrictions BOOLEAN,' +
     'religionRestrictionsText VARCHAR(255),' +
-    // Is the member ok with smoking?
+    // Is the Member ok with smoking (Tobacco, Marijuana, Other?)
     'smokingRestrictions BOOLEAN,' +
     'smokingRestrictionsText VARCHAR(255),' +
     // Are dietary restrictions important to the member (Vegan/Halal/Fasting Restrictions)?
     'dietRestrictions BOOLEAN,' +
-    'dietResctirtionsText VARCHAR(255),' +
+    'dietRestrictionsText VARCHAR(255),' +
     // Does the member have any allergies?
     'allergies BOOLEAN,' +
     'allergiesText VARCHAR(255),' +
     // Does the member have a place to live or are they looking for a place.
-    // TODO: Should this be a reference to a listing? If a user picks yes should they be required to make a listing?
     'hasHousing BOOLEAN,' +
     'housingDescription VARCHAR(255),' +
-    // Account Text Profile?
     'profileText VARCHAR(1024),' +
     'FOREIGN KEY (memberId) REFERENCES Member(id),' +
     'FOREIGN KEY (genderId) REFERENCES GenderType(id),' +
@@ -165,24 +181,13 @@ create(
   'MemberReview (' +
     'id INT AUTO_INCREMENT PRIMARY KEY,' +
     'memberId INT,' +
-    // TODO: Define a range for this, 1-10? 1-5? 1-100?. (Will also need to update Insert command)
     'reviewScore INT,' +
-    'reivewText VARCHAR (2000),' +
+    'reviewText VARCHAR (2000),' +
     // Only display if this is set to true, if this is set to false when a review moderator pulls up the moderation queue grab this.
     'moderationApproved BOOLEAN,' +
     'FOREIGN KEY (memberId) REFERENCES Member(id)' +
   ')'
 );
-
-insert('MemberReview(memberId, reviewScore, reviewText, moderationApproved)', [
-  [1, 0, "Good", true],
-  [2, 1, "I didn't like the person", true],
-  [1, 2, "They smelled funny", false],
-  [4, 1, "Why can we review people?", false],
-  [3, 0, "Not bad", true],
-  [5, 5, "We ended up getting married, I guess I have to give them 5/5", true],
-]);
-
 
 create(
   'MiscSearchPrefs (' +
@@ -272,8 +277,9 @@ create(
     'organizationMainPhone VARCHAR(20),' +
     'organizationAltPhone VARCHAR(20),' +
     'organizationEmail VARCHAR(100),' +
+    // The "national" flag is only to be used with Home Sharing organizations and will cause them to show up in all reasons, it has no other purpose.
     'national BOOLEAN,' +
-    // Address Information, Only postalCode is required
+    // Address Information, Only postal-code is required
     'organizationStreetAddress VARCHAR (200),' +
     'organizationMailingAddress VARCHAR(200),' +
     'organizationPostalCode VARCHAR(30)' +
@@ -281,7 +287,7 @@ create(
 );
 
 create(
-  'OrganizationReviews (' +
+  'OrganizationReview (' +
     'id INT AUTO_INCREMENT PRIMARY KEY, ' +
     'name VARCHAR(100), ' +
     'paymentRequired BOOLEAN ' +
@@ -297,7 +303,7 @@ create(
   ')'
 );
 
-// Categories takes fron "Final Sub Category Ad Questions Oct 14"
+
 insert('CategoryType(name, paymentRequired)', [
   // These listing categories require payment (paymentRequired == true)
   ['Rental', true],
@@ -314,7 +320,7 @@ insert('CategoryType(name, paymentRequired)', [
   ['Member Holiday Home Swap', false],
 ]);
 
-// TODO: Should listings be pruned after a certain amount of time?
+
 create(
   'Listing(' +
     'id INT AUTO_INCREMENT PRIMARY KEY,' +
@@ -329,7 +335,11 @@ create(
     'startDate DATE,' +
     'endDate DATE,' +
     'description VARCHAR(10000),' +
-    'imageURL VARCHAR(200),' +
+    // Plural, expects comma delimited lists of images eg: "https://imgbox.com/asd123a.png, https://dogdoggroomingcompany.org/imgbest.jpg"
+    // As the client expents most listings to have at least 6 photos minimum this allows an n number of images to be stored without having 
+    // to create an additional table and row for each image reference. 
+    
+    'imageURLs VARCHAR(200),' +
     'categoryId INT,' +
     'subCategoryId INT,' +
     'organizationId INT,' +
@@ -339,7 +349,10 @@ create(
 );
 
 
-// Inserts example data for testing.
+// ╔═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
+// ║ This is the example data that is insert into the DB for testing reasons, none of it is legitimate.                                   ║ 
+// ╚═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝
+
 insert('Organization(verified, organizationName, registrationDate, organizationWebsite, organizationMainPhone, organizationEmail, organizationStreetAddress, organizationPostalCode, incorporated)', [
   [true,'Larry\'s Lizard Shack', '2010-10-1', 'larryzlizards.com', '250-555-1234', 'larry@larryzlizards.com', '1111 Alabama Way', 'V1X3P6', true],
   [true,'The Grass Assassins', '2014-7-29', 'grassassassins.com', '250-555-0987', 'contact@grassassassins.com', '1234 Montreal Road, Armstrong, BC', 'V1Z 9P6', true],
@@ -366,6 +379,15 @@ insert('Listing(approvalStatus, title, website, phone, email, description, image
   [true,'Jeff', 'No Website', '250-555-8001', 'No E-Mail', '70+ Year old Male, looking for assistance around the house in exchange for a free room. Utilities extra.', 'NO IMAGE', 9,6],
 
 ]);
+
+// insert('MemberReview(memberId, reviewScore, reviewText, moderationApproved)', [
+//   [1, 0, "Good", true],
+//   [2, 1, "I didn't like the person", true],
+//   [1, 2, "They smelled funny", false],
+//   [4, 1, "Why can we review people?", false],
+//   [3, 0, "Not bad", true],
+//   [5, 5, "We ended up getting married, I guess I have to give them 5/5", true],
+// ]);
 
 // // Will be inserting 50 users
 // insert('Member(firstName, lastName)', [

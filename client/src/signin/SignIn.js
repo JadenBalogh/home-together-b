@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -9,7 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Checkbox from '@material-ui/core/Checkbox';
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -32,6 +31,27 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles();
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [token, setToken] = useState("");
+  const [id, setId] = useState(-1);
+
+  function handleLogin() {
+    const route = '/api/login?';
+    fetch(process.env.REACT_APP_SERVER_URL + route, {
+      method: 'POST',
+      body: JSON.stringify(
+        username,
+        password,
+        ),
+    })
+    .then((res) => res.json())
+    .then((json) => {
+      setUsername({username: json.username});
+      setId({id: json.id});
+      setToken({token: json.accessToken});
+     });
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -51,6 +71,10 @@ export default function SignIn() {
             name="username"
             autoComplete="username"
             autoFocus
+            onChange={event => {
+              const { value } = event.target;
+              setUsername({ value });
+            }}
           />
           <TextField
             variant="outlined"
@@ -62,6 +86,10 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={event => {
+              const { value } = event.target;
+              setPassword({ value });
+            }}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -72,7 +100,7 @@ export default function SignIn() {
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
+            className={handleLogin()}
           >
             Sign In
           </Button>

@@ -364,21 +364,21 @@ insert('Organization(verified, organizationName, registrationDate, organizationW
 
 // Value Template
 // [approvalStatus,'Title', 'Website', 'Phone', 'E-Mail', 'Description', 'imageURL', categoryId, organizationId],
-insert('Listing(approvalStatus, title, website, phone, email, description, imageURL, categoryId, organizationId)', [
-  [true,'Suzanne\'s Rentals', 'No Website', '250-555-8001', 'Suzzanne@Gmail.test', 'I\'m looking to rent out rooms in my apartment. Cost is $600 a month for a 1 bedroom or $900.00 a month for a 2 Bedroom.', 'NO IMAGE', 1,6],
-  [true,'Larry\'s Lizard Rental Service', 'larryzlizards.com', '250-555-1234', 'larry@larryzlizards.com', 'Description', 'imageURL', 2,1],
-  [true,'Grass Assassins Grass Cutting Service', 'grassassassins.com', '250-555-0987', 'contact@grassassassins.com', 'We will cut your grass for a fair and reasonable price, our specialty is cutting grass so quiet you would never hear it', 'NO IMAGE', 2,2],
-  [true,'Grass B Gone Landscaping Service', 'grassbgone.ca', '413-555-1983', 'info@grassbgone.ca', 'Tired of watering the lawn every week? Tired of paying to get your lawn mowed? Contact us about our xeroscaping services, never water again!', '/image/testimage/test.jpg', 2,3],
-  [false,'Dog Walking - CHEAP', 'legitdogwalkingcomapany.xyz', '250-555-1111', 'walking@dogCorp.xyz', 'Will walk your dog for cheap, please pay via Monero Money Transfer', 'No Image', 3,4],
-  [true,'Bob\s Insurance', 'BobInsuranceco.co', '250-555-3021', 'RequestAQuote@Bobinsuranceco.co', 'Worried about your dog burning down the kitchen while you\re away? Have a look at our new fire insurance polices today. We\'re number one in the region for a reason!', '/image/testimage/BCGOVLOGO.png', 4,6],
-  [true,'YogiBear Yoga', 'Yogibear.com', '250-555-1101', 'Contact@YogiBear.com', 'Come on down to our Yoga studio, your first class is free with 0 obligation to join!', 'NO IMAGE', 5,6],
-  [true,'Dagwood Senior\'s Community', 'No Website', '250-555-2301', 'DagwoodCommunity@gmail.test', 'Come join us for a free seminar about our community living initative, tea and snacks will be provided! Dagwood Senior Center is home to the Dagwood ride-sharing and community assistance club, contact us for details!', '/image/testimage/BCGOVLOGO.png', 6,6],
-  [true,'YMCA Healthy Living Initiative', 'ymca.ca', '250-555-3001', 'HealthyLiving@ymca.ca', 'Come join us for our new living alone seminar, where we\'ll cover budgeting, cooking at home, common household maintenance and repairs, and much more!', 'NO IMAGE', 7,6],
-  [true,'BC Housing - Housing Placement Service', 'placement.housingassistance.gov.bc.ca', '250-555-8000', 'HousingAssistance@gov.bc.ca', 'We\'ll help you find an afforable place to live', '/image/testimage/BCGOVLOGO.png', 8,5],
-  [true,'BC Housing - Lease Assistance Service', 'leasehelp.housingassistance.gov.bc.ca', '250-555-8001', 'HousingAssistance@gov.bc.ca', 'We\'ll help you create, mange disputes, and understand lease agreements in BC', '/image/testimage/BCGOVLOGO.png', 8,5],
-  [true,'Jeff', 'No Website', '250-555-8001', 'No E-Mail', '70+ Year old Male, looking for assistance around the house in exchange for a free room. Utilities extra.', 'NO IMAGE', 9,6],
+// insert('Listing(approvalStatus, title, website, phone, email, description, imageURL, categoryId, organizationId)', [
+//   [true,'Suzanne\'s Rentals', 'No Website', '250-555-8001', 'Suzzanne@Gmail.test', 'I\'m looking to rent out rooms in my apartment. Cost is $600 a month for a 1 bedroom or $900.00 a month for a 2 Bedroom.', 'NO IMAGE', 1,6],
+//   [true,'Larry\'s Lizard Rental Service', 'larryzlizards.com', '250-555-1234', 'larry@larryzlizards.com', 'Description', 'imageURL', 2,1],
+//   [true,'Grass Assassins Grass Cutting Service', 'grassassassins.com', '250-555-0987', 'contact@grassassassins.com', 'We will cut your grass for a fair and reasonable price, our specialty is cutting grass so quiet you would never hear it', 'NO IMAGE', 2,2],
+//   [true,'Grass B Gone Landscaping Service', 'grassbgone.ca', '413-555-1983', 'info@grassbgone.ca', 'Tired of watering the lawn every week? Tired of paying to get your lawn mowed? Contact us about our xeroscaping services, never water again!', '/image/testimage/test.jpg', 2,3],
+//   [false,'Dog Walking - CHEAP', 'legitdogwalkingcomapany.xyz', '250-555-1111', 'walking@dogCorp.xyz', 'Will walk your dog for cheap, please pay via Monero Money Transfer', 'No Image', 3,4],
+//   [true,'Bob\s Insurance', 'BobInsuranceco.co', '250-555-3021', 'RequestAQuote@Bobinsuranceco.co', 'Worried about your dog burning down the kitchen while you\re away? Have a look at our new fire insurance polices today. We\'re number one in the region for a reason!', '/image/testimage/BCGOVLOGO.png', 4,6],
+//   [true,'YogiBear Yoga', 'Yogibear.com', '250-555-1101', 'Contact@YogiBear.com', 'Come on down to our Yoga studio, your first class is free with 0 obligation to join!', 'NO IMAGE', 5,6],
+//   [true,'Dagwood Senior\'s Community', 'No Website', '250-555-2301', 'DagwoodCommunity@gmail.test', 'Come join us for a free seminar about our community living initative, tea and snacks will be provided! Dagwood Senior Center is home to the Dagwood ride-sharing and community assistance club, contact us for details!', '/image/testimage/BCGOVLOGO.png', 6,6],
+//   [true,'YMCA Healthy Living Initiative', 'ymca.ca', '250-555-3001', 'HealthyLiving@ymca.ca', 'Come join us for our new living alone seminar, where we\'ll cover budgeting, cooking at home, common household maintenance and repairs, and much more!', 'NO IMAGE', 7,6],
+//   [true,'BC Housing - Housing Placement Service', 'placement.housingassistance.gov.bc.ca', '250-555-8000', 'HousingAssistance@gov.bc.ca', 'We\'ll help you find an afforable place to live', '/image/testimage/BCGOVLOGO.png', 8,5],
+//   [true,'BC Housing - Lease Assistance Service', 'leasehelp.housingassistance.gov.bc.ca', '250-555-8001', 'HousingAssistance@gov.bc.ca', 'We\'ll help you create, mange disputes, and understand lease agreements in BC', '/image/testimage/BCGOVLOGO.png', 8,5],
+//   [true,'Jeff', 'No Website', '250-555-8001', 'No E-Mail', '70+ Year old Male, looking for assistance around the house in exchange for a free room. Utilities extra.', 'NO IMAGE', 9,6],
 
-]);
+// ]);
 
 // insert('MemberReview(memberId, reviewScore, reviewText, moderationApproved)', [
 //   [1, 0, "Good", true],

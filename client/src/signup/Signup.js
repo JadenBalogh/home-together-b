@@ -6,37 +6,37 @@ class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        confPassword: "", //check if same as password
-        formData : {
-            firstName: "",
-            lastName: "",
-            birthYear: '',
-            birthMonth: '',
-            birthDay: '',
-            homeAddress: "",
-            mailAddress: "",
-            username: "", //check if already exists
-            password: "",
-            email: "", //check if existing
-            phoneNumber: "", //check if existing?
-            genderId: '',
-            familyStatusId: '',
-            peopleCount: '',
-            maxMonthlyBudget: '',
-            petRestrictions: "",
-            petRestrictionsText: "",
-            disabilities: '',
-            disabilitiesText: "",
-            religiousRestrictions: '',
-            religiousRestrictionsText: "",
-            smokingRestrictions: '',
-            smokingRestrictionsText: "",
-            allergies: '',
-            allergiesText: "",
-            hasHousing: '',
-            housingDescription: "",
-            profileText: "",
-        },
+      confPassword: '', //check if same as password
+      formData: {
+        firstName: '',
+        lastName: '',
+        birthYear: '',
+        birthMonth: '',
+        birthDay: '',
+        homeAddress: '',
+        mailAddress: '',
+        username: '', //check if already exists
+        password: '',
+        email: '', //check if existing
+        phoneNumber: '', //check if existing?
+        genderId: '',
+        familyStatusId: '',
+        peopleCount: '',
+        maxMonthlyBudget: '',
+        petRestrictions: '',
+        petRestrictionsText: '',
+        disabilities: '',
+        disabilitiesText: '',
+        religiousRestrictions: '',
+        religiousRestrictionsText: '',
+        smokingRestrictions: '',
+        smokingRestrictionsText: '',
+        allergies: '',
+        allergiesText: '',
+        hasHousing: '',
+        housingDescription: '',
+        profileText: '',
+      },
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handlePhone = this.handlePhone.bind(this);
@@ -48,104 +48,107 @@ class Signup extends Component {
     this.handleSignup = this.handleSignup.bind(this);
   }
 
+  //   componentDidMount() {
+  //     this.updateMembers();
+  //   }
+
   handleSignup() {
-    if(!this.handlePassword && !this.handleEmail && !this.handlePhone && !this.handleUsername) {
-        const route = '/api/signup?';
-        fetch(process.env.REACT_APP_SERVER_URL + route, {
+    if (!this.handlePassword && !this.handleEmail && !this.handlePhone && !this.handleUsername) {
+      const route = '/api/signup?';
+      const url = process.env.REACT_APP_LOCAL_URL || '';
+      fetch(url + route, {
         method: 'POST',
-        body: JSON.stringify(
-            this.state.formData,
-            ),
-        })
-        // .then((res) => res.json())
-        // .then((json) => {
-        //   this.setToken({
-        //     token: json,
-        //    });
-        //  });
-    }
-    else alert("Please ensure that all fields are filled correctly.");
+        body: JSON.stringify(this.state.formData),
+      });
+      // .then((res) => res.json())
+      // .then((json) => {
+      //   this.setToken({
+      //     token: json,
+      //    });
+      //  });
+    } else alert('Please ensure that all fields are filled correctly.');
   }
 
   handleInputChange(event) {
-    this.setState(
-      {
-        [event.target.name]: event.target.value,
-      },
-    );
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
   }
 
-  handlePassword(){
-    if(this.state.formData.password !== this.state.confPassword) {
-        console.log(this.state.formData.password);
-        console.log(this.state.confPassword);
-        console.log("passwords don't match.");
-        return true;
-    }
-    else console.log("passwords match."); return false;
+  handlePassword() {
+    if (this.state.formData.password !== this.state.confPassword) {
+      console.log(this.state.formData.password);
+      console.log(this.state.confPassword);
+      console.log("passwords don't match.");
+      return true;
+    } else console.log('passwords match.');
+    return false;
   }
 
-  handleConfirm(pass){//confPassword is read only apparently?
-    this.setState({confPassword: pass});
+  handleConfirm(pass) {
+    //confPassword is read only apparently?
+    this.setState({ confPassword: pass });
   }
 
-  handlePhone(){
+  handlePhone() {
     const route = '/api/phonecheck?';
-    const bool = "false";
-    fetch(process.env.REACT_APP_SERVER_URL + route, {
+    const bool = 'false';
+    const url = process.env.REACT_APP_LOCAL_URL || '';
+    fetch(url + route, {
       method: 'POST',
-      body: JSON.stringify(
-        this.state.phoneNumber,
-        ),
+      body: JSON.stringify(this.state.phoneNumber),
     })
-    .then((res) => res.json())
-    .then((json) => {
-      {bool = json.exist};
-     });
-     return bool;
+      .then((res) => res.json())
+      .then((json) => {
+        {
+          bool = json.exist;
+        }
+      });
+    return bool;
   }
 
-  handleEmail(){
+  handleEmail() {
     const route = '/api/emailcheck?';
-    const bool = "false";
-    fetch(process.env.REACT_APP_SERVER_URL + route, {
+    const bool = 'false';
+    const url = process.env.REACT_APP_LOCAL_URL || '';
+    fetch(url + route, {
       method: 'POST',
-      body: JSON.stringify(
-        this.state.email,
-        ),
+      body: JSON.stringify(this.state.email),
     })
-    .then((res) => res.json())
-    .then((json) => {
-      {bool = json.exist};
-     });
-     return bool;
+      .then((res) => res.json())
+      .then((json) => {
+        {
+          bool = json.exist;
+        }
+      });
+    return bool;
   }
 
-  handleUsername(){
+  handleUsername() {
     const route = '/api/usernamecheck?';
-    const bool = "false";
-    fetch(process.env.REACT_APP_SERVER_URL + route, {
+    const bool = 'false';
+    const url = process.env.REACT_APP_LOCAL_URL || '';
+    fetch(url + route, {
       method: 'POST',
-      body: JSON.stringify(
-        this.state.username,
-        ),
+      body: JSON.stringify(this.state.username),
     })
-    .then((res) => res.json())
-    .then((json) => {
-      {bool = json.exist};
-     });
-     return bool;
+      .then((res) => res.json())
+      .then((json) => {
+        {
+          bool = json.exist;
+        }
+      });
+    return bool;
   }
 
   handleSubmit = () => {
-      if(false){//check username, password, confpassword, email, and phone.
-          //
-      }
-      else
-      {
-          alert("Please ensure that all fields are filled correctly.")
-      }
-  }
+    if (false) {
+      //check username, password, confpassword, email, and phone.
+      //
+    } else {
+      alert('Please ensure that all fields are filled correctly.');
+    }
+  };
 
   render() {
     return (
@@ -161,7 +164,7 @@ class Signup extends Component {
           handlePhone={this.handlePhone}
           handleUsername={this.handleUsername}
           handleSignup={this.handleSignup}
-          />
+        />
       </div>
     );
   }

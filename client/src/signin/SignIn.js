@@ -38,7 +38,8 @@ export default function SignIn() {
 
   function handleLogin() {
     const route = '/api/login?';
-    fetch(process.env.REACT_APP_SERVER_URL + route, {
+    const url = process.env.REACT_APP_LOCAL_URL || '';
+    fetch(url + route, {
       method: 'POST',
       body: JSON.stringify(
         username,

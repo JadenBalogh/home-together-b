@@ -474,3 +474,30 @@ Concluding the client's requirement in the client meeting
 ###### 3:40-3:54pm:
 
 Discussing plan of next week
+
+
+
+
+## January 30th
+
+###### 1:00-1:30pm:
+
+Discusing the process done:
+
+Discussing the implementation of the map feature (Alvin)
+
+Reviewing the front end implementation (new design)(Athena)
+
+
+
+
+## January 26th
+
+###### 1:30-2:05pm:
+
+Reviewing the process of each teammate
+
+Discussing the question to Twila
+
+###### 2:32-2:58pm:
+ Organizing questions for Twila

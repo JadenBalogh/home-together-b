@@ -5,6 +5,7 @@ import './Signup.css';
 class Signup extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       confPassword: '', //check if same as password
       phoneExists: false,
@@ -14,9 +15,7 @@ class Signup extends Component {
       formData: {
         firstName: '',
         lastName: '',
-        birthYear: '',
-        birthMonth: '',
-        birthDay: '',
+        birthDate: '',
         homeAddress: '',
         mailAddress: '',
         username: '', //check if already exists
@@ -51,16 +50,26 @@ class Signup extends Component {
     this.handleSignup = this.handleSignup.bind(this);
   }
 
-  handleSignup() {
-    console.log('Signed up');
-    if (!this.checkPasswordsMatch && !this.checkEmailExists && !this.checkPhoneExists && !this.checkUsernameExists) {
-      const route = '/api/signup?';
-      const url = process.env.REACT_APP_LOCAL_URL || '';
-      fetch(url + route, {
-        method: 'POST',
-        body: JSON.stringify(this.state.formData),
+  handleSignup(event) {
+    event.preventDefault();
+
+    let formData = this.state.formData;
+
+    const url = process.env.REACT_APP_LOCAL_URL || '';
+    const route = '/api/signup?';
+    fetch(url + route, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ formData }),
+    })
+      .then((raw) => raw.json())
+      .then((result) => {
+        if (result.err) {
+          window.alert(result.err);
+          return;
+        }
+        this.props.history.push('/signin');
       });
-    } else alert('Please ensure that all fields are filled correctly.');
   }
 
   handleInputChange(event, callback = () => {}) {

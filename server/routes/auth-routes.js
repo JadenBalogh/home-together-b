@@ -19,6 +19,7 @@ const SQL_INSERT_SEARCHABLE_INFO = `INSERT INTO SearchableInfo(
 export default function (app) {
   app.post('/api/signup', (req, res) => {
     let data = req.body.formData;
+    console.log(data);
 
     authService.checkAvailable(data.username, data.email).then((available) => {
       if (!available) {
@@ -40,12 +41,13 @@ export default function (app) {
         ])
         .then((result) => {
           let id = result.insertId;
+          console.log(id);
 
           dbutils
             .query(SQL_INSERT_SEARCHABLE_INFO, [
               id,
               data.genderId,
-              data.birthYear,
+              404,
               data.familyStatusId,
               data.maxMonthlyBudget,
               data.petRestrictions,

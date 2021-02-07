@@ -5,8 +5,8 @@ import authService from '../services/auth.js';
 import dbutils from '../helpers/dbutils.js';
 
 const SQL_INSERT_MEMBER = `INSERT INTO Member(
-  firstName, lastName, homeAddress, mailAddress, email, username, password)
-  VALUES (?, ?, ?, ?, ?, ?, ?)`;
+  firstName, lastName, homeAddress, mailAddress, phoneNumber, email, username, password)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
 const SQL_INSERT_SEARCHABLE_INFO = `INSERT INTO SearchableInfo(
   memberId, genderId, birthYear, familyStatusId, maxMonthlyBudget,
@@ -33,6 +33,7 @@ export default function (app) {
           data.lastName,
           data.homeAddress,
           data.mailAddress,
+          data.phoneNumber,
           data.email,
           data.username,
           pwHash,
@@ -91,6 +92,24 @@ export default function (app) {
         username: user.username,
         accessToken: token,
       });
+    });
+  });
+
+  app.get('/api/check-phone-exists', (req, res) => {
+    authService.checkPhoneExists(req.query.phoneNumber).then((exists) => {
+      res.send({ exists: exists });
+    });
+  });
+
+  app.get('/api/check-email-exists', (req, res) => {
+    authService.checkEmailExists(req.query.email).then((exists) => {
+      res.send({ exists: exists });
+    });
+  });
+
+  app.get('/api/check-username-exists', (req, res) => {
+    authService.checkUsernameExists(req.query.username).then((exists) => {
+      res.send({ exists: exists });
     });
   });
 }

@@ -7,6 +7,10 @@ class Signup extends Component {
     super(props);
     this.state = {
       confPassword: '', //check if same as password
+      phoneExists: false,
+      emailExists: false,
+      usernameExists: false,
+      passwordsMatch: true,
       formData: {
         firstName: '',
         lastName: '',
@@ -19,136 +23,110 @@ class Signup extends Component {
         password: '',
         email: '', //check if existing
         phoneNumber: '', //check if existing?
-        genderId: '',
-        familyStatusId: '',
-        peopleCount: '',
-        maxMonthlyBudget: '',
-        petRestrictions: '',
+        genderId: 0,
+        familyStatusId: 0,
+        peopleCount: 0,
+        maxMonthlyBudget: 0,
+        petRestrictions: false,
         petRestrictionsText: '',
-        disabilities: '',
+        disabilities: false,
         disabilitiesText: '',
-        religiousRestrictions: '',
+        religiousRestrictions: false,
         religiousRestrictionsText: '',
-        smokingRestrictions: '',
+        smokingRestrictions: false,
         smokingRestrictionsText: '',
-        allergies: '',
+        allergies: false,
         allergiesText: '',
-        hasHousing: '',
+        hasHousing: false,
         housingDescription: '',
         profileText: '',
       },
     };
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handlePhone = this.handlePhone.bind(this);
-    this.handleEmail = this.handleEmail.bind(this);
-    this.handleUsername = this.handleUsername.bind(this);
+    this.checkPhoneExists = this.checkPhoneExists.bind(this);
+    this.checkEmailExists = this.checkEmailExists.bind(this);
+    this.checkUsernameExists = this.checkUsernameExists.bind(this);
     this.handleConfirm = this.handleConfirm.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handlePassword = this.handlePassword.bind(this);
+    this.checkPasswordsMatch = this.checkPasswordsMatch.bind(this);
     this.handleSignup = this.handleSignup.bind(this);
   }
 
-  //   componentDidMount() {
-  //     this.updateMembers();
-  //   }
-
   handleSignup() {
-    if (!this.handlePassword && !this.handleEmail && !this.handlePhone && !this.handleUsername) {
+    console.log('Signed up');
+    if (!this.checkPasswordsMatch && !this.checkEmailExists && !this.checkPhoneExists && !this.checkUsernameExists) {
       const route = '/api/signup?';
       const url = process.env.REACT_APP_LOCAL_URL || '';
       fetch(url + route, {
         method: 'POST',
         body: JSON.stringify(this.state.formData),
       });
-      // .then((res) => res.json())
-      // .then((json) => {
-      //   this.setToken({
-      //     token: json,
-      //    });
-      //  });
     } else alert('Please ensure that all fields are filled correctly.');
   }
 
-  handleInputChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
+  handleInputChange(event, callback = () => {}) {
+    this.setState(
+      (prevState) => ({
+        formData: {
+          ...prevState.formData,
+          [event.target.name]: event.target.value,
+        },
+      }),
+      () => {
+        console.log(`tried to change ${event.target.name} to ${event.target.value}`);
+        console.log(this.state.formData);
+        callback();
+      }
+    );
   }
 
-  handlePassword() {
-    if (this.state.formData.password !== this.state.confPassword) {
-      console.log(this.state.formData.password);
-      console.log(this.state.confPassword);
-      console.log("passwords don't match.");
-      return true;
-    } else console.log('passwords match.');
-    return false;
+  checkPasswordsMatch() {
+    let match = this.state.formData.password === this.state.confPassword;
+    this.setState({ passwordsMatch: match });
   }
 
-  handleConfirm(pass) {
-    //confPassword is read only apparently?
-    this.setState({ confPassword: pass });
+  handleConfirm(event) {
+    this.setState({ confPassword: event.target.value });
   }
 
-  handlePhone() {
-    const route = '/api/phonecheck?';
-    const bool = 'false';
+  checkPhoneExists() {
     const url = process.env.REACT_APP_LOCAL_URL || '';
-    fetch(url + route, {
-      method: 'POST',
-      body: JSON.stringify(this.state.phoneNumber),
-    })
+    const route = '/api/check-phone-exists?';
+    const params = new URLSearchParams(`&phoneNumber=${this.state.formData.phoneNumber}`).toString();
+    fetch(url + route + params)
       .then((res) => res.json())
       .then((json) => {
-        {
-          bool = json.exist;
-        }
+        this.setState({
+          phoneExists: json.exists,
+        });
       });
-    return bool;
   }
 
-  handleEmail() {
-    const route = '/api/emailcheck?';
-    const bool = 'false';
+  checkEmailExists() {
     const url = process.env.REACT_APP_LOCAL_URL || '';
-    fetch(url + route, {
-      method: 'POST',
-      body: JSON.stringify(this.state.email),
-    })
+    const route = '/api/check-email-exists?';
+    const params = new URLSearchParams(`&email=${this.state.formData.email}`).toString();
+    fetch(url + route + params)
       .then((res) => res.json())
       .then((json) => {
-        {
-          bool = json.exist;
-        }
+        this.setState({
+          emailExists: json.exists,
+        });
       });
-    return bool;
   }
 
-  handleUsername() {
-    const route = '/api/usernamecheck?';
-    const bool = 'false';
+  checkUsernameExists() {
     const url = process.env.REACT_APP_LOCAL_URL || '';
-    fetch(url + route, {
-      method: 'POST',
-      body: JSON.stringify(this.state.username),
-    })
+    const route = '/api/check-username-exists?';
+    const params = new URLSearchParams(`&username=${this.state.formData.username}`).toString();
+    fetch(url + route + params)
       .then((res) => res.json())
       .then((json) => {
-        {
-          bool = json.exist;
-        }
+        console.log('went through');
+        this.setState({
+          usernameExists: json.exists,
+        });
       });
-    return bool;
   }
-
-  handleSubmit = () => {
-    if (false) {
-      //check username, password, confpassword, email, and phone.
-      //
-    } else {
-      alert('Please ensure that all fields are filled correctly.');
-    }
-  };
 
   render() {
     return (
@@ -156,13 +134,17 @@ class Signup extends Component {
         <SignupForm //...maybe reconsider the form being separate at this point huh
           formData={this.state.formData}
           confPassword={this.state.confPassword}
+          phoneExists={this.state.phoneExists}
+          emailExists={this.state.emailExists}
+          usernameExists={this.state.usernameExists}
+          passwordsMatch={this.state.passwordsMatch}
           handleConfirm={this.handleConfirm}
-          changeInput={this.handleInputChange}
+          handleInputChange={this.handleInputChange}
           handleDropdownChange={this.handleDropdownChange}
-          handlePassword={this.handlePassword}
-          handleEmail={this.handleEmail}
-          handlePhone={this.handlePhone}
-          handleUsername={this.handleUsername}
+          checkPasswordsMatch={this.checkPasswordsMatch}
+          checkPhoneExists={this.checkPhoneExists}
+          checkEmailExists={this.checkEmailExists}
+          checkUsernameExists={this.checkUsernameExists}
           handleSignup={this.handleSignup}
         />
       </div>

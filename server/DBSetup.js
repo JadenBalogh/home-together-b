@@ -134,6 +134,7 @@ create(
     'homeAddress VARCHAR(255),' +
     'mailAddress VARCHAR(255),' + 
     // Used for account management of the Member.
+    'phoneNumber VARCHAR(20),' +
     'email VARCHAR(255),' +
     'username VARCHAR(50),' +
     'password VARCHAR(255)' +

@@ -14,7 +14,11 @@ const port = process.env.PORT || 3001;
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'build')));
+
+if (process.env.NODE_ENV === 'production') {
+  console.log('Production code running...');
+  app.use(express.static(path.join(__dirname, 'build')));
+}
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);

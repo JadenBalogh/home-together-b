@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -31,88 +32,83 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles();
-  const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
-  const [token, setToken] = useState("");
-  const [id, setId] = useState(-1);
+  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const history = useHistory();
 
-  function handleLogin() {
+  function handleLogin(event) {
+    event.preventDefault();
+
     const route = '/api/login?';
     const url = process.env.REACT_APP_LOCAL_URL || '';
     fetch(url + route, {
       method: 'POST',
-      body: JSON.stringify(
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
         username,
         password,
-        ),
+      }),
     })
-    .then((res) => res.json())
-    .then((json) => {
-      setUsername({username: json.username});
-      setId({id: json.id});
-      setToken({token: json.accessToken});
-     });
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.err) {
+          window.alert(json.err);
+          return;
+        }
+        console.log('TODO');
+        history.push('/');
+        // Assign id and accesstoken to global/session variables
+      });
   }
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component='main' maxWidth='xs'>
       <CssBaseline />
       <div className={classes.paper}>
-        <Typography component="h1" variant="h5">
+        <Typography component='h1' variant='h5'>
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={handleLogin} noValidate>
           <TextField
-            variant="outlined"
-            margin="normal"
+            variant='outlined'
+            margin='normal'
             required
             fullWidth
-            id="username"
-            label="Username"
-            name="username"
-            autoComplete="username"
+            id='username'
+            label='Username'
+            name='username'
+            autoComplete='username'
             autoFocus
-            onChange={event => {
-              const { value } = event.target;
-              setUsername({ value });
+            onChange={(event) => {
+              setUsername(event.target.value);
             }}
           />
           <TextField
-            variant="outlined"
-            margin="normal"
+            variant='outlined'
+            margin='normal'
             required
             fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            onChange={event => {
-              const { value } = event.target;
-              setPassword({ value });
+            name='password'
+            label='Password'
+            type='password'
+            id='password'
+            autoComplete='current-password'
+            onChange={(event) => {
+              setPassword(event.target.value);
             }}
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={handleLogin()}
-          >
+          <FormControlLabel control={<Checkbox value='remember' color='primary' />} label='Remember me' />
+          <Button type='submit' fullWidth variant='contained' color='primary'>
             Sign In
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link href='#' variant='body2'>
                 Forgot password?
               </Link>
             </Grid>
             <Grid item>
-              <Link href="/signup" variant="body2">
+              <Link href='/signup' variant='body2'>
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

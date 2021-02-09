@@ -42,6 +42,7 @@ function simpleSelect(entry, table) {
 // TODO: Setup login with salted and hashed information
 
 // Drop Tables (MUST BE REVERSE ORDER OF Create STATEMENTS BELOW)
+drop('ListingReview')
 drop('Listing');
 drop('CategoryType');
 drop('OrganizationReview');
@@ -152,6 +153,8 @@ create(
     // TODO: Should this be a reference to a listing? If a user picks yes should they be required to make a listing?
     'hasHousing BOOLEAN,' +
     'housingDescription VARCHAR(255),' +
+    'wouldPurchaseHome BOOLEAN,' +
+    'homeCapacity INT,' +
     // Account Text Profile?
     'profileText VARCHAR(1024),' +
     'FOREIGN KEY (memberId) REFERENCES Member(id),' +
@@ -314,7 +317,6 @@ insert('CategoryType(name, paymentRequired)', [
   ['Member Holiday Home Swap', false],
 ]);
 
-// TODO: Should listings be pruned after a certain amount of time?
 create(
   'Listing(' +
     'id INT AUTO_INCREMENT PRIMARY KEY,' +
@@ -325,6 +327,11 @@ create(
     'website VARCHAR(100),' +
     'phone VARCHAR(20),' +
     'email VARCHAR(100),' +
+    // Store the average as a decimal number with 3 significant digits and 2 decimal places e.g: 2.31
+    // This value should be updated only when a NEW/Updated review is added.
+    'ratingAverage DECIMAL(3,2),' +
+    // Used to show the number of ratings a listing has eg: 4.3 Stars - 337 Ratings
+    'ratingCount INT,' +
     // Start and end date, Important for Classes / Vacation Listings
     'startDate DATE,' +
     'endDate DATE,' +
@@ -338,6 +345,18 @@ create(
   ')'
 );
 
+create(
+  'LisitingReview (' +
+    'id INT AUTO_INCREMENT PRIMARY KEY,' +
+    'listingId INT,' +
+    // Should be a star rating from 0-5 (INT).
+    'reviewScore INT,' +
+    'reviewText VARCHAR (2000),' +
+    // Only display if this is set to true, if this is set to false when a review moderator pulls up the moderation queue grab this.
+    'moderationApproved BOOLEAN,' +
+    'FOREIGN KEY (listingId) REFERENCES Listing(id)' +
+  ')'
+);
 
 // Inserts example data for testing.
 insert('Organization(verified, organizationName, registrationDate, organizationWebsite, organizationMainPhone, organizationEmail, organizationStreetAddress, organizationPostalCode, incorporated)', [

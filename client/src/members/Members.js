@@ -9,13 +9,21 @@ class Members extends Component {
     super(props);
     this.state = {
       members: [],
-      genderIds: [],
-      ageGroupIds: [],
-      familyStatusIds: [],
-      maxMonthlyBudget: 0,
+      filters: {
+        genderIds: [],
+        ageGroupIds: [],
+        familyStatusIds: [],
+        maxMonthlyBudget: 0,
+        petRestrictions: false,
+        religiousRestrictions: false,
+        smokingRestrictions: false,
+        hasHousing: false,
+      },
+      
     };
     this.updateMembers = this.updateMembers.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
   }
 
@@ -24,15 +32,26 @@ class Members extends Component {
   }
 
   updateMembers() {
-    const route = '/api/get-members?';
-    const params = new URLSearchParams(
-      `${this.state.genderIds.map((x) => 'genderIds=' + x).join('&')}` +
-        `&${this.state.ageGroupIds.map((x) => 'ageGroupIds=' + x).join('&')}` +
-        `&${this.state.familyStatusIds.map((x) => 'familyStatusIds=' + x).join('&')}` +
-        `&maxMonthlyBudget=${this.state.maxMonthlyBudget}`
-    ).toString();
+    let filters = this.state.filters;
+
     const url = process.env.REACT_APP_LOCAL_URL || '';
-    fetch(url + route + params)
+    const route = '/api/get-members?';
+    // const params = new URLSearchParams( //Old implementation
+    //   `${this.state.filters.genderIds.map((x) => 'genderIds=' + x).join('&')}` +
+    //     `&${this.state.filters.ageGroupIds.map((x) => 'ageGroupIds=' + x).join('&')}` +
+    //     `&${this.state.filters.familyStatusIds.map((x) => 'familyStatusIds=' + x).join('&')}` +
+    //     `&maxMonthlyBudget=${this.state.filters.maxMonthlyBudget}` +
+    //     `&petRestrictions=${this.state.filters.petRestrictions}` +
+    //     `&religiousRestrictions=${this.state.filters.religiousRestrictions}` +
+    //     `&smokingRestrictions=${this.state.filters.smokingRestrictions}` +
+    //     `&hasHousing=${this.state.filters.hasHousing}`
+    // ).toString();
+
+    fetch(url + route, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ filters }),
+    })
       .then((res) => res.json())
       .then((json) => {
         this.setState({
@@ -43,10 +62,23 @@ class Members extends Component {
 
   handleInputChange(event) {
     this.setState(
-      {
-        [event.target.name]: event.target.value,
-      },
-      () => this.updateMembers()
+      (prevState) => ({
+        filters: {
+          ...prevState.filters,
+          [event.target.name]: event.target.value,
+        },
+      })
+    );
+  }
+
+  handleCheckboxChange(event) {
+    this.setState(
+      (prevState) => ({
+        filters: {
+          ...prevState.filters,
+          [event.target.name]: event.target.checked,
+        },
+      })
     );
   }
 
@@ -71,7 +103,8 @@ class Members extends Component {
         <MembersFilter
           dropdownHandler={this.handleDropdownChange}
           inputHandler={this.handleInputChange}
-          maxMonthlyBudget={this.state.maxMonthlyBudget}
+          checkboxHandler={this.handleCheckboxChange}
+          filters={this.state.filters}
         />
         <MemberList members={this.state.members} />
       </div>

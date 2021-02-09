@@ -257,7 +257,7 @@ export default function SignUp(props) {
               justify='flex-start'
               onChange={props.handleInputChange}
             >
-              <FormLabel component='legend'>Status</FormLabel>
+              <FormLabel component='legend'>Family Status</FormLabel>
               <FormControl component='fieldset'>
                 <RadioGroup aria-label='status' name='familyStatusId' id='familyStatusId'>
                   {familyStatusOptions.map((option) => (
@@ -337,14 +337,14 @@ export default function SignUp(props) {
             >
               <FormLabel component='legend'>Do you have health or mobility issues?</FormLabel>
               <FormControl component='fieldset'>
-                <RadioGroup aria-label='disabilities' name='disabilities' id='disabilities'>
+                <RadioGroup aria-label='healthRestrictions' name='healthRestrictions' id='healthRestrictions'>
                   <FormControlLabel value='true' control={<Radio />} label='Yes' />
                   <FormControlLabel value='false' control={<Radio />} label='No' />
                 </RadioGroup>
                 <RadioText
-                  check={props.formData.disabilities}
-                  name='disabilitiesText'
-                  value={props.formData.disabilitiesText}
+                  check={props.formData.healthRestrictions}
+                  name='healthRestrictionsText'
+                  value={props.formData.healthRestrictionsText}
                 />
               </FormControl>
             </Grid>
@@ -409,6 +409,28 @@ export default function SignUp(props) {
                 </RadioGroup>
                 <RadioText check={props.formData.allergies} name='allergiesText' value={props.formData.allergiesText} />
               </FormControl>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              container
+              direction='column'
+              alignItems='flex-start'
+              justify='flex-start'
+              onChange={props.handleInputChange}
+            >
+              <FormLabel component='legend'>Do you have any dietary preferences or restrictions?</FormLabel>
+              <FormControl component='fieldset'>
+                <RadioGroup aria-label='dietRestrictions' name='dietRestrictions' id='dietRestrictions'>
+                  <FormControlLabel value='true' control={<Radio />} label='Yes' />
+                  <FormControlLabel value='false' control={<Radio />} label='No' />
+                </RadioGroup>
+              </FormControl>
+              <RadioText
+                check={props.formData.dietRestrictions}
+                name='dietRestrictionsText'
+                value={props.formData.dietRestrictionsText}
+              />
             </Grid>
             <Grid
               item

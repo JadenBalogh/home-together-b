@@ -32,4 +32,8 @@ app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-dbutils.query('SELECT * FROM Member m JOIN SearchableInfo s ON m.id = s.memberId').then((result) => console.log(result));
+if (process.env.NODE_ENV !== 'production') {
+  dbutils
+    .query('SELECT * FROM Member m JOIN SearchableInfo s ON m.id = s.memberId')
+    .then((result) => console.log(result));
+}

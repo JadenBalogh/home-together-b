@@ -5,150 +5,139 @@ import './Signup.css';
 class Signup extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       confPassword: '', //check if same as password
+      phoneExists: false,
+      emailExists: false,
+      usernameExists: false,
+      passwordsMatch: true,
       formData: {
         firstName: '',
         lastName: '',
-        birthYear: '',
-        birthMonth: '',
-        birthDay: '',
+        birthDate: '',
         homeAddress: '',
         mailAddress: '',
         username: '', //check if already exists
         password: '',
         email: '', //check if existing
         phoneNumber: '', //check if existing?
-        genderId: '',
-        familyStatusId: '',
-        peopleCount: '',
-        maxMonthlyBudget: '',
-        petRestrictions: '',
+        genderId: 0,
+        familyStatusId: 0,
+        peopleCount: 0,
+        maxMonthlyBudget: 0,
+        petRestrictions: false,
         petRestrictionsText: '',
-        disabilities: '',
-        disabilitiesText: '',
-        religiousRestrictions: '',
+        healthRestrictions: false,
+        healthRestrictionsText: '',
+        religiousRestrictions: false,
         religiousRestrictionsText: '',
-        smokingRestrictions: '',
+        smokingRestrictions: false,
         smokingRestrictionsText: '',
-        allergies: '',
+        allergies: false,
         allergiesText: '',
-        hasHousing: '',
+        dietRestrictions: false,
+        dietRestrictionsText: '',
+        hasHousing: false,
         housingDescription: '',
         profileText: '',
       },
     };
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handlePhone = this.handlePhone.bind(this);
-    this.handleEmail = this.handleEmail.bind(this);
-    this.handleUsername = this.handleUsername.bind(this);
+    this.checkPhoneExists = this.checkPhoneExists.bind(this);
+    this.checkEmailExists = this.checkEmailExists.bind(this);
+    this.checkUsernameExists = this.checkUsernameExists.bind(this);
     this.handleConfirm = this.handleConfirm.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handlePassword = this.handlePassword.bind(this);
+    this.checkPasswordsMatch = this.checkPasswordsMatch.bind(this);
     this.handleSignup = this.handleSignup.bind(this);
   }
 
-  //   componentDidMount() {
-  //     this.updateMembers();
-  //   }
+  handleSignup(event) {
+    event.preventDefault();
 
-  handleSignup() {
-    if (!this.handlePassword && !this.handleEmail && !this.handlePhone && !this.handleUsername) {
-      const route = '/api/signup?';
-      const url = process.env.REACT_APP_LOCAL_URL || '';
-      fetch(url + route, {
-        method: 'POST',
-        body: JSON.stringify(this.state.formData),
-      });
-      // .then((res) => res.json())
-      // .then((json) => {
-      //   this.setToken({
-      //     token: json,
-      //    });
-      //  });
-    } else alert('Please ensure that all fields are filled correctly.');
-  }
+    let formData = this.state.formData;
 
-  handleInputChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
-  }
-
-  handlePassword() {
-    if (this.state.formData.password !== this.state.confPassword) {
-      console.log(this.state.formData.password);
-      console.log(this.state.confPassword);
-      console.log("passwords don't match.");
-      return true;
-    } else console.log('passwords match.');
-    return false;
-  }
-
-  handleConfirm(pass) {
-    //confPassword is read only apparently?
-    this.setState({ confPassword: pass });
-  }
-
-  handlePhone() {
-    const route = '/api/phonecheck?';
-    const bool = 'false';
     const url = process.env.REACT_APP_LOCAL_URL || '';
+    const route = '/api/signup?';
     fetch(url + route, {
       method: 'POST',
-      body: JSON.stringify(this.state.phoneNumber),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ formData }),
     })
-      .then((res) => res.json())
-      .then((json) => {
-        {
-          bool = json.exist;
+      .then((raw) => raw.json())
+      .then((result) => {
+        if (result.err) {
+          window.alert(result.err);
+          return;
         }
+        this.props.history.push('/signin');
       });
-    return bool;
   }
 
-  handleEmail() {
-    const route = '/api/emailcheck?';
-    const bool = 'false';
+  handleInputChange(event, callback = () => {}) {
+    this.setState(
+      (prevState) => ({
+        formData: {
+          ...prevState.formData,
+          [event.target.name]: event.target.value,
+        },
+      }),
+      () => {
+        console.log(`tried to change ${event.target.name} to ${event.target.value}`);
+        console.log(this.state.formData);
+        callback();
+      }
+    );
+  }
+
+  checkPasswordsMatch() {
+    let match = this.state.formData.password === this.state.confPassword;
+    this.setState({ passwordsMatch: match });
+  }
+
+  handleConfirm(event) {
+    this.setState({ confPassword: event.target.value });
+  }
+
+  checkPhoneExists() {
     const url = process.env.REACT_APP_LOCAL_URL || '';
-    fetch(url + route, {
-      method: 'POST',
-      body: JSON.stringify(this.state.email),
-    })
+    const route = '/api/check-phone-exists?';
+    const params = new URLSearchParams(`&phoneNumber=${this.state.formData.phoneNumber}`).toString();
+    fetch(url + route + params)
       .then((res) => res.json())
       .then((json) => {
-        {
-          bool = json.exist;
-        }
+        this.setState({
+          phoneExists: json.exists,
+        });
       });
-    return bool;
   }
 
-  handleUsername() {
-    const route = '/api/usernamecheck?';
-    const bool = 'false';
+  checkEmailExists() {
     const url = process.env.REACT_APP_LOCAL_URL || '';
-    fetch(url + route, {
-      method: 'POST',
-      body: JSON.stringify(this.state.username),
-    })
+    const route = '/api/check-email-exists?';
+    const params = new URLSearchParams(`&email=${this.state.formData.email}`).toString();
+    fetch(url + route + params)
       .then((res) => res.json())
       .then((json) => {
-        {
-          bool = json.exist;
-        }
+        this.setState({
+          emailExists: json.exists,
+        });
       });
-    return bool;
   }
 
-  handleSubmit = () => {
-    if (false) {
-      //check username, password, confpassword, email, and phone.
-      //
-    } else {
-      alert('Please ensure that all fields are filled correctly.');
-    }
-  };
+  checkUsernameExists() {
+    const url = process.env.REACT_APP_LOCAL_URL || '';
+    const route = '/api/check-username-exists?';
+    const params = new URLSearchParams(`&username=${this.state.formData.username}`).toString();
+    fetch(url + route + params)
+      .then((res) => res.json())
+      .then((json) => {
+        console.log('went through');
+        this.setState({
+          usernameExists: json.exists,
+        });
+      });
+  }
 
   render() {
     return (
@@ -156,13 +145,17 @@ class Signup extends Component {
         <SignupForm //...maybe reconsider the form being separate at this point huh
           formData={this.state.formData}
           confPassword={this.state.confPassword}
+          phoneExists={this.state.phoneExists}
+          emailExists={this.state.emailExists}
+          usernameExists={this.state.usernameExists}
+          passwordsMatch={this.state.passwordsMatch}
           handleConfirm={this.handleConfirm}
-          changeInput={this.handleInputChange}
+          handleInputChange={this.handleInputChange}
           handleDropdownChange={this.handleDropdownChange}
-          handlePassword={this.handlePassword}
-          handleEmail={this.handleEmail}
-          handlePhone={this.handlePhone}
-          handleUsername={this.handleUsername}
+          checkPasswordsMatch={this.checkPasswordsMatch}
+          checkPhoneExists={this.checkPhoneExists}
+          checkEmailExists={this.checkEmailExists}
+          checkUsernameExists={this.checkUsernameExists}
           handleSignup={this.handleSignup}
         />
       </div>

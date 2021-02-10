@@ -2,9 +2,9 @@ import searchService from '../services/search.js';
 
 export default function (app) {
   // Expects: /get-members?genderId=2&minAge=21&maxAge=80&familyStatusId=1&maxMonthlyBudget=800
-  app.get('/api/get-members', (req, res) => {
+  app.post('/api/get-members', (req, res) => {
     searchService
-      .getMembers(req.query.genderIds, req.query.ageGroupIds, req.query.familyStatusIds, req.query.maxMonthlyBudget)
+      .getMembers(req.body.filters)
       .then((members) => {
         res.send(members);
       });

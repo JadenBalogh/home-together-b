@@ -55,6 +55,7 @@ function simpleSelect(entry, table) {
 // Do we also want to use this method? We could create a DB that stores just images that's tied to a listing ID.
 
 // Drop Tables (MUST BE REVERSE ORDER OF Create STATEMENTS BELOW)
+drop('ListingReview')
 drop('Listing');
 drop('CategoryType');
 drop('OrganizationReview');
@@ -170,6 +171,9 @@ create(
     // Does the member have a place to live or are they looking for a place.
     'hasHousing BOOLEAN,' +
     'housingDescription VARCHAR(255),' +
+    'wouldPurchaseHome BOOLEAN,' +
+    'homeCapacity INT,' +
+    // Account Text Profile?
     'profileText VARCHAR(1024),' +
     'FOREIGN KEY (memberId) REFERENCES Member(id),' +
     'FOREIGN KEY (genderId) REFERENCES GenderType(id),' +
@@ -321,7 +325,6 @@ insert('CategoryType(name, paymentRequired)', [
   ['Member Holiday Home Swap', false],
 ]);
 
-
 create(
   'Listing(' +
     'id INT AUTO_INCREMENT PRIMARY KEY,' +
@@ -332,6 +335,11 @@ create(
     'website VARCHAR(100),' +
     'phone VARCHAR(20),' +
     'email VARCHAR(100),' +
+    // Store the average as a decimal number with 3 significant digits and 2 decimal places e.g: 2.31
+    // This value should be updated only when a NEW/Updated review is added.
+    'ratingAverage DECIMAL(3,2),' +
+    // Used to show the number of ratings a listing has eg: 4.3 Stars - 337 Ratings
+    'ratingCount INT,' +
     // Start and end date, Important for Classes / Vacation Listings
     'startDate DATE,' +
     'endDate DATE,' +
@@ -349,6 +357,18 @@ create(
   ')'
 );
 
+create(
+  'LisitingReview (' +
+    'id INT AUTO_INCREMENT PRIMARY KEY,' +
+    'listingId INT,' +
+    // Should be a star rating from 0-5 (INT).
+    'reviewScore INT,' +
+    'reviewText VARCHAR (2000),' +
+    // Only display if this is set to true, if this is set to false when a review moderator pulls up the moderation queue grab this.
+    'moderationApproved BOOLEAN,' +
+    'FOREIGN KEY (listingId) REFERENCES Listing(id)' +
+  ')'
+);
 
 // ╔═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
 // ║ This is the example data that is insert into the DB for testing reasons, none of it is legitimate.                                   ║ 

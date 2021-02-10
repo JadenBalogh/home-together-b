@@ -17,7 +17,7 @@ const SQL_INSERT_SEARCHABLE_INFO = `INSERT INTO SearchableInfo(
   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
 export default function (app) {
-  app.post('/signup', (req, res) => {
+  app.post('/api/signup', (req, res) => {
     let data = req.body.formData;
 
     authService.checkAvailable(data.username, data.email).then((available) => {
@@ -68,7 +68,7 @@ export default function (app) {
     });
   });
 
-  app.post('/login', (req, res) => {
+  app.post('/api/login', (req, res) => {
     let username = req.body.username;
 
     let sql = `SELECT id, username, password FROM Member WHERE username = ?`;

@@ -2,7 +2,7 @@ import mysql from 'mysql2';
 // This is required to read from the .env.local file
 import localenv from 'localenv';
 
-export default mysql.createConnection({
+export default mysql.createPool({
   host: process.env.HOST,
   user: process.env.USER,
   password: process.env.PASSWORD,

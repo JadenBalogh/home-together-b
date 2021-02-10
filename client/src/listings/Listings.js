@@ -36,11 +36,10 @@ function Listings(props) {
   useEffect(updateListings, [categoryId]);
 
   function updateListings() {
-    const route = '/get-listings?';
+    const route = '/api/get-listings?';
     const params = new URLSearchParams(`categoryId=${categoryId}`).toString();
-    const url = process.env.REACT_APP_SERVER_URL + route + params;
-
-    fetch(url)
+    const url = process.env.REACT_APP_LOCAL_URL || '';
+    fetch(url + route + params)
       .then((res) => res.json())
       .then((json) => {
         setListings(json);
@@ -53,7 +52,8 @@ function Listings(props) {
     } */
 
   function fetchCategoryOptions() {
-    fetch(process.env.REACT_APP_SERVER_URL + '/get-category-types')
+    const url = process.env.REACT_APP_LOCAL_URL || '';
+    fetch(url + '/api/get-category-types')
       .then((res) => res.json())
       .then((json) => {
         let options = json.map((x) => {

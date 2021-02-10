@@ -6,134 +6,165 @@ class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: "",
-      lastName: "",
-      birthYear: '',
-      birthMonth: '',
-      birthDay: '',
-      homeAddress: "",
-      mailAddress: "",
-      username: "", //check if already exists
-      password: "",
-      confPassword: "", //check if same as password
-      email: "", //check if existing
-      phone: "", //check if existing?
-      gender: "",
-      status: '',
-      people: '',
-      monthlyBudget: '',
-      pet: '',
-      disabilities: '',
-      religious: '',
-      smoke: '',
-      allergy: '',
-      home: '',
-      about: "",
-    //   //old stuff, since some of these are the same variable, consider switching to these to keep consistent throughout (eg. gender->genderId?)
-    //   members: "",
-    //   genderIds: "",
-    //   ageGroupIds: "",
-    //   familyStatusIds: "",
-    //   maxMonthlyBudget: 0,
+      confPassword: '', //check if same as password
+      formData: {
+        firstName: '',
+        lastName: '',
+        birthYear: '',
+        birthMonth: '',
+        birthDay: '',
+        homeAddress: '',
+        mailAddress: '',
+        username: '', //check if already exists
+        password: '',
+        email: '', //check if existing
+        phoneNumber: '', //check if existing?
+        genderId: '',
+        familyStatusId: '',
+        peopleCount: '',
+        maxMonthlyBudget: '',
+        petRestrictions: '',
+        petRestrictionsText: '',
+        disabilities: '',
+        disabilitiesText: '',
+        religiousRestrictions: '',
+        religiousRestrictionsText: '',
+        smokingRestrictions: '',
+        smokingRestrictionsText: '',
+        allergies: '',
+        allergiesText: '',
+        hasHousing: '',
+        housingDescription: '',
+        profileText: '',
+      },
     };
-    this.handleDropdownChange = this.handleDropdownChange.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleUsername = this.handleUsername.bind(this);
-    this.handleEmail = this.handleEmail.bind(this);
     this.handlePhone = this.handlePhone.bind(this);
+    this.handleEmail = this.handleEmail.bind(this);
+    this.handleUsername = this.handleUsername.bind(this);
+    this.handleConfirm = this.handleConfirm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handlePassword = this.handlePassword.bind(this);
+    this.handleSignup = this.handleSignup.bind(this);
   }
 
-//   componentDidMount() {
-//     this.updateMembers();
-//   }
+  //   componentDidMount() {
+  //     this.updateMembers();
+  //   }
 
-//   updateMembers() {
-//     const route = '/get-members?';
-//     const params = new URLSearchParams(
-//       `${this.state.genderIds.map((x) => 'genderIds=' + x).join('&')}` +
-//         `&${this.state.ageGroupIds.map((x) => 'ageGroupIds=' + x).join('&')}` +
-//         `&${this.state.familyStatusIds.map((x) => 'familyStatusIds=' + x).join('&')}` +
-//         `&maxMonthlyBudget=${this.state.maxMonthlyBudget}`
-//     ).toString();
-//     const url = process.env.REACT_APP_SERVER_URL + route + params;
-
-//     fetch(url)
-//       .then((res) => res.json())
-//       .then((json) => {
-//         this.setState({
-//           members: json,
-//         });
-//       });
-//   }
+  handleSignup() {
+    if (!this.handlePassword && !this.handleEmail && !this.handlePhone && !this.handleUsername) {
+      const route = '/api/signup?';
+      const url = process.env.REACT_APP_LOCAL_URL || '';
+      fetch(url + route, {
+        method: 'POST',
+        body: JSON.stringify(this.state.formData),
+      });
+      // .then((res) => res.json())
+      // .then((json) => {
+      //   this.setToken({
+      //     token: json,
+      //    });
+      //  });
+    } else alert('Please ensure that all fields are filled correctly.');
+  }
 
   handleInputChange(event) {
-    this.setState(
-      {
-        [event.target.name]: event.target.value,
-      },
-    );
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
   }
 
-  handleDropdownChange(selection) {
-    this.setState(
+  handlePassword() {
+    if (this.state.formData.password !== this.state.confPassword) {
+      console.log(this.state.formData.password);
+      console.log(this.state.confPassword);
+      console.log("passwords don't match.");
+      return true;
+    } else console.log('passwords match.');
+    return false;
+  }
+
+  handleConfirm(pass) {
+    //confPassword is read only apparently?
+    this.setState({ confPassword: pass });
+  }
+
+  handlePhone() {
+    const route = '/api/phonecheck?';
+    const bool = 'false';
+    const url = process.env.REACT_APP_LOCAL_URL || '';
+    fetch(url + route, {
+      method: 'POST',
+      body: JSON.stringify(this.state.phoneNumber),
+    })
+      .then((res) => res.json())
+      .then((json) => {
         {
-          [selection.id]: selection.value,//Help, I have fallen and I can't get up
-        },
-      );
+          bool = json.exist;
+        }
+      });
+    return bool;
   }
 
-  handleUsername(){
-      //check DB for username
+  handleEmail() {
+    const route = '/api/emailcheck?';
+    const bool = 'false';
+    const url = process.env.REACT_APP_LOCAL_URL || '';
+    fetch(url + route, {
+      method: 'POST',
+      body: JSON.stringify(this.state.email),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        {
+          bool = json.exist;
+        }
+      });
+    return bool;
   }
 
-  handleEmail(){
-    //check DB for email
-  }
-
-  handlePhone(){
-    //check DB for phone number
+  handleUsername() {
+    const route = '/api/usernamecheck?';
+    const bool = 'false';
+    const url = process.env.REACT_APP_LOCAL_URL || '';
+    fetch(url + route, {
+      method: 'POST',
+      body: JSON.stringify(this.state.username),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        {
+          bool = json.exist;
+        }
+      });
+    return bool;
   }
 
   handleSubmit = () => {
-      if(false){//check username, password, confpassword, email, and phone.
-          //
-      }
-      else
-      {
-          alert("Please ensure that all fields are filled correctly.")
-      }
-  }
+    if (false) {
+      //check username, password, confpassword, email, and phone.
+      //
+    } else {
+      alert('Please ensure that all fields are filled correctly.');
+    }
+  };
 
   render() {
     return (
       <div>
         <SignupForm //...maybe reconsider the form being separate at this point huh
-          firstName={this.state.firstName}
-          lastName={this.state.lastName}
-          birthYear={this.state.birthYear}
-          birthMonth={this.state.birthMonth}
-          birthDay={this.state.birthDay}
-          homeAddress={this.state.homeAddress}
-          mailAddress={this.state.mailAddress}
-          username={this.state.username}
-          password={this.state.password}
+          formData={this.state.formData}
           confPassword={this.state.confPassword}
-          email={this.state.email}
-          phone={this.state.phone}
-          gender={this.state.gender}
-          status={this.state.status}
-          people={this.state.people}
-          monthlyBudget={this.state.monthlyBudget}
-          pet={this.state.pet}
-          disabilities={this.state.disabilities}
-          religious={this.state.religious}
-          smoke={this.state.smoke}
-          allergy={this.state.allergy}
-          home={this.state.home}
+          handleConfirm={this.handleConfirm}
           changeInput={this.handleInputChange}
           handleDropdownChange={this.handleDropdownChange}
-          />
+          handlePassword={this.handlePassword}
+          handleEmail={this.handleEmail}
+          handlePhone={this.handlePhone}
+          handleUsername={this.handleUsername}
+          handleSignup={this.handleSignup}
+        />
       </div>
     );
   }

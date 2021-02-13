@@ -149,6 +149,7 @@ create(
     'genderId INT,' + // References the genderType table.
     'birthYear INT,' + // Used to calculate age.
     'familyStatusId INT,' +
+    'minMonthlyBudget INT,' +
     'maxMonthlyBudget INT,' +
     // Does the member allow/want pets?
     'petRestrictions BOOLEAN,' +
@@ -171,8 +172,9 @@ create(
     // Does the member have a place to live or are they looking for a place.
     'hasHousing BOOLEAN,' +
     'housingDescription VARCHAR(255),' +
-    'wouldPurchaseHome BOOLEAN,' +
-    'homeCapacity INT,' +
+    // Number of people the member is willing to live with
+    'minHomeCapacity INT,' +
+    'maxHomeCapacity INT,' +
     // Account Text Profile?
     'profileText VARCHAR(1024),' +
     'FOREIGN KEY (memberId) REFERENCES Member(id),' +
@@ -308,7 +310,6 @@ create(
   ')'
 );
 
-
 insert('CategoryType(name, paymentRequired)', [
   // These listing categories require payment (paymentRequired == true)
   ['Rental', true],
@@ -358,7 +359,7 @@ create(
 );
 
 create(
-  'LisitingReview (' +
+  'ListingReview (' +
     'id INT AUTO_INCREMENT PRIMARY KEY,' +
     'listingId INT,' +
     // Should be a star rating from 0-5 (INT).

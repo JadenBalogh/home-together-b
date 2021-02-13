@@ -9,12 +9,12 @@ const SQL_INSERT_MEMBER = `INSERT INTO Member(
   VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
 const SQL_INSERT_SEARCHABLE_INFO = `INSERT INTO SearchableInfo(
-  memberId, genderId, birthYear, familyStatusId, maxMonthlyBudget,
+  memberId, genderId, birthYear, familyStatusId, minMonthlyBudget, maxMonthlyBudget,
   petRestrictions, petRestrictionsText, healthRestrictions, healthRestrictionsText,
   religionRestrictions, religionRestrictionsText, smokingRestrictions, smokingRestrictionsText,
   dietRestrictions, dietRestrictionsText, allergies, allergiesText,
-  hasHousing, housingDescription, profileText)
-  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+  hasHousing, minHomeCapacity, maxHomeCapacity, housingDescription, profileText)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
 export default function (app) {
   app.post('/api/signup', (req, res) => {
@@ -49,6 +49,7 @@ export default function (app) {
               data.genderId,
               404,
               data.familyStatusId,
+              data.minMonthlyBudget,
               data.maxMonthlyBudget,
               data.petRestrictions,
               data.petRestrictionsText,
@@ -63,6 +64,8 @@ export default function (app) {
               data.allergies,
               data.allergiesText,
               data.hasHousing,
+              data.minHomeCapacity,
+              data.maxHomeCapacity,
               data.housingDescription,
               data.profileText,
             ])

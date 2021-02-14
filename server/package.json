@@ -20,5 +20,8 @@
     "localenv": "^0.2.2",
     "mysql2": "^2.2.5",
     "nodemon": "^2.0.6"
+  },
+  "devDependencies": {
+    "mysql-import": "^5.0.21"
   }
 }

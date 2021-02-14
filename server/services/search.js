@@ -21,27 +21,40 @@ function getMembers(filters) {
       g.name AS gender,
       f.id AS familyStatusId,
       f.name AS familyStatus,
-      s.maxMonthlyBudget AS maxMonthlyBudget,
-      s.birthYear as birthYear
+      s.minMonthlyBudget,
+      s.maxMonthlyBudget,
+      s.petRestrictions,
+      s.religionRestrictions,
+      s.smokingRestrictions,
+      s.hasHousing,
+      s.minHomeCapacity,
+      s.maxHomeCapacity,
+      s.birthYear
     FROM SearchableInfo s
     JOIN Member m ON m.id = s.memberID
     JOIN GenderType g ON g.id = s.genderId
     JOIN FamilyStatusType f ON f.id = s.familyStatusId
     WHERE
+      s.minMonthlyBudget <= ? AND
       s.maxMonthlyBudget >= ? AND
       s.petRestrictions = ? AND
       s.religionRestrictions = ? AND
       s.smokingRestrictions = ? AND
-      s.hasHousing = ?`;
+      s.hasHousing = ? AND
+      s.minHomeCapacity <= ? AND
+      s.maxHomeCapacity >= ?`;
 
   return new Promise((resolve) => {
     dbutils
       .query(sql, [
         filters.maxMonthlyBudget,
+        filters.minMonthlyBudget,
         filters.petRestrictions,
         filters.religionRestrictions,
         filters.smokingRestrictions,
         filters.hasHousing,
+        filters.maxHomeCapacity,
+        filters.minHomeCapacity,
       ])
       .then((results) => {
         // Manually do the filtering for the array-based parameters

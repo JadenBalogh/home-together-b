@@ -3,8 +3,8 @@ import authService from '../services/auth.js';
 
 export default function (app) {
   app.post('/api/signup', (req, res) => {
-    accountService.signup(req.body.formData).then(() => {
-      res.end();
+    accountService.signup(req.body.formData).then((result) => {
+      res.send(result);
     });
   });
 

@@ -61,6 +61,7 @@ drop('CategoryType');
 drop('OrganizationReview');
 drop('Organization');
 drop('Admin');
+drop('LocationPreference');
 drop('MiscSearchPrefs');
 drop('GenderSearchPrefs');
 drop('AgeSearchPrefs');
@@ -238,7 +239,7 @@ create(
 );
 
 create(
-  'LocationSearchPrefs (' +
+  'LocationPreference (' +
     'memberId INT,' +
     'locationId INT,' +
     'PRIMARY KEY (memberId, locationId),' +

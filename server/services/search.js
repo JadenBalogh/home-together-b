@@ -109,27 +109,23 @@ function getListings(categoryId) {
 }
 
 function getGenderTypes() {
-  var sql = 'SELECT id, name \
-    FROM GenderType';
-  return dbutils.query(sql);
+  return dbutils.query('SELECT id, name FROM GenderType');
 }
 
 function getFamilyStatusTypes() {
-  var sql = 'SELECT id, name \
-    FROM FamilyStatusType';
-  return dbutils.query(sql);
+  return dbutils.query('SELECT id, name FROM FamilyStatusType');
 }
 
 function getAgeGroupTypes() {
-  var sql = 'SELECT id, name, minAge, maxAge \
-    FROM AgeGroupType';
-  return dbutils.query(sql);
+  return dbutils.query('SELECT id, name, minAge, maxAge FROM AgeGroupType');
 }
 
 function getCategoryTypes() {
-  var sql = 'SELECT id, name \
-    FROM CategoryType';
-  return dbutils.query(sql);
+  return dbutils.query('SELECT id, name FROM CategoryType');
+}
+
+function getLocations() {
+  return dbutils.query(`SELECT id, city, province_name, postal FROM Location`);
 }
 
 export default {
@@ -140,4 +136,5 @@ export default {
   getFamilyStatusTypes,
   getAgeGroupTypes,
   getCategoryTypes,
+  getLocations,
 };

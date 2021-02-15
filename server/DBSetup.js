@@ -237,6 +237,16 @@ create(
   ')'
 );
 
+create(
+  'LocationSearchPrefs (' +
+    'memberId INT,' +
+    'locationId INT,' +
+    'PRIMARY KEY (memberId, locationId),' +
+    'FOREIGN KEY (memberId) REFERENCES Member(id),' +
+    'FOREIGN KEY (locationId) REFERENCES Location(id)' +
+  ')'
+);
+
 // ----- Tables related to the Administration of the site -----
 create(
   'Admin (' +

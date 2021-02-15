@@ -70,7 +70,7 @@ async function signup(data) {
   await dbutils.query(SQL_INSERT_SEARCHABLE_INFO, [
     memberId,
     data.genderId,
-    404,
+    data.birthYear,
     data.familyStatusId,
     data.minMonthlyBudget,
     data.maxMonthlyBudget,

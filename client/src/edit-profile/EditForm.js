@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { InputLabel } from '@material-ui/core';
-import RadioText from '../shared/RadioText';
+import RadioText from './RadioText';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //things to check: username, password(against confPassword), email, phone no. (only if we plan on implementing cellphone authentication/confirmation)
-export default function SignUp(props) {
+export default function EditForm(props) {
   const classes = useStyles();
   const [genderOptions, setGenderOptions] = useState([]);
   const [familyStatusOptions, setFamilyStatusOptions] = useState([]);

@@ -15,7 +15,7 @@ class Signup extends Component {
       formData: {
         firstName: '',
         lastName: '',
-        birthDate: '',
+        birthYear: '',
         homeAddress: '',
         mailAddress: '',
         username: '', //check if already exists
@@ -24,8 +24,11 @@ class Signup extends Component {
         phoneNumber: '', //check if existing?
         genderId: 0,
         familyStatusId: 0,
-        peopleCount: 0,
+        minHomeCapacity: 0,
+        maxHomeCapacity: 0,
+        minMonthlyBudget: 0,
         maxMonthlyBudget: 0,
+        locationIds: [],
         petRestrictions: false,
         petRestrictionsText: '',
         healthRestrictions: false,
@@ -50,6 +53,7 @@ class Signup extends Component {
     this.handleConfirm = this.handleConfirm.bind(this);
     this.checkPasswordsMatch = this.checkPasswordsMatch.bind(this);
     this.handleSignup = this.handleSignup.bind(this);
+    this.handleLocationChange = this.handleLocationChange.bind(this);
   }
 
   handleSignup(event) {
@@ -75,6 +79,7 @@ class Signup extends Component {
   }
 
   handleInputChange(event, callback = () => {}) {
+    console.log(event);
     this.setState(
       (prevState) => ({
         formData: {
@@ -86,6 +91,25 @@ class Signup extends Component {
         console.log(`tried to change ${event.target.name} to ${event.target.value}`);
         console.log(this.state.formData);
         callback();
+      }
+    );
+  }
+
+  handleLocationChange(array) {
+    console.log(array);
+    const sorted = array.map(i => {
+      return{ value: i, name: i};
+    });
+
+    this.setState(
+      (prevState) => ({
+        formData: {
+          ...prevState.formData,
+          locationIds: sorted,
+        },
+      }),
+      () => {
+        console.log(this.state.formData);
       }
     );
   }
@@ -157,6 +181,7 @@ class Signup extends Component {
           checkEmailExists={this.checkEmailExists}
           checkUsernameExists={this.checkUsernameExists}
           handleSignup={this.handleSignup}
+          handleLocationChange={this.handleLocationChange}
         />
       </div>
     );

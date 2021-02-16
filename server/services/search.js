@@ -50,12 +50,6 @@ async function getMembers(filters) {
   let familyStatusIds = Array.from(filters.familyStatusIds);
   let locationIds = Array.from(filters.locationIds);
 
-  console.log('Filter arrays:');
-  console.log(genderIds);
-  console.log(ageGroupIds);
-  console.log(familyStatusIds);
-  console.log(locationIds);
-
   let results = await dbutils.query(SQL_SELECT_MEMBERS, [
     filters.maxMonthlyBudget,
     filters.minMonthlyBudget,

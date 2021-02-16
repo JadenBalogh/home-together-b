@@ -1,0 +1,110 @@
+import dbutils from '../helpers/dbutils.js';
+
+const SQL_UPDATE_MEMBER = `
+  UPDATE Member
+  SET
+    firstName = ?, 
+    lastName = ?, 
+    homeAddress = ?,
+    mailAddress = ?,
+    phoneNumber = ?,
+    email = ?
+  WHERE id = ?
+`;
+
+const SQL_UPDATE_SEARCHABLE_INFO = `
+  UPDATE SearchableInfo
+  SET
+    genderId = ?,
+    birthYear = ?,
+    familyStatusId = ?,
+    minMonthlyBudget = ?,
+    maxMonthlyBudget = ?,
+    petRestrictions = ?,
+    petRestrictionsText = ?,
+    healthRestrictions = ?,
+    healthRestrictionsText = ?,
+    religionRestrictions = ?,
+    religionRestrictionsText = ?,
+    smokingRestrictions = ?,
+    smokingRestrictionsText = ?,
+    dietRestrictions = ?,
+    dietRestrictionsText = ?,
+    allergies = ?,
+    allergiesText = ?,
+    hasHousing = ?,
+    minHomeCapacity = ?,
+    maxHomeCapacity = ?,
+    housingDescription = ?,
+    profileText = ?
+  WHERE memberId = ?
+`;
+
+const SQL_DELETE_LOCATION_PREFERENCE = `DELETE FROM LocationPreference WHERE memberId = ?`;
+
+const SQL_INSERT_LOCATION_PREFERENCE = `INSERT INTO LocationPreference(memberId, locationId) VALUES (?, ?)`;
+
+function getMember(id) {
+  return new Promise((resolve) => {
+    var sql = 'SELECT * FROM Member JOIN SearchableInfo ON SearchableInfo.memberId = Member.id WHERE id = ?';
+    dbutils.query(sql, [id]).then((results) => {
+      // TODO: Impliment results filtering (Strip out Username & Password from results)
+      let filteredResults = results[0];
+      dbutils.query('SELECT locationId FROM LocationPreference WHERE memberId = ?', [id]).then((locations) => {
+        filteredResults.locationIds = locations.map((x) => x.locationId);
+        resolve(filteredResults);
+      });
+    });
+  });
+}
+
+async function editMember(id, data) {
+  // Update Member
+  await dbutils.query(SQL_UPDATE_MEMBER, [
+    data.firstName,
+    data.lastName,
+    data.homeAddress,
+    data.mailAddress,
+    data.phoneNumber,
+    data.email,
+    id,
+  ]);
+
+  // Update SearchableInfo
+  await dbutils.query(SQL_UPDATE_SEARCHABLE_INFO, [
+    data.genderId,
+    data.birthYear,
+    data.familyStatusId,
+    data.minMonthlyBudget,
+    data.maxMonthlyBudget,
+    data.petRestrictions,
+    data.petRestrictionsText,
+    data.healthRestrictions,
+    data.healthRestrictionsText,
+    data.religionRestrictions,
+    data.religionRestrictionsText,
+    data.smokingRestrictions,
+    data.smokingRestrictionsText,
+    data.dietRestrictions,
+    data.dietRestrictionsText,
+    data.allergies,
+    data.allergiesText,
+    data.hasHousing,
+    data.minHomeCapacity,
+    data.maxHomeCapacity,
+    data.housingDescription,
+    data.profileText,
+    id,
+  ]);
+
+  // Update LocationPreferences
+  await dbutils.query(SQL_DELETE_LOCATION_PREFERENCE, [id]);
+  for (const locationId of data.locationIds) {
+    await dbutils.query(SQL_INSERT_LOCATION_PREFERENCE, [id, locationId]);
+  }
+}
+
+export default {
+  getMember,
+  editMember,
+};

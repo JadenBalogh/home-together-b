@@ -56,7 +56,7 @@ function MembersFilter(props) {
       .then((res) => res.json())
       .then((json) => {
         let options = json.map((x) => {
-          return { value: x.id, label: x.name };
+          return { value: x.id, label: x.city };
         });
         setLocationOptions(options);
       });
@@ -117,7 +117,7 @@ function MembersFilter(props) {
         <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
           <Grid container spacing={2} direction="row" justify="flex-start" alignItems="center" justify="space-between">
             <Grid item>
-              <Typography className={classes.heading}>Filter Through Members</Typography>
+              <Typography className={classes.heading}>Advanced Member Filter</Typography>
             </Grid>
           </Grid>
         </AccordionSummary>

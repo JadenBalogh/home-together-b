@@ -16,8 +16,7 @@ import { InputLabel } from '@material-ui/core';
 import RadioText from './RadioText';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import SelectSearch from 'react-select-search';
-import '../shared/search-select.css';
+import FilterSelect from './FilterSelect';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -45,11 +44,12 @@ export default function SignUp(props) {
   const [genderOptions, setGenderOptions] = useState([]);
   const [familyStatusOptions, setFamilyStatusOptions] = useState([]);
   const [cityOptions, setCityOptions] = useState([]);
-  const testCities = [
-    { value: 'Kelowna', name: 'Kelowna' },
-    { value: 'Vernon', name: 'Vernon' },
-    { value: 'Kamloops', name: 'Kamloops' },
-  ];
+  // const testCities = [
+  //   { value: 'Kelowna', label: 'Kelowna' },
+  //   { value: 'Vernon', label: 'Vernon' },
+  //   { value: 'Kamloops', label: 'Kamloops' },
+  //   { value: 'Test1', label: 'Test1' },
+  // ];
 
   useEffect(() => fetchGenderOptions(), []);
   useEffect(() => fetchFamilyStatusOptions(), []);
@@ -85,7 +85,7 @@ export default function SignUp(props) {
       .then((res) => res.json())
       .then((json) => {
         let options = json.map((x) => {
-          return { value: x.id, label: x.name };
+          return { value: x.id, label: x.city };
         });
         setCityOptions(options);
       });
@@ -351,8 +351,15 @@ export default function SignUp(props) {
                 onChange={props.changeInput}
               />
             </Grid>
-            <Grid item xs={12} container>
-              <FormLabel component='legend'>Preferred Living Locations</FormLabel>
+            <Grid 
+            item 
+            xs={12} 
+            container
+            direction='column'
+            alignItems='flex-start'
+            justify='flex-start'
+            >
+              {/* <FormLabel component='legend'>Preferred Living Locations</FormLabel>
               <SelectSearch
                 // options={cityOptions}
                 options={testCities}
@@ -364,6 +371,12 @@ export default function SignUp(props) {
                 onChange={props.handleLocationChange}
                 value={props.formData.locationIds}
                 placeholder='Select cities'
+              /> */}
+              <FilterSelect
+                label='Living Locations:'
+                name='locationIds'
+                options={cityOptions}
+                onChange={props.handleDropdownChange}
               />
             </Grid>
             <Grid

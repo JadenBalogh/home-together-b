@@ -54,6 +54,7 @@ class Signup extends Component {
     this.checkPasswordsMatch = this.checkPasswordsMatch.bind(this);
     this.handleSignup = this.handleSignup.bind(this);
     this.handleLocationChange = this.handleLocationChange.bind(this);
+    this.handleDropdownChange = this.handleDropdownChange.bind(this);
   }
 
   handleSignup(event) {
@@ -92,6 +93,19 @@ class Signup extends Component {
         console.log(this.state.formData);
         callback();
       }
+    );
+  }
+
+  handleDropdownChange(selection, action) {
+    let ids = selection
+      ? selection.map((x) => {
+          return x.value;
+        })
+      : [];
+    this.setState(
+      {
+        [action.name]: ids,
+      },
     );
   }
 

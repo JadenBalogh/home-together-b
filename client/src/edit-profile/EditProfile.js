@@ -1,28 +1,22 @@
 import React, { Component } from 'react';
-import SignupForm from './EditForm';
-import './Profile.css';
+import EditForm from './EditForm';
 
 class EditProfile extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      confPassword: '', //check if same as password
       phoneExists: false,
       emailExists: false,
-      usernameExists: false,
-      passwordsMatch: true,
       formData: {
         firstName: '',
         lastName: '',
-        birthDate: '',
         homeAddress: '',
         mailAddress: '',
-        username: '', //check if already exists
-        password: '',
         email: '', //check if existing
         phoneNumber: '', //check if existing?
         genderId: 0,
+        birthYear: 0,
         familyStatusId: 0,
         peopleCount: 0,
         maxMonthlyBudget: 0,
@@ -46,23 +40,21 @@ class EditProfile extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.checkPhoneExists = this.checkPhoneExists.bind(this);
     this.checkEmailExists = this.checkEmailExists.bind(this);
-    this.checkUsernameExists = this.checkUsernameExists.bind(this);
-    this.handleConfirm = this.handleConfirm.bind(this);
-    this.checkPasswordsMatch = this.checkPasswordsMatch.bind(this);
-    this.handleSignup = this.handleSignup.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSignup(event) {
+  handleSubmit(event) {
     event.preventDefault();
 
+    let id = sessionStorage.getItem('id');
     let formData = this.state.formData;
 
     const url = process.env.REACT_APP_LOCAL_URL || '';
-    const route = '/api/signup?';
+    const route = '/api/edit-profile?';
     fetch(url + route, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ formData }),
+      body: JSON.stringify({ id, formData }),
     })
       .then((raw) => raw.json())
       .then((result) => {
@@ -70,7 +62,8 @@ class EditProfile extends Component {
           window.alert(result.err);
           return;
         }
-        this.props.history.push('/signin');
+        console.log('success!');
+        this.props.history.push('/');
       });
   }
 
@@ -88,15 +81,6 @@ class EditProfile extends Component {
         callback();
       }
     );
-  }
-
-  checkPasswordsMatch() {
-    let match = this.state.formData.password === this.state.confPassword;
-    this.setState({ passwordsMatch: match });
-  }
-
-  handleConfirm(event) {
-    this.setState({ confPassword: event.target.value });
   }
 
   checkPhoneExists() {
@@ -125,38 +109,18 @@ class EditProfile extends Component {
       });
   }
 
-  checkUsernameExists() {
-    const url = process.env.REACT_APP_LOCAL_URL || '';
-    const route = '/api/check-username-exists?';
-    const params = new URLSearchParams(`&username=${this.state.formData.username}`).toString();
-    fetch(url + route + params)
-      .then((res) => res.json())
-      .then((json) => {
-        console.log('went through');
-        this.setState({
-          usernameExists: json.exists,
-        });
-      });
-  }
-
   render() {
     return (
       <div>
-        <SignupForm //...maybe reconsider the form being separate at this point huh
+        <EditForm //...maybe reconsider the form being separate at this point huh
           formData={this.state.formData}
-          confPassword={this.state.confPassword}
           phoneExists={this.state.phoneExists}
           emailExists={this.state.emailExists}
-          usernameExists={this.state.usernameExists}
-          passwordsMatch={this.state.passwordsMatch}
           handleConfirm={this.handleConfirm}
           handleInputChange={this.handleInputChange}
-          handleDropdownChange={this.handleDropdownChange}
-          checkPasswordsMatch={this.checkPasswordsMatch}
           checkPhoneExists={this.checkPhoneExists}
           checkEmailExists={this.checkEmailExists}
-          checkUsernameExists={this.checkUsernameExists}
-          handleSignup={this.handleSignup}
+          handleSubmit={this.handleSubmit}
         />
       </div>
     );

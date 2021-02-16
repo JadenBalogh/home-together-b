@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormLabel from '@material-ui/core/FormLabel';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import {
+  Card,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+  Button,
+  CssBaseline,
+  TextField,
+  Link,
+  Grid,
+  Typography,
+  Container,
+  InputLabel
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import { InputLabel } from '@material-ui/core';
-import RadioText from './RadioText';
+import RadioText from '../shared/RadioText';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -73,17 +76,10 @@ export default function EditForm(props) {
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component='h1' variant='h5'>
-          Sign up
+          Edit Profile
         </Typography>
-        <form className={classes.form} onSubmit={props.handleSignup} noValidate>
+        <form className={classes.form} onSubmit={props.handleSubmit} noValidate>
           <Grid container spacing={2}>
-            <Grid container justify='flex-end'>
-              <Grid item>
-                <Link href='/signin' variant='body2'>
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
             <Grid item xs={12} sm={6} container>
               <TextField
                 autoComplete='fname'
@@ -145,52 +141,6 @@ export default function EditForm(props) {
                 autoComplete='mailAddress'
                 helperText='If you do not have one, use the address of a friend, relative, or verifiable organization.'
                 onChange={props.handleInputChange}
-              />
-            </Grid>
-            <Grid item xs={12} container>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                name='username'
-                label='Username'
-                id='username'
-                autoComplete='username'
-                onBlur={(event) => {
-                  props.handleInputChange(event, props.checkUsernameExists);
-                }}
-                error={props.usernameExists} //checks if already exists
-                helperText={props.usernameExists ? 'Username already exists.' : ''}
-              />
-            </Grid>
-            <Grid item xs={12} container>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                name='password'
-                label='Password'
-                type='password'
-                id='password'
-                autoComplete='password'
-                onChange={props.handleInputChange}
-                onBlur={props.checkPasswordsMatch}
-              />
-            </Grid>
-            <Grid item xs={12} container>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                name='confPassword'
-                label='Confirm Password'
-                type='password'
-                id='confPassword'
-                autoComplete='confPassword'
-                onChange={props.handleConfirm}
-                onBlur={props.checkPasswordsMatch}
-                error={!props.passwordsMatch} //check if password and confPassword matches
-                helperText={!props.passwordsMatch ? 'Passwords do not match.' : ''}
               />
             </Grid>
             <Grid item xs={12} container>
@@ -469,7 +419,7 @@ export default function EditForm(props) {
             </Grid>
           </Grid>
           <Button type='submit' fullWidth variant='contained' color='primary'>
-            Sign Up
+            Save Changes
           </Button>
         </form>
       </div>

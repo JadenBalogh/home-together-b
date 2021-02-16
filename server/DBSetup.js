@@ -61,6 +61,7 @@ drop('CategoryType');
 drop('OrganizationReview');
 drop('Organization');
 drop('Admin');
+drop('LocationPreference');
 drop('MiscSearchPrefs');
 drop('GenderSearchPrefs');
 drop('AgeSearchPrefs');
@@ -234,6 +235,16 @@ create(
     'PRIMARY KEY (memberId, familyStatusId),' +
     'FOREIGN KEY (memberId) REFERENCES Member(id),' +
     'FOREIGN KEY (familyStatusId) REFERENCES FamilyStatusType(id)' +
+  ')'
+);
+
+create(
+  'LocationPreference (' +
+    'memberId INT,' +
+    'locationId INT,' +
+    'PRIMARY KEY (memberId, locationId),' +
+    'FOREIGN KEY (memberId) REFERENCES Member(id),' +
+    'FOREIGN KEY (locationId) REFERENCES Location(id)' +
   ')'
 );
 

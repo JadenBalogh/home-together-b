@@ -8,6 +8,8 @@ import FormLabel from '@material-ui/core/FormLabel';
 
 // Filter component for the members page
 function MembersFilter(props) {
+  const [locationOptions, setLocationOptions] = useState([]);
+  const [homeCapacityOptions, setHomeCapacityOptions] = useState([]);
   const [genderOptions, setGenderOptions] = useState([]);
   const [ageGroupOptions, setAgeGroupOptions] = useState([]);
   const [familyStatusOptions, setFamilyStatusOptions] = useState([]);
@@ -15,6 +17,32 @@ function MembersFilter(props) {
   useEffect(() => fetchGenderOptions(), []);
   useEffect(() => fetchAgeGroupOptions(), []);
   useEffect(() => fetchFamilyStatusOptions(), []);
+  useEffect(() => fetchLocationOptions(), []);
+  useEffect(() => fetchCapacityOptions(), []);
+
+  function fetchLocationOptions() {
+    const url = process.env.REACT_APP_LOCAL_URL || '';
+    fetch(url + '/api/get-locations')
+      .then((res) => res.json())
+      .then((json) => {
+        let options = json.map((x) => {
+          return { value: x.id, label: x.name };
+        });
+        setLocationOptions(options);
+      });
+  }
+
+  function fetchCapacityOptions() {
+    const url = process.env.REACT_APP_LOCAL_URL || '';
+    fetch(url + '/api/get-home-capacity')
+      .then((res) => res.json())
+      .then((json) => {
+        let options = json.map((x) => {
+          return { value: x.id, label: x.name };
+        });
+        setHomeCapacityOptions(options);
+      });
+  }
 
   function fetchGenderOptions() {
     const url = process.env.REACT_APP_LOCAL_URL || '';
@@ -56,6 +84,22 @@ function MembersFilter(props) {
   return (
     <div className='filter-container'>
       <Grid container spacing={2}>
+        <Grid item xs={12} sm={6} container>
+          <FilterSelect 
+            label='Living Locations:' 
+            name='locations' 
+            options={locationOptions} 
+            onChange={props.dropdownHandler} 
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} container>
+          <FilterSelect 
+            label='Home Capacity:' 
+            name='homeCapacity' 
+            options={homeCapacityOptions} 
+            onChange={props.dropdownHandler} 
+          />
+        </Grid>
         <Grid item xs={12} sm={6} container>
           <FilterSelect 
             label='Genders:' 

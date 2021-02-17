@@ -1,5 +1,40 @@
 import dbutils from '../helpers/dbutils.js';
 
+const SQL_SELECT_MEMBER = `
+  SELECT
+    firstName,
+    lastName,
+    homeAddress,
+    mailAddress,
+    email,
+    phoneNumber,
+    genderId,
+    birthYear,
+    familyStatusId,
+    minMonthlyBudget,
+    maxMonthlyBudget,
+    petRestrictions,
+    petRestrictionsText,
+    healthRestrictions,
+    healthRestrictionsText,
+    religiousRestrictions,
+    religiousRestrictionsText,
+    smokingRestrictions,
+    smokingRestrictionsText,
+    dietRestrictions,
+    dietRestrictionsText,
+    allergies,
+    allergiesText,
+    hasHousing,
+    minHomeCapacity,
+    maxHomeCapacity,
+    housingDescription,
+    profileText
+  FROM Member m
+  JOIN SearchableInfo s ON m.id = s.memberID
+  WHERE m.id = ?
+`;
+
 const SQL_UPDATE_MEMBER = `
   UPDATE Member
   SET
@@ -46,13 +81,11 @@ const SQL_INSERT_LOCATION_PREFERENCE = `INSERT INTO LocationPreference(memberId,
 
 function getMember(id) {
   return new Promise((resolve) => {
-    var sql = 'SELECT * FROM Member JOIN SearchableInfo ON SearchableInfo.memberId = Member.id WHERE id = ?';
-    dbutils.query(sql, [id]).then((results) => {
-      // TODO: Impliment results filtering (Strip out Username & Password from results)
-      let filteredResults = results[0];
+    dbutils.query(SQL_SELECT_MEMBER, [id]).then((results) => {
+      let member = results[0];
       dbutils.query('SELECT locationId FROM LocationPreference WHERE memberId = ?', [id]).then((locations) => {
-        filteredResults.locationIds = locations.map((x) => x.locationId);
-        resolve(filteredResults);
+        member.locationIds = locations.map((x) => x.locationId);
+        resolve(member);
       });
     });
   });

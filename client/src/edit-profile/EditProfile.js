@@ -41,6 +41,30 @@ class EditProfile extends Component {
     this.checkPhoneExists = this.checkPhoneExists.bind(this);
     this.checkEmailExists = this.checkEmailExists.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.loadProfile = this.loadProfile.bind(this);
+
+    this.loadProfile();
+  }
+
+  loadProfile() {
+    console.log('yuh');
+
+    let id = sessionStorage.getItem('id');
+
+    const url = process.env.REACT_APP_LOCAL_URL || '';
+    const route = '/api/get-member?';
+    const params = new URLSearchParams('id=' + id).toString();
+    fetch(url + route + params)
+      .then((raw) => raw.json())
+      .then((result) => {
+        if (result.err) {
+          window.alert(result.err);
+          return;
+        }
+        console.log('success!');
+        console.log(result);
+        this.setState({ formData: result.data });
+      });
   }
 
   handleSubmit(event) {

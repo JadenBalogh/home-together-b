@@ -13,7 +13,11 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { InputLabel } from '@material-ui/core';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import SelectSearch from 'react-select-search';
 import RadioText from '../shared/RadioText';
+import '../shared/search-select.css';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -40,9 +44,16 @@ export default function SignUp(props) {
   const classes = useStyles();
   const [genderOptions, setGenderOptions] = useState([]);
   const [familyStatusOptions, setFamilyStatusOptions] = useState([]);
+  const [cityOptions, setCityOptions] = useState([]);
+  const testCities = [
+    { value: 'Kelowna', name: 'Kelowna' },
+    { value: 'Vernon', name: 'Vernon' },
+    { value: 'Kamloops', name: 'Kamloops' },
+  ];
 
   useEffect(() => fetchGenderOptions(), []);
   useEffect(() => fetchFamilyStatusOptions(), []);
+  useEffect(() => fetchCityOptions(), []);
 
   function fetchGenderOptions() {
     const url = process.env.REACT_APP_LOCAL_URL || '';
@@ -65,6 +76,18 @@ export default function SignUp(props) {
           return { value: x.id, label: x.name };
         });
         setFamilyStatusOptions(options);
+      });
+  }
+
+  function fetchCityOptions() {
+    const url = process.env.REACT_APP_LOCAL_URL || '';
+    fetch(url + '/api/get-locations')
+      .then((res) => res.json())
+      .then((json) => {
+        let options = json.map((x) => {
+          return { value: x.id, label: x.name };
+        });
+        setCityOptions(options);
       });
   }
 
@@ -109,17 +132,23 @@ export default function SignUp(props) {
                 onChange={props.handleInputChange}
               />
             </Grid>
-            <Grid item xs={8} container>
-              <InputLabel>Birthday</InputLabel>
-              <TextField
-                type='date'
-                variant='outlined'
-                required
-                fullWidth
-                id='birthDate'
-                name='birthDate'
-                onChange={props.handleInputChange}
-              />
+            <Grid item xs={12} container>
+              <InputLabel>Birth Year</InputLabel>
+              <Select
+                autoWidth
+                id='birthYear'
+                name='birthYear'
+                value={props.formData.birthYear}
+                onChange={(event) => {
+                  props.handleInputChange(event, ()=>{} );
+                }}
+              >
+                {[...Array(120).keys()].map(i => (
+                  <MenuItem key={i+1900} value={i + 1900}>
+                    {i + 1900}
+                  </MenuItem>
+                ))}
+              </Select>
             </Grid>
             <Grid item xs={12} container>
               <TextField
@@ -160,7 +189,7 @@ export default function SignUp(props) {
                   props.handleInputChange(event, props.checkUsernameExists);
                 }}
                 error={props.usernameExists} //checks if already exists
-                helperText={props.usernameExists ? 'Username already exists.' : ''}
+                helperText={props.usernameExists ? 'Username already exists.' : 'Username cannot be changed after signup'}
               />
             </Grid>
             <Grid item xs={12} container>
@@ -200,6 +229,7 @@ export default function SignUp(props) {
                 fullWidth
                 id='email'
                 label='Email Address'
+                type='email'
                 name='email'
                 autoComplete='email'
                 onBlur={(event) => {
@@ -217,6 +247,7 @@ export default function SignUp(props) {
                 id='phoneNumber'
                 label='Phone Number'
                 name='phoneNumber'
+                type='tel'
                 autoComplete='phone'
                 onBlur={(event) => {
                   props.handleInputChange(event, props.checkPhoneExists);
@@ -271,25 +302,41 @@ export default function SignUp(props) {
                 </RadioGroup>
               </FormControl>
             </Grid>
-            <Grid
-              item
-              xs={12}
-              container
-              direction='column'
-              alignItems='flex-start'
-              justify='flex-start'
-              onChange={props.handleInputChange}
-            >
-              <FormLabel component='legend'>Open to share with</FormLabel>
-              <FormControl component='fieldset'>
-                <RadioGroup aria-label='people' name='peopleCount' id='peopleCount'>
-                  <FormControlLabel value='1' control={<Radio />} label='1 person' />
-                  <FormControlLabel value='2' control={<Radio />} label='2 people' />
-                  <FormControlLabel value='3' control={<Radio />} label='3 people' />
-                  <FormControlLabel value='4' control={<Radio />} label='4 people' />
-                  <FormControlLabel value='0' control={<Radio />} label='Any amount' />
-                </RadioGroup>
-              </FormControl>
+            <Grid item xs={12} container>
+              <TextField
+                variant='outlined'
+                required
+                fullWidth
+                id='minHomeCapacity'
+                label='Min Living Capacity'
+                name='minHomeCapacity'
+                type='number'
+                onChange={props.changeInput}
+              />
+            </Grid>
+            <Grid item xs={12} container>
+              <TextField
+                variant='outlined'
+                required
+                fullWidth
+                id='maxHomeCapacity'
+                label='Max Living Capacity'
+                name='maxHomeCapacity'
+                type='number'
+                onChange={props.changeInput}
+              />
+            </Grid>
+            <Grid item xs={12} container>
+              <TextField
+                variant='outlined'
+                required
+                fullWidth
+                id='minMonthlyBudget'
+                label='Min Monthly Budget'
+                name='minMonthlyBudget'
+                type='number'
+                onChange={props.changeInput}
+              />
             </Grid>
             <Grid item xs={12} container>
               <TextField
@@ -297,11 +344,26 @@ export default function SignUp(props) {
                 required
                 fullWidth
                 id='maxMonthlyBudget'
-                label='Monthly Budget'
+                label='Max Monthly Budget'
                 name='maxMonthlyBudget'
+                type='number'
                 autoComplete='budget'
                 onChange={props.changeInput}
-                value={props.monthlyBudget}
+              />
+            </Grid>
+            <Grid item xs={12} container>
+              <FormLabel component='legend'>Preferred Living Locations</FormLabel>
+              <SelectSearch
+                // options={cityOptions}
+                options={testCities}
+                multiple
+                search
+                id='locations'
+                name='locations'
+                printOptions="on-focus"
+                onChange={props.handleLocationChange}
+                value={props.formData.locationIds}
+                placeholder='Select cities'
               />
             </Grid>
             <Grid

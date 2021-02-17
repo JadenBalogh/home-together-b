@@ -3,7 +3,6 @@ import { Switch, Route } from 'react-router-dom';
 import About from '../about/About';
 import Members from '../members/Members';
 import Listings from '../listings/Listings';
-import Maps from '../map/Map';
 import Signup from '../signup/Signup';
 import SignIn from '../signin/SignIn';
 import EditProfile from '../edit-profile/EditProfile';
@@ -16,7 +15,6 @@ class Main extends Component {
         <Route exact path='/' component={About} />
         <Route exact path='/members' component={Members} />
         <Route exact path='/listings' component={Listings} />
-        <Route exact path='/maps' component={Maps} />
         <Route exact path='/signup' component={Signup} />
         <Route exact path='/signin' component={SignIn} />
         <Route exact path='/edit-profile' component={EditProfile} />

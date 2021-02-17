@@ -11,7 +11,9 @@ import {
   Grid,
   Typography,
   Container,
-  InputLabel
+  InputLabel,
+  Select,
+  MenuItem,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import RadioText from '../shared/RadioText';
@@ -87,6 +89,7 @@ export default function EditForm(props) {
                 fullWidth
                 id='firstName'
                 label='First Name'
+                value={props.formData.firstName}
                 autoFocus
                 onChange={props.handleInputChange}
               />
@@ -99,21 +102,28 @@ export default function EditForm(props) {
                 id='lastName'
                 label='Last Name'
                 name='lastName'
+                value={props.formData.lastName}
                 autoComplete='lname'
                 onChange={props.handleInputChange}
               />
             </Grid>
-            <Grid item xs={8} container>
-              <InputLabel>Birthday</InputLabel>
-              <TextField
-                type='date'
-                variant='outlined'
-                required
-                fullWidth
-                id='birthDate'
-                name='birthDate'
-                onChange={props.handleInputChange}
-              />
+            <Grid item xs={12} container>
+              <InputLabel>Birth Year</InputLabel>
+              <Select
+                autoWidth
+                id='birthYear'
+                name='birthYear'
+                value={props.formData.birthYear}
+                onChange={(event) => {
+                  props.handleInputChange(event, () => {});
+                }}
+              >
+                {[...Array(120).keys()].map((i) => (
+                  <MenuItem key={i + 1900} value={i + 1900}>
+                    {i + 1900}
+                  </MenuItem>
+                ))}
+              </Select>
             </Grid>
             <Grid item xs={12} container>
               <TextField
@@ -123,6 +133,7 @@ export default function EditForm(props) {
                 id='homeAddress'
                 label='Home Address'
                 name='homeAddress'
+                value={props.formData.homeAddress}
                 autoComplete='homeAddress'
                 helperText='If you do not have one, use the address of a friend, relative, or verifiable organization.'
                 onChange={props.handleInputChange}
@@ -136,6 +147,7 @@ export default function EditForm(props) {
                 id='mailAddress'
                 label='Mailing Address'
                 name='mailAddress'
+                value={props.formData.mailAddress}
                 autoComplete='mailAddress'
                 helperText='If you do not have one, use the address of a friend, relative, or verifiable organization.'
                 onChange={props.handleInputChange}
@@ -149,6 +161,7 @@ export default function EditForm(props) {
                 id='email'
                 label='Email Address'
                 name='email'
+                value={props.formData.email}
                 autoComplete='email'
                 onBlur={(event) => {
                   props.handleInputChange(event, props.checkEmailExists);
@@ -165,6 +178,7 @@ export default function EditForm(props) {
                 id='phoneNumber'
                 label='Phone Number'
                 name='phoneNumber'
+                value={props.formData.phoneNumber}
                 autoComplete='phone'
                 onBlur={(event) => {
                   props.handleInputChange(event, props.checkPhoneExists);
@@ -173,18 +187,16 @@ export default function EditForm(props) {
                 helperText={props.phoneExists ? 'This phone number was already used to sign up.' : ''}
               />
             </Grid>
-            <Grid
-              item
-              xs={12}
-              container
-              direction='column'
-              alignItems='flex-start'
-              justify='flex-start'
-              onChange={props.handleInputChange}
-            >
+            <Grid item xs={12} container direction='column' alignItems='flex-start' justify='flex-start'>
               <FormLabel component='legend'>Gender</FormLabel>
               <FormControl component='fieldset'>
-                <RadioGroup aria-label='gender' name='genderId' id='genderId'>
+                <RadioGroup
+                  aria-label='gender'
+                  name='genderId'
+                  id='genderId'
+                  value={props.formData.genderId || ''}
+                  onChange={(event) => props.handleInputChange(event, () => {})}
+                >
                   {genderOptions.map((option) => (
                     <FormControlLabel
                       key={option.value}
@@ -307,14 +319,14 @@ export default function EditForm(props) {
             >
               <FormLabel component='legend'>Do you prefer others with the same religion?</FormLabel>
               <FormControl component='fieldset'>
-                <RadioGroup aria-label='religious' name='religiousRestrictions' id='religiousRestrictions'>
+                <RadioGroup aria-label='religious' name='religionRestrictions' id='religionRestrictions'>
                   <FormControlLabel value='true' control={<Radio />} label='Yes' />
                   <FormControlLabel value='false' control={<Radio />} label='No' />
                 </RadioGroup>
                 <RadioText
                   check='true'
-                  name='religiousRestrictionsText'
-                  value={props.formData.religiousRestrictionsText}
+                  name='religionRestrictionsText'
+                  value={props.formData.religionRestrictionsText}
                 />
               </FormControl>
             </Grid>

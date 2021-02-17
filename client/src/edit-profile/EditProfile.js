@@ -18,23 +18,26 @@ class EditProfile extends Component {
         genderId: 0,
         birthYear: 0,
         familyStatusId: 0,
-        peopleCount: 0,
+        minMonthlyBudget: 0,
         maxMonthlyBudget: 0,
         petRestrictions: false,
         petRestrictionsText: '',
         healthRestrictions: false,
         healthRestrictionsText: '',
-        religiousRestrictions: false,
-        religiousRestrictionsText: '',
+        religionRestrictions: false,
+        religionRestrictionsText: '',
         smokingRestrictions: false,
         smokingRestrictionsText: '',
-        allergies: false,
-        allergiesText: '',
         dietRestrictions: false,
         dietRestrictionsText: '',
+        allergies: false,
+        allergiesText: '',
         hasHousing: false,
+        minHomeCapacity: 0,
+        maxHomeCapacity: 0,
         housingDescription: '',
         profileText: '',
+        locationIds: [],
       },
     };
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -42,14 +45,14 @@ class EditProfile extends Component {
     this.checkEmailExists = this.checkEmailExists.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.loadProfile = this.loadProfile.bind(this);
+  }
 
+  componentDidMount() {
     this.loadProfile();
   }
 
   loadProfile() {
-    console.log('yuh');
-
-    let id = sessionStorage.getItem('id');
+    let id = sessionStorage.getItem('id') || 1;
 
     const url = process.env.REACT_APP_LOCAL_URL || '';
     const route = '/api/get-member?';
@@ -61,9 +64,11 @@ class EditProfile extends Component {
           window.alert(result.err);
           return;
         }
-        console.log('success!');
-        console.log(result);
-        this.setState({ formData: result.data });
+        console.log(this.state);
+        this.setState({ formData: { ...result } }, () => {
+          console.log('all done!');
+          console.log(this.state);
+        });
       });
   }
 

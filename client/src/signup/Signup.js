@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import SignupForm from './SignupForm';
-import './Signup.css';
 
 class Signup extends Component {
   constructor(props) {
@@ -180,7 +179,7 @@ class Signup extends Component {
   render() {
     return (
       <div>
-        <SignupForm //...maybe reconsider the form being separate at this point huh
+        <SignupForm 
           formData={this.state.formData}
           confPassword={this.state.confPassword}
           phoneExists={this.state.phoneExists}

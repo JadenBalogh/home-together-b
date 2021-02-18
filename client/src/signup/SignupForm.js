@@ -5,7 +5,6 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
@@ -17,10 +16,11 @@ import RadioText from './RadioText';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FilterSelect from './FilterSelect';
+import './Signup.css';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(4),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
   form: {
     width: '100%',
     marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -93,7 +94,7 @@ export default function SignUp(props) {
 
   return (
     <Container component='main' maxWidth='xs'>
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <div className={classes.paper}>
         <Typography component='h1' variant='h5'>
           Sign up

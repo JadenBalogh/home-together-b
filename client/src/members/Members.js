@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MemberList from './MemberList';
 import MembersFilter from './MembersFilter';
+import Typography from '@material-ui/core/Typography';
 import './Members.css';
 
 // Search page for members
@@ -10,6 +11,8 @@ class Members extends Component {
     this.state = {
       members: [],
       filters: {
+        locations: [],
+        homeCapacity: [],
         genderIds: [],
         ageGroupIds: [],
         familyStatusIds: [],
@@ -19,7 +22,7 @@ class Members extends Component {
         smokingRestrictions: false,
         hasHousing: false,
       },
-      
+
     };
     this.updateMembers = this.updateMembers.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -85,8 +88,8 @@ class Members extends Component {
   handleDropdownChange(selection, action) {
     let ids = selection
       ? selection.map((x) => {
-          return x.value;
-        })
+        return x.value;
+      })
       : [];
     this.setState(
       {
@@ -99,7 +102,10 @@ class Members extends Component {
   render() {
     return (
       <div className='members-container'>
-        <h2>Find other members looking to homeshare...</h2>
+        <Typography component="h1" variant="h5">
+          Find other members looking to homeshare...
+        </Typography>
+        {/* <h2>Find other members looking to homeshare...</h2> */}
         <MembersFilter
           dropdownHandler={this.handleDropdownChange}
           inputHandler={this.handleInputChange}

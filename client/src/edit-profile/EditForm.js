@@ -194,7 +194,7 @@ export default function EditForm(props) {
                   aria-label='gender'
                   name='genderId'
                   id='genderId'
-                  value={props.formData.genderId || ''}
+                  value={`${props.formData.genderId}`}
                   onChange={(event) => props.handleInputChange(event, () => {})}
                 >
                   {genderOptions.map((option) => (
@@ -219,7 +219,12 @@ export default function EditForm(props) {
             >
               <FormLabel component='legend'>Family Status</FormLabel>
               <FormControl component='fieldset'>
-                <RadioGroup aria-label='status' name='familyStatusId' id='familyStatusId'>
+                <RadioGroup
+                  aria-label='status'
+                  name='familyStatusId'
+                  id='familyStatusId'
+                  value={`${props.formData.familyStatusId}`}
+                >
                   {familyStatusOptions.map((option) => (
                     <FormControlLabel
                       key={option.value}
@@ -242,7 +247,12 @@ export default function EditForm(props) {
             >
               <FormLabel component='legend'>Open to share with</FormLabel>
               <FormControl component='fieldset'>
-                <RadioGroup aria-label='people' name='peopleCount' id='peopleCount'>
+                <RadioGroup
+                  aria-label='people'
+                  name='peopleCount'
+                  id='peopleCount'
+                  value={`${props.formData.peopleCount}`}
+                >
                   <FormControlLabel value='1' control={<Radio />} label='1 person' />
                   <FormControlLabel value='2' control={<Radio />} label='2 people' />
                   <FormControlLabel value='3' control={<Radio />} label='3 people' />
@@ -275,7 +285,12 @@ export default function EditForm(props) {
             >
               <FormLabel component='legend'>Are you pet friendly?</FormLabel>
               <FormControl component='fieldset'>
-                <RadioGroup aria-label='pet' name='petRestrictions' id='petRestrictions'>
+                <RadioGroup
+                  aria-label='pet'
+                  name='petRestrictions'
+                  id='petRestrictions'
+                  value={`${Boolean(props.formData.petRestrictions)}`}
+                >
                   <FormControlLabel value='true' control={<Radio />} label='Yes' />
                   <FormControlLabel value='false' control={<Radio />} label='No' />
                 </RadioGroup>
@@ -297,7 +312,12 @@ export default function EditForm(props) {
             >
               <FormLabel component='legend'>Do you have health or mobility issues?</FormLabel>
               <FormControl component='fieldset'>
-                <RadioGroup aria-label='healthRestrictions' name='healthRestrictions' id='healthRestrictions'>
+                <RadioGroup
+                  aria-label='healthRestrictions'
+                  name='healthRestrictions'
+                  id='healthRestrictions'
+                  value={`${Boolean(props.formData.healthRestrictions)}`}
+                >
                   <FormControlLabel value='true' control={<Radio />} label='Yes' />
                   <FormControlLabel value='false' control={<Radio />} label='No' />
                 </RadioGroup>
@@ -319,7 +339,12 @@ export default function EditForm(props) {
             >
               <FormLabel component='legend'>Do you prefer others with the same religion?</FormLabel>
               <FormControl component='fieldset'>
-                <RadioGroup aria-label='religious' name='religionRestrictions' id='religionRestrictions'>
+                <RadioGroup
+                  aria-label='religious'
+                  name='religionRestrictions'
+                  id='religionRestrictions'
+                  value={`${Boolean(props.formData.religionRestrictions)}`}
+                >
                   <FormControlLabel value='true' control={<Radio />} label='Yes' />
                   <FormControlLabel value='false' control={<Radio />} label='No' />
                 </RadioGroup>
@@ -341,7 +366,12 @@ export default function EditForm(props) {
             >
               <FormLabel component='legend'>Are you a smoker or are smoking friendly?</FormLabel>
               <FormControl component='fieldset'>
-                <RadioGroup aria-label='smoke' name='smokingRestrictions' id='smokingRestrictions'>
+                <RadioGroup
+                  aria-label='smoke'
+                  name='smokingRestrictions'
+                  id='smokingRestrictions'
+                  value={`${Boolean(props.formData.smokingRestrictions)}`}
+                >
                   <FormControlLabel value='true' control={<Radio />} label='Yes' />
                   <FormControlLabel value='false' control={<Radio />} label='No' />
                 </RadioGroup>
@@ -363,7 +393,12 @@ export default function EditForm(props) {
             >
               <FormLabel component='legend'>Do you have allergies?</FormLabel>
               <FormControl component='fieldset'>
-                <RadioGroup aria-label='allergy' name='allergies' id='allergies'>
+                <RadioGroup
+                  aria-label='allergy'
+                  name='allergies'
+                  id='allergies'
+                  value={`${Boolean(props.formData.allergies)}`}
+                >
                   <FormControlLabel value='true' control={<Radio />} label='Yes' />
                   <FormControlLabel value='false' control={<Radio />} label='No' />
                 </RadioGroup>
@@ -381,7 +416,12 @@ export default function EditForm(props) {
             >
               <FormLabel component='legend'>Do you have any dietary preferences or restrictions?</FormLabel>
               <FormControl component='fieldset'>
-                <RadioGroup aria-label='dietRestrictions' name='dietRestrictions' id='dietRestrictions'>
+                <RadioGroup
+                  aria-label='dietRestrictions'
+                  name='dietRestrictions'
+                  id='dietRestrictions'
+                  value={`${Boolean(props.formData.dietRestrictions)}`}
+                >
                   <FormControlLabel value='true' control={<Radio />} label='Yes' />
                   <FormControlLabel value='false' control={<Radio />} label='No' />
                 </RadioGroup>
@@ -403,7 +443,12 @@ export default function EditForm(props) {
             >
               <FormLabel component='legend'>Do you have a home to share?</FormLabel>
               <FormControl component='fieldset'>
-                <RadioGroup aria-label='home' name='hasHousing' id='hasHousing'>
+                <RadioGroup
+                  aria-label='home'
+                  name='hasHousing'
+                  id='hasHousing'
+                  value={`${Boolean(props.formData.hasHousing)}`}
+                >
                   <FormControlLabel value='true' control={<Radio />} label='Yes' />
                   <FormControlLabel value='false' control={<Radio />} label='No' />
                 </RadioGroup>
@@ -421,9 +466,10 @@ export default function EditForm(props) {
                 rows={3}
                 rowsMax={3}
                 fullWidth
-                id='about'
+                id='profileText'
                 label='About You'
-                name='about'
+                name='profileText'
+                value={props.formData.profileText}
                 onChange={props.handleInputChange}
               />
             </Grid>

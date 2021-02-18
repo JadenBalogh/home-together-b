@@ -64,18 +64,14 @@ class EditProfile extends Component {
           window.alert(result.err);
           return;
         }
-        console.log(this.state);
-        this.setState({ formData: { ...result } }, () => {
-          console.log('all done!');
-          console.log(this.state);
-        });
+        this.setState({ formData: { ...result } });
       });
   }
 
   handleSubmit(event) {
     event.preventDefault();
 
-    let id = sessionStorage.getItem('id');
+    let id = sessionStorage.getItem('id') || 1;
     let formData = this.state.formData;
 
     const url = process.env.REACT_APP_LOCAL_URL || '';
@@ -84,16 +80,9 @@ class EditProfile extends Component {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id, formData }),
-    })
-      .then((raw) => raw.json())
-      .then((result) => {
-        if (result.err) {
-          window.alert(result.err);
-          return;
-        }
-        console.log('success!');
-        this.props.history.push('/');
-      });
+    }).then(() => {
+      this.props.history.push('/');
+    });
   }
 
   handleInputChange(event, callback = () => {}) {

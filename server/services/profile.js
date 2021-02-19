@@ -9,8 +9,10 @@ const SQL_SELECT_MEMBER = `
     email,
     phoneNumber,
     genderId,
+    g.name AS gender,
     birthYear,
     familyStatusId,
+    f.name AS familyStatus,
     minMonthlyBudget,
     maxMonthlyBudget,
     petRestrictions,
@@ -32,6 +34,8 @@ const SQL_SELECT_MEMBER = `
     profileText
   FROM Member m
   JOIN SearchableInfo s ON m.id = s.memberID
+  JOIN GenderType g ON g.id = s.genderId
+  JOIN FamilyStatusType f ON f.id = s.familyStatusId
   WHERE m.id = ?
 `;
 

@@ -14,6 +14,7 @@ class NavBar extends Component {
           <li><NavLink to='/listings'>Find Services</NavLink></li>
           <li><NavLink to='/signup'>Signup</NavLink></li>
           <li><NavLink to='/signin'>Sign In</NavLink></li>
+          <li><NavLink to='/profile'>Profile</NavLink></li>
           <li><NavLink to='/edit-profile'>Edit Profile</NavLink></li>
         </ul>
       </nav>

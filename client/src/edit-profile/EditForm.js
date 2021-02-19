@@ -289,14 +289,14 @@ export default function EditForm(props) {
                   aria-label='pet'
                   name='petRestrictions'
                   id='petRestrictions'
-                  value={`${Boolean(props.formData.petRestrictions)}`}
+                  value={`${props.formData.petRestrictions}`}
                 >
-                  <FormControlLabel value='true' control={<Radio />} label='Yes' />
-                  <FormControlLabel value='false' control={<Radio />} label='No' />
+                  <FormControlLabel value='1' control={<Radio />} label='Yes' />
+                  <FormControlLabel value='0' control={<Radio />} label='No' />
                 </RadioGroup>
               </FormControl>
               <RadioText
-                check={props.formData.petRestrictions}
+                check={`${Boolean(Number(props.formData.petRestrictions))}`}
                 name='petRestrictionsText'
                 value={props.formData.petRestrictionsText}
               />
@@ -316,13 +316,13 @@ export default function EditForm(props) {
                   aria-label='healthRestrictions'
                   name='healthRestrictions'
                   id='healthRestrictions'
-                  value={`${Boolean(props.formData.healthRestrictions)}`}
+                  value={`${props.formData.healthRestrictions}`}
                 >
-                  <FormControlLabel value='true' control={<Radio />} label='Yes' />
-                  <FormControlLabel value='false' control={<Radio />} label='No' />
+                  <FormControlLabel value='1' control={<Radio />} label='Yes' />
+                  <FormControlLabel value='0' control={<Radio />} label='No' />
                 </RadioGroup>
                 <RadioText
-                  check={props.formData.healthRestrictions}
+                  check={`${Boolean(Number(props.formData.healthRestrictions))}`}
                   name='healthRestrictionsText'
                   value={props.formData.healthRestrictionsText}
                 />
@@ -343,10 +343,10 @@ export default function EditForm(props) {
                   aria-label='religious'
                   name='religionRestrictions'
                   id='religionRestrictions'
-                  value={`${Boolean(props.formData.religionRestrictions)}`}
+                  value={`${props.formData.religionRestrictions}`}
                 >
-                  <FormControlLabel value='true' control={<Radio />} label='Yes' />
-                  <FormControlLabel value='false' control={<Radio />} label='No' />
+                  <FormControlLabel value='1' control={<Radio />} label='Yes' />
+                  <FormControlLabel value='0' control={<Radio />} label='No' />
                 </RadioGroup>
                 <RadioText
                   check='true'
@@ -370,13 +370,13 @@ export default function EditForm(props) {
                   aria-label='smoke'
                   name='smokingRestrictions'
                   id='smokingRestrictions'
-                  value={`${Boolean(props.formData.smokingRestrictions)}`}
+                  value={`${props.formData.smokingRestrictions}`}
                 >
-                  <FormControlLabel value='true' control={<Radio />} label='Yes' />
-                  <FormControlLabel value='false' control={<Radio />} label='No' />
+                  <FormControlLabel value='1' control={<Radio />} label='Yes' />
+                  <FormControlLabel value='0' control={<Radio />} label='No' />
                 </RadioGroup>
                 <RadioText
-                  check={props.formData.smokingRestrictions}
+                  check={`${Boolean(Number(props.formData.smokingRestrictions))}`}
                   name='smokingRestrictionsText'
                   value={props.formData.smokingRestrictionsText}
                 />
@@ -393,16 +393,15 @@ export default function EditForm(props) {
             >
               <FormLabel component='legend'>Do you have allergies?</FormLabel>
               <FormControl component='fieldset'>
-                <RadioGroup
-                  aria-label='allergy'
-                  name='allergies'
-                  id='allergies'
-                  value={`${Boolean(props.formData.allergies)}`}
-                >
-                  <FormControlLabel value='true' control={<Radio />} label='Yes' />
-                  <FormControlLabel value='false' control={<Radio />} label='No' />
+                <RadioGroup aria-label='allergy' name='allergies' id='allergies' value={`${props.formData.allergies}`}>
+                  <FormControlLabel value='1' control={<Radio />} label='Yes' />
+                  <FormControlLabel value='0' control={<Radio />} label='No' />
                 </RadioGroup>
-                <RadioText check={props.formData.allergies} name='allergiesText' value={props.formData.allergiesText} />
+                <RadioText
+                  check={`${Boolean(Number(props.formData.allergies))}`}
+                  name='allergiesText'
+                  value={props.formData.allergiesText}
+                />
               </FormControl>
             </Grid>
             <Grid
@@ -420,14 +419,14 @@ export default function EditForm(props) {
                   aria-label='dietRestrictions'
                   name='dietRestrictions'
                   id='dietRestrictions'
-                  value={`${Boolean(props.formData.dietRestrictions)}`}
+                  value={`${props.formData.dietRestrictions}`}
                 >
-                  <FormControlLabel value='true' control={<Radio />} label='Yes' />
-                  <FormControlLabel value='false' control={<Radio />} label='No' />
+                  <FormControlLabel value='1' control={<Radio />} label='Yes' />
+                  <FormControlLabel value='0' control={<Radio />} label='No' />
                 </RadioGroup>
               </FormControl>
               <RadioText
-                check={props.formData.dietRestrictions}
+                check={`${Boolean(Number(props.formData.dietRestrictions))}`}
                 name='dietRestrictionsText'
                 value={props.formData.dietRestrictionsText}
               />
@@ -443,17 +442,12 @@ export default function EditForm(props) {
             >
               <FormLabel component='legend'>Do you have a home to share?</FormLabel>
               <FormControl component='fieldset'>
-                <RadioGroup
-                  aria-label='home'
-                  name='hasHousing'
-                  id='hasHousing'
-                  value={`${Boolean(props.formData.hasHousing)}`}
-                >
-                  <FormControlLabel value='true' control={<Radio />} label='Yes' />
-                  <FormControlLabel value='false' control={<Radio />} label='No' />
+                <RadioGroup aria-label='home' name='hasHousing' id='hasHousing' value={`${props.formData.hasHousing}`}>
+                  <FormControlLabel value='1' control={<Radio />} label='Yes' />
+                  <FormControlLabel value='0' control={<Radio />} label='No' />
                 </RadioGroup>
                 <RadioText
-                  check={props.formData.hasHousing}
+                  check={`${Boolean(Number(props.formData.hasHousing))}`}
                   name='housingDescription'
                   value={props.formData.housingDescription}
                 />

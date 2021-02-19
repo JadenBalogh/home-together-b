@@ -365,7 +365,7 @@ export default function SignUp(props) {
             <Grid 
             item 
             xs={12} 
-            sm={10}
+            sm={11}
             container
             direction='column'
             alignItems='flex-start'
@@ -381,7 +381,7 @@ export default function SignUp(props) {
             <Grid 
             item 
             xs={12} 
-            sm={2}
+            sm={1}
             container
             direction='column'
             alignItems='center'

@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormLabel from '@material-ui/core/FormLabel';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import {
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+  Button,
+  CssBaseline,
+  TextField,
+  Grid,
+  Typography,
+  Container,
+  InputLabel,
+  Select,
+  MenuItem,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import { InputLabel } from '@material-ui/core';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import SelectSearch from 'react-select-search';
 import RadioText from '../shared/RadioText';
-import '../shared/search-select.css';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -40,20 +39,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //things to check: username, password(against confPassword), email, phone no. (only if we plan on implementing cellphone authentication/confirmation)
-export default function SignUp(props) {
+export default function EditForm(props) {
   const classes = useStyles();
   const [genderOptions, setGenderOptions] = useState([]);
   const [familyStatusOptions, setFamilyStatusOptions] = useState([]);
-  const [cityOptions, setCityOptions] = useState([]);
-  const testCities = [
-    { value: 'Kelowna', name: 'Kelowna' },
-    { value: 'Vernon', name: 'Vernon' },
-    { value: 'Kamloops', name: 'Kamloops' },
-  ];
 
   useEffect(() => fetchGenderOptions(), []);
   useEffect(() => fetchFamilyStatusOptions(), []);
-  useEffect(() => fetchCityOptions(), []);
 
   function fetchGenderOptions() {
     const url = process.env.REACT_APP_LOCAL_URL || '';
@@ -79,34 +71,15 @@ export default function SignUp(props) {
       });
   }
 
-  function fetchCityOptions() {
-    const url = process.env.REACT_APP_LOCAL_URL || '';
-    fetch(url + '/api/get-locations')
-      .then((res) => res.json())
-      .then((json) => {
-        let options = json.map((x) => {
-          return { value: x.id, label: x.name };
-        });
-        setCityOptions(options);
-      });
-  }
-
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component='h1' variant='h5'>
-          Sign up
+          Edit Profile
         </Typography>
-        <form className={classes.form} onSubmit={props.handleSignup} noValidate>
+        <form className={classes.form} onSubmit={props.handleSubmit} noValidate>
           <Grid container spacing={2}>
-            <Grid container justify='flex-end'>
-              <Grid item>
-                <Link href='/signin' variant='body2'>
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
             <Grid item xs={12} sm={6} container>
               <TextField
                 autoComplete='fname'
@@ -116,6 +89,7 @@ export default function SignUp(props) {
                 fullWidth
                 id='firstName'
                 label='First Name'
+                value={props.formData.firstName}
                 autoFocus
                 onChange={props.handleInputChange}
               />
@@ -128,6 +102,7 @@ export default function SignUp(props) {
                 id='lastName'
                 label='Last Name'
                 name='lastName'
+                value={props.formData.lastName}
                 autoComplete='lname'
                 onChange={props.handleInputChange}
               />
@@ -140,11 +115,11 @@ export default function SignUp(props) {
                 name='birthYear'
                 value={props.formData.birthYear}
                 onChange={(event) => {
-                  props.handleInputChange(event, ()=>{} );
+                  props.handleInputChange(event, () => {});
                 }}
               >
-                {[...Array(120).keys()].map(i => (
-                  <MenuItem key={i+1900} value={i + 1900}>
+                {[...Array(120).keys()].map((i) => (
+                  <MenuItem key={i + 1900} value={i + 1900}>
                     {i + 1900}
                   </MenuItem>
                 ))}
@@ -158,6 +133,7 @@ export default function SignUp(props) {
                 id='homeAddress'
                 label='Home Address'
                 name='homeAddress'
+                value={props.formData.homeAddress}
                 autoComplete='homeAddress'
                 helperText='If you do not have one, use the address of a friend, relative, or verifiable organization.'
                 onChange={props.handleInputChange}
@@ -171,6 +147,7 @@ export default function SignUp(props) {
                 id='mailAddress'
                 label='Mailing Address'
                 name='mailAddress'
+                value={props.formData.mailAddress}
                 autoComplete='mailAddress'
                 helperText='If you do not have one, use the address of a friend, relative, or verifiable organization.'
                 onChange={props.handleInputChange}
@@ -181,56 +158,10 @@ export default function SignUp(props) {
                 variant='outlined'
                 required
                 fullWidth
-                name='username'
-                label='Username'
-                id='username'
-                autoComplete='username'
-                onBlur={(event) => {
-                  props.handleInputChange(event, props.checkUsernameExists);
-                }}
-                error={props.usernameExists} //checks if already exists
-                helperText={props.usernameExists ? 'Username already exists.' : 'Username cannot be changed after signup'}
-              />
-            </Grid>
-            <Grid item xs={12} container>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                name='password'
-                label='Password'
-                type='password'
-                id='password'
-                autoComplete='password'
-                onChange={props.handleInputChange}
-                onBlur={props.checkPasswordsMatch}
-              />
-            </Grid>
-            <Grid item xs={12} container>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                name='confPassword'
-                label='Confirm Password'
-                type='password'
-                id='confPassword'
-                autoComplete='confPassword'
-                onChange={props.handleConfirm}
-                onBlur={props.checkPasswordsMatch}
-                error={!props.passwordsMatch} //check if password and confPassword matches
-                helperText={!props.passwordsMatch ? 'Passwords do not match.' : ''}
-              />
-            </Grid>
-            <Grid item xs={12} container>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
                 id='email'
                 label='Email Address'
-                type='email'
                 name='email'
+                value={props.formData.email}
                 autoComplete='email'
                 onBlur={(event) => {
                   props.handleInputChange(event, props.checkEmailExists);
@@ -247,7 +178,7 @@ export default function SignUp(props) {
                 id='phoneNumber'
                 label='Phone Number'
                 name='phoneNumber'
-                type='tel'
+                value={props.formData.phoneNumber}
                 autoComplete='phone'
                 onBlur={(event) => {
                   props.handleInputChange(event, props.checkPhoneExists);
@@ -256,18 +187,16 @@ export default function SignUp(props) {
                 helperText={props.phoneExists ? 'This phone number was already used to sign up.' : ''}
               />
             </Grid>
-            <Grid
-              item
-              xs={12}
-              container
-              direction='column'
-              alignItems='flex-start'
-              justify='flex-start'
-              onChange={props.handleInputChange}
-            >
+            <Grid item xs={12} container direction='column' alignItems='flex-start' justify='flex-start'>
               <FormLabel component='legend'>Gender</FormLabel>
               <FormControl component='fieldset'>
-                <RadioGroup aria-label='gender' name='genderId' id='genderId'>
+                <RadioGroup
+                  aria-label='gender'
+                  name='genderId'
+                  id='genderId'
+                  value={`${props.formData.genderId}`}
+                  onChange={(event) => props.handleInputChange(event, () => {})}
+                >
                   {genderOptions.map((option) => (
                     <FormControlLabel
                       key={option.value}
@@ -290,7 +219,12 @@ export default function SignUp(props) {
             >
               <FormLabel component='legend'>Family Status</FormLabel>
               <FormControl component='fieldset'>
-                <RadioGroup aria-label='status' name='familyStatusId' id='familyStatusId'>
+                <RadioGroup
+                  aria-label='status'
+                  name='familyStatusId'
+                  id='familyStatusId'
+                  value={`${props.formData.familyStatusId}`}
+                >
                   {familyStatusOptions.map((option) => (
                     <FormControlLabel
                       key={option.value}
@@ -302,41 +236,30 @@ export default function SignUp(props) {
                 </RadioGroup>
               </FormControl>
             </Grid>
-            <Grid item xs={12} container>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                id='minHomeCapacity'
-                label='Min Living Capacity'
-                name='minHomeCapacity'
-                type='number'
-                onChange={props.changeInput}
-              />
-            </Grid>
-            <Grid item xs={12} container>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                id='maxHomeCapacity'
-                label='Max Living Capacity'
-                name='maxHomeCapacity'
-                type='number'
-                onChange={props.changeInput}
-              />
-            </Grid>
-            <Grid item xs={12} container>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                id='minMonthlyBudget'
-                label='Min Monthly Budget'
-                name='minMonthlyBudget'
-                type='number'
-                onChange={props.changeInput}
-              />
+            <Grid
+              item
+              xs={12}
+              container
+              direction='column'
+              alignItems='flex-start'
+              justify='flex-start'
+              onChange={props.handleInputChange}
+            >
+              <FormLabel component='legend'>Open to share with</FormLabel>
+              <FormControl component='fieldset'>
+                <RadioGroup
+                  aria-label='people'
+                  name='peopleCount'
+                  id='peopleCount'
+                  value={`${props.formData.peopleCount}`}
+                >
+                  <FormControlLabel value='1' control={<Radio />} label='1 person' />
+                  <FormControlLabel value='2' control={<Radio />} label='2 people' />
+                  <FormControlLabel value='3' control={<Radio />} label='3 people' />
+                  <FormControlLabel value='4' control={<Radio />} label='4 people' />
+                  <FormControlLabel value='0' control={<Radio />} label='Any amount' />
+                </RadioGroup>
+              </FormControl>
             </Grid>
             <Grid item xs={12} container>
               <TextField
@@ -344,26 +267,11 @@ export default function SignUp(props) {
                 required
                 fullWidth
                 id='maxMonthlyBudget'
-                label='Max Monthly Budget'
+                label='Monthly Budget'
                 name='maxMonthlyBudget'
-                type='number'
                 autoComplete='budget'
                 onChange={props.changeInput}
-              />
-            </Grid>
-            <Grid item xs={12} container>
-              <FormLabel component='legend'>Preferred Living Locations</FormLabel>
-              <SelectSearch
-                // options={cityOptions}
-                options={testCities}
-                multiple
-                search
-                id='locations'
-                name='locations'
-                printOptions="on-focus"
-                onChange={props.handleLocationChange}
-                value={props.formData.locationIds}
-                placeholder='Select cities'
+                value={props.monthlyBudget}
               />
             </Grid>
             <Grid
@@ -377,13 +285,18 @@ export default function SignUp(props) {
             >
               <FormLabel component='legend'>Are you pet friendly?</FormLabel>
               <FormControl component='fieldset'>
-                <RadioGroup aria-label='pet' name='petRestrictions' id='petRestrictions'>
-                  <FormControlLabel value='true' control={<Radio />} label='Yes' />
-                  <FormControlLabel value='false' control={<Radio />} label='No' />
+                <RadioGroup
+                  aria-label='pet'
+                  name='petRestrictions'
+                  id='petRestrictions'
+                  value={`${props.formData.petRestrictions}`}
+                >
+                  <FormControlLabel value='1' control={<Radio />} label='Yes' />
+                  <FormControlLabel value='0' control={<Radio />} label='No' />
                 </RadioGroup>
               </FormControl>
               <RadioText
-                check={props.formData.petRestrictions}
+                check={`${Boolean(Number(props.formData.petRestrictions))}`}
                 name='petRestrictionsText'
                 value={props.formData.petRestrictionsText}
               />
@@ -399,12 +312,17 @@ export default function SignUp(props) {
             >
               <FormLabel component='legend'>Do you have health or mobility issues?</FormLabel>
               <FormControl component='fieldset'>
-                <RadioGroup aria-label='healthRestrictions' name='healthRestrictions' id='healthRestrictions'>
-                  <FormControlLabel value='true' control={<Radio />} label='Yes' />
-                  <FormControlLabel value='false' control={<Radio />} label='No' />
+                <RadioGroup
+                  aria-label='healthRestrictions'
+                  name='healthRestrictions'
+                  id='healthRestrictions'
+                  value={`${props.formData.healthRestrictions}`}
+                >
+                  <FormControlLabel value='1' control={<Radio />} label='Yes' />
+                  <FormControlLabel value='0' control={<Radio />} label='No' />
                 </RadioGroup>
                 <RadioText
-                  check={props.formData.healthRestrictions}
+                  check={`${Boolean(Number(props.formData.healthRestrictions))}`}
                   name='healthRestrictionsText'
                   value={props.formData.healthRestrictionsText}
                 />
@@ -421,14 +339,19 @@ export default function SignUp(props) {
             >
               <FormLabel component='legend'>Do you prefer others with the same religion?</FormLabel>
               <FormControl component='fieldset'>
-                <RadioGroup aria-label='religious' name='religiousRestrictions' id='religiousRestrictions'>
-                  <FormControlLabel value='true' control={<Radio />} label='Yes' />
-                  <FormControlLabel value='false' control={<Radio />} label='No' />
+                <RadioGroup
+                  aria-label='religious'
+                  name='religionRestrictions'
+                  id='religionRestrictions'
+                  value={`${props.formData.religionRestrictions}`}
+                >
+                  <FormControlLabel value='1' control={<Radio />} label='Yes' />
+                  <FormControlLabel value='0' control={<Radio />} label='No' />
                 </RadioGroup>
                 <RadioText
                   check='true'
-                  name='religiousRestrictionsText'
-                  value={props.formData.religiousRestrictionsText}
+                  name='religionRestrictionsText'
+                  value={props.formData.religionRestrictionsText}
                 />
               </FormControl>
             </Grid>
@@ -443,12 +366,17 @@ export default function SignUp(props) {
             >
               <FormLabel component='legend'>Are you a smoker or are smoking friendly?</FormLabel>
               <FormControl component='fieldset'>
-                <RadioGroup aria-label='smoke' name='smokingRestrictions' id='smokingRestrictions'>
-                  <FormControlLabel value='true' control={<Radio />} label='Yes' />
-                  <FormControlLabel value='false' control={<Radio />} label='No' />
+                <RadioGroup
+                  aria-label='smoke'
+                  name='smokingRestrictions'
+                  id='smokingRestrictions'
+                  value={`${props.formData.smokingRestrictions}`}
+                >
+                  <FormControlLabel value='1' control={<Radio />} label='Yes' />
+                  <FormControlLabel value='0' control={<Radio />} label='No' />
                 </RadioGroup>
                 <RadioText
-                  check={props.formData.smokingRestrictions}
+                  check={`${Boolean(Number(props.formData.smokingRestrictions))}`}
                   name='smokingRestrictionsText'
                   value={props.formData.smokingRestrictionsText}
                 />
@@ -465,11 +393,15 @@ export default function SignUp(props) {
             >
               <FormLabel component='legend'>Do you have allergies?</FormLabel>
               <FormControl component='fieldset'>
-                <RadioGroup aria-label='allergy' name='allergies' id='allergies'>
-                  <FormControlLabel value='true' control={<Radio />} label='Yes' />
-                  <FormControlLabel value='false' control={<Radio />} label='No' />
+                <RadioGroup aria-label='allergy' name='allergies' id='allergies' value={`${props.formData.allergies}`}>
+                  <FormControlLabel value='1' control={<Radio />} label='Yes' />
+                  <FormControlLabel value='0' control={<Radio />} label='No' />
                 </RadioGroup>
-                <RadioText check={props.formData.allergies} name='allergiesText' value={props.formData.allergiesText} />
+                <RadioText
+                  check={`${Boolean(Number(props.formData.allergies))}`}
+                  name='allergiesText'
+                  value={props.formData.allergiesText}
+                />
               </FormControl>
             </Grid>
             <Grid
@@ -483,13 +415,18 @@ export default function SignUp(props) {
             >
               <FormLabel component='legend'>Do you have any dietary preferences or restrictions?</FormLabel>
               <FormControl component='fieldset'>
-                <RadioGroup aria-label='dietRestrictions' name='dietRestrictions' id='dietRestrictions'>
-                  <FormControlLabel value='true' control={<Radio />} label='Yes' />
-                  <FormControlLabel value='false' control={<Radio />} label='No' />
+                <RadioGroup
+                  aria-label='dietRestrictions'
+                  name='dietRestrictions'
+                  id='dietRestrictions'
+                  value={`${props.formData.dietRestrictions}`}
+                >
+                  <FormControlLabel value='1' control={<Radio />} label='Yes' />
+                  <FormControlLabel value='0' control={<Radio />} label='No' />
                 </RadioGroup>
               </FormControl>
               <RadioText
-                check={props.formData.dietRestrictions}
+                check={`${Boolean(Number(props.formData.dietRestrictions))}`}
                 name='dietRestrictionsText'
                 value={props.formData.dietRestrictionsText}
               />
@@ -505,12 +442,12 @@ export default function SignUp(props) {
             >
               <FormLabel component='legend'>Do you have a home to share?</FormLabel>
               <FormControl component='fieldset'>
-                <RadioGroup aria-label='home' name='hasHousing' id='hasHousing'>
-                  <FormControlLabel value='true' control={<Radio />} label='Yes' />
-                  <FormControlLabel value='false' control={<Radio />} label='No' />
+                <RadioGroup aria-label='home' name='hasHousing' id='hasHousing' value={`${props.formData.hasHousing}`}>
+                  <FormControlLabel value='1' control={<Radio />} label='Yes' />
+                  <FormControlLabel value='0' control={<Radio />} label='No' />
                 </RadioGroup>
                 <RadioText
-                  check={props.formData.hasHousing}
+                  check={`${Boolean(Number(props.formData.hasHousing))}`}
                   name='housingDescription'
                   value={props.formData.housingDescription}
                 />
@@ -523,15 +460,16 @@ export default function SignUp(props) {
                 rows={3}
                 rowsMax={3}
                 fullWidth
-                id='about'
+                id='profileText'
                 label='About You'
-                name='about'
+                name='profileText'
+                value={props.formData.profileText}
                 onChange={props.handleInputChange}
               />
             </Grid>
           </Grid>
           <Button type='submit' fullWidth variant='contained' color='primary'>
-            Sign Up
+            Save Changes
           </Button>
         </form>
       </div>

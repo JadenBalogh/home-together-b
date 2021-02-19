@@ -8,6 +8,7 @@ import bodyParser from 'body-parser';
 import dbutils from './helpers/dbutils.js';
 import searchRoutes from './routes/search-routes.js';
 import authRoutes from './routes/auth-routes.js';
+import profileRoutes from './routes/profile-routes.js';
 
 import localenv from 'localenv';
 const port = process.env.PORT || 3001;
@@ -27,13 +28,14 @@ app.listen(port, () => {
 
 searchRoutes(app);
 authRoutes(app);
+profileRoutes(app);
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 if (process.env.NODE_ENV !== 'production') {
-  dbutils
-    .query('SELECT * FROM Member m JOIN SearchableInfo s ON m.id = s.memberId')
-    .then((result) => console.log(result));
+  // dbutils
+  //   .query('SELECT * FROM Member m JOIN SearchableInfo s ON m.id = s.memberId')
+  //   .then((result) => console.log(result));
 }

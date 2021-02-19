@@ -33,6 +33,29 @@ const SQL_SELECT_MEMBERS = `
     s.maxHomeCapacity >= ?
 `;
 
+const SQL_SELECT_LISTINGS = `
+  SELECT
+    l.id AS id,
+    approvalStatus,
+    creationDate,
+    title,
+    website,
+    phone,
+    email,
+    ratingAverage,
+    ratingCount,
+    startDate,
+    endDate,
+    description,
+    c.id AS categoryId,
+    c.name AS categoryName,
+    o.id AS organizationId,
+    o.organizationName AS organizationName
+  FROM Listing l
+  JOIN CategoryType c ON l.categoryId = c.id
+  JOIN Organization o ON l.organizationId = o.id
+`;
+
 function getAgeRanges(ageGroupIds) {
   var placeholders = ageGroupIds.length > 0 ? ageGroupIds.map(() => '?').join(',') : '-1';
   var sql = `SELECT minAge, maxAge FROM AgeGroupType WHERE id IN (${placeholders})`;
@@ -93,18 +116,7 @@ async function getMembers(filters) {
 
 function getListings(categoryId) {
   return new Promise((resolve) => {
-    var sql =
-      'SELECT \
-        l.id, \
-        title, \
-        website, \
-        phone, \
-        email, \
-        c.id AS categoryId, \
-        c.name AS categoryName \
-      FROM Listing l \
-      JOIN CategoryType c ON l.categoryId = c.id';
-    dbutils.query(sql).then((results) => {
+    dbutils.query(SQL_SELECT_LISTINGS).then((results) => {
       let filteredResults = results;
       if (categoryId > 0) {
         filteredResults = results.filter((x) => x.categoryId == categoryId);

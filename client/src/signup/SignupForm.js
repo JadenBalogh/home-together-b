@@ -16,7 +16,11 @@ import RadioText from './RadioText';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FilterSelect from './FilterSelect';
+import Tooltip from '@material-ui/core/Tooltip';
+import Icon from '@material-ui/core/Icon';
+import HelpIcon from '@material-ui/icons/Help';
 import './Signup.css';
+import { Help } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -24,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    backgroundColor: '#CFE5F8',
+    padding: '15px',
+    borderRadius: '20px',
   },
   avatar: {
     margin: theme.spacing(1),
@@ -140,6 +147,7 @@ export default function SignUp(props) {
                 id='birthYear'
                 name='birthYear'
                 value={props.formData.birthYear}
+                className='signup-select'
                 onChange={(event) => {
                   props.handleInputChange(event, ()=>{} );
                 }}
@@ -304,28 +312,32 @@ export default function SignUp(props) {
               </FormControl>
             </Grid>
             <Grid item xs={12} container>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                id='minHomeCapacity'
-                label='Min Living Capacity'
-                name='minHomeCapacity'
-                type='number'
-                onChange={props.changeInput}
-              />
+              <Tooltip disableFocusListener title="The minimum amount of people you're interested to live with">
+                <TextField
+                  variant='outlined'
+                  required
+                  fullWidth
+                  id='minHomeCapacity'
+                  label='Min Living Capacity'
+                  name='minHomeCapacity'
+                  type='number'
+                  onChange={props.changeInput}
+                />
+              </Tooltip>
             </Grid>
             <Grid item xs={12} container>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                id='maxHomeCapacity'
-                label='Max Living Capacity'
-                name='maxHomeCapacity'
-                type='number'
-                onChange={props.changeInput}
-              />
+              <Tooltip disableFocusListener title="The maximum amount of people you're interested to live with">
+                <TextField
+                  variant='outlined'
+                  required
+                  fullWidth
+                  id='maxHomeCapacity'
+                  label='Max Living Capacity'
+                  name='maxHomeCapacity'
+                  type='number'
+                  onChange={props.changeInput}
+                />
+              </Tooltip>
             </Grid>
             <Grid item xs={12} container>
               <TextField
@@ -355,30 +367,31 @@ export default function SignUp(props) {
             <Grid 
             item 
             xs={12} 
+            sm={10}
             container
             direction='column'
             alignItems='flex-start'
             justify='flex-start'
             >
-              {/* <FormLabel component='legend'>Preferred Living Locations</FormLabel>
-              <SelectSearch
-                // options={cityOptions}
-                options={testCities}
-                multiple
-                search
-                id='locations'
-                name='locations'
-                printOptions="on-focus"
-                onChange={props.handleLocationChange}
-                value={props.formData.locationIds}
-                placeholder='Select cities'
-              /> */}
               <FilterSelect
                 label='Living Locations:'
                 name='locationIds'
                 options={cityOptions}
                 onChange={props.handleDropdownChange}
               />
+            </Grid>
+            <Grid 
+            item 
+            xs={12} 
+            sm={2}
+            container
+            direction='column'
+            alignItems='center'
+            justify='center'
+            >
+              <Tooltip title="These are the places you are interested in living in.">
+                <HelpIcon/>
+              </Tooltip>
             </Grid>
             <Grid
               item

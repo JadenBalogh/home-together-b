@@ -66,7 +66,7 @@ function Listings(props) {
   const classes = useStyles();
   // TODO: Update this to connect to the DB, current categories are only placeholders, the proper ones will be pulled from the DB
   return (
-    <div className={classes.root}>
+    <div className='listings-container'>
       <Typography component="h1" variant="h5">
         Find Services:
       </Typography>

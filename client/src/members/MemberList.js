@@ -7,6 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 import '../shared/List.css';
 
 const year = new Date().getFullYear();
@@ -21,7 +22,8 @@ function MemberList(props) {
   const classes = useStyles();
   return (
     <div className='list-container'>
-      <h3>Members Found:</h3>
+      <Typography component="h1" variant="h6">Members Found:</Typography>
+      {/* <h3>Members Found:</h3> */}
       <TableContainer component={Paper}>
         <Table className={classes.table} size='small' aria-label='a dense table'>
           <TableHead>

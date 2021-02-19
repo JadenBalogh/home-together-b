@@ -5,7 +5,21 @@
   align-items: center;
 }
 
+.navbar {
+  background: #434343;
+  margin: 5px;
+}
+
+.navbar-toolbar a {
+  text-decoration: none;
+}
+
 .navbar-header {
-  font-size: 32px;
+  font-size: 40px;
   color: #F56476;
+}
+
+.navbar-minis a {
+  text-decoration: none;
+  color: #FFFFFF;
 }

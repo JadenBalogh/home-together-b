@@ -8,7 +8,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -56,7 +56,7 @@ function MembersFilter(props) {
       .then((res) => res.json())
       .then((json) => {
         let options = json.map((x) => {
-          return { value: x.id, label: x.name };
+          return { value: x.id, label: x.city };
         });
         setLocationOptions(options);
       });
@@ -114,16 +114,23 @@ function MembersFilter(props) {
   return (
     <div className='filter-container'>
       <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
+        <AccordionSummary expandIcon={<SearchIcon />} aria-controls="panel1a-content" id="panel1a-header">
           <Grid container spacing={2} direction="row" justify="flex-start" alignItems="center" justify="space-between">
             <Grid item>
-              <Typography className={classes.heading}>Filter Through Members</Typography>
+              <Typography className={classes.heading}>Advanced Member Filter</Typography>
             </Grid>
           </Grid>
         </AccordionSummary>
         <AccordionDetails>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6} container>
+            <Grid 
+            item 
+            xs={6}
+            container 
+            direction='row'
+            alignItems='center'
+            justify='center'
+            >
               <FilterSelect
                 label='Living Locations:'
                 name='locations'
@@ -131,7 +138,14 @@ function MembersFilter(props) {
                 onChange={props.dropdownHandler}
               />
             </Grid>
-            <Grid item xs={12} sm={6} container>
+            <Grid 
+            item 
+            xs={6}
+            container 
+            direction='row'
+            alignItems='center'
+            justify='center'
+            >
               <FilterSelect
                 label='Home Capacity:'
                 name='homeCapacity'
@@ -139,7 +153,14 @@ function MembersFilter(props) {
                 onChange={props.dropdownHandler}
               />
             </Grid>
-            <Grid item xs={12} sm={6} container>
+            <Grid 
+            item 
+            xs={6}
+            container
+            direction='row'
+            alignItems='center'
+            justify='center'
+            >
               <FilterSelect
                 label='Genders:'
                 name='genderIds'
@@ -147,7 +168,14 @@ function MembersFilter(props) {
                 onChange={props.dropdownHandler}
               />
             </Grid>
-            <Grid item xs={12} sm={6} container>
+            <Grid 
+            item 
+            xs={6} 
+            container
+            direction='row'
+            alignItems='center'
+            justify='center'
+            >
               <FilterSelect
                 label='Age Groups:'
                 name='ageGroupIds'
@@ -155,7 +183,14 @@ function MembersFilter(props) {
                 onChange={props.dropdownHandler}
               />
             </Grid>
-            <Grid item xs={12} sm={6} container>
+            <Grid 
+            item 
+            xs={6} 
+            container
+            direction='rows'
+            alignItems='center'
+            justify='center'
+            >
               <FilterSelect
                 label='Family Status:'
                 name='familyStatusIds'
@@ -163,7 +198,14 @@ function MembersFilter(props) {
                 onChange={props.dropdownHandler}
               />
             </Grid>
-            <Grid item xs={6} container>
+            <Grid 
+            item 
+            xs={6} 
+            container
+            direction='rows'
+            alignItems='center'
+            justify='center'
+            >
               <TextField
                 variant='outlined'
                 fullWidth

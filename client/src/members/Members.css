@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   width: 80%;
-  background-color: #CFE5F8;
+  background-color: #FFFFFF;
 }
 
 .filter-container {
@@ -11,11 +11,13 @@
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
-  border: 1px solid #D8D8D8;
+  border: 1px solid #CFE5F8;
   width: 750px;
-  padding: 5px;
+  padding: 15px;
   margin: 5px;
-  background-color: #A8C9EC;
+  background-color: #CFE5F8;
+  border: 1px solid #f2f2f2;
+  border-radius: 20px;
 }
 
 .filter-select-container {
@@ -27,5 +29,16 @@
 
 .filter-select {
   width: 200px;
-  margin-left: 8px;
+}
+
+.MuiPagination-ul {
+  background-color: #FFFFFF;
+}
+
+.MuiPaper-root {
+  text-align: left;
+}
+
+.MuiAccordionSummary-content.Mui-expanded {
+  margin: 0;
 }

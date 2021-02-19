@@ -7,10 +7,10 @@ import Grid from '@material-ui/core/Grid';
 function FilterSelect(props) {
   return (
     <div className='filter-select-container'>
-      <Grid item xs={12} sm={6} container>
+      <Grid item xs={12} sm={5} container>
         <InputLabel>{props.label}</InputLabel>
       </Grid>
-      <Grid item xs={12} sm={6} container>
+      <Grid item xs={12} sm={7} container>
         <Select
           isMulti
           isClearable={false}

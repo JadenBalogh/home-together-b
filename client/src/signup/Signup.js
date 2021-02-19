@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import SignupForm from './SignupForm';
-import './Signup.css';
 
 class Signup extends Component {
   constructor(props) {
@@ -54,6 +53,7 @@ class Signup extends Component {
     this.checkPasswordsMatch = this.checkPasswordsMatch.bind(this);
     this.handleSignup = this.handleSignup.bind(this);
     this.handleLocationChange = this.handleLocationChange.bind(this);
+    this.handleDropdownChange = this.handleDropdownChange.bind(this);
   }
 
   handleSignup(event) {
@@ -92,6 +92,19 @@ class Signup extends Component {
         console.log(this.state.formData);
         callback();
       }
+    );
+  }
+
+  handleDropdownChange(selection, action) {
+    let ids = selection
+      ? selection.map((x) => {
+          return x.value;
+        })
+      : [];
+    this.setState(
+      {
+        [action.name]: ids,
+      },
     );
   }
 
@@ -166,7 +179,7 @@ class Signup extends Component {
   render() {
     return (
       <div>
-        <SignupForm //...maybe reconsider the form being separate at this point huh
+        <SignupForm 
           formData={this.state.formData}
           confPassword={this.state.confPassword}
           phoneExists={this.state.phoneExists}

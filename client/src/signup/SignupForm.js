@@ -5,7 +5,6 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
@@ -15,16 +14,21 @@ import Container from '@material-ui/core/Container';
 import { InputLabel } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import SelectSearch from 'react-select-search';
 import RadioText from '../shared/RadioText';
-import '../shared/search-select.css';
+import FilterSelect from './FilterSelect';
+import Tooltip from '@material-ui/core/Tooltip';
+import HelpIcon from '@material-ui/icons/Help';
+import './Signup.css';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(4),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    backgroundColor: '#CFE5F8',
+    padding: '15px',
+    borderRadius: '20px',
   },
   avatar: {
     margin: theme.spacing(1),
@@ -33,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
   form: {
     width: '100%',
     marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -45,11 +50,12 @@ export default function SignUp(props) {
   const [genderOptions, setGenderOptions] = useState([]);
   const [familyStatusOptions, setFamilyStatusOptions] = useState([]);
   const [cityOptions, setCityOptions] = useState([]);
-  const testCities = [
-    { value: 'Kelowna', name: 'Kelowna' },
-    { value: 'Vernon', name: 'Vernon' },
-    { value: 'Kamloops', name: 'Kamloops' },
-  ];
+  // const testCities = [
+  //   { value: 'Kelowna', label: 'Kelowna' },
+  //   { value: 'Vernon', label: 'Vernon' },
+  //   { value: 'Kamloops', label: 'Kamloops' },
+  //   { value: 'Test1', label: 'Test1' },
+  // ];
 
   useEffect(() => fetchGenderOptions(), []);
   useEffect(() => fetchFamilyStatusOptions(), []);
@@ -85,7 +91,7 @@ export default function SignUp(props) {
       .then((res) => res.json())
       .then((json) => {
         let options = json.map((x) => {
-          return { value: x.id, label: x.name };
+          return { value: x.id, label: x.city };
         });
         setCityOptions(options);
       });
@@ -93,7 +99,7 @@ export default function SignUp(props) {
 
   return (
     <Container component='main' maxWidth='xs'>
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <div className={classes.paper}>
         <Typography component='h1' variant='h5'>
           Sign up
@@ -139,6 +145,7 @@ export default function SignUp(props) {
                 id='birthYear'
                 name='birthYear'
                 value={props.formData.birthYear}
+                className='signup-select'
                 onChange={(event) => {
                   props.handleInputChange(event, ()=>{} );
                 }}
@@ -303,28 +310,32 @@ export default function SignUp(props) {
               </FormControl>
             </Grid>
             <Grid item xs={12} container>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                id='minHomeCapacity'
-                label='Min Living Capacity'
-                name='minHomeCapacity'
-                type='number'
-                onChange={props.changeInput}
-              />
+              <Tooltip disableFocusListener title="The minimum amount of people you're interested to live with">
+                <TextField
+                  variant='outlined'
+                  required
+                  fullWidth
+                  id='minHomeCapacity'
+                  label='Min Living Capacity'
+                  name='minHomeCapacity'
+                  type='number'
+                  onChange={props.changeInput}
+                />
+              </Tooltip>
             </Grid>
             <Grid item xs={12} container>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                id='maxHomeCapacity'
-                label='Max Living Capacity'
-                name='maxHomeCapacity'
-                type='number'
-                onChange={props.changeInput}
-              />
+              <Tooltip disableFocusListener title="The maximum amount of people you're interested to live with">
+                <TextField
+                  variant='outlined'
+                  required
+                  fullWidth
+                  id='maxHomeCapacity'
+                  label='Max Living Capacity'
+                  name='maxHomeCapacity'
+                  type='number'
+                  onChange={props.changeInput}
+                />
+              </Tooltip>
             </Grid>
             <Grid item xs={12} container>
               <TextField
@@ -351,20 +362,34 @@ export default function SignUp(props) {
                 onChange={props.changeInput}
               />
             </Grid>
-            <Grid item xs={12} container>
-              <FormLabel component='legend'>Preferred Living Locations</FormLabel>
-              <SelectSearch
-                // options={cityOptions}
-                options={testCities}
-                multiple
-                search
-                id='locations'
-                name='locations'
-                printOptions="on-focus"
-                onChange={props.handleLocationChange}
-                value={props.formData.locationIds}
-                placeholder='Select cities'
+            <Grid 
+            item 
+            xs={12} 
+            sm={10}
+            container
+            direction='column'
+            alignItems='flex-start'
+            justify='flex-start'
+            >
+              <FilterSelect
+                label='Living Locations:'
+                name='locationIds'
+                options={cityOptions}
+                onChange={props.handleDropdownChange}
               />
+            </Grid>
+            <Grid 
+            item 
+            xs={12} 
+            sm={2}
+            container
+            direction='column'
+            alignItems='center'
+            justify='center'
+            >
+              <Tooltip title="These are the places you are interested in living in.">
+                <HelpIcon/>
+              </Tooltip>
             </Grid>
             <Grid
               item

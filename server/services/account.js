@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import dbutils from '../helpers/dbutils.js';
 import authService from './auth.js';
+import authConfig from '../config/authconfig.js';
 
 const SQL_INSERT_MEMBER = `
   INSERT INTO Member(
@@ -103,6 +104,8 @@ async function signup(data) {
   for (const locationId of data.locationIds) {
     await dbutils.query(SQL_INSERT_LOCATION_PREFERENCE, [memberId, locationId]);
   }
+
+  return { success: true };
 }
 
 function login(username, password) {
@@ -122,7 +125,7 @@ function login(username, password) {
           return;
         }
 
-        let token = jwt.sign({ id: user.id }, authconfig.secret, { expiresIn: 86400 });
+        let token = jwt.sign({ id: user.id }, authConfig.secret, { expiresIn: 86400 });
         resolve({
           id: user.id,
           username: user.username,

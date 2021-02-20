@@ -527,9 +527,9 @@ export default function SignupForm(props) {
                 rows={3}
                 rowsMax={3}
                 fullWidth
-                id='about'
+                id='profileText'
                 label='About You'
-                name='about'
+                name='profileText'
                 onChange={props.handleInputChange}
               />
             </Grid>

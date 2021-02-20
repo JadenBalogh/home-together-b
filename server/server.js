@@ -6,6 +6,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 
 import dbutils from './helpers/dbutils.js';
+import accountRoutes from './routes/account-routes.js';
 import searchRoutes from './routes/search-routes.js';
 import authRoutes from './routes/auth-routes.js';
 import profileRoutes from './routes/profile-routes.js';
@@ -26,6 +27,7 @@ app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });
 
+accountRoutes(app);
 searchRoutes(app);
 authRoutes(app);
 profileRoutes(app);

@@ -5,7 +5,7 @@ import Members from '../members/Members';
 import Listings from '../listings/Listings';
 import Signup from '../signup/Signup';
 import SignIn from '../signin/SignIn';
-import Profile from '../profile/Profile'
+import Profile from '../profile/Profile';
 import EditProfile from '../edit-profile/EditProfile';
 
 // Main component that renders all pages in our app

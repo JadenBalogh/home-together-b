@@ -62,6 +62,7 @@ export default function SignIn() {
         sessionStorage.setItem('id', json.id);
         sessionStorage.setItem('token', json.accessToken);
         history.push('/');
+        window.location.reload();
       });
   }
 

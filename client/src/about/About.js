@@ -1,6 +1,7 @@
 import React from 'react';
 import AboutBlockLeft from './AboutBlockLeft';
 import AboutBlockRight from './AboutBlockRight';
+import AboutBlockCenter from './AboutBlockCenter';
 import bikeImg from './stock-bike.jpg';
 import blueprintsImg from './stock-blueprints.jpg';
 import personWritingImg from './stock-person-writing.jpg';
@@ -71,6 +72,16 @@ freely providing hometogether.ca across the nation.
           </div>
         }
         image={blueprintsImg}
+      />
+      <AboutBlockCenter
+        title='Board Members'
+        desc={
+          <div>
+            Member One<br/>
+            Member Two<br/>
+            Member Three<br/>
+          </div>
+        }
       />
       <AboutBlockLeft
         title='Contact Us'

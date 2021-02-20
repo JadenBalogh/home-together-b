@@ -52,6 +52,8 @@ async function signup(data) {
     return { err: 'Credentials unavailable.' };
   }
 
+  console.log(data);
+
   // Insert Member
   let pwHash = bcrypt.hashSync(data.password);
   let result = await dbutils.query(SQL_INSERT_MEMBER, [
@@ -65,6 +67,8 @@ async function signup(data) {
     pwHash,
   ]);
   let memberId = result.insertId;
+
+  console.log('passed step 1');
 
   // Insert SearchableInfo
   await dbutils.query(SQL_INSERT_SEARCHABLE_INFO, [
@@ -92,6 +96,8 @@ async function signup(data) {
     data.housingDescription,
     data.profileText,
   ]);
+
+  console.log('passed step 2');
 
   // Insert LocationPreferences
   for (const locationId of data.locationIds) {

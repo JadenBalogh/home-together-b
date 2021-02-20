@@ -15,9 +15,8 @@ import { InputLabel } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import RadioText from '../shared/RadioText';
-import FilterSelect from './FilterSelect';
+import SignupSelect from './SignupSelect';
 import Tooltip from '@material-ui/core/Tooltip';
-import HelpIcon from '@material-ui/icons/Help';
 import './Signup.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -45,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //things to check: username, password(against confPassword), email, phone no. (only if we plan on implementing cellphone authentication/confirmation)
-export default function SignUp(props) {
+export default function SignupForm(props) {
   const classes = useStyles();
   const [genderOptions, setGenderOptions] = useState([]);
   const [familyStatusOptions, setFamilyStatusOptions] = useState([]);
@@ -147,11 +146,11 @@ export default function SignUp(props) {
                 value={props.formData.birthYear}
                 className='signup-select'
                 onChange={(event) => {
-                  props.handleInputChange(event, ()=>{} );
+                  props.handleInputChange(event, () => {});
                 }}
               >
-                {[...Array(120).keys()].map(i => (
-                  <MenuItem key={i+1900} value={i + 1900}>
+                {[...Array(120).keys()].map((i) => (
+                  <MenuItem key={i + 1900} value={i + 1900}>
                     {i + 1900}
                   </MenuItem>
                 ))}
@@ -196,7 +195,9 @@ export default function SignUp(props) {
                   props.handleInputChange(event, props.checkUsernameExists);
                 }}
                 error={props.usernameExists} //checks if already exists
-                helperText={props.usernameExists ? 'Username already exists.' : 'Username cannot be changed after signup'}
+                helperText={
+                  props.usernameExists ? 'Username already exists.' : 'IMPORTANT: Username cannot be changed after signup'
+                }
               />
             </Grid>
             <Grid item xs={12} container>
@@ -319,7 +320,7 @@ export default function SignUp(props) {
                   label='Min Living Capacity'
                   name='minHomeCapacity'
                   type='number'
-                  onChange={props.changeInput}
+                  onChange={props.handleInputChange}
                 />
               </Tooltip>
             </Grid>
@@ -333,7 +334,7 @@ export default function SignUp(props) {
                   label='Max Living Capacity'
                   name='maxHomeCapacity'
                   type='number'
-                  onChange={props.changeInput}
+                  onChange={props.handleInputChange}
                 />
               </Tooltip>
             </Grid>
@@ -346,7 +347,7 @@ export default function SignUp(props) {
                 label='Min Monthly Budget'
                 name='minMonthlyBudget'
                 type='number'
-                onChange={props.changeInput}
+                onChange={props.handleInputChange}
               />
             </Grid>
             <Grid item xs={12} container>
@@ -359,38 +360,16 @@ export default function SignUp(props) {
                 name='maxMonthlyBudget'
                 type='number'
                 autoComplete='budget'
-                onChange={props.changeInput}
+                onChange={props.handleInputChange}
               />
             </Grid>
-            <Grid 
-            item 
-            xs={12} 
-            sm={11}
-            container
-            direction='column'
-            alignItems='flex-start'
-            justify='flex-start'
-            >
-              <FilterSelect
-                label='Living Locations:'
-                name='locationIds'
-                options={cityOptions}
-                onChange={props.handleDropdownChange}
-              />
-            </Grid>
-            <Grid 
-            item 
-            xs={12} 
-            sm={1}
-            container
-            direction='column'
-            alignItems='center'
-            justify='center'
-            >
-              <Tooltip title="These are the places you are interested in living in.">
-                <HelpIcon/>
-              </Tooltip>
-            </Grid>
+            <SignupSelect
+              label='Living Locations:'
+              name='locationIds'
+              options={cityOptions}
+              onChange={props.handleDropdownChange}
+              tooltip='These are the places you are interested in living in.'
+            />
             <Grid
               item
               xs={12}
@@ -446,14 +425,14 @@ export default function SignUp(props) {
             >
               <FormLabel component='legend'>Do you prefer others with the same religion?</FormLabel>
               <FormControl component='fieldset'>
-                <RadioGroup aria-label='religious' name='religiousRestrictions' id='religiousRestrictions'>
+                <RadioGroup aria-label='religion' name='religionRestrictions' id='religionRestrictions'>
                   <FormControlLabel value='true' control={<Radio />} label='Yes' />
                   <FormControlLabel value='false' control={<Radio />} label='No' />
                 </RadioGroup>
                 <RadioText
                   check='true'
-                  name='religiousRestrictionsText'
-                  value={props.formData.religiousRestrictionsText}
+                  name='religionRestrictionsText'
+                  value={props.formData.religionRestrictionsText}
                 />
               </FormControl>
             </Grid>

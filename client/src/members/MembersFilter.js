@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import FilterSelect from './FilterSelect';
-import Checkbox from '@material-ui/core/Checkbox';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormLabel from '@material-ui/core/FormLabel';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
+import {
+  Checkbox,
+  TextField,
+  InputLabel,
+  Grid,
+  FormControlLabel,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Typography,
+} from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
 // Filter component for the members page
@@ -38,7 +40,6 @@ const useStyles = makeStyles((theme) => ({
 
 function MembersFilter(props) {
   const [locationOptions, setLocationOptions] = useState([]);
-  const [homeCapacityOptions, setHomeCapacityOptions] = useState([]);
   const [genderOptions, setGenderOptions] = useState([]);
   const [ageGroupOptions, setAgeGroupOptions] = useState([]);
   const [familyStatusOptions, setFamilyStatusOptions] = useState([]);
@@ -48,7 +49,6 @@ function MembersFilter(props) {
   useEffect(() => fetchAgeGroupOptions(), []);
   useEffect(() => fetchFamilyStatusOptions(), []);
   useEffect(() => fetchLocationOptions(), []);
-  useEffect(() => fetchCapacityOptions(), []);
 
   function fetchLocationOptions() {
     const url = process.env.REACT_APP_LOCAL_URL || '';
@@ -59,18 +59,6 @@ function MembersFilter(props) {
           return { value: x.id, label: x.city };
         });
         setLocationOptions(options);
-      });
-  }
-
-  function fetchCapacityOptions() {
-    const url = process.env.REACT_APP_LOCAL_URL || '';
-    fetch(url + '/api/get-home-capacity')
-      .then((res) => res.json())
-      .then((json) => {
-        let options = json.map((x) => {
-          return { value: x.id, label: x.name };
-        });
-        setHomeCapacityOptions(options);
       });
   }
 
@@ -114,8 +102,8 @@ function MembersFilter(props) {
   return (
     <div className='filter-container'>
       <Accordion>
-        <AccordionSummary expandIcon={<SearchIcon />} aria-controls="panel1a-content" id="panel1a-header">
-          <Grid container spacing={2} direction="row" justify="flex-start" alignItems="center" justify="space-between">
+        <AccordionSummary expandIcon={<SearchIcon />} aria-controls='panel1a-content' id='panel1a-header'>
+          <Grid container spacing={2} direction='row' alignItems='center' justify='space-between'>
             <Grid item>
               <Typography className={classes.heading}>Advanced Member Filter</Typography>
             </Grid>
@@ -123,143 +111,126 @@ function MembersFilter(props) {
         </AccordionSummary>
         <AccordionDetails>
           <Grid container spacing={2}>
-            <Grid 
-            item 
-            xs={6}
-            container 
-            direction='row'
-            alignItems='center'
-            justify='center'
-            >
-              <FilterSelect
-                label='Living Locations:'
-                name='locations'
-                options={locationOptions}
-                onChange={props.dropdownHandler}
-              />
+            <FilterSelect
+              label='Living Locations:'
+              name='locationIds'
+              options={locationOptions}
+              onChange={props.dropdownHandler}
+            />
+            <FilterSelect label='Genders:' name='genderIds' options={genderOptions} onChange={props.dropdownHandler} />
+            <FilterSelect
+              label='Age Groups:'
+              name='ageGroupIds'
+              options={ageGroupOptions}
+              onChange={props.dropdownHandler}
+            />
+            <FilterSelect
+              label='Family Status:'
+              name='familyStatusIds'
+              options={familyStatusOptions}
+              onChange={props.dropdownHandler}
+            />
+            <Grid item xs={6} container direction='rows' alignItems='center' justify='center'>
+              <Grid item xs={5} container justify='flex-start'>
+                <InputLabel>Home Capacity:</InputLabel>
+              </Grid>
+              <Grid item xs={3}>
+                <TextField
+                  fullWidth
+                  type='number'
+                  name='minHomeCapacity'
+                  autoComplete='minHomeCapacity'
+                  value={props.filters.minHomeCapacity}
+                  onChange={props.inputHandler}
+                />
+              </Grid>
+              <Grid item xs={1} container justify='center'>
+                -
+              </Grid>
+              <Grid item xs={3}>
+                <TextField
+                  fullWidth
+                  type='number'
+                  name='maxHomeCapacity'
+                  autoComplete='maxHomeCapacity'
+                  value={props.filters.maxHomeCapacity}
+                  onChange={props.inputHandler}
+                />
+              </Grid>
             </Grid>
-            <Grid 
-            item 
-            xs={6}
-            container 
-            direction='row'
-            alignItems='center'
-            justify='center'
-            >
-              <FilterSelect
-                label='Home Capacity:'
-                name='homeCapacity'
-                options={homeCapacityOptions}
-                onChange={props.dropdownHandler}
-              />
+            <Grid item xs={6} container direction='rows' alignItems='center' justify='center'>
+              <Grid item xs={5} container justify='flex-start'>
+                <InputLabel>Monthly Budget:</InputLabel>
+              </Grid>
+              <Grid item xs={3}>
+                <TextField
+                  fullWidth
+                  type='number'
+                  name='minMonthlyBudget'
+                  autoComplete='minMonthlyBudget'
+                  value={props.filters.minMonthlyBudget}
+                  onChange={props.inputHandler}
+                />
+              </Grid>
+              <Grid item xs={1} container justify='center'>
+                -
+              </Grid>
+              <Grid item xs={3}>
+                <TextField
+                  fullWidth
+                  type='number'
+                  name='maxMonthlyBudget'
+                  autoComplete='maxMonthlyBudget'
+                  value={props.filters.maxMonthlyBudget}
+                  onChange={props.inputHandler}
+                />
+              </Grid>
             </Grid>
-            <Grid 
-            item 
-            xs={6}
-            container
-            direction='row'
-            alignItems='center'
-            justify='center'
-            >
-              <FilterSelect
-                label='Genders:'
-                name='genderIds'
-                options={genderOptions}
-                onChange={props.dropdownHandler}
-              />
-            </Grid>
-            <Grid 
-            item 
-            xs={6} 
-            container
-            direction='row'
-            alignItems='center'
-            justify='center'
-            >
-              <FilterSelect
-                label='Age Groups:'
-                name='ageGroupIds'
-                options={ageGroupOptions}
-                onChange={props.dropdownHandler}
-              />
-            </Grid>
-            <Grid 
-            item 
-            xs={6} 
-            container
-            direction='rows'
-            alignItems='center'
-            justify='center'
-            >
-              <FilterSelect
-                label='Family Status:'
-                name='familyStatusIds'
-                options={familyStatusOptions}
-                onChange={props.dropdownHandler}
-              />
-            </Grid>
-            <Grid 
-            item 
-            xs={6} 
-            container
-            direction='rows'
-            alignItems='center'
-            justify='center'
-            >
-              <TextField
-                variant='outlined'
-                fullWidth
-                name='maxMonthlyBudget'
-                label='Max Monthly Budget'
-                id='maxMonthlyBudget'
-                autoComplete='maxMonthlyBudget'
-                value={props.filters.maxMonthlyBudget}
-                onChange={props.inputHandler}
-              />
-            </Grid>
-            <Grid item xs={12} sm={3} container>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={props.filters.petRestrictions}
-                    onChange={props.checkboxHandler}
-                    name="petRestrictions"
-                  />}
-                label="Pet Friendly"
-              />
-            </Grid>
-            <Grid item xs={12} sm={3} container>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={props.filters.religiousRestrictions}
-                    onChange={props.checkboxHandler}
-                    name="religiousRestrictions"
-                  />}
-                label="Religious"
-              />
-            </Grid>
-            <Grid item xs={12} sm={3} container>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={props.filters.smokingRestrictions}
-                    onChange={props.checkboxHandler}
-                    name="smokingRestrictions"
-                  />}
-                label="Smoking Friendly"
-              />
-            </Grid>
-            <Grid item xs={12} sm={3} container>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={props.filters.hasHousing}
-                    onChange={props.checkboxHandler}
-                    name="hasHousing"
-                  />}
-                label="Has Housing"
-              />
+            <Grid item xs={12} container>
+              <Grid item xs={3} container>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={props.filters.petRestrictions}
+                      onChange={props.checkboxHandler}
+                      name='petRestrictions'
+                    />
+                  }
+                  label='Pet Friendly'
+                />
+              </Grid>
+              <Grid item xs={3} container>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={props.filters.religionRestrictions}
+                      onChange={props.checkboxHandler}
+                      name='religionRestrictions'
+                    />
+                  }
+                  label='Religious'
+                />
+              </Grid>
+              <Grid item xs={3} container>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={props.filters.smokingRestrictions}
+                      onChange={props.checkboxHandler}
+                      name='smokingRestrictions'
+                    />
+                  }
+                  label='Smoking Friendly'
+                />
+              </Grid>
+              <Grid item xs={3} container>
+                <FormControlLabel
+                  control={
+                    <Checkbox checked={props.filters.hasHousing} onChange={props.checkboxHandler} name='hasHousing' />
+                  }
+                  label='Has Housing'
+                />
+              </Grid>
             </Grid>
           </Grid>
         </AccordionDetails>

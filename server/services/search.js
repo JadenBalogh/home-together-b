@@ -68,30 +68,26 @@ function getLocationPreferences(memberId) {
 }
 
 async function getMembers(filters) {
-  let genderIds = Array.from(filters.genderIds);
-  let ageGroupIds = Array.from(filters.ageGroupIds);
-  let familyStatusIds = Array.from(filters.familyStatusIds);
-  let locationIds = Array.from(filters.locationIds);
-
   let results = await dbutils.query(SQL_SELECT_MEMBERS, [
-    filters.maxMonthlyBudget,
-    filters.minMonthlyBudget,
+    filters.maxMonthlyBudget || Number.MAX_SAFE_INTEGER,
+    filters.minMonthlyBudget || 0,
     filters.petRestrictions,
     filters.religionRestrictions,
     filters.smokingRestrictions,
     filters.hasHousing,
-    filters.maxHomeCapacity,
-    filters.minHomeCapacity,
+    filters.maxHomeCapacity || Number.MAX_SAFE_INTEGER,
+    filters.minHomeCapacity || 0,
   ]);
 
   // Manually do the filtering for the array-based parameters cause prepared statements suck at dealing with this
-  let isGenderMatch = (member) => genderIds.length === 0 || genderIds.includes(member.genderId);
+  let isGenderMatch = (member) => filters.genderIds.length === 0 || filters.genderIds.includes(member.genderId);
 
-  let isFamilyStatusMatch = (member) => familyStatusIds.length === 0 || familyStatusIds.includes(member.familyStatusId);
+  let isFamilyStatusMatch = (member) =>
+    filters.familyStatusIds.length === 0 || filters.familyStatusIds.includes(member.familyStatusId);
 
   // Check if the member's birth year is within any of the given age ranges
   let year = new Date().getFullYear();
-  let ageRanges = await getAgeRanges(ageGroupIds);
+  let ageRanges = await getAgeRanges(filters.ageGroupIds);
   let isAgeMatch = (member) =>
     ageRanges.length === 0 ||
     ageRanges.some((ageRange) => {
@@ -103,15 +99,23 @@ async function getMembers(filters) {
   // Check if any of the member's location preferences match any of the location filters
   let isLocationMatch = async (member) => {
     let prefs = await getLocationPreferences(member.id);
-    return locationIds.length === 0 || locationIds.some((id) => prefs.some((pref) => pref.locationId === id));
+    return (
+      filters.locationIds.length === 0 || filters.locationIds.some((id) => prefs.some((pref) => pref.locationId === id))
+    );
   };
 
-  let filteredResults = await results.filter(async (member) => {
-    let match = await isLocationMatch(member);
-    return isGenderMatch(member) && isFamilyStatusMatch(member) && isAgeMatch(member) && match;
-  });
+  let filterMembers = async (members) => {
+    let result = [];
+    for (let m of members) {
+      let locationMatch = await isLocationMatch(m);
+      if (isGenderMatch(m) && isFamilyStatusMatch(m) && isAgeMatch(m) && locationMatch) {
+        result.push(m);
+      }
+    }
+    return result;
+  };
 
-  return filteredResults;
+  return await filterMembers(results);
 }
 
 function getListings(categoryId) {

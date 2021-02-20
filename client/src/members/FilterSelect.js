@@ -1,16 +1,15 @@
 import React from 'react';
-import Select from 'react-select'
-import {InputLabel} from '@material-ui/core'
-import Grid from '@material-ui/core/Grid';
+import Select from 'react-select';
+import { InputLabel, Grid } from '@material-ui/core';
 
 // Select box for filter panel
 function FilterSelect(props) {
   return (
-    <div className='filter-select-container'>
-      <Grid item xs={12} sm={6} container>
+    <Grid item xs={6} container alignItems='center'>
+      <Grid item xs={5} container justify='flex-start'>
         <InputLabel>{props.label}</InputLabel>
       </Grid>
-      <Grid item xs={12} sm={6} container>
+      <Grid item xs={7}>
         <Select
           isMulti
           isClearable={false}
@@ -20,7 +19,7 @@ function FilterSelect(props) {
           onChange={props.onChange}
         />
       </Grid>
-    </div>
+    </Grid>
   );
 }
 

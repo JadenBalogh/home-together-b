@@ -11,18 +11,19 @@ class Members extends Component {
     this.state = {
       members: [],
       filters: {
-        locations: [],
-        homeCapacity: [],
+        locationIds: [],
         genderIds: [],
         ageGroupIds: [],
         familyStatusIds: [],
+        minHomeCapacity: 0,
+        maxHomeCapacity: 0,
+        minMonthlyBudget: 0,
         maxMonthlyBudget: 0,
         petRestrictions: false,
-        religiousRestrictions: false,
+        religionRestrictions: false,
         smokingRestrictions: false,
         hasHousing: false,
       },
-
     };
     this.updateMembers = this.updateMembers.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -39,17 +40,6 @@ class Members extends Component {
 
     const url = process.env.REACT_APP_LOCAL_URL || '';
     const route = '/api/get-members?';
-    // const params = new URLSearchParams( //Old implementation
-    //   `${this.state.filters.genderIds.map((x) => 'genderIds=' + x).join('&')}` +
-    //     `&${this.state.filters.ageGroupIds.map((x) => 'ageGroupIds=' + x).join('&')}` +
-    //     `&${this.state.filters.familyStatusIds.map((x) => 'familyStatusIds=' + x).join('&')}` +
-    //     `&maxMonthlyBudget=${this.state.filters.maxMonthlyBudget}` +
-    //     `&petRestrictions=${this.state.filters.petRestrictions}` +
-    //     `&religiousRestrictions=${this.state.filters.religiousRestrictions}` +
-    //     `&smokingRestrictions=${this.state.filters.smokingRestrictions}` +
-    //     `&hasHousing=${this.state.filters.hasHousing}`
-    // ).toString();
-
     fetch(url + route, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -70,7 +60,8 @@ class Members extends Component {
           ...prevState.filters,
           [event.target.name]: event.target.value,
         },
-      })
+      }),
+      this.updateMembers
     );
   }
 
@@ -81,31 +72,30 @@ class Members extends Component {
           ...prevState.filters,
           [event.target.name]: event.target.checked,
         },
-      })
+      }),
+      this.updateMembers
     );
   }
 
   handleDropdownChange(selection, action) {
-    let ids = selection
-      ? selection.map((x) => {
-        return x.value;
-      })
-      : [];
+    let ids = selection ? selection.map((x) => x.value) : [];
     this.setState(
-      {
-        [action.name]: ids,
-      },
-      () => this.updateMembers()
+      (prevState) => ({
+        filters: {
+          ...prevState.filters,
+          [action.name]: ids,
+        },
+      }),
+      this.updateMembers
     );
   }
 
   render() {
     return (
       <div className='members-container'>
-        <Typography component="h1" variant="h5">
+        <Typography component='h1' variant='h5'>
           Find other members looking to homeshare...
         </Typography>
-        {/* <h2>Find other members looking to homeshare...</h2> */}
         <MembersFilter
           dropdownHandler={this.handleDropdownChange}
           inputHandler={this.handleInputChange}

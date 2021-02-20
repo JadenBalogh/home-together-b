@@ -23,44 +23,57 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
+  hidden: {
+    visibility: 'hidden',
+  },
 }));
 
 // Search page for members
 function Listings(props) {
   const [listings, setListings] = useState([]);
+  const [categoryId, setCategoryId] = useState('');
+  const [subcategoryId, setSubcategoryId] = useState('');
   const [categoryOptions, setCategoryOptions] = useState([]);
-  const [categoryId, setCategoryId] = useState(-1);
+  const [subcategoryOptions, setSubcategoryOptions] = useState({});
 
   useEffect(fetchCategoryOptions, []);
-  useEffect(updateListings, [categoryId]);
+  useEffect(updateListings, [subcategoryId]);
 
   function updateListings() {
     const route = '/api/get-listings?';
-    const params = new URLSearchParams(`categoryId=${categoryId}`).toString();
+    const params = new URLSearchParams(`categoryId=${subcategoryId}`).toString();
     const url = process.env.REACT_APP_LOCAL_URL || '';
     fetch(url + route + params)
       .then((res) => res.json())
       .then((json) => {
-        console.log(json);
         setListings(json);
       });
   }
-
-  /*   function handleDropdownChange(selection) {
-      let id = selection ? selection.value : -1;
-      setCategoryId(id);
-    } */
 
   function fetchCategoryOptions() {
     const url = process.env.REACT_APP_LOCAL_URL || '';
     fetch(url + '/api/get-category-types')
       .then((res) => res.json())
-      .then((json) => {
-        let options = json.map((x) => {
-          return { value: x.id, label: x.name };
-        });
-        setCategoryOptions(options);
+      .then((options) => {
+        setCategoryOptions(options.filter((x) => !x.parentId));
+        let subCats = {};
+        for (var o of options.filter((x) => x.parentId)) {
+          let arr = subCats[o.parentId];
+          subCats[o.parentId] = arr ? [...arr, o] : [o];
+        }
+        setSubcategoryOptions(subCats);
       });
+  }
+
+  function handleCategoryChange(event) {
+    setCategoryId(event.target.value);
+    setSubcategoryId('');
+  }
+
+  function handleSubcategoryChange(event) {
+    let activeId = event.target.value;
+    setSubcategoryId(activeId);
+    console.log(activeId);
   }
 
   const classes = useStyles();
@@ -74,35 +87,37 @@ function Listings(props) {
           <Grid item xs>
             <InputLabel>Select a Category:</InputLabel>
             <Select
-              id='category'
-              defaultValue=''
               className='listing-select'
-              name={'categoryId'}
+              name='categoryId'
+              value={categoryId}
               required
-              value={props.category}
-              onChange={props.handleDropdownChange}
+              onChange={handleCategoryChange}
             >
-              <MenuItem value='1'>Rentals</MenuItem>
-              <MenuItem value='2'>Home and Yard Services</MenuItem>
-              <MenuItem value='3'>Legal and Sales Services</MenuItem>
-              <MenuItem value='4'>Classes, Clubs, and Events</MenuItem>
+              {categoryOptions.map((option) => (
+                <MenuItem key={option.id} value={option.id}>
+                  {option.name}
+                </MenuItem>
+              ))}
             </Select>
           </Grid>
-          <Grid item xs>
+          <Grid item xs className={subcategoryOptions[categoryId] ? '' : classes.hidden}>
             <InputLabel>Select a Sub-category:</InputLabel>
             <Select
-              id='sub-category'
-              defaultValue='1'
               className='listing-select'
-              name={'sub-categoryId'}
+              name='subcategoryId'
               required
-              value={props.category}
-              onChange={props.handleDropdownChange}
+              value={subcategoryId}
+              onChange={handleSubcategoryChange}
             >
-              <MenuItem value='1'>All Sub-categories</MenuItem>
-              <MenuItem value='2'>Sub 2</MenuItem>
-              <MenuItem value='3'>Sub 3</MenuItem>
-              <MenuItem value='4'>Sub 4</MenuItem>
+              {subcategoryOptions[categoryId] ? (
+                subcategoryOptions[categoryId].map((option) => (
+                  <MenuItem key={option.id} value={option.id}>
+                    {option.name}
+                  </MenuItem>
+                ))
+              ) : (
+                <MenuItem key={-1}>-</MenuItem>
+              )}
             </Select>
           </Grid>
         </Grid>

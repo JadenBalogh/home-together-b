@@ -116,12 +116,12 @@ function login(username, password) {
       .then((results) => {
         let user = results[0];
         if (!user) {
-          res.send({ err: 'User not found.' });
+          resolve({ err: 'User not found.' });
           return;
         }
 
         if (!bcrypt.compareSync(password, user.password)) {
-          res.send({ err: 'Invalid password.' });
+          resolve({ err: 'Invalid password.' });
           return;
         }
 

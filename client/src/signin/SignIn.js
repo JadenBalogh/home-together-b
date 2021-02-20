@@ -59,9 +59,9 @@ export default function SignIn() {
           window.alert(json.err);
           return;
         }
-        console.log('TODO');
+        sessionStorage.setItem('id', json.id);
+        sessionStorage.setItem('token', json.accessToken);
         history.push('/');
-        // Assign id and accesstoken to global/session variables
       });
   }
 

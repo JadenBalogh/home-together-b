@@ -32,8 +32,8 @@ class Signup extends Component {
         petRestrictionsText: '',
         healthRestrictions: false,
         healthRestrictionsText: '',
-        religiousRestrictions: false,
-        religiousRestrictionsText: '',
+        religionRestrictions: false,
+        religionRestrictionsText: '',
         smokingRestrictions: false,
         smokingRestrictionsText: '',
         allergies: false,
@@ -52,7 +52,6 @@ class Signup extends Component {
     this.handleConfirm = this.handleConfirm.bind(this);
     this.checkPasswordsMatch = this.checkPasswordsMatch.bind(this);
     this.handleSignup = this.handleSignup.bind(this);
-    this.handleLocationChange = this.handleLocationChange.bind(this);
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
   }
 
@@ -60,6 +59,7 @@ class Signup extends Component {
     event.preventDefault();
 
     let formData = this.state.formData;
+    console.log(formData);
 
     const url = process.env.REACT_APP_LOCAL_URL || '';
     const route = '/api/signup?';
@@ -96,35 +96,13 @@ class Signup extends Component {
   }
 
   handleDropdownChange(selection, action) {
-    let ids = selection
-      ? selection.map((x) => {
-          return x.value;
-        })
-      : [];
-    this.setState(
-      {
+    let ids = selection ? selection.map((x) => x.value) : [];
+    this.setState((prevState) => ({
+      formData: {
+        ...prevState.formData,
         [action.name]: ids,
       },
-    );
-  }
-
-  handleLocationChange(array) {
-    console.log(array);
-    const sorted = array.map(i => {
-      return{ value: i, name: i};
-    });
-
-    this.setState(
-      (prevState) => ({
-        formData: {
-          ...prevState.formData,
-          locationIds: sorted,
-        },
-      }),
-      () => {
-        console.log(this.state.formData);
-      }
-    );
+    }));
   }
 
   checkPasswordsMatch() {
@@ -179,7 +157,7 @@ class Signup extends Component {
   render() {
     return (
       <div>
-        <SignupForm 
+        <SignupForm
           formData={this.state.formData}
           confPassword={this.state.confPassword}
           phoneExists={this.state.phoneExists}
@@ -194,7 +172,6 @@ class Signup extends Component {
           checkEmailExists={this.checkEmailExists}
           checkUsernameExists={this.checkUsernameExists}
           handleSignup={this.handleSignup}
-          handleLocationChange={this.handleLocationChange}
         />
       </div>
     );

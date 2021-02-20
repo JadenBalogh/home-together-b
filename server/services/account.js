@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import dbutils from '../helpers/dbutils.js';
 import authService from './auth.js';
+import authConfig from '../config/authconfig.js';
 
 const SQL_INSERT_MEMBER = `
   INSERT INTO Member(
@@ -52,6 +53,8 @@ async function signup(data) {
     return { err: 'Credentials unavailable.' };
   }
 
+  console.log(data);
+
   // Insert Member
   let pwHash = bcrypt.hashSync(data.password);
   let result = await dbutils.query(SQL_INSERT_MEMBER, [
@@ -65,6 +68,8 @@ async function signup(data) {
     pwHash,
   ]);
   let memberId = result.insertId;
+
+  console.log('passed step 1');
 
   // Insert SearchableInfo
   await dbutils.query(SQL_INSERT_SEARCHABLE_INFO, [
@@ -93,10 +98,14 @@ async function signup(data) {
     data.profileText,
   ]);
 
+  console.log('passed step 2');
+
   // Insert LocationPreferences
   for (const locationId of data.locationIds) {
     await dbutils.query(SQL_INSERT_LOCATION_PREFERENCE, [memberId, locationId]);
   }
+
+  return { success: true };
 }
 
 function login(username, password) {
@@ -116,7 +125,7 @@ function login(username, password) {
           return;
         }
 
-        let token = jwt.sign({ id: user.id }, authconfig.secret, { expiresIn: 86400 });
+        let token = jwt.sign({ id: user.id }, authConfig.secret, { expiresIn: 86400 });
         resolve({
           id: user.id,
           username: user.username,

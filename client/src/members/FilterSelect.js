@@ -13,7 +13,6 @@ function FilterSelect(props) {
         <Select
           isMulti
           isClearable={false}
-          className='filter-select'
           name={props.name}
           options={props.options}
           onChange={props.onChange}

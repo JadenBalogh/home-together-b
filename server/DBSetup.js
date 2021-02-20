@@ -316,25 +316,60 @@ create(
 create(
   'CategoryType (' +
     'id INT AUTO_INCREMENT PRIMARY KEY, ' +
+    'parentId INT, ' +
     'name VARCHAR(100), ' +
-    'paymentRequired BOOLEAN ' +
+    'paymentRequired BOOLEAN, ' +
+    'FOREIGN KEY (parentId) REFERENCES CategoryType(id)' +
   ')'
 );
 
-insert('CategoryType(name, paymentRequired)', [
-  // These listing categories require payment (paymentRequired == true)
-  ['Rental', true],
-  ['House & Yard Services', true],
-  ['Individual & Group Services', true],
-  ['Legal, Sales & Insurance Agencies', true],
-  ['Classes, Clubs & Events', true],
+// Parent categories
+insert('CategoryType(parentId, name, paymentRequired)', [
+  [null, 'Rentals', true],
+  [null, 'House & Yard Services', true],
+  [null, 'Legal & Sales', true],
+  [null, 'Classes, Clubs & Events', true],
+  [null, 'Cohousing, Co-ops, Intergenerational, Planned Neighborhoods', false],
+  [null, 'Home Share Facilitation & Supporting Services', false],
+  [null, 'Home Sharing Businesses, Groups and Organizations', false],
+  [null, 'Government & Human Service Agencies offering Shared Living', false],
+  [null, 'Information & Services', false],
+  [null, 'Members with Homes to Share', false],
+]);
 
-  // These listin' categories are free (paymentRequired == false)
-  ['Shared & Community Living Initiatives', false],
-  ['Sharing Facilitation, Matching & Educational Services', false],
-  ['Governmental Supports & Services', false],
-  ['Member Shared Homes', false],
-  ['Member Holiday Home Swap', false],
+// Subcategories
+insert('CategoryType(parentId, name, paymentRequired)', [
+  [1, 'House', true],
+  [1, 'Partial House / Suite Up or Down', true],
+  [1, 'Duplex / Triplex', true],
+  [1, 'Apartment', true],
+  [1, 'Condo / Townhouse', true],
+  [1, 'Rural', true],
+  [1, 'Country', true],
+  [1, 'Other', true],
+  [11, 'Carpet Cleaning', true],
+  [11, 'Computer & Technical Services', true],
+  [11, 'Delivery Services', true],
+  [11, 'Duct Cleaning', true],
+  [11, 'Gardening, Yard Work, & Yard Maintenance', true],
+  [11, 'Handyman Services', true],
+  [11, 'Housekeeper / Cleaner', true],
+  [11, 'Home Care Services', true],
+  [11, 'House Maintenance & Repair', true],
+  [11, 'Meal Services', true],
+  [11, 'Moving & Storage', true],
+  [11, 'Organizing / De-Cluttering', true],
+  [11, 'Pet Services', true],
+  [11, 'Ride Sharing & Transportation', true],
+  [11, 'Window Cleaning', true],
+  [11, 'Other', true],
+  [21, 'Multi-Ownership Purchasing: Legalities', true],
+  [21, 'Multiple Ownership Sales / Purchasing: Realtors', true],
+  [21, 'Multi-Owner / Tenant / Shared Home Insurance', true],
+  [21, 'Shared Vehicle Insurance & Legalities', true],
+  [21, 'Understanding Home Sharing & Taxes', true],
+  [21, 'Multi-Tenant Rentals & Leases', true],
+  [21, 'Shared Homes A-Z', true],
 ]);
 
 create(

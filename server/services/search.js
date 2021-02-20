@@ -143,7 +143,7 @@ function getAgeGroupTypes() {
 }
 
 function getCategoryTypes() {
-  return dbutils.query('SELECT id, name FROM CategoryType');
+  return dbutils.query('SELECT id, parentId, name, paymentRequired FROM CategoryType');
 }
 
 function getLocations() {

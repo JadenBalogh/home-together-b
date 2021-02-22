@@ -126,7 +126,7 @@ async function getListings(categoryId, filters) {
     filters.maxRating || Number.MAX_SAFE_INTEGER,
   ]);
 
-  let isCategoryMatch = (listing) => categoryId === 0 || listing.categoryId === categoryId;
+  let isCategoryMatch = (listing) => categoryId === '' || listing.categoryId === categoryId;
 
   let isTitleMatch = (listing) => filters.title === '' || `${listing.title}`.includes(filters.title);
 

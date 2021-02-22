@@ -47,6 +47,7 @@ const SQL_SELECT_LISTINGS = `
     startDate,
     endDate,
     description,
+    locationId,
     c.id AS categoryId,
     c.name AS categoryName,
     o.id AS organizationId,
@@ -54,6 +55,7 @@ const SQL_SELECT_LISTINGS = `
   FROM Listing l
   JOIN CategoryType c ON l.categoryId = c.id
   JOIN Organization o ON l.organizationId = o.id
+  WHERE ratingAverage >= ? AND ratingAverage <= ?
 `;
 
 function getAgeRanges(ageGroupIds) {
@@ -118,16 +120,24 @@ async function getMembers(filters) {
   return await filterMembers(results);
 }
 
-function getListings(categoryId) {
-  return new Promise((resolve) => {
-    dbutils.query(SQL_SELECT_LISTINGS).then((results) => {
-      let filteredResults = results;
-      if (categoryId > 0) {
-        filteredResults = results.filter((x) => x.categoryId == categoryId);
-      }
-      resolve(filteredResults);
-    });
-  });
+async function getListings(categoryId, filters) {
+  let results = await dbutils.query(SQL_SELECT_LISTINGS, [
+    filters.minRating || 0,
+    filters.maxRating || Number.MAX_SAFE_INTEGER,
+  ]);
+
+  let isCategoryMatch = (listing) => categoryId === 0 || listing.categoryId === categoryId;
+
+  let isTitleMatch = (listing) => filters.title === '' || `${listing.title}`.includes(filters.title);
+
+  let isLocationMatch = (listing) =>
+    filters.locationIds.length === 0 || filters.locationIds.some((id) => id === listing.locationId);
+
+  let filterListings = (listings) => {
+    return listings.filter((l) => isCategoryMatch(l) && isTitleMatch(l) && isLocationMatch(l));
+  };
+
+  return filterListings(results);
 }
 
 function getGenderTypes() {

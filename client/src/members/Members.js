@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MemberList from './MemberList';
 import MembersFilter from './MembersFilter';
+import Typography from '@material-ui/core/Typography';
 import './Members.css';
 
 // Search page for members
@@ -9,13 +10,24 @@ class Members extends Component {
     super(props);
     this.state = {
       members: [],
-      genderIds: [],
-      ageGroupIds: [],
-      familyStatusIds: [],
-      maxMonthlyBudget: 0,
+      filters: {
+        locationIds: [],
+        genderIds: [],
+        ageGroupIds: [],
+        familyStatusIds: [],
+        minHomeCapacity: 0,
+        maxHomeCapacity: 0,
+        minMonthlyBudget: 0,
+        maxMonthlyBudget: 0,
+        petRestrictions: false,
+        religionRestrictions: false,
+        smokingRestrictions: false,
+        hasHousing: false,
+      },
     };
     this.updateMembers = this.updateMembers.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
   }
 
@@ -24,16 +36,15 @@ class Members extends Component {
   }
 
   updateMembers() {
-    const route = '/get-members?';
-    const params = new URLSearchParams(
-      `${this.state.genderIds.map((x) => 'genderIds=' + x).join('&')}` +
-        `&${this.state.ageGroupIds.map((x) => 'ageGroupIds=' + x).join('&')}` +
-        `&${this.state.familyStatusIds.map((x) => 'familyStatusIds=' + x).join('&')}` +
-        `&maxMonthlyBudget=${this.state.maxMonthlyBudget}`
-    ).toString();
-    const url = process.env.REACT_APP_SERVER_URL + route + params;
+    let filters = this.state.filters;
 
-    fetch(url)
+    const url = process.env.REACT_APP_LOCAL_URL || '';
+    const route = '/api/get-members?';
+    fetch(url + route, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ filters }),
+    })
       .then((res) => res.json())
       .then((json) => {
         this.setState({
@@ -44,35 +55,52 @@ class Members extends Component {
 
   handleInputChange(event) {
     this.setState(
-      {
-        [event.target.name]: event.target.value,
-      },
-      () => this.updateMembers()
+      (prevState) => ({
+        filters: {
+          ...prevState.filters,
+          [event.target.name]: event.target.value,
+        },
+      }),
+      this.updateMembers
+    );
+  }
+
+  handleCheckboxChange(event) {
+    this.setState(
+      (prevState) => ({
+        filters: {
+          ...prevState.filters,
+          [event.target.name]: event.target.checked,
+        },
+      }),
+      this.updateMembers
     );
   }
 
   handleDropdownChange(selection, action) {
-    let ids = selection
-      ? selection.map((x) => {
-          return x.value;
-        })
-      : [];
+    let ids = selection ? selection.map((x) => x.value) : [];
     this.setState(
-      {
-        [action.name]: ids,
-      },
-      () => this.updateMembers()
+      (prevState) => ({
+        filters: {
+          ...prevState.filters,
+          [action.name]: ids,
+        },
+      }),
+      this.updateMembers
     );
   }
 
   render() {
     return (
       <div className='members-container'>
-        <h2>Find other members looking to homeshare...</h2>
+        <Typography component='h1' variant='h5'>
+          Find other members looking to homeshare...
+        </Typography>
         <MembersFilter
           dropdownHandler={this.handleDropdownChange}
           inputHandler={this.handleInputChange}
-          maxMonthlyBudget={this.state.maxMonthlyBudget}
+          checkboxHandler={this.handleCheckboxChange}
+          filters={this.state.filters}
         />
         <MemberList members={this.state.members} />
       </div>

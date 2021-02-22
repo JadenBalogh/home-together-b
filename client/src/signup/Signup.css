@@ -1,0 +1,13 @@
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  background-color: #FFFFFF;
+  margin-bottom: 30px;
+}
+
+.signup-select {
+  width: 120px;
+  margin-left: 15px;
+}

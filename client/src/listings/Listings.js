@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Select, Grid, Typography, TextField, Divider, InputLabel, MenuItem } from '@material-ui/core';
+import { Select, Grid, Typography, TextField, InputLabel, MenuItem } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import MultiSelect from 'react-select';
 import ListingList from './ListingList';

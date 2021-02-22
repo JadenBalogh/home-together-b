@@ -1,13 +1,7 @@
-// React & Material-ui imports
 import React, { useState, useEffect } from 'react';
+import { Select, Grid, Typography, TextField, Divider, InputLabel, MenuItem } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Select from '@material-ui/core/Select';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import { InputLabel, MenuItem } from '@material-ui/core';
-
-// My Imports
+import MultiSelect from 'react-select';
 import ListingList from './ListingList';
 import PaginationControlled from './Pagination';
 import { SearchClearSnackbar } from '../shared/snackbars';
@@ -23,44 +17,98 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
+  hidden: {
+    visibility: 'hidden',
+  },
+  multiLabel: {
+    marginTop: '15px',
+    marginBottom: '5px',
+  },
 }));
 
 // Search page for members
 function Listings(props) {
   const [listings, setListings] = useState([]);
+  const [filters, setFilters] = useState({
+    locationIds: [],
+    title: '',
+    minRating: '',
+    maxRating: '',
+  });
+  const [locationOptions, setLocationOptions] = useState([]);
+  const [categoryId, setCategoryId] = useState('');
+  const [subcategoryId, setSubcategoryId] = useState('');
   const [categoryOptions, setCategoryOptions] = useState([]);
-  const [categoryId, setCategoryId] = useState(-1);
+  const [subcategoryOptions, setSubcategoryOptions] = useState({});
 
+  useEffect(fetchLocationOptions, []);
   useEffect(fetchCategoryOptions, []);
-  useEffect(updateListings, [categoryId]);
+  useEffect(updateListings, [subcategoryId, filters]);
 
   function updateListings() {
-    const route = '/api/get-listings?';
-    const params = new URLSearchParams(`categoryId=${categoryId}`).toString();
     const url = process.env.REACT_APP_LOCAL_URL || '';
-    fetch(url + route + params)
+    const route = '/api/get-listings?';
+    fetch(url + route, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ categoryId: subcategoryId, filters }),
+    })
       .then((res) => res.json())
       .then((json) => {
-        console.log(json);
         setListings(json);
       });
   }
 
-  /*   function handleDropdownChange(selection) {
-      let id = selection ? selection.value : -1;
-      setCategoryId(id);
-    } */
+  function fetchLocationOptions() {
+    const url = process.env.REACT_APP_LOCAL_URL || '';
+    fetch(url + '/api/get-locations')
+      .then((res) => res.json())
+      .then((json) => {
+        let options = json.map((x) => {
+          return { value: x.id, label: x.city };
+        });
+        setLocationOptions(options);
+      });
+  }
 
   function fetchCategoryOptions() {
     const url = process.env.REACT_APP_LOCAL_URL || '';
     fetch(url + '/api/get-category-types')
       .then((res) => res.json())
-      .then((json) => {
-        let options = json.map((x) => {
-          return { value: x.id, label: x.name };
-        });
-        setCategoryOptions(options);
+      .then((options) => {
+        setCategoryOptions(options.filter((x) => !x.parentId));
+        let subCats = {};
+        for (var o of options.filter((x) => x.parentId)) {
+          let arr = subCats[o.parentId];
+          subCats[o.parentId] = arr ? [...arr, o] : [o];
+        }
+        setSubcategoryOptions(subCats);
       });
+  }
+
+  function handleCategoryChange(event) {
+    setCategoryId(event.target.value);
+    setSubcategoryId('');
+  }
+
+  function handleSubcategoryChange(event) {
+    let activeId = event.target.value;
+    setSubcategoryId(activeId);
+  }
+
+  function handleFilterChange(event) {
+    setFilters({
+      ...filters,
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  function handleLocationsChange(selection) {
+    let ids = selection ? selection.map((x) => x.value) : [];
+    setFilters({
+      ...filters,
+      locationIds: ids,
+    });
   }
 
   const classes = useStyles();
@@ -74,91 +122,99 @@ function Listings(props) {
           <Grid item xs>
             <InputLabel>Select a Category:</InputLabel>
             <Select
-              id='category'
-              defaultValue=''
               className='listing-select'
-              name={'categoryId'}
+              name='categoryId'
+              value={categoryId}
               required
-              value={props.category}
-              onChange={props.handleDropdownChange}
+              onChange={handleCategoryChange}
             >
-              <MenuItem value='1'>Rentals</MenuItem>
-              <MenuItem value='2'>Home and Yard Services</MenuItem>
-              <MenuItem value='3'>Legal and Sales Services</MenuItem>
-              <MenuItem value='4'>Classes, Clubs, and Events</MenuItem>
+              {categoryOptions.map((option) => (
+                <MenuItem key={option.id} value={option.id}>
+                  {option.name}
+                </MenuItem>
+              ))}
             </Select>
           </Grid>
-          <Grid item xs>
+          <Grid item xs className={subcategoryOptions[categoryId] ? '' : classes.hidden}>
             <InputLabel>Select a Sub-category:</InputLabel>
             <Select
-              id='sub-category'
-              defaultValue='1'
               className='listing-select'
-              name={'sub-categoryId'}
+              name='subcategoryId'
               required
-              value={props.category}
-              onChange={props.handleDropdownChange}
+              value={subcategoryId}
+              onChange={handleSubcategoryChange}
             >
-              <MenuItem value='1'>All Sub-categories</MenuItem>
-              <MenuItem value='2'>Sub 2</MenuItem>
-              <MenuItem value='3'>Sub 3</MenuItem>
-              <MenuItem value='4'>Sub 4</MenuItem>
+              {subcategoryOptions[categoryId] ? (
+                subcategoryOptions[categoryId].map((option) => (
+                  <MenuItem key={option.id} value={option.id}>
+                    {option.name}
+                  </MenuItem>
+                ))
+              ) : (
+                <MenuItem key={-1}>-</MenuItem>
+              )}
             </Select>
           </Grid>
         </Grid>
         <Grid container spacing={2} justify='center' alignItems='flex-start' wrap='wrap'>
+          <Grid item xs={3} container direction='column'>
+            <Grid item xs={12} container alignItems='left' className={classes.multiLabel}>
+              <InputLabel>Locations</InputLabel>
+            </Grid>
+            <Grid item xs={12}>
+              <MultiSelect
+                isMulti
+                isClearable={false}
+                name='locationIds'
+                options={locationOptions}
+                onChange={handleLocationsChange}
+              />
+            </Grid>
+          </Grid>
           <Grid item xs={3}>
             <TextField
               variant='outlined'
               margin='normal'
               fullWidth
-              id='titleText'
               label='Listing Title'
-              name='listingTitle'
+              name='title'
               placeholder='Example'
+              onChange={handleFilterChange}
               autoFocus
             />
           </Grid>
           <Grid item xs={3}>
             <TextField
+              type='number'
               variant='outlined'
               margin='normal'
               fullWidth
-              id='postalCode'
-              label='Postal Code'
-              name='postalCode'
-              placeholder='V1V 1V1'
-              autoFocus
-            />
-          </Grid>
-          <Grid item xs={3}>
-            <TextField
-              variant='outlined'
-              margin='normal'
-              fullWidth
-              id='minimumRating'
               label='Minimum Rating'
-              name='minimumRating'
+              name='minRating'
               placeholder='0.0 to 5.0'
+              onChange={handleFilterChange}
               autoFocus
             />
           </Grid>
           <Grid item xs={3}>
             <TextField
+              type='number'
               variant='outlined'
               margin='normal'
               fullWidth
-              id='maximumRating'
               label='Maximum Rating'
-              name='maximumRating'
+              name='maxRating'
               placeholder='0.0 to 5.0'
+              onChange={handleFilterChange}
               autoFocus
             />
           </Grid>
         </Grid>
       </form>
       <SearchClearSnackbar SearchClearSnackbar={SearchClearSnackbar}></SearchClearSnackbar>
+      <br />
       <ListingList listings={listings}></ListingList>
+      <br />
       <Grid container direction='column' justify='center' alignItems='center'>
         <PaginationControlled PaginationControlled={PaginationControlled}></PaginationControlled>
       </Grid>

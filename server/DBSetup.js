@@ -316,25 +316,60 @@ create(
 create(
   'CategoryType (' +
     'id INT AUTO_INCREMENT PRIMARY KEY, ' +
+    'parentId INT, ' +
     'name VARCHAR(100), ' +
-    'paymentRequired BOOLEAN ' +
+    'paymentRequired BOOLEAN, ' +
+    'FOREIGN KEY (parentId) REFERENCES CategoryType(id)' +
   ')'
 );
 
-insert('CategoryType(name, paymentRequired)', [
-  // These listing categories require payment (paymentRequired == true)
-  ['Rental', true],
-  ['House & Yard Services', true],
-  ['Individual & Group Services', true],
-  ['Legal, Sales & Insurance Agencies', true],
-  ['Classes, Clubs & Events', true],
+// Parent categories
+insert('CategoryType(parentId, name, paymentRequired)', [
+  [null, 'Rentals', true],
+  [null, 'House & Yard Services', true],
+  [null, 'Legal & Sales', true],
+  [null, 'Classes, Clubs & Events', true],
+  [null, 'Cohousing, Co-ops, Intergenerational, Planned Neighborhoods', false],
+  [null, 'Home Share Facilitation & Supporting Services', false],
+  [null, 'Home Sharing Businesses, Groups and Organizations', false],
+  [null, 'Government & Human Service Agencies offering Shared Living', false],
+  [null, 'Information & Services', false],
+  [null, 'Members with Homes to Share', false],
+]);
 
-  // These listin' categories are free (paymentRequired == false)
-  ['Shared & Community Living Initiatives', false],
-  ['Sharing Facilitation, Matching & Educational Services', false],
-  ['Governmental Supports & Services', false],
-  ['Member Shared Homes', false],
-  ['Member Holiday Home Swap', false],
+// Subcategories
+insert('CategoryType(parentId, name, paymentRequired)', [
+  [1, 'House', true],
+  [1, 'Partial House / Suite Up or Down', true],
+  [1, 'Duplex / Triplex', true],
+  [1, 'Apartment', true],
+  [1, 'Condo / Townhouse', true],
+  [1, 'Rural', true],
+  [1, 'Country', true],
+  [1, 'Other', true],
+  [11, 'Carpet Cleaning', true],
+  [11, 'Computer & Technical Services', true],
+  [11, 'Delivery Services', true],
+  [11, 'Duct Cleaning', true],
+  [11, 'Gardening, Yard Work, & Yard Maintenance', true],
+  [11, 'Handyman Services', true],
+  [11, 'Housekeeper / Cleaner', true],
+  [11, 'Home Care Services', true],
+  [11, 'House Maintenance & Repair', true],
+  [11, 'Meal Services', true],
+  [11, 'Moving & Storage', true],
+  [11, 'Organizing / De-Cluttering', true],
+  [11, 'Pet Services', true],
+  [11, 'Ride Sharing & Transportation', true],
+  [11, 'Window Cleaning', true],
+  [11, 'Other', true],
+  [21, 'Multi-Ownership Purchasing: Legalities', true],
+  [21, 'Multiple Ownership Sales / Purchasing: Realtors', true],
+  [21, 'Multi-Owner / Tenant / Shared Home Insurance', true],
+  [21, 'Shared Vehicle Insurance & Legalities', true],
+  [21, 'Understanding Home Sharing & Taxes', true],
+  [21, 'Multi-Tenant Rentals & Leases', true],
+  [21, 'Shared Homes A-Z', true],
 ]);
 
 create(
@@ -361,9 +396,10 @@ create(
     // to create an additional table and row for each image reference. 
     
     'imageURLs VARCHAR(200),' +
+    'locationId INT,' +
     'categoryId INT,' +
-    'subCategoryId INT,' +
     'organizationId INT,' +
+    'FOREIGN KEY (locationId) REFERENCES Location(id),' +
     'FOREIGN KEY (categoryId) REFERENCES CategoryType(id),' +
     'FOREIGN KEY (organizationId) REFERENCES Organization(id)' +
   ')'
@@ -397,9 +433,9 @@ insert('Organization(verified, organizationName, registrationDate, organizationW
 
 // Value Template
 // [approvalStatus,'Title', 'Website', 'Phone', 'E-Mail', 'Description', categoryId, organizationId],
-insert('Listing(approvalStatus, title, creationDate, website, phone, email, description, ratingAverage, categoryId, organizationId)', [
-  [true,'Suzanne\'s Rentals', new Date('2015-07-15'), 'No Website', '250-555-8001', 'Suzzanne@Gmail.test', 'I\'m looking to rent out rooms in my apartment. Cost is $600 a month for a 1 bedroom or $900.00 a month for a 2 Bedroom.',4.5, 1,51],
-  [true,'Larry\'s Lizard Rental Service', new Date('2020-08-08'), 'larryzlizards.com', '250-555-1234', 'larry@larryzlizards.com', 'Lizzzzzzzzzaaaaaaaaaaaaaaaaaarrrrrrrdddddddddssssssssssss',2, 11,1],
+insert('Listing(approvalStatus, title, creationDate, website, phone, email, description, ratingAverage, locationId, categoryId, organizationId)', [
+  [true,'Suzanne\'s Rentals', new Date('2015-07-15'), 'No Website', '250-555-8001', 'Suzzanne@Gmail.test', 'I\'m looking to rent out rooms in my apartment. Cost is $600 a month for a 1 bedroom or $900.00 a month for a 2 Bedroom.',4.5, 1, 131,51],
+  [true,'Larry\'s Lizard Rental Service', new Date('2020-08-08'), 'larryzlizards.com', '250-555-1234', 'larry@larryzlizards.com', 'Lizzzzzzzzzaaaaaaaaaaaaaaaaaarrrrrrrdddddddddssssssssssss',2, 11,301,1],
   // [true,'Grass Assassins Grass Cutting Service', 'grassassassins.com', '250-555-0987', 'contact@grassassassins.com', 'We will cut your grass for a fair and reasonable price, our specialty is cutting grass so quiet you would never hear it', 'NO IMAGE', 2,2],
   // [true,'Grass B Gone Landscaping Service', 'grassbgone.ca', '413-555-1983', 'info@grassbgone.ca', 'Tired of watering the lawn every week? Tired of paying to get your lawn mowed? Contact us about our xeroscaping services, never water again!', '/image/testimage/test.jpg', 2,3],
   // [false,'Dog Walking - CHEAP', 'legitdogwalkingcomapany.xyz', '250-555-1111', 'walking@dogCorp.xyz', 'Will walk your dog for cheap, please pay via Monero Money Transfer', 'No Image', 3,4],

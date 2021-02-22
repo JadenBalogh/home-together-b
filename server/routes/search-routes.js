@@ -7,8 +7,8 @@ export default function (app) {
     });
   });
 
-  app.get('/api/get-listings', (req, res) => {
-    searchService.getListings(req.query.categoryId).then((listings) => {
+  app.post('/api/get-listings', (req, res) => {
+    searchService.getListings(req.body.categoryId, req.body.filters).then((listings) => {
       res.send(listings);
     });
   });

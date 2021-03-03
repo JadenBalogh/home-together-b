@@ -474,3 +474,144 @@ Concluding the client's requirement in the client meeting
 ###### 3:40-3:54pm:
 
 Discussing plan of next week
+
+
+
+
+## January 30th
+
+###### 1:00-1:30pm:
+
+Discusing the process done:
+
+Discussing the implementation of the map feature (Alvin)
+
+Reviewing the front end implementation (new design)(Athena)
+
+
+
+
+## January 26th
+
+###### 1:30-2:05pm:
+
+Reviewing the process of each teammate
+
+Discussing the question to Twila
+
+###### 2:32-2:43pm:
+ Organizing questions for Twila
+ 
+ ###### 2:43-2:58pm:
+DIscussing issues and assign the tasks
+
+
+
+
+
+## January 30th
+
+###### 1:00-1:30pm:
+Discussing the map feature and progress from last half of the week
+
+
+
+
+## February 2nd
+
+###### 1:30-2:06pm:
+Discuss what to show and discuss with Twila
+
+###### 2:06-2:32pm:
+Review the progress of each team member
+
+###### 2:32-2:53pm:
+Create issues and assign the tasks:
+
+Fix listings filters
+
+Write down list of user tasks to use during evaluations
+
+Write down system description to read during evaluations
+
+
+
+
+## February 6th
+
+###### 1:00-1:13pm:
+Discuss the requirement of Twila
+
+###### 1:13-1:38pm:
+Discuss what to do with the back end 
+
+###### 1:38-1:59pm:
+Discuss the progress and what to do before next Tuesday
+
+
+
+
+## February 16th
+
+###### 1:30-1:41pm:
+Discuss the progress
+
+###### 1:41-2:03pm:
+Discuss the future plan
+
+###### 2:03-2:21pm:
+Create issues and assign the tasks:
+
+REPORT: Heuristic Analysis
+
+REPORT: Issues discovered
+
+REPORT: Complete milestone features
+
+
+
+
+## February 23th
+
+###### 1:30-1:42pm:
+Discuss and reviewthe progress 
+
+###### 1:42-1:56pm:
+Discuss the requirement of the milestone report and how to do them
+
+###### 1:56-2:07pm:
+Create issues and assign them
+
+
+
+
+## March 2nd
+
+###### 1:30-1:44pm:
+Review the heuristic report
+
+###### 1:44-1:53pm:
+List the remainning tasks waiting for Twila to prioritize
+
+###### 1:53-2:01pm:
+List the questions for Twila
+
+###### 2:01-2:09pm:
+Dscuss the remaining task
+
+###### 2:09-2:30pm:
+Create isssues and assign tasks:
+
+Fix Clear Filters button in the Services page
+
+Fix listings pagination OR remove pagination and allow the listing to grow infinitely
+
+View member details page 
+
+Manage listings page
+
+Edit business profile
+
+View business profile 
+
+Business signup and storing account type

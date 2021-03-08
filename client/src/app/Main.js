@@ -7,6 +7,7 @@ import Signup from '../signup/Signup';
 import SignIn from '../signin/SignIn';
 import Profile from '../profile/Profile';
 import EditProfile from '../edit-profile/EditProfile';
+import ManageListings from '../manage-listings/ManageListings';
 
 // Main component that renders all pages in our app
 class Main extends Component {
@@ -20,6 +21,7 @@ class Main extends Component {
         <Route exact path='/signin' component={SignIn} />
         <Route exact path='/profile' component={Profile} />
         <Route exact path='/edit-profile' component={EditProfile} />
+        <Route exact path='/manage-listings' component={ManageListings} />
       </Switch>
     );
   }

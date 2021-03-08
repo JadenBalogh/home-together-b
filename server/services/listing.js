@@ -50,6 +50,23 @@ const SQL_SELECT_LISTING = `
   WHERE l.id = ?
 `;
 
+const SQL_INSERT_LISTING = `
+  INSERT INTO Listing(
+    approvalStatus,
+    creationDate,
+    title,
+    website,
+    phone,
+    email,
+    startDate,
+    endDate,
+    description,
+    locationId,
+    categoryId,
+    organizationId)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+`;
+
 async function getListingsByUser(id) {
   return await dbutils.query(SQL_SELECT_LISTINGS_BY_USER, [id]);
 }
@@ -63,7 +80,27 @@ async function getListing(id) {
   }
 }
 
+async function createListing(listing) {
+  await dbutils.query(SQL_INSERT_LISTING, [
+    true, // TODO: implement approval by admins
+    Date.now(),
+    listing.title,
+    listing.website,
+    listing.phone,
+    listing.email,
+    Date.now(), // TODO: Start date
+    Date.now(), // TODO: End date
+    listing.description,
+    listing.locationId,
+    listing.categoryId,
+    listing.organizationId,
+  ]);
+
+  return { success: true };
+}
+
 export default {
   getListingsByUser,
   getListing,
+  createListing,
 };

@@ -8,4 +8,8 @@ export default function (app) {
   app.get('/api/get-listing', (req, res) => {
     listingService.getListing(req.query.id).then((listing) => res.send(listing));
   });
+
+  app.post('/api/create-listing', (req, res) => {
+    listingService.createListing(req.body.listing).then((result) => res.send(result));
+  });
 }

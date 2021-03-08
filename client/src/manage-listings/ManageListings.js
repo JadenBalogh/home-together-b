@@ -12,8 +12,8 @@ const useStyles = makeStyles({
   row: {
     position: 'relative',
     border: 'solid 1px gray',
-    boxShadow: '1px 1px gray',
     padding: 15,
+    margin: 1,
     '&:hover': {
       boxShadow: '3px 3px gray',
       top: -2,
@@ -40,14 +40,15 @@ export default function ManageListings() {
     fetch(url + route + params)
       .then((raw) => raw.json())
       .then((result) => {
-        console.log(result);
         setListings(result);
       });
   };
 
+  let handleCreate = () => {
+    history.push('/create-listing');
+  };
+
   let handleView = (id) => {
-    // TODO: Load listing view page
-    console.log('view ' + id);
     history.push('/listing/' + id);
   };
 
@@ -104,6 +105,14 @@ export default function ManageListings() {
             </Grid>
           </Grid>
         ))}
+      </Grid>
+      <br />
+      <Grid container>
+        <Grid item align='center' xs={12}>
+          <Button variant='contained' color='primary' onClick={handleCreate}>
+            New Listing
+          </Button>
+        </Grid>
       </Grid>
     </div>
   );

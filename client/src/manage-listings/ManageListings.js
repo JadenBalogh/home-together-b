@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Typography, Grid, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -6,7 +7,7 @@ import '../shared/List.css';
 
 const useStyles = makeStyles({
   table: {
-    width: 800,
+    minWidth: 800,
   },
   row: {
     position: 'relative',
@@ -26,6 +27,7 @@ const useStyles = makeStyles({
 
 export default function ManageListings() {
   const classes = useStyles();
+  let history = useHistory();
   let [listings, setListings] = useState([]);
 
   let loadListings = () => {
@@ -45,7 +47,8 @@ export default function ManageListings() {
 
   let handleView = (id) => {
     // TODO: Load listing view page
-    console.log('view');
+    console.log('view ' + id);
+    history.push('/listing/' + id);
   };
 
   let handleEdit = (id) => {
@@ -68,7 +71,7 @@ export default function ManageListings() {
       <br />
       <Grid className={classes.table} container alignItems='center' justify='space-between'>
         {listings.map((listing) => (
-          <Grid className={classes.row} container alignItems='center' justify='space-between'>
+          <Grid key={listing.id} className={classes.row} container alignItems='center' justify='space-between'>
             <Grid
               className={classes.title}
               item
@@ -77,7 +80,7 @@ export default function ManageListings() {
               alignItems='center'
               justify='flex-start'
               xs={9}
-              onClick={handleView}
+              onClick={() => handleView(listing.id)}
             >
               <Grid item>
                 <Typography variant='h6'>{listing.title}</Typography>
@@ -89,12 +92,12 @@ export default function ManageListings() {
             </Grid>
             <Grid item container spacing={2} alignItems='center' justify='flex-end' xs={3}>
               <Grid item>
-                <Button variant='contained' color='primary' onClick={handleEdit}>
+                <Button variant='contained' color='primary' onClick={() => handleEdit(listing.id)}>
                   Edit
                 </Button>
               </Grid>
               <Grid item>
-                <Button variant='contained' color='secondary' onClick={handleDelete}>
+                <Button variant='contained' color='secondary' onClick={() => handleDelete(listing.id)}>
                   Delete
                 </Button>
               </Grid>

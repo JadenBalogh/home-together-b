@@ -8,6 +8,7 @@ import SignIn from '../signin/SignIn';
 import Profile from '../profile/Profile';
 import EditProfile from '../edit-profile/EditProfile';
 import ManageListings from '../manage-listings/ManageListings';
+import Listing from '../manage-listings/Listing';
 
 // Main component that renders all pages in our app
 class Main extends Component {
@@ -22,6 +23,7 @@ class Main extends Component {
         <Route exact path='/profile' component={Profile} />
         <Route exact path='/edit-profile' component={EditProfile} />
         <Route exact path='/manage-listings' component={ManageListings} />
+        <Route exact path='/listing/:id' component={Listing} />
       </Switch>
     );
   }

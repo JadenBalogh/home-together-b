@@ -15,7 +15,7 @@ class SignupSelection extends Component {
 
   render() {
     return (
-      <Container component='main' maxWidth='xs'>
+      <Container component='main'>
         <div>
           <Typography component='h1' variant='h5'>
             Select Account Type
@@ -30,32 +30,11 @@ class SignupSelection extends Component {
               alignItems='center'
               justify='center'
             >
-              <Grid
-                item
-                xs={12}
-                container
-                direction='column'
-                alignItems='center'
-                justify='center'
-              >
-                <Link href='/signup'>
-                  <IconButton>
-                    <PersonIcon style={{ fontSize: 200 }}/>
-                  </IconButton>
-                </Link>
-              </Grid>
-              {/* <Grid
-                item
-                xs={12}
-                container
-                direction='column'
-                alignItems='center'
-                justify='center'
-              >
-                <Typography component='h1' variant='h5'>
-                  Personal Account
-                </Typography>
-              </Grid> */}
+              <Link href='/signup'>
+                <IconButton>
+                  <PersonIcon style={{ fontSize: 200 }}/>
+                </IconButton>
+              </Link>
             </Grid>
             <Grid
               item
@@ -66,32 +45,37 @@ class SignupSelection extends Component {
               alignItems='center'
               justify='center'
             >
-              <Grid
-                item
-                xs={12}
-                container
-                direction='column'
-                alignItems='center'
-                justify='center'
-              >
-                <Link href='/business-signup'>
-                  <IconButton>
-                    <WorkIcon style={{ fontSize: 200 }}/>
-                  </IconButton>
-                </Link>
-              </Grid>
-              {/* <Grid
-                item
-                xs={12}
-                container
-                direction='column'
-                alignItems='center'
-                justify='center'
-              >
-                <Typography component='h1' variant='h5'>
-                  Business Account
-                </Typography>
-              </Grid> */}
+              <Link href='/business-signup'>
+                <IconButton>
+                  <WorkIcon style={{ fontSize: 200 }}/>
+                </IconButton>
+              </Link>              
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              container
+              direction='column'
+              alignItems='center'
+              justify='center'
+            >
+              <Typography component='h1' variant='h5'>
+                Personal Account
+              </Typography>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              container
+              direction='column'
+              alignItems='center'
+              justify='center'
+            >
+              <Typography component='h1' variant='h5'>
+                Business Account
+              </Typography>
             </Grid>
           </Grid>
         </div>

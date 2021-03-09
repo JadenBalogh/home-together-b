@@ -153,7 +153,6 @@ async function businessSignup(data) {
     organizationAltPhone,
     organizationEmail,
   ]);
-  let memberId = result.insertId;
 
   console.log('passed step 1');
 

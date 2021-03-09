@@ -39,7 +39,7 @@ const SQL_INSERT_BUSINESS = `
     organizationStreetAddress,
     organizationMailingAddress,
     organizationPostalCode)
-  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 `;
 
 const SQL_INSERT_SEARCHABLE_INFO = `
@@ -141,23 +141,29 @@ async function businessSignup(data) {
 
   console.log(data);
 
-  // Insert Member
+  // Insert Organization
   let pwHash = bcrypt.hashSync(data.password);
   let result = await dbutils.query(SQL_INSERT_BUSINESS, [
-    incorporated,
-    incorporatedName,
-    incorporatedOwners,
-    contactFirstName,
-    contactLastName,
-    contactPhone,
-    username,
+    data.verified,
+    data.date,
+    data.incorporated,
+    data.incorporatedName,
+    data.incorporatedOwners,
+    data.contactFirstName,
+    data.contactLastName,
+    data.contactPhone,
+    data.username,
     pwHash, 
-    organizationName,
-    organizationWebsite,
-    organizationLogoURL,
-    organizationMainPhone,
-    organizationAltPhone,
-    organizationEmail,
+    data.organizationName,
+    data.organizationWebsite,
+    data.organizationLogoURL,
+    data.organizationMainPhone,
+    data.organizationAltPhone,
+    data.organizationEmail,
+    data.national,
+    data.organizationStreetAddress,
+    data.organizationMailingAddress,
+    data.organizationPostalCode,
   ]);
 
   console.log('passed step 1');

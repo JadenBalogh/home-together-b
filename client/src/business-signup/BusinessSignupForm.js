@@ -11,11 +11,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { InputLabel } from '@material-ui/core';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import IncText from './IncText';
-import Tooltip from '@material-ui/core/Tooltip';
 import './BusinessSignup.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -45,59 +41,9 @@ const useStyles = makeStyles((theme) => ({
 //things to check: username, password(against confPassword), email, phone no. (only if we plan on implementing cellphone authentication/confirmation)
 export default function SignupForm(props) {
   const classes = useStyles();
-  const [genderOptions, setGenderOptions] = useState([]);
-  const [familyStatusOptions, setFamilyStatusOptions] = useState([]);
-  const [cityOptions, setCityOptions] = useState([]);
-  // const testCities = [
-  //   { value: 'Kelowna', label: 'Kelowna' },
-  //   { value: 'Vernon', label: 'Vernon' },
-  //   { value: 'Kamloops', label: 'Kamloops' },
-  //   { value: 'Test1', label: 'Test1' },
-  // ];
-
-  useEffect(() => fetchGenderOptions(), []);
-  useEffect(() => fetchFamilyStatusOptions(), []);
-  useEffect(() => fetchCityOptions(), []);
-
-  function fetchGenderOptions() {
-    const url = process.env.REACT_APP_LOCAL_URL || '';
-    fetch(url + '/api/get-gender-types')
-      .then((res) => res.json())
-      .then((json) => {
-        let options = json.map((x) => {
-          return { value: x.id, label: x.name };
-        });
-        setGenderOptions(options);
-      });
-  }
-
-  function fetchFamilyStatusOptions() {
-    const url = process.env.REACT_APP_LOCAL_URL || '';
-    fetch(url + '/api/get-family-status-types')
-      .then((res) => res.json())
-      .then((json) => {
-        let options = json.map((x) => {
-          return { value: x.id, label: x.name };
-        });
-        setFamilyStatusOptions(options);
-      });
-  }
-
-  function fetchCityOptions() {
-    const url = process.env.REACT_APP_LOCAL_URL || '';
-    fetch(url + '/api/get-locations')
-      .then((res) => res.json())
-      .then((json) => {
-        let options = json.map((x) => {
-          return { value: x.id, label: x.city };
-        });
-        setCityOptions(options);
-      });
-  }
 
   return (
     <Container component='main' maxWidth='xs'>
-      {/* <CssBaseline /> */}
       <div className={classes.paper}>
         <Typography component='h1' variant='h5'>
           Sign up

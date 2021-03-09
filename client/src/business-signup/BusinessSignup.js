@@ -12,7 +12,7 @@ class Signup extends Component {
       usernameExists: false,
       passwordsMatch: true,
       formData: {
-        verified: false,
+        verified: true,
         date: new Date(),
         incorporated: false,
         incorporatedName: null,

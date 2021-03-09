@@ -18,7 +18,9 @@ const SQL_INSERT_MEMBER = `
 `;
 
 const SQL_INSERT_BUSINESS = `
-  INSERT INTO Member(
+  INSERT INTO Organization(
+    verified,
+    registrationDate,
     incorporated,
     incorporatedName,
     incorporatedOwners,
@@ -32,8 +34,12 @@ const SQL_INSERT_BUSINESS = `
     organizationLogoURL,
     organizationMainPhone,
     organizationAltPhone,
-    organizationEmail)
-  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,)
+    organizationEmail,
+    national,
+    organizationStreetAddress,
+    organizationMailingAddress,
+    organizationPostalCode)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 `;
 
 const SQL_INSERT_SEARCHABLE_INFO = `
@@ -159,8 +165,40 @@ async function businessSignup(data) {
   return { success: true };
 }
 
+// function login(username, password) {
+//   return new Promise((resolve, reject) => {
+//     let sql = `SELECT id, username, password FROM Member WHERE username = ?`;
+//     dbutils
+//       .query(sql, [username])
+//       .then((results) => {
+//         let user = results[0];
+//         if (!user) {
+//           resolve({ err: 'User not found.' });
+//           return;
+//         }
+
+//         if (!bcrypt.compareSync(password, user.password)) {
+//           resolve({ err: 'Invalid password.' });
+//           return;
+//         }
+
+//         let token = jwt.sign({ id: user.id }, authConfig.secret, { expiresIn: 86400 });
+//         resolve({
+//           id: user.id,
+//           username: user.username,
+//           accessToken: token,
+//         });
+//       })
+//       .catch((reason) => {
+//         console.log(reason);
+//         reject(reason);
+//       });
+//   });
+// }
+
 function login(username, password) {
   return new Promise((resolve, reject) => {
+    const userFound = false;
     let sql = `SELECT id, username, password FROM Member WHERE username = ?`;
     dbutils
       .query(sql, [username])
@@ -168,7 +206,9 @@ function login(username, password) {
         let user = results[0];
         if (!user) {
           resolve({ err: 'User not found.' });
-          return;
+        }
+        else {
+          userFound = true;
         }
 
         if (!bcrypt.compareSync(password, user.password)) {
@@ -187,7 +227,36 @@ function login(username, password) {
         console.log(reason);
         reject(reason);
       });
-  });
+
+    if(!userFound) {
+      let sql = `SELECT id, username, password FROM Organization WHERE username = ?`;
+      dbutils
+        .query(sql, [username])
+        .then((results) => {
+          let user = results[0];
+          if (!user) {
+            resolve({ err: 'User not found.' });
+            return;
+          }
+
+          if (!bcrypt.compareSync(password, user.password)) {
+            resolve({ err: 'Invalid password.' });
+            return;
+          }
+
+          let token = jwt.sign({ id: user.id }, authConfig.secret, { expiresIn: 86400 });
+          resolve({
+            id: user.id,
+            username: user.username,
+            accessToken: token,
+          });
+        })
+        .catch((reason) => {
+          console.log(reason);
+          reject(reason);
+        });
+      }
+    });
 }
 
 export default {

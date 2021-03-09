@@ -12,9 +12,11 @@ class Signup extends Component {
       usernameExists: false,
       passwordsMatch: true,
       formData: {
+        verified: false,
+        date: new Date(),
         incorporated: false,
-        incorporatedName: '',
-        incorporatedOwners: '',
+        incorporatedName: null,
+        incorporatedOwners: null,
         contactFirstName: '',
         contactLastName: '',
         contactPhone: '',
@@ -26,6 +28,10 @@ class Signup extends Component {
         organizationMainPhone: '',
         organizationAltPhone: '',
         organizationEmail: '',
+        national: false,
+        organizationStreetAddress: '',
+        organizationMailingAddress: '',
+        organizationPostalCode: '',
       },
     };
     this.handleInputChange = this.handleInputChange.bind(this);

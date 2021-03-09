@@ -49,7 +49,7 @@ export default function NavBar() {
               </>
             ) : (
               <>
-                <NavItem path='/signup' label='Signup' />
+                <NavItem path='/signup-selection' label='Signup' />
                 <NavItem path='/signin' label='Login' />
               </>
             )}

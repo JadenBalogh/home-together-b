@@ -7,6 +7,12 @@ export default function (app) {
     });
   });
 
+  app.post('/api/business-signup', (req, res) => {
+    accountService.businessSignup(req.body.formData).then((result) => {
+      res.send(result);
+    });
+  });
+
   app.post('/api/login', (req, res) => {
     accountService.login(req.body.username, req.body.password).then((result) => {
       res.send(result);

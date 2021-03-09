@@ -17,6 +17,25 @@ const SQL_INSERT_MEMBER = `
   VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 `;
 
+const SQL_INSERT_BUSINESS = `
+  INSERT INTO Member(
+    incorporated,
+    incorporatedName,
+    incorporatedOwners,
+    contactFirstName,
+    contactLastName,
+    contactPhone,
+    username,
+    password,
+    organizationName,
+    organizationWebsite,
+    organizationLogoURL,
+    organizationMainPhone,
+    organizationAltPhone,
+    organizationEmail)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,)
+`;
+
 const SQL_INSERT_SEARCHABLE_INFO = `
   INSERT INTO SearchableInfo(
     memberId,
@@ -108,6 +127,39 @@ async function signup(data) {
   return { success: true };
 }
 
+async function businessSignup(data) {
+  let available = await authService.checkAvailable(data.username, data.email);
+  if (!available) {
+    return { err: 'Credentials unavailable.' };
+  }
+
+  console.log(data);
+
+  // Insert Member
+  let pwHash = bcrypt.hashSync(data.password);
+  let result = await dbutils.query(SQL_INSERT_BUSINESS, [
+    incorporated,
+    incorporatedName,
+    incorporatedOwners,
+    contactFirstName,
+    contactLastName,
+    contactPhone,
+    username,
+    pwHash, 
+    organizationName,
+    organizationWebsite,
+    organizationLogoURL,
+    organizationMainPhone,
+    organizationAltPhone,
+    organizationEmail,
+  ]);
+  let memberId = result.insertId;
+
+  console.log('passed step 1');
+
+  return { success: true };
+}
+
 function login(username, password) {
   return new Promise((resolve, reject) => {
     let sql = `SELECT id, username, password FROM Member WHERE username = ?`;
@@ -141,5 +193,6 @@ function login(username, password) {
 
 export default {
   signup,
+  businessSignup,
   login,
 };

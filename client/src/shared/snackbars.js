@@ -53,11 +53,13 @@ export default function CustomizedSnackbars() {
 }
 
 
-function SearchClearSnackbar() {
+function SearchClearSnackbar(props) {
+    const {clear}=props
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
     const handleClick = () => {
+        clear()
         setOpen(true);
     };
 

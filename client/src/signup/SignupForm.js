@@ -50,12 +50,6 @@ export default function SignupForm(props) {
   const [genderOptions, setGenderOptions] = useState([]);
   const [familyStatusOptions, setFamilyStatusOptions] = useState([]);
   const [cityOptions, setCityOptions] = useState([]);
-  // const testCities = [
-  //   { value: 'Kelowna', label: 'Kelowna' },
-  //   { value: 'Vernon', label: 'Vernon' },
-  //   { value: 'Kamloops', label: 'Kamloops' },
-  //   { value: 'Test1', label: 'Test1' },
-  // ];
 
   useEffect(() => fetchGenderOptions(), []);
   useEffect(() => fetchFamilyStatusOptions(), []);

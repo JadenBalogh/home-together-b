@@ -13,7 +13,6 @@ class Signup extends Component {
       passwordsMatch: true,
       formData: {
         verified: true,
-        date: new Date(),
         incorporated: false,
         incorporatedName: null,
         incorporatedOwners: null,
@@ -105,7 +104,7 @@ class Signup extends Component {
 
   checkPhoneExists() {
     const url = process.env.REACT_APP_LOCAL_URL || '';
-    const route = '/api/check-phone-exists?';
+    const route = '/api/check-business-phone-exists?';
     const params = new URLSearchParams(`&phoneNumber=${this.state.formData.phoneNumber}`).toString();
     fetch(url + route + params)
       .then((res) => res.json())
@@ -118,7 +117,7 @@ class Signup extends Component {
 
   checkEmailExists() {
     const url = process.env.REACT_APP_LOCAL_URL || '';
-    const route = '/api/check-email-exists?';
+    const route = '/api/check-business-email-exists?';
     const params = new URLSearchParams(`&email=${this.state.formData.email}`).toString();
     fetch(url + route + params)
       .then((res) => res.json())

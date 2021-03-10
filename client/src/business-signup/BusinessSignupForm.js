@@ -183,7 +183,7 @@ export default function SignupForm(props) {
                 required
                 fullWidth
                 id='organizationName'
-                label='Organization Name'
+                label='Business Name'
                 onChange={props.handleInputChange}
               />
             </Grid>
@@ -193,7 +193,7 @@ export default function SignupForm(props) {
                 variant='outlined'
                 fullWidth
                 id='organizationWebsite'
-                label='Organization Website URL'
+                label='Business Website URL'
                 onChange={props.handleInputChange}
               />
             </Grid>
@@ -203,7 +203,7 @@ export default function SignupForm(props) {
                 variant='outlined'
                 fullWidth
                 id='organizationLogoURL'
-                label='Organization Logo URL'
+                label='Business Logo URL'
                 onChange={props.handleInputChange}
               />
             </Grid>
@@ -213,7 +213,7 @@ export default function SignupForm(props) {
                 required
                 fullWidth
                 id='organizationMainPhone'
-                label='Organization Main Phone Number'
+                label='Business Main Phone Number'
                 name='organizationMainPhone'
                 type='tel'
                 autoComplete='phone'
@@ -227,10 +227,9 @@ export default function SignupForm(props) {
             <Grid item xs={12} container>
               <TextField
                 variant='outlined'
-                required
                 fullWidth
                 id='organizationAltPhone'
-                label='Organization Alternate Phone Number'
+                label='Business Alternate Phone Number'
                 name='organizationAltPhone'
                 type='tel'
                 autoComplete='phone'
@@ -247,7 +246,7 @@ export default function SignupForm(props) {
                 required
                 fullWidth
                 id='organizationEmail'
-                label='Organization Email Address'
+                label='Business Email Address'
                 type='email'
                 name='organizationEmail'
                 autoComplete='email'
@@ -263,7 +262,7 @@ export default function SignupForm(props) {
                 variant='outlined'
                 fullWidth
                 id='organizationStreetAddress'
-                label='Organization Street Address'
+                label='Business Street Address'
                 name='organizationStreetAddress'
                 onChange={props.handleInputChange}
               />
@@ -273,7 +272,7 @@ export default function SignupForm(props) {
                 variant='outlined'
                 fullWidth
                 id='organizationMailingAddress'
-                label='Organization Mailing Address'
+                label='Business Mailing Address'
                 name='organizationMailingAddress'
                 onChange={props.handleInputChange}
               />
@@ -284,7 +283,7 @@ export default function SignupForm(props) {
                 required
                 fullWidth
                 id='organizationPostalCode'
-                label='Organization Postal Code'
+                label='Business Postal Code'
                 name='organizationPostalCode'
                 onChange={props.handleInputChange}
               />

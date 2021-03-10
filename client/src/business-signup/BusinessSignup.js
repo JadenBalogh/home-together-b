@@ -18,6 +18,7 @@ class Signup extends Component {
         incorporatedOwners: null,
         contactFirstName: '',
         contactLastName: '',
+        contactEmail: '',
         contactPhone: '',
         username: '',
         password: '',

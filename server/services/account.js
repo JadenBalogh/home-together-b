@@ -151,6 +151,7 @@ async function businessSignup(data) {
     data.incorporatedOwners,
     data.contactFirstName,
     data.contactLastName,
+    data.contactEmail,
     data.contactPhone,
     data.username,
     pwHash, 

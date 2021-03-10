@@ -56,6 +56,7 @@ function Listings(props) {
       .then((res) => res.json())
       .then((json) => {
         setListings(json);
+      console.log('fetched');
       });
   }
 
@@ -196,7 +197,7 @@ function Listings(props) {
               autoFocus
             />
           </Grid>
-          <Grid item xs={3}>
+ {/*          <Grid item xs={3}>
             <TextField
               type='number'
               variant='outlined'
@@ -208,7 +209,7 @@ function Listings(props) {
               onChange={handleFilterChange}
               autoFocus
             />
-          </Grid>
+          </Grid> */}
         </Grid>
       </form>
       <SearchClearSnackbar SearchClearSnackbar={SearchClearSnackbar}></SearchClearSnackbar>

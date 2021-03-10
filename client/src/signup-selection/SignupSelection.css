@@ -1,0 +1,8 @@
+.signup-selection-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  background-color: #FFFFFF;
+  margin-bottom: 30px;
+}

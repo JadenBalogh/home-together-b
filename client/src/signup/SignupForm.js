@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -18,6 +19,7 @@ import RadioText from "../shared/RadioText";
 import SignupSelect from "./SignupSelect";
 import Tooltip from "@material-ui/core/Tooltip";
 import "./Signup.css";
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -180,6 +182,12 @@ export default function SignupForm(props) {
               />
             </Grid>
             <Grid item xs={12} container>
+              <FormControlLabel
+                control={<Switch name='checkedA' color='primary' />}
+                label='Mailing Address and Home Address are the same'
+              ></FormControlLabel>
+            </Grid>
+            <Grid item xs={12} container>
               <TextField
                 variant="outlined"
                 required
@@ -215,8 +223,10 @@ export default function SignupForm(props) {
                 error={props.usernameExists} //checks if already exists
                 helperText={
                   props.usernameExists
+
                     ? "Username already exists."
                     : "IMPORTANT: Username cannot be changed after signup"
+
                 }
               />
             </Grid>

@@ -108,6 +108,8 @@ class Signup extends Component {
   checkPasswordsMatch() {
     let match = this.state.formData.password === this.state.confPassword;
     this.setState({ passwordsMatch: match });
+    console.log('Hit Password Match Check');
+    
   }
 
   handleConfirm(event) {

@@ -8,6 +8,9 @@ import SignIn from '../signin/SignIn';
 import Profile from '../profile/Profile';
 import EditProfile from '../edit-profile/EditProfile';
 import Member from '../view-member/Member';
+import ManageListings from '../manage-listings/ManageListings';
+import Listing from '../manage-listings/Listing';
+import CreateListing from '../manage-listings/CreateListing';
 
 // Main component that renders all pages in our app
 class Main extends Component {
@@ -22,6 +25,9 @@ class Main extends Component {
         <Route exact path='/profile' component={Profile} />
         <Route exact path='/edit-profile' component={EditProfile} />
         <Route exact path='/member/:id' component={Member} />
+        <Route exact path='/manage-listings' component={ManageListings} />
+        <Route exact path='/create-listing' component={CreateListing} />
+        <Route exact path='/listing/:id' component={Listing} />
       </Switch>
     );
   }

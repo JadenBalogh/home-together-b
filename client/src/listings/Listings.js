@@ -196,19 +196,6 @@ function Listings(props) {
               autoFocus
             />
           </Grid>
-          <Grid item xs={3}>
-            <TextField
-              type='number'
-              variant='outlined'
-              margin='normal'
-              fullWidth
-              label='Maximum Rating'
-              name='maxRating'
-              placeholder='0.0 to 5.0'
-              onChange={handleFilterChange}
-              autoFocus
-            />
-          </Grid>
         </Grid>
       </form>
       <SearchClearSnackbar SearchClearSnackbar={SearchClearSnackbar}></SearchClearSnackbar>

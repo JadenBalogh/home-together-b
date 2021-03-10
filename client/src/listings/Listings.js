@@ -1,35 +1,28 @@
-import React, { useState, useEffect,useCallback } from "react";
-import {
-  Select,
-  Grid,
-  Typography,
-  TextField,
-  InputLabel,
-  MenuItem,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import MultiSelect from "react-select";
-import ListingList from "./ListingList";
-import PaginationControlled from "./Pagination";
-import { SearchClearSnackbar } from "../shared/snackbars";
-import "./Listings.css";
+import React, { useState, useEffect, useCallback } from 'react';
+import { Select, Grid, Typography, TextField, InputLabel, MenuItem } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import MultiSelect from 'react-select';
+import ListingList from './ListingList';
+import PaginationControlled from './Pagination';
+import { SearchClearSnackbar } from '../shared/snackbars';
+import './Listings.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    paddingTop: "25px",
+    paddingTop: '25px',
   },
   paper: {
     padding: theme.spacing(2),
-    textAlign: "center",
+    textAlign: 'center',
     color: theme.palette.text.secondary,
   },
   hidden: {
-    visibility: "hidden",
+    visibility: 'hidden',
   },
   multiLabel: {
-    marginTop: "15px",
-    marginBottom: "5px",
+    marginTop: '15px',
+    marginBottom: '5px',
   },
 }));
 
@@ -38,33 +31,33 @@ function Listings(props) {
   const [listings, setListings] = useState([]);
   const [filters, setFilters] = useState({
     locationIds: [],
-    title: "",
-    minRating: "",
-    maxRating: "",
+    title: '',
+    minRating: '',
+    maxRating: '',
   });
-  const [currentLocation,setCurrentLocation]=useState([])
+  const [currentLocation, setCurrentLocation] = useState([]);
   const [locationOptions, setLocationOptions] = useState([]);
-  const [categoryId, setCategoryId] = useState("");
-  const [subcategoryId, setSubcategoryId] = useState("");
+  const [categoryId, setCategoryId] = useState('');
+  const [subcategoryId, setSubcategoryId] = useState('');
   const [categoryOptions, setCategoryOptions] = useState([]);
   const [subcategoryOptions, setSubcategoryOptions] = useState({});
-  const reset=useCallback(()=>{
-      setCategoryId('')
-      setSubcategoryId('')
-      setFilters({locationIds:[],title:'',minRating: '',maxRating: ''})
-      setCurrentLocation([])
-  },[])
+  const reset = useCallback(() => {
+    setCategoryId('');
+    setSubcategoryId('');
+    setFilters({ locationIds: [], title: '', minRating: '', maxRating: '' });
+    setCurrentLocation([]);
+  }, []);
 
   useEffect(fetchLocationOptions, []);
   useEffect(fetchCategoryOptions, []);
   useEffect(updateListings, [subcategoryId, filters]);
 
   function updateListings() {
-    const url = process.env.REACT_APP_LOCAL_URL || "";
-    const route = "/api/get-listings?";
+    const url = process.env.REACT_APP_LOCAL_URL || '';
+    const route = '/api/get-listings?';
     fetch(url + route, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ categoryId: subcategoryId, filters }),
     })
       .then((res) => res.json())
@@ -74,8 +67,8 @@ function Listings(props) {
   }
 
   function fetchLocationOptions() {
-    const url = process.env.REACT_APP_LOCAL_URL || "";
-    fetch(url + "/api/get-locations")
+    const url = process.env.REACT_APP_LOCAL_URL || '';
+    fetch(url + '/api/get-locations')
       .then((res) => res.json())
       .then((json) => {
         let options = json.map((x) => {
@@ -86,8 +79,8 @@ function Listings(props) {
   }
 
   function fetchCategoryOptions() {
-    const url = process.env.REACT_APP_LOCAL_URL || "";
-    fetch(url + "/api/get-category-types")
+    const url = process.env.REACT_APP_LOCAL_URL || '';
+    fetch(url + '/api/get-category-types')
       .then((res) => res.json())
       .then((options) => {
         setCategoryOptions(options.filter((x) => !x.parentId));
@@ -102,7 +95,7 @@ function Listings(props) {
 
   function handleCategoryChange(event) {
     setCategoryId(event.target.value);
-    setSubcategoryId("");
+    setSubcategoryId('');
   }
 
   function handleSubcategoryChange(event) {
@@ -119,7 +112,7 @@ function Listings(props) {
 
   function handleLocationsChange(selection) {
     let ids = selection ? selection.map((x) => x.value) : [];
-    setCurrentLocation(selection)
+    setCurrentLocation(selection);
     setFilters({
       ...filters,
       locationIds: ids,
@@ -128,23 +121,17 @@ function Listings(props) {
 
   const classes = useStyles();
   return (
-    <div className="listings-container">
-      <Typography component="h1" variant="h5">
+    <div className='listings-container'>
+      <Typography component='h1' variant='h5'>
         Find Services:
       </Typography>
       <form className={classes.form} noValidate>
-        <Grid
-          container
-          spacing={3}
-          direction="row"
-          justify="space-evenly"
-          alignItems="flex-end"
-        >
+        <Grid container spacing={3} direction='row' justify='space-evenly' alignItems='flex-end'>
           <Grid item xs>
             <InputLabel>Select a Category:</InputLabel>
             <Select
-              className="listing-select"
-              name="categoryId"
+              className='listing-select'
+              name='categoryId'
               value={categoryId}
               required
               onChange={handleCategoryChange}
@@ -156,15 +143,11 @@ function Listings(props) {
               ))}
             </Select>
           </Grid>
-          <Grid
-            item
-            xs
-            className={subcategoryOptions[categoryId] ? "" : classes.hidden}
-          >
+          <Grid item xs className={subcategoryOptions[categoryId] ? '' : classes.hidden}>
             <InputLabel>Select a Sub-category:</InputLabel>
             <Select
-              className="listing-select"
-              name="subcategoryId"
+              className='listing-select'
+              name='subcategoryId'
               required
               value={subcategoryId}
               onChange={handleSubcategoryChange}
@@ -181,28 +164,16 @@ function Listings(props) {
             </Select>
           </Grid>
         </Grid>
-        <Grid
-          container
-          spacing={2}
-          justify="center"
-          alignItems="flex-start"
-          wrap="wrap"
-        >
-          <Grid item xs={3} container direction="column">
-            <Grid
-              item
-              xs={12}
-              container
-              alignItems="left"
-              className={classes.multiLabel}
-            >
+        <Grid container spacing={2} justify='center' alignItems='flex-start' wrap='wrap'>
+          <Grid item xs={3} container direction='column'>
+            <Grid item xs={12} container alignItems='left' className={classes.multiLabel}>
               <InputLabel>Locations</InputLabel>
             </Grid>
             <Grid item xs={12}>
               <MultiSelect
                 isMulti
                 isClearable={false}
-                name="locationIds"
+                name='locationIds'
                 options={locationOptions}
                 value={currentLocation}
                 onChange={handleLocationsChange}
@@ -211,41 +182,41 @@ function Listings(props) {
           </Grid>
           <Grid item xs={3}>
             <TextField
-              variant="outlined"
-              margin="normal"
+              variant='outlined'
+              margin='normal'
               fullWidth
-              label="Listing Title"
-              name="title"
-               value={filters['title']}
-              placeholder="Example"
+              label='Listing Title'
+              name='title'
+              value={filters['title']}
+              placeholder='Example'
               onChange={handleFilterChange}
               autoFocus
             />
           </Grid>
           <Grid item xs={3}>
             <TextField
-              type="number"
-              variant="outlined"
-              margin="normal"
+              type='number'
+              variant='outlined'
+              margin='normal'
               fullWidth
-              label="Minimum Rating"
-    value={filters['minRating']}
-              name="minRating"
-              placeholder="0.0 to 5.0"
+              label='Minimum Rating'
+              value={filters['minRating']}
+              name='minRating'
+              placeholder='0.0 to 5.0'
               onChange={handleFilterChange}
               autoFocus
             />
           </Grid>
           <Grid item xs={3}>
             <TextField
-              type="number"
-              variant="outlined"
-              margin="normal"
+              type='number'
+              variant='outlined'
+              margin='normal'
               fullWidth
-              label="Maximum Rating"
-              name="maxRating"
-    value={filters['maxRating']}
-              placeholder="0.0 to 5.0"
+              label='Maximum Rating'
+              name='maxRating'
+              value={filters['maxRating']}
+              placeholder='0.0 to 5.0'
               onChange={handleFilterChange}
               autoFocus
             />
@@ -256,10 +227,8 @@ function Listings(props) {
       <br />
       <ListingList listings={listings}></ListingList>
       <br />
-      <Grid container direction="column" justify="center" alignItems="center">
-        <PaginationControlled
-          PaginationControlled={PaginationControlled}
-        ></PaginationControlled>
+      <Grid container direction='column' justify='center' alignItems='center'>
+        <PaginationControlled PaginationControlled={PaginationControlled}></PaginationControlled>
       </Grid>
     </div>
   );

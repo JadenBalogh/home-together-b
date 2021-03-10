@@ -30,7 +30,11 @@ class Members extends Component {
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
   }
-  
+
+  componentDidMount() {
+    this.updateMembers();
+  }
+
   updateMembers() {
     let filters = this.state.filters;
 
@@ -47,12 +51,6 @@ class Members extends Component {
           members: json,
         });
       });
-      console.log('Search for new members list attempted')
-      if(Members.members === undefined){
-        console.log('No results were successfully returned')
-      }
-      
-       
   }
 
   handleInputChange(event) {

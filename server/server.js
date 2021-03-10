@@ -10,7 +10,6 @@ import accountRoutes from './routes/account-routes.js';
 import searchRoutes from './routes/search-routes.js';
 import authRoutes from './routes/auth-routes.js';
 import profileRoutes from './routes/profile-routes.js';
-import listingRoutes from './routes/listing-routes.js';
 
 import localenv from 'localenv';
 const port = process.env.PORT || 3001;
@@ -32,7 +31,6 @@ accountRoutes(app);
 searchRoutes(app);
 authRoutes(app);
 profileRoutes(app);
-listingRoutes(app);
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));

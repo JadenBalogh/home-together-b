@@ -23,11 +23,3 @@
   text-decoration: none;
   color: #FFFFFF;
 }
-.navbar-minis:hover {
-  color: #cfe5f8;
-}
-.navbar-toolbar .active {
-  color:aquamarine;
-  text-decoration: underline;
-  
-}

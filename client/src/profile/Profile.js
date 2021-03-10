@@ -12,7 +12,7 @@ import {
   CardActions,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import ProfileField from '../shared/ProfileField';
+import ProfileField from './ProfileField';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -48,6 +48,7 @@ export default function Profile() {
           window.alert(result.err);
           return;
         }
+        console.log({ ...result });
         setMember({ ...result });
       });
   };

@@ -171,9 +171,11 @@ export default function SignupForm(props) {
               />
             </Grid>
             <Grid item xs={12} container>
-              <FormControlLabel control={<Switch  name="checkedA" color="primary"/>}
-              label="Mailing Address and Home Address are the same" ></FormControlLabel>
-            </Grid>       
+              <FormControlLabel
+                control={<Switch name='checkedA' color='primary' />}
+                label='Mailing Address and Home Address are the same'
+              ></FormControlLabel>
+            </Grid>
             <Grid item xs={12} container>
               <TextField
                 variant='outlined'
@@ -201,7 +203,9 @@ export default function SignupForm(props) {
                 }}
                 error={props.usernameExists} //checks if already exists
                 helperText={
-                  props.usernameExists ? 'Username already exists.' : 'IMPORTANT: Username cannot be changed after signup'
+                  props.usernameExists
+                    ? 'Username already exists.'
+                    : 'IMPORTANT: Username cannot be changed after signup'
                 }
               />
             </Grid>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SignupForm from './SignupForm';
+import BusinessSignupForm from './BusinessSignupForm';
 
 class Signup extends Component {
   constructor(props) {
@@ -12,37 +12,26 @@ class Signup extends Component {
       usernameExists: false,
       passwordsMatch: true,
       formData: {
-        firstName: '',
-        lastName: '',
-        birthYear: '',
-        homeAddress: '',
-        mailAddress: '',
-        username: '', //check if already exists
+        verified: true,
+        incorporated: false,
+        incorporatedName: null,
+        incorporatedOwners: null,
+        contactFirstName: '',
+        contactLastName: '',
+        contactEmail: '',
+        contactPhone: '',
+        username: '',
         password: '',
-        email: '', //check if existing
-        phoneNumber: '', //check if existing?
-        genderId: 0,
-        familyStatusId: 0,
-        minHomeCapacity: 0,
-        maxHomeCapacity: 0,
-        minMonthlyBudget: 0,
-        maxMonthlyBudget: 0,
-        locationIds: [],
-        petRestrictions: false,
-        petRestrictionsText: '',
-        healthRestrictions: false,
-        healthRestrictionsText: '',
-        religionRestrictions: false,
-        religionRestrictionsText: '',
-        smokingRestrictions: false,
-        smokingRestrictionsText: '',
-        allergies: false,
-        allergiesText: '',
-        dietRestrictions: false,
-        dietRestrictionsText: '',
-        hasHousing: false,
-        housingDescription: '',
-        profileText: '',
+        organizationName: '',
+        organizationWebsite: '',
+        organizationLogoURL: '',
+        organizationMainPhone: '',
+        organizationAltPhone: '',
+        organizationEmail: '',
+        national: false,
+        organizationStreetAddress: '',
+        organizationMailingAddress: '',
+        organizationPostalCode: '',
       },
     };
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -62,7 +51,7 @@ class Signup extends Component {
     console.log(formData);
 
     const url = process.env.REACT_APP_LOCAL_URL || '';
-    const route = '/api/signup?';
+    const route = '/api/business-signup?';
     fetch(url + route, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -108,8 +97,6 @@ class Signup extends Component {
   checkPasswordsMatch() {
     let match = this.state.formData.password === this.state.confPassword;
     this.setState({ passwordsMatch: match });
-    console.log('Hit Password Match Check');
-    
   }
 
   handleConfirm(event) {
@@ -118,7 +105,7 @@ class Signup extends Component {
 
   checkPhoneExists() {
     const url = process.env.REACT_APP_LOCAL_URL || '';
-    const route = '/api/check-phone-exists?';
+    const route = '/api/check-business-phone-exists?';
     const params = new URLSearchParams(`&phoneNumber=${this.state.formData.phoneNumber}`).toString();
     fetch(url + route + params)
       .then((res) => res.json())
@@ -131,7 +118,7 @@ class Signup extends Component {
 
   checkEmailExists() {
     const url = process.env.REACT_APP_LOCAL_URL || '';
-    const route = '/api/check-email-exists?';
+    const route = '/api/check-business-email-exists?';
     const params = new URLSearchParams(`&email=${this.state.formData.email}`).toString();
     fetch(url + route + params)
       .then((res) => res.json())
@@ -159,7 +146,7 @@ class Signup extends Component {
   render() {
     return (
       <div>
-        <SignupForm
+        <BusinessSignupForm
           formData={this.state.formData}
           confPassword={this.state.confPassword}
           phoneExists={this.state.phoneExists}

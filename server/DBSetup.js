@@ -285,6 +285,7 @@ create(
     'contactFirstName VARCHAR(300),' +
     'contactLastName VARCHAR(300),' +
     'contactPhone VARCHAR(300),' +
+    'contactEmail VARCHAR(100),' +
     'username VARCHAR(200),' +
     'password VARCHAR(1000),' +
     

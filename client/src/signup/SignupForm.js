@@ -6,6 +6,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Switch from '@material-ui/core/Switch';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -162,6 +163,12 @@ export default function SignupForm(props) {
                 helperText='If you do not have one, use the address of a friend, relative, or verifiable organization.'
                 onChange={props.handleInputChange}
               />
+            </Grid>
+            <Grid item xs={12} container>
+              <FormControlLabel
+                control={<Switch name='checkedA' color='primary' />}
+                label='Mailing Address and Home Address are the same'
+              ></FormControlLabel>
             </Grid>
             <Grid item xs={12} container>
               <TextField

@@ -207,6 +207,7 @@ function Listings(props) {
               autoFocus
             />
           </Grid>
+
           <Grid item xs={3}>
             <TextField
               type='number'
@@ -221,6 +222,7 @@ function Listings(props) {
               autoFocus
             />
           </Grid>
+
         </Grid>
       </form>
       <SearchClearSnackbar clear={reset} />

@@ -16,4 +16,12 @@ export default function (app) {
   app.post('/api/edit-listing', (req, res) => {
     listingService.editListing(req.body.id, req.body.listing).then(() => res.end());
   });
+
+  app.post('/api/edit-listing', (req, res) => {
+    listingService.editListing(req.body.id, req.body.listing).then(() => res.end());
+  });
+
+  app.post('/api/delete-listing', (req, res) => {
+    listingService.deleteListing(req.body.id).then(() => res.end());
+  });
 }

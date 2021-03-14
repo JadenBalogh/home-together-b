@@ -82,6 +82,8 @@ const SQL_UPDATE_LISTING = `
   WHERE id = ?
 `;
 
+const SQL_DELETE_LISTING = `DELETE FROM Listing WHERE id = ?`;
+
 async function getListingsByUser(id) {
   return await dbutils.query(SQL_SELECT_LISTINGS_BY_USER, [id]);
 }
@@ -129,9 +131,14 @@ async function editListing(id, listing) {
   ]);
 }
 
+async function deleteListing(id) {
+  await dbutils.query(SQL_DELETE_LISTING, [id]);
+}
+
 export default {
   getListingsByUser,
   getListing,
   createListing,
   editListing,
+  deleteListing,
 };

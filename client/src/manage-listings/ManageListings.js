@@ -31,7 +31,6 @@ export default function ManageListings() {
   let [listings, setListings] = useState([]);
 
   let loadListings = () => {
-    console.log('yuh');
     let id = sessionStorage.getItem('id') || 1;
 
     const url = process.env.REACT_APP_LOCAL_URL || '';
@@ -73,7 +72,7 @@ export default function ManageListings() {
   return (
     <div className='list-container'>
       <Typography component='h1' variant='h5'>
-        My Listings
+        {sessionStorage.getItem('accountType') === '1' ? 'My Listings' : 'My Homes'}
       </Typography>
       <br />
       <Grid className={classes.table} container alignItems='center' justify='space-between'>

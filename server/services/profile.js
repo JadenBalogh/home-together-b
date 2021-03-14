@@ -39,6 +39,32 @@ const SQL_SELECT_MEMBER = `
   WHERE m.id = ?
 `;
 
+const SQL_SELECT_ORGANIZATION = `
+  SELECT
+    verified,
+    incorporated,
+    incorporatedName,
+    incorporatedOwners,
+    contactFirstName,
+    contactLastName,
+    contactEmail,
+    contactPhone,
+    username,
+    password,
+    organizationName,
+    organizationWebsite,
+    organizationLogoURL,
+    organizationMainPhone,
+    organizationAltPhone,
+    organizationEmail,
+    national,
+    organizationStreetAddress,
+    organizationMailingAddress,
+    organizationPostalCode,
+  FROM Organization m
+  WHERE m.id = ?
+`;
+
 const SQL_UPDATE_MEMBER = `
   UPDATE Member
   SET
@@ -79,6 +105,32 @@ const SQL_UPDATE_SEARCHABLE_INFO = `
   WHERE memberId = ?
 `;
 
+const SQL_UPDATE_ORGANIZATION = `
+  UPDATE Organization
+  SET
+    verified,
+    incorporated,
+    incorporatedName,
+    incorporatedOwners,
+    contactFirstName,
+    contactLastName,
+    contactEmail,
+    contactPhone,
+    username,
+    password,
+    organizationName,
+    organizationWebsite,
+    organizationLogoURL,
+    organizationMainPhone,
+    organizationAltPhone,
+    organizationEmail,
+    national,
+    organizationStreetAddress,
+    organizationMailingAddress,
+    organizationPostalCode,
+  WHERE id = ?
+`;
+
 const SQL_DELETE_LOCATION_PREFERENCE = `DELETE FROM LocationPreference WHERE memberId = ?`;
 
 const SQL_INSERT_LOCATION_PREFERENCE = `INSERT INTO LocationPreference(memberId, locationId) VALUES (?, ?)`;
@@ -91,6 +143,14 @@ function getMember(id) {
         member.locationIds = locations.map((x) => x.locationId);
         resolve(member);
       });
+    });
+  });
+}
+
+function getBusiness(id) {
+  return new Promise((resolve) => {
+    dbutils.query(SQL_SELECT_ORGANIZATION, [id]).then((results) => {
+      resolve(results[0]);
     });
   });
 }
@@ -141,7 +201,35 @@ async function editMember(id, data) {
   }
 }
 
+async function editOrganization(id, data) {
+  // Update Organization
+  await dbutils.query(SQL_UPDATE_ORGANIZATION, [
+    data.verified,
+    data.incorporated,
+    data.incorporatedName,
+    data.incorporatedOwners,
+    data.contactFirstName,
+    data.contactLastName,
+    data.contactEmail,
+    data.contactPhone,
+    data.username,
+    data.password,
+    data.organizationName,
+    data.organizationWebsite,
+    data.organizationLogoURL,
+    data.organizationMainPhone,
+    data.organizationAltPhone,
+    data.organizationEmail,
+    data.national,
+    data.organizationStreetAddress,
+    data.organizationMailingAddress,
+    data.organizationPostalCode,
+    id,
+  ]);
+}
 export default {
   getMember,
+  getBusiness,
   editMember,
+  editOrganization,
 };

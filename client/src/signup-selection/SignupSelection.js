@@ -20,7 +20,7 @@ class SignupSelection extends Component {
           <Typography component='h1' variant='h5'>
             Select Account Type
           </Typography>
-          <Grid container spacing={2}>
+          <Grid container spacing={4}>
             <Grid
               item
               xs={12}
@@ -76,6 +76,36 @@ class SignupSelection extends Component {
               <Typography component='h1' variant='h5'>
                 Business Account
               </Typography>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              container
+              direction='column'
+              alignItems='center'
+              justify='center'
+            >
+              <p>
+                <div>
+                  Accounts for users looking to homeshare. Users can look for other members to homeshare with and share their homes.
+                </div>
+              </p>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              container
+              direction='column'
+              alignItems='center'
+              justify='center'
+            >
+              <p>
+                <div>
+                  Accounts for users looking to create listings. Businesses can create and manage listings for services related to homesharing.
+                </div>
+              </p>
             </Grid>
           </Grid>
         </div>

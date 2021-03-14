@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Select, Grid, Typography, TextField, InputLabel, MenuItem } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import MultiSelect from 'react-select';
@@ -35,11 +35,18 @@ function Listings(props) {
     minRating: '',
     maxRating: '',
   });
+  const [currentLocation, setCurrentLocation] = useState([]);
   const [locationOptions, setLocationOptions] = useState([]);
   const [categoryId, setCategoryId] = useState('');
   const [subcategoryId, setSubcategoryId] = useState('');
   const [categoryOptions, setCategoryOptions] = useState([]);
   const [subcategoryOptions, setSubcategoryOptions] = useState({});
+  const reset = useCallback(() => {
+    setCategoryId('');
+    setSubcategoryId('');
+    setFilters({ locationIds: [], title: '', minRating: '', maxRating: '' });
+    setCurrentLocation([]);
+  }, []);
 
   useEffect(fetchLocationOptions, []);
   useEffect(fetchCategoryOptions, []);
@@ -105,6 +112,7 @@ function Listings(props) {
 
   function handleLocationsChange(selection) {
     let ids = selection ? selection.map((x) => x.value) : [];
+    setCurrentLocation(selection);
     setFilters({
       ...filters,
       locationIds: ids,
@@ -167,6 +175,7 @@ function Listings(props) {
                 isClearable={false}
                 name='locationIds'
                 options={locationOptions}
+                value={currentLocation}
                 onChange={handleLocationsChange}
               />
             </Grid>
@@ -178,6 +187,7 @@ function Listings(props) {
               fullWidth
               label='Listing Title'
               name='title'
+              value={filters['title']}
               placeholder='Example'
               onChange={handleFilterChange}
               autoFocus
@@ -190,12 +200,14 @@ function Listings(props) {
               margin='normal'
               fullWidth
               label='Minimum Rating'
+              value={filters['minRating']}
               name='minRating'
               placeholder='0.0 to 5.0'
               onChange={handleFilterChange}
               autoFocus
             />
           </Grid>
+
           <Grid item xs={3}>
             <TextField
               type='number'
@@ -204,14 +216,16 @@ function Listings(props) {
               fullWidth
               label='Maximum Rating'
               name='maxRating'
+              value={filters['maxRating']}
               placeholder='0.0 to 5.0'
               onChange={handleFilterChange}
               autoFocus
             />
           </Grid>
+
         </Grid>
       </form>
-      <SearchClearSnackbar SearchClearSnackbar={SearchClearSnackbar}></SearchClearSnackbar>
+      <SearchClearSnackbar clear={reset} />
       <br />
       <ListingList listings={listings}></ListingList>
       <br />

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import {
   Card,
   CardContent,
@@ -30,14 +30,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Profile() {
+export default function Member(props) {
   const classes = useStyles();
+  const { id } = useParams();
   let history = useHistory();
   let [member, setMember] = useState({});
 
-  let loadProfile = () => {
-    let id = sessionStorage.getItem('id') || 1;
-
+  let loadMember = () => {
     const url = process.env.REACT_APP_LOCAL_URL || '';
     const route = '/api/get-member?';
     const params = new URLSearchParams('id=' + id).toString();
@@ -52,12 +51,7 @@ export default function Profile() {
       });
   };
 
-  let handleEdit = (event) => {
-    event.preventDefault();
-    history.push('/edit-profile');
-  };
-
-  useEffect(loadProfile, []);
+  useEffect(loadMember, [id]);
 
   return (
     <Container component='main' maxWidth='md'>
@@ -66,27 +60,11 @@ export default function Profile() {
         <Card>
           <CardContent>
             <Grid container spacing={2}>
-              <Grid item xs={10}>
-                <Typography variant='h5'>My Profile</Typography>
+              <Grid item xs={12}>
+                <Typography variant='h5'>{`${member.firstName} ${member.lastName}`}</Typography>
                 <Divider />
               </Grid>
-              <Grid item xs={2}>
-                <Button variant='contained' color='primary' onClick={handleEdit}>
-                  Edit Profile
-                </Button>
-              </Grid>
             </Grid>
-            <br />
-            <Grid container spacing={2}>
-              <ProfileField label='Name' value={`${member.firstName} ${member.lastName}`} />
-              <ProfileField label='Home Address' value={member.homeAddress} />
-              <ProfileField label='Mail Address' value={member.mailAddress} />
-              <ProfileField label='Phone Number' value={member.phoneNumber} />
-              <ProfileField label='Email' value={member.email} />
-            </Grid>
-            <br />
-            <Typography variant='h6'>Public Information</Typography>
-            <Divider />
             <br />
             <Grid container spacing={2}>
               <ProfileField label='Gender' value={member.gender} />
@@ -148,8 +126,8 @@ export default function Profile() {
           <CardActions>
             <Grid container spacing={2}>
               <Grid item align='center' xs={12}>
-                <Button variant='contained' color='primary' onClick={handleEdit}>
-                  Edit Profile
+                <Button variant='contained' color='primary' onClick={history.goBack}>
+                  Back
                 </Button>
               </Grid>
             </Grid>

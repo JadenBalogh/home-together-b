@@ -6,6 +6,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Switch from '@material-ui/core/Switch';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -49,12 +50,6 @@ export default function SignupForm(props) {
   const [genderOptions, setGenderOptions] = useState([]);
   const [familyStatusOptions, setFamilyStatusOptions] = useState([]);
   const [cityOptions, setCityOptions] = useState([]);
-  // const testCities = [
-  //   { value: 'Kelowna', label: 'Kelowna' },
-  //   { value: 'Vernon', label: 'Vernon' },
-  //   { value: 'Kamloops', label: 'Kamloops' },
-  //   { value: 'Test1', label: 'Test1' },
-  // ];
 
   useEffect(() => fetchGenderOptions(), []);
   useEffect(() => fetchFamilyStatusOptions(), []);
@@ -170,6 +165,12 @@ export default function SignupForm(props) {
               />
             </Grid>
             <Grid item xs={12} container>
+              <FormControlLabel
+                control={<Switch name='checkedA' color='primary' />}
+                label='Mailing Address and Home Address are the same'
+              ></FormControlLabel>
+            </Grid>
+            <Grid item xs={12} container>
               <TextField
                 variant='outlined'
                 required
@@ -196,7 +197,9 @@ export default function SignupForm(props) {
                 }}
                 error={props.usernameExists} //checks if already exists
                 helperText={
-                  props.usernameExists ? 'Username already exists.' : 'IMPORTANT: Username cannot be changed after signup'
+                  props.usernameExists
+                    ? 'Username already exists.'
+                    : 'IMPORTANT: Username cannot be changed after signup'
                 }
               />
             </Grid>

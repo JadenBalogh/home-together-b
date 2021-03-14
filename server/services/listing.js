@@ -58,13 +58,15 @@ const SQL_INSERT_LISTING = `
     website,
     phone,
     email,
+    ratingAverage,
+    ratingCount,
     startDate,
     endDate,
     description,
     locationId,
     categoryId,
     organizationId)
-  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 `;
 
 const SQL_UPDATE_LISTING = `
@@ -100,13 +102,15 @@ async function getListing(id) {
 async function createListing(listing) {
   await dbutils.query(SQL_INSERT_LISTING, [
     true, // TODO: implement approval by admins
-    Date.now(),
+    new Date().toISOString(),
     listing.title,
     listing.website,
     listing.phone,
     listing.email,
-    Date.now(), // TODO: Start date
-    Date.now(), // TODO: End date
+    0,
+    0,
+    new Date().toISOString(), // TODO: Start date
+    new Date().toISOString(), // TODO: End date
     listing.description,
     listing.locationId,
     listing.categoryId,
@@ -122,8 +126,8 @@ async function editListing(id, listing) {
     listing.website,
     listing.phone,
     listing.email,
-    Date.now(), // TODO: Start date
-    Date.now(), // TODO: End date
+    new Date().toISOString(), // TODO: Start date
+    new Date().toISOString(), // TODO: End date
     listing.description,
     listing.locationId,
     listing.categoryId,

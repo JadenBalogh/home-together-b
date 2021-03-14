@@ -57,8 +57,15 @@ export default function ManageListings() {
   };
 
   let handleDelete = (id) => {
-    // TODO: Delete listing
-    console.log('delete');
+    const url = process.env.REACT_APP_LOCAL_URL || '';
+    const route = '/api/delete-listing?';
+    fetch(url + route, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id }),
+    }).then(() => {
+      loadListings();
+    });
   };
 
   useEffect(loadListings, [setListings]);

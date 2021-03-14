@@ -60,6 +60,7 @@ export default function SignIn() {
           return;
         }
         sessionStorage.setItem('id', json.id);
+        sessionStorage.setItem('accountType', json.accountType);
         sessionStorage.setItem('token', json.accessToken);
         history.push('/');
         window.location.reload();

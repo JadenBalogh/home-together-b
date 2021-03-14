@@ -106,7 +106,7 @@ export default function EditListing() {
             <Grid container>
               <Grid item align='center' xs={12}>
                 <Typography component='h1' variant='h5'>
-                  Edit Listing
+                  {sessionStorage.getItem('accountType') === '1' ? 'Edit Listing' : 'Edit Home'}
                 </Typography>
               </Grid>
             </Grid>

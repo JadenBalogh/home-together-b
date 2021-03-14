@@ -40,7 +40,14 @@ export default function NavBar() {
             <NavItem path='/listings' label='Services' />
             {sessionStorage.getItem('id') ? (
               <>
-                <NavItem path='/manage-listings' label={sessionStorage.getItem('accountType') === '1' ? 'Manage Listings' : 'Manage Homes'} />
+                <NavItem
+                  path='/create-listing'
+                  label={sessionStorage.getItem('accountType') === '1' ? 'New Listing' : 'Add Home'}
+                />
+                <NavItem
+                  path='/manage-listings'
+                  label={sessionStorage.getItem('accountType') === '1' ? 'Manage Listings' : 'Manage Homes'}
+                />
                 <NavItem path='/profile' label='My Profile' />
                 <Grid item className={classes.navItem}>
                   <Link href='#' onClick={logout}>

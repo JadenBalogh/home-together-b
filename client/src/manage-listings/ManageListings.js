@@ -115,7 +115,7 @@ export default function ManageListings() {
       <Grid container>
         <Grid item align='center' xs={12}>
           <Button variant='contained' color='primary' onClick={handleCreate}>
-            New Listing
+            {sessionStorage.getItem('accountType') === '1' ? 'New Listing' : 'Add Home'}
           </Button>
         </Grid>
       </Grid>

@@ -97,7 +97,7 @@ export default function CreateListing() {
             <Grid container>
               <Grid item align='center' xs={12}>
                 <Typography component='h1' variant='h5'>
-                  New Listing
+                  {sessionStorage.getItem('accountType') === '1' ? 'New Listing' : 'New Home to Share'}
                 </Typography>
               </Grid>
             </Grid>

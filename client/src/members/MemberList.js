@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -15,14 +16,28 @@ const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
+  row: {
+    cursor: 'pointer',
+    '&:hover': {
+      background: '#CFE5F8',
+    }
+  },
 });
 
 //Info stored: username, gender*, age*, status*, budget*
 function MemberList(props) {
+  let history = useHistory();
+
+  let handleMemberClicked = (id) => {
+    history.push('/member/' + id);
+  };
+
   const classes = useStyles();
   return (
     <div className='list-container'>
-      <Typography component="h1" variant="h6">Members Found:</Typography>
+      <Typography component='h1' variant='h6'>
+        Members Found:
+      </Typography>
       {/* <h3>Members Found:</h3> */}
       <TableContainer component={Paper}>
         <Table className={classes.table} size='small' aria-label='a dense table'>
@@ -47,7 +62,7 @@ function MemberList(props) {
           </TableHead>
           <TableBody>
             {props.members.map((member) => (
-              <TableRow key={member.id}>
+              <TableRow className={classes.row} key={member.id} onClick={() => handleMemberClicked(member.id)}>
                 <TableCell component='th' scope='row'>
                   {`${member.firstName} ${member.lastName}`}
                 </TableCell>

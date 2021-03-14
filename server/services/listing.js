@@ -67,6 +67,21 @@ const SQL_INSERT_LISTING = `
   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 `;
 
+const SQL_UPDATE_LISTING = `
+  UPDATE Listing
+  SET
+    title = ?,
+    website = ?,
+    phone = ?,
+    email = ?,
+    startDate = ?,
+    endDate = ?,
+    description = ?,
+    locationId = ?,
+    categoryId = ?
+  WHERE id = ?
+`;
+
 async function getListingsByUser(id) {
   return await dbutils.query(SQL_SELECT_LISTINGS_BY_USER, [id]);
 }
@@ -99,8 +114,24 @@ async function createListing(listing) {
   return { success: true };
 }
 
+async function editListing(id, listing) {
+  await dbutils.query(SQL_UPDATE_LISTING, [
+    listing.title,
+    listing.website,
+    listing.phone,
+    listing.email,
+    Date.now(), // TODO: Start date
+    Date.now(), // TODO: End date
+    listing.description,
+    listing.locationId,
+    listing.categoryId,
+    id,
+  ]);
+}
+
 export default {
   getListingsByUser,
   getListing,
   createListing,
+  editListing,
 };

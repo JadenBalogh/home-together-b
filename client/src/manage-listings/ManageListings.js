@@ -53,8 +53,7 @@ export default function ManageListings() {
   };
 
   let handleEdit = (id) => {
-    // TODO: Load edit listing page
-    console.log('edit');
+    history.push('/edit-listing/' + id);
   };
 
   let handleDelete = (id) => {

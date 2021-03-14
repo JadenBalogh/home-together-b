@@ -13,6 +13,8 @@ import Member from '../view-member/Member';
 import ManageListings from '../manage-listings/ManageListings';
 import Listing from '../manage-listings/Listing';
 import CreateListing from '../manage-listings/CreateListing';
+import BusinessProfile from '../business-profile/BusinessProfile';
+import EditBusinessProfile from '../edit-profile-business/EditBusinessProfile';
 
 // Main component that renders all pages in our app
 class Main extends Component {
@@ -32,6 +34,8 @@ class Main extends Component {
         <Route exact path='/manage-listings' component={ManageListings} />
         <Route exact path='/create-listing' component={CreateListing} />
         <Route exact path='/listing/:id' component={Listing} />
+        <Route exact path='/business-profile' component={BusinessProfile} />
+        <Route exact path='/edit-business-profile' component={EditBusinessProfile} />
       </Switch>
     );
   }

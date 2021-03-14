@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import {
   FormControl,
   FormControlLabel,
@@ -11,12 +10,9 @@ import {
   Grid,
   Typography,
   Container,
-  InputLabel,
-  Select,
-  MenuItem,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import RadioText from '../shared/RadioText';
+import IncText from './IncText';
 
 const useStyles = makeStyles((theme) => ({
   paper: {

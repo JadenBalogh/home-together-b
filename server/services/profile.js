@@ -61,8 +61,8 @@ const SQL_SELECT_ORGANIZATION = `
     organizationStreetAddress,
     organizationMailingAddress,
     organizationPostalCode,
-  FROM Organization m
-  WHERE m.id = ?
+  FROM Organization
+  WHERE id = ?
 `;
 
 const SQL_UPDATE_MEMBER = `

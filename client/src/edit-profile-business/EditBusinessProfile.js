@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import EditForm from './EditForm';
+import EditBusinessForm from './EditBusinessForm';
 
 class EditProfile extends Component {
   constructor(props) {
@@ -46,7 +46,7 @@ class EditProfile extends Component {
     let id = sessionStorage.getItem('id') || 1;
 
     const url = process.env.REACT_APP_LOCAL_URL || '';
-    const route = '/api/get-business?';//CHANGE ROUTE AND DETAILS FIRST
+    const route = '/api/get-business?';
     const params = new URLSearchParams('id=' + id).toString();
     fetch(url + route + params)
       .then((raw) => raw.json())
@@ -66,7 +66,7 @@ class EditProfile extends Component {
     let formData = this.state.formData;
 
     const url = process.env.REACT_APP_LOCAL_URL || '';
-    const route = '/api/edit-profile?';//CHANGE ROUTE AND DETAILS FIRST
+    const route = '/api/edit-business-profile?';
     fetch(url + route, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -121,7 +121,7 @@ class EditProfile extends Component {
   render() {
     return (
       <div>
-        <EditForm //...maybe reconsider the form being separate at this point huh
+        <EditBusinessForm
           formData={this.state.formData}
           phoneExists={this.state.phoneExists}
           emailExists={this.state.emailExists}

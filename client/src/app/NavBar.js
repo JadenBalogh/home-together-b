@@ -44,7 +44,7 @@ export default function NavBar() {
                 {/* <NavItem path='/profile' label='My Profile' /> */}
                 <NavItem
                   path={sessionStorage.getItem('accountType') === '1' ? '/business-profile' : '/profile'}
-                  label={sessionStorage.getItem('accountType') === '1' ? 'Account Profile' : 'My Profile'}
+                  label={sessionStorage.getItem('accountType') === '1' ? 'Account Details' : 'My Account'}
                 />
                 <Grid item className={classes.navItem}>
                   <Link href='#' onClick={logout}>

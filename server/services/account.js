@@ -26,6 +26,7 @@ const SQL_INSERT_BUSINESS = `
     incorporatedOwners,
     contactFirstName,
     contactLastName,
+    contactEmail,
     contactPhone,
     username,
     password,
@@ -39,7 +40,7 @@ const SQL_INSERT_BUSINESS = `
     organizationStreetAddress,
     organizationMailingAddress,
     organizationPostalCode)
-  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 `;
 
 const SQL_INSERT_SEARCHABLE_INFO = `

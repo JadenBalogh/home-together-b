@@ -82,12 +82,12 @@ export default function SignupForm(props) {
                   <FormControlLabel value='true' control={<Radio />} label='Yes' />
                   <FormControlLabel value='false' control={<Radio />} label='No' />
                 </RadioGroup>
-                <IncText
+                {/* <IncText
                   check={props.formData.incorporated}
                   name='incorporatedName'
                   value={props.formData.incorporatedName}
                   text='Incorporated Name'
-                />
+                /> */}
               </FormControl>
             </Grid>
             <Grid item xs={12} container>
@@ -96,7 +96,7 @@ export default function SignupForm(props) {
                 required
                 fullWidth
                 id='organizationEmail'
-                label='Business Email Address'
+                label='Email Address'
                 type='email'
                 name='organizationEmail'
                 autoComplete='email'
@@ -113,7 +113,7 @@ export default function SignupForm(props) {
                 variant='outlined'
                 fullWidth
                 id='organizationWebsite'
-                label='Business Website URL'
+                label='Website URL'
                 onChange={props.handleInputChange}
               />
             </Grid>
@@ -123,7 +123,7 @@ export default function SignupForm(props) {
                 required
                 fullWidth
                 id='organizationMainPhone'
-                label='Business Phone Number'
+                label='Phone Number'
                 name='organizationMainPhone'
                 type='tel'
                 autoComplete='phone'
@@ -139,7 +139,7 @@ export default function SignupForm(props) {
                 variant='outlined'
                 fullWidth
                 id='organizationAltPhone'
-                label='Business Cellphone Number'
+                label='Cellphone Number'
                 name='organizationAltPhone'
                 type='tel'
                 autoComplete='phone'
@@ -155,7 +155,7 @@ export default function SignupForm(props) {
                 variant='outlined'
                 fullWidth
                 id='organizationStreetAddress'
-                label='Business Street Address'
+                label='Street Address'
                 name='organizationStreetAddress'
                 onChange={props.handleInputChange}
               />
@@ -165,7 +165,7 @@ export default function SignupForm(props) {
                 variant='outlined'
                 fullWidth
                 id='organizationMailingAddress'
-                label='Business Mailing Address'
+                label='Mailing Address'
                 name='organizationMailingAddress'
                 onChange={props.handleInputChange}
               />
@@ -193,7 +193,7 @@ export default function SignupForm(props) {
                 required
                 fullWidth
                 id='organizationPostalCode'
-                label='Business Postal Code'
+                label='Postal Code/Searchable Address'
                 name='organizationPostalCode'
                 onChange={props.handleInputChange}
               />
@@ -204,7 +204,7 @@ export default function SignupForm(props) {
                 variant='outlined'
                 fullWidth
                 id='organizationLogoURL'
-                label='Business Logo URL'
+                label='Logo URL'
                 onChange={props.handleInputChange}
               />
             </Grid>

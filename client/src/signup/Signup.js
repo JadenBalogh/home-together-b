@@ -42,6 +42,7 @@ class Signup extends Component {
         dietRestrictionsText: '',
         hasHousing: false,
         housingDescription: '',
+        locationText: '',
         profileText: '',
       },
     };
@@ -95,12 +96,11 @@ class Signup extends Component {
     );
   }
 
-  handleDropdownChange(selection, action) {
-    let ids = selection ? selection.map((x) => x.value) : [];
+  handleDropdownChange(event, options) {
     this.setState((prevState) => ({
       formData: {
         ...prevState.formData,
-        [action.name]: ids,
+        locationIds: options.map((x) => x.value),
       },
     }));
   }
@@ -109,7 +109,6 @@ class Signup extends Component {
     let match = this.state.formData.password === this.state.confPassword;
     this.setState({ passwordsMatch: match });
     console.log('Hit Password Match Check');
-    
   }
 
   handleConfirm(event) {

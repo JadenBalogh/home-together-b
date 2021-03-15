@@ -6,7 +6,7 @@ export default function (app) {
   });
 
   app.get('/api/get-business', (req, res) => {
-    profileService.getMember(req.query.id).then((member) => res.send(member));
+    profileService.getBusiness(req.query.id).then((business) => res.send(business));
   });
 
   app.post('/api/edit-profile', (req, res) => {

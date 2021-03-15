@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Select, Grid, Typography, TextField, InputLabel, MenuItem } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import MultiSelect from 'react-select';
 import ListingList from './ListingList';
 import PaginationControlled from './Pagination';
 import { SearchClearSnackbar } from '../shared/snackbars';
 import './Listings.css';
+import LocationFilter from '../shared/LocationFilter';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,8 +35,6 @@ function Listings(props) {
     minRating: '',
     maxRating: '',
   });
-  const [currentLocation, setCurrentLocation] = useState([]);
-  const [locationOptions, setLocationOptions] = useState([]);
   const [categoryId, setCategoryId] = useState('');
   const [subcategoryId, setSubcategoryId] = useState('');
   const [categoryOptions, setCategoryOptions] = useState([]);
@@ -45,10 +43,8 @@ function Listings(props) {
     setCategoryId('');
     setSubcategoryId('');
     setFilters({ locationIds: [], title: '', minRating: '', maxRating: '' });
-    setCurrentLocation([]);
   }, []);
 
-  useEffect(fetchLocationOptions, []);
   useEffect(fetchCategoryOptions, []);
   useEffect(updateListings, [subcategoryId, filters]);
 
@@ -63,18 +59,6 @@ function Listings(props) {
       .then((res) => res.json())
       .then((json) => {
         setListings(json);
-      });
-  }
-
-  function fetchLocationOptions() {
-    const url = process.env.REACT_APP_LOCAL_URL || '';
-    fetch(url + '/api/get-locations')
-      .then((res) => res.json())
-      .then((json) => {
-        let options = json.map((x) => {
-          return { value: x.id, label: x.city };
-        });
-        setLocationOptions(options);
       });
   }
 
@@ -110,12 +94,10 @@ function Listings(props) {
     });
   }
 
-  function handleLocationsChange(selection) {
-    let ids = selection ? selection.map((x) => x.value) : [];
-    setCurrentLocation(selection);
+  function handleLocationsChange(event, options) {
     setFilters({
       ...filters,
-      locationIds: ids,
+      locationIds: options.map((x) => x.value),
     });
   }
 
@@ -164,21 +146,9 @@ function Listings(props) {
             </Select>
           </Grid>
         </Grid>
-        <Grid container spacing={2} justify='center' alignItems='flex-start' wrap='wrap'>
-          <Grid item xs={3} container direction='column'>
-            <Grid item xs={12} container alignItems='left' className={classes.multiLabel}>
-              <InputLabel>Locations</InputLabel>
-            </Grid>
-            <Grid item xs={12}>
-              <MultiSelect
-                isMulti
-                isClearable={false}
-                name='locationIds'
-                options={locationOptions}
-                value={currentLocation}
-                onChange={handleLocationsChange}
-              />
-            </Grid>
+        <Grid container spacing={2} justify='center' alignItems='center' wrap='wrap'>
+          <Grid item xs={3}>
+            <LocationFilter onChange={handleLocationsChange} />
           </Grid>
           <Grid item xs={3}>
             <TextField
@@ -222,7 +192,6 @@ function Listings(props) {
               autoFocus
             />
           </Grid>
-
         </Grid>
       </form>
       <SearchClearSnackbar clear={reset} />

@@ -80,6 +80,7 @@ function Listings(props) {
 
   function fetchCategoryOptions() {
     const url = process.env.REACT_APP_LOCAL_URL || '';
+    
     fetch(url + '/api/get-category-types')
       .then((res) => res.json())
       .then((options) => {
@@ -123,27 +124,32 @@ function Listings(props) {
   return (
     <div className='listings-container'>
       <Typography component='h1' variant='h5'>
-        Find Services:
+        Find Classifieds & Home Share Links:
       </Typography>
       <form className={classes.form} noValidate>
         <Grid container spacing={3} direction='row' justify='space-evenly' alignItems='flex-end'>
           <Grid item xs>
             <InputLabel>Select a Category:</InputLabel>
-            <Select
-              className='listing-select'
-              name='categoryId'
-              value={categoryId}
-              required
-              onChange={handleCategoryChange}
-            >
-              {categoryOptions.map((option) => (
-                <MenuItem key={option.id} value={option.id}>
-                  {option.name}
-                </MenuItem>
-              ))}
-            </Select>
+            <Select className="listing-select" name='categoryId' native defaultValue='' id='categoryId'>
+                    <option value='' />
+                    {categoryOptions.length > 0 && Object.keys(subcategoryOptions).length > 0 ? (
+                      categoryOptions.map((cat) => (
+                        <optgroup key={cat.id} label={`${cat.name}`}>
+                          {subcategoryOptions[cat.id] ? (
+                            subcategoryOptions[cat.id].map((subcat) => (
+                              <option key={subcat.id} value={subcat.id}>{`${subcat.name}`}</option>
+                            ))
+                          ) : (
+                            <></>
+                          )}
+                        </optgroup>
+                      ))
+                    ) : (
+                      <option value='' />
+                    )}
+                  </Select>
           </Grid>
-          <Grid item xs className={subcategoryOptions[categoryId] ? '' : classes.hidden}>
+          {/* <Grid item xs className={subcategoryOptions[categoryId] ? '' : classes.hidden}>
             <InputLabel>Select a Sub-category:</InputLabel>
             <Select
               className='listing-select'
@@ -162,7 +168,7 @@ function Listings(props) {
                 <MenuItem key={-1}>-</MenuItem>
               )}
             </Select>
-          </Grid>
+          </Grid> */}
         </Grid>
         <Grid container spacing={2} justify='center' alignItems='flex-start' wrap='wrap'>
           <Grid item xs={3} container direction='column'>
@@ -208,7 +214,7 @@ function Listings(props) {
             />
           </Grid>
 
-          <Grid item xs={3}>
+          {/* <Grid item xs={3}>
             <TextField
               type='number'
               variant='outlined'
@@ -221,7 +227,7 @@ function Listings(props) {
               onChange={handleFilterChange}
               autoFocus
             />
-          </Grid>
+          </Grid> */}
 
         </Grid>
       </form>

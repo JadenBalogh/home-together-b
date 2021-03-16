@@ -1,5 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Select, Grid, Typography, TextField, InputLabel, MenuItem } from '@material-ui/core';
+import {
+  Select,
+  Grid,
+  Typography,
+  TextField,
+  InputLabel,
+  MenuItem,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import MultiSelect from 'react-select';
 import ListingList from './ListingList';
@@ -41,16 +48,22 @@ function Listings(props) {
   const [subcategoryId, setSubcategoryId] = useState('');
   const [categoryOptions, setCategoryOptions] = useState([]);
   const [subcategoryOptions, setSubcategoryOptions] = useState({});
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(15);
+  const [pageNum, setPageNum] = useState(0);
   const reset = useCallback(() => {
     setCategoryId('');
     setSubcategoryId('');
     setFilters({ locationIds: [], title: '', minRating: '', maxRating: '' });
     setCurrentLocation([]);
   }, []);
+  const handlePageChange = useCallback((current) => {
+    setPage(current);
+  }, []);
 
   useEffect(fetchLocationOptions, []);
   useEffect(fetchCategoryOptions, []);
-  useEffect(updateListings, [subcategoryId, filters]);
+  useEffect(updateListings, [subcategoryId, filters, page, pageSize]);
 
   function updateListings() {
     const url = process.env.REACT_APP_LOCAL_URL || '';
@@ -58,11 +71,17 @@ function Listings(props) {
     fetch(url + route, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ categoryId: subcategoryId, filters }),
+      body: JSON.stringify({
+        categoryId: subcategoryId,
+        filters,
+        page,
+        pageSize,
+      }),
     })
       .then((res) => res.json())
       .then((json) => {
-        setListings(json);
+        setPageNum(json.pageNum);
+        setListings(json.list);
       });
   }
 
@@ -80,7 +99,6 @@ function Listings(props) {
 
   function fetchCategoryOptions() {
     const url = process.env.REACT_APP_LOCAL_URL || '';
-    
     fetch(url + '/api/get-category-types')
       .then((res) => res.json())
       .then((options) => {
@@ -96,6 +114,8 @@ function Listings(props) {
 
   function handleCategoryChange(event) {
     setCategoryId(event.target.value);
+    console.log('suboptions', subcategoryOptions);
+    console.log('cateId', categoryId);
     setSubcategoryId('');
   }
 
@@ -124,38 +144,42 @@ function Listings(props) {
   return (
     <div className='listings-container'>
       <Typography component='h1' variant='h5'>
-        Find Classifieds & Home Share Links:
+        Find Services:
       </Typography>
       <form className={classes.form} noValidate>
-        <Grid container spacing={3} direction='row' justify='space-evenly' alignItems='flex-end'>
+        <Grid
+          container
+          spacing={3}
+          direction='row'
+          justify='space-evenly'
+          alignItems='flex-end'
+        >
           <Grid item xs>
             <InputLabel>Select a Category:</InputLabel>
-            <Select className="listing-select" name='categoryId' native defaultValue='' id='categoryId'>
-                    <option value='' />
-                    {categoryOptions.length > 0 && Object.keys(subcategoryOptions).length > 0 ? (
-                      categoryOptions.map((cat) => (
-                        <optgroup key={cat.id} label={`${cat.name}`}>
-                          {subcategoryOptions[cat.id] ? (
-                            subcategoryOptions[cat.id].map((subcat) => (
-                              <option key={subcat.id} value={subcat.id}>{`${subcat.name}`}</option>
-                            ))
-                          ) : (
-                            <></>
-                          )}
-                        </optgroup>
-                      ))
-                    ) : (
-                      <option value='' />
-                    )}
-                  </Select>
+            <Select
+              className='listing-select'
+              name='categoryId'
+              value={categoryId}
+              required
+              onChange={handleCategoryChange}
+            >
+              {categoryOptions.map((option) => (
+                <MenuItem key={option.id} value={option.id}>
+                  {option.name}
+                </MenuItem>
+              ))}
+            </Select>
           </Grid>
-          {/* <Grid item xs className={subcategoryOptions[categoryId] ? '' : classes.hidden}>
+          <Grid
+            item
+            xs
+            className={subcategoryOptions[categoryId] ? '' : classes.hidden}
+          >
             <InputLabel>Select a Sub-category:</InputLabel>
             <Select
               className='listing-select'
               name='subcategoryId'
               required
-              value={subcategoryId}
               onChange={handleSubcategoryChange}
             >
               {subcategoryOptions[categoryId] ? (
@@ -168,11 +192,23 @@ function Listings(props) {
                 <MenuItem key={-1}>-</MenuItem>
               )}
             </Select>
-          </Grid> */}
+          </Grid>
         </Grid>
-        <Grid container spacing={2} justify='center' alignItems='flex-start' wrap='wrap'>
+        <Grid
+          container
+          spacing={2}
+          justify='center'
+          alignItems='flex-start'
+          wrap='wrap'
+        >
           <Grid item xs={3} container direction='column'>
-            <Grid item xs={12} container alignItems='left' className={classes.multiLabel}>
+            <Grid
+              item
+              xs={12}
+              container
+              alignItems='left'
+              className={classes.multiLabel}
+            >
               <InputLabel>Locations</InputLabel>
             </Grid>
             <Grid item xs={12}>
@@ -213,8 +249,7 @@ function Listings(props) {
               autoFocus
             />
           </Grid>
-
-          {/* <Grid item xs={3}>
+          <Grid item xs={3}>
             <TextField
               type='number'
               variant='outlined'
@@ -227,8 +262,7 @@ function Listings(props) {
               onChange={handleFilterChange}
               autoFocus
             />
-          </Grid> */}
-
+          </Grid>
         </Grid>
       </form>
       <SearchClearSnackbar clear={reset} />
@@ -236,7 +270,11 @@ function Listings(props) {
       <ListingList listings={listings}></ListingList>
       <br />
       <Grid container direction='column' justify='center' alignItems='center'>
-        <PaginationControlled PaginationControlled={PaginationControlled}></PaginationControlled>
+        <PaginationControlled
+          pageChange={handlePageChange}
+          pageNum={pageNum}
+          page={page}
+        ></PaginationControlled>
       </Grid>
     </div>
   );

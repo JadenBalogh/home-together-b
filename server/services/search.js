@@ -120,7 +120,7 @@ async function getMembers(filters) {
   return await filterMembers(results);
 }
 
-async function getListings(categoryId, filters) {
+async function getListings(categoryId, filters,page,pageSize) {
   let results = await dbutils.query(SQL_SELECT_LISTINGS, [
     filters.minRating || 0,
     filters.maxRating || Number.MAX_SAFE_INTEGER,
@@ -136,8 +136,17 @@ async function getListings(categoryId, filters) {
   let filterListings = (listings) => {
     return listings.filter((l) => isCategoryMatch(l) && isTitleMatch(l) && isLocationMatch(l));
   };
-
-  return filterListings(results);
+  let temp=filterListings(results)
+  const total=temp.length
+  const pageNum=Math.ceil(total/pageSize)
+  const hasNext=page<pageNum
+  let list=temp.slice(page-1,pageSize*page)
+  return {
+    list,
+    total,
+    pageNum,
+    hasNext
+  }
 }
 
 function getGenderTypes() {

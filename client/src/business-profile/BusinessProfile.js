@@ -67,12 +67,12 @@ export default function BusinessProfile() {
           <CardContent>
             <Grid container spacing={2}>
               <Grid item xs={10}>
-                <Typography variant='h5'>Account Profile</Typography>
+                <Typography variant='h5'>Account Details</Typography>
                 <Divider />
               </Grid>
               <Grid item xs={2}>
                 <Button variant='contained' color='primary' onClick={handleEdit}>
-                  Edit Profile
+                  Edit Account Details
                 </Button>
               </Grid>
             </Grid>
@@ -106,7 +106,7 @@ export default function BusinessProfile() {
             <Grid container spacing={2}>
               <Grid item align='center' xs={12}>
                 <Button variant='contained' color='primary' onClick={handleEdit}>
-                  Edit Profile
+                  Edit Account Details
                 </Button>
               </Grid>
             </Grid>

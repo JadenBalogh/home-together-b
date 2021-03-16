@@ -8,9 +8,11 @@ export default function (app) {
   });
 
   app.post('/api/get-listings', (req, res) => {
-    searchService.getListings(req.body.categoryId, req.body.filters,req.body.page,req.body.pageSize).then((listings) => {
-      res.send(listings);
-    });
+    searchService
+      .getListings(req.body.categoryId, req.body.filters, req.body.page, req.body.pageSize)
+      .then((listings) => {
+        res.send(listings);
+      });
   });
 
   app.get('/api/get-gender-types', (req, res) => {

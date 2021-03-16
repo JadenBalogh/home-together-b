@@ -80,8 +80,8 @@ function Listings(props) {
     })
       .then((res) => res.json())
       .then((json) => {
-        setPageNum(json.pageNum);
-        setListings(json.list);
+        setPageNum(json.pageCount);
+        setListings(json.listings);
       });
   }
 

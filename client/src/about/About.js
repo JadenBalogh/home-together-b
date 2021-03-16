@@ -1,25 +1,24 @@
 import React from 'react';
 import AboutBlockLeft from './AboutBlockLeft';
 import AboutBlockRight from './AboutBlockRight';
-import AboutBlockCenter from './AboutBlockCenter';
 import bikeImg from './stock-bike.jpg';
 import blueprintsImg from './stock-blueprints.jpg';
 import personWritingImg from './stock-person-writing.jpg';
 import './About.css';
+import Footer from '../footer/Footer';
 
 // About page
 function About(props) {
   return (
     <div className='about'>
-      <h1>Welcome to HomeTogether.ca</h1>
       <AboutBlockLeft
         title='About Us'
         desc={
           <div>
             In late 2015 Home Together Canada&#39;s founding member placed an online ad in search of others to
-share her home.  The number of responses and the diversity of needs and desires that came from
-those responses and many more that followed, motivated her to research why living collectively in a
-shared home was so desired and yet so hard to attain.
+            share her home.  The number of responses and the diversity of needs and desires that came from
+            those responses and many more that followed, motivated her to research why living collectively in a
+            shared home was so desired and yet so hard to attain.
             <br />
             <br />
             What she found was that sharing homes and living collectively with others was the outward desire of
@@ -40,7 +39,7 @@ but also the businesses and groups trying to provide for this large and diverse 
         an incorporated, non-profit association.'
         desc={
           <div>
-            <p style={{color:"red"}}></p>The question to be answered was, how to find a solution that would bring more people
+            <p style={{ color: "red" }}></p>The question to be answered was, how to find a solution that would bring more people
 together in one place so they had adequate numbers to find compatible others and how to
 ensure those individuals could find the services and help they need to succeed at sharing a
 home together.
@@ -51,7 +50,7 @@ and collaborating with groups working to create services, communicating with cit
 organizations, and a first draft website with nearly four hundred participants;
             <br />
             <br />
-            Home Together Canada determined that the solution was to create and provide a 
+            Home Together Canada determined that the solution was to create and provide a
 central <u>non-competitive</u> stepping stone site where 1) all Canadian&#39;s interested in any kind of shared or
 companion living would freely register to find others of like mind and 2) where all existing and new
 home sharing services, housing and businesses are provided full and free listing of their service with
@@ -73,27 +72,7 @@ freely providing hometogether.ca across the nation.
         }
         image={blueprintsImg}
       />
-      <AboutBlockCenter
-        title='Board Members'
-        desc={
-          <div>
-            Member One<br/>
-            Member Two<br/>
-            Member Three<br/>
-          </div>
-        }
-      />
-      <AboutBlockLeft
-        title='Contact Us'
-        desc={
-          <div>
-            Phone: 111-222-3333<br/>
-            E-Mail: Contact@HomeTogether.ca<br/>
-            Address: 1234 Home Together Street, Vancouver, BC, Canada.<br/>
-          </div>
-        }
-        image={personWritingImg}
-      />
+      <Footer Footer={Footer}></Footer>
     </div>
   );
 }

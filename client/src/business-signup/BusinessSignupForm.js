@@ -135,7 +135,7 @@ export default function SignupForm(props) {
                 helperText={props.phoneExists ? 'This phone number was already used to sign up.' : ''}
               />
             </Grid>
-            <Grid item xs={12} container>
+            {/* <Grid item xs={12} container>
               <TextField
                 variant='outlined'
                 fullWidth
@@ -150,7 +150,7 @@ export default function SignupForm(props) {
                 error={props.phoneExists} //checks if phone number was already used.
                 helperText={props.phoneExists ? 'This phone number was already used to sign up.' : ''}
               />
-            </Grid>
+            </Grid> */}
             <Grid item xs={12} container>
               <TextField
                 variant='outlined'

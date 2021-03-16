@@ -37,7 +37,7 @@ export default function NavBar() {
           <Grid item xs={9} container alignItems='center' justify='flex-end'>
             <NavItem path='/about' label='About' />
             {sessionStorage.getItem('id') ? <NavItem path='/members' label='Members' /> : <></>}
-            <NavItem path='/listings' label='Services' />
+            <NavItem path='/listings' label='Classifieds & Home Share Links' />
             {sessionStorage.getItem('id') ? (
               <>
                 <NavItem

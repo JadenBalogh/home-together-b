@@ -127,7 +127,7 @@ const SQL_UPDATE_ORGANIZATION = `
     national,
     organizationStreetAddress,
     organizationMailingAddress,
-    organizationPostalCode,
+    organizationPostalCode
   WHERE id = ?
 `;
 

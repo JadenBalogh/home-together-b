@@ -119,7 +119,7 @@ class Signup extends Component {
   checkEmailExists() {
     const url = process.env.REACT_APP_LOCAL_URL || '';
     const route = '/api/check-business-email-exists?';
-    const params = new URLSearchParams(`&email=${this.state.formData.email}`).toString();
+    const params = new URLSearchParams(`&email=${this.state.formData.organizationEmail}`).toString();
     fetch(url + route + params)
       .then((res) => res.json())
       .then((json) => {

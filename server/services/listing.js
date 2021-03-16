@@ -58,14 +58,33 @@ const SQL_INSERT_LISTING = `
     website,
     phone,
     email,
+    ratingAverage,
+    ratingCount,
     startDate,
     endDate,
     description,
     locationId,
     categoryId,
     organizationId)
-  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 `;
+
+const SQL_UPDATE_LISTING = `
+  UPDATE Listing
+  SET
+    title = ?,
+    website = ?,
+    phone = ?,
+    email = ?,
+    startDate = ?,
+    endDate = ?,
+    description = ?,
+    locationId = ?,
+    categoryId = ?
+  WHERE id = ?
+`;
+
+const SQL_DELETE_LISTING = `DELETE FROM Listing WHERE id = ?`;
 
 async function getListingsByUser(id) {
   return await dbutils.query(SQL_SELECT_LISTINGS_BY_USER, [id]);
@@ -83,13 +102,15 @@ async function getListing(id) {
 async function createListing(listing) {
   await dbutils.query(SQL_INSERT_LISTING, [
     true, // TODO: implement approval by admins
-    Date.now(),
+    new Date().toISOString(),
     listing.title,
     listing.website,
     listing.phone,
     listing.email,
-    Date.now(), // TODO: Start date
-    Date.now(), // TODO: End date
+    0,
+    0,
+    new Date().toISOString(), // TODO: Start date
+    new Date().toISOString(), // TODO: End date
     listing.description,
     listing.locationId,
     listing.categoryId,
@@ -99,8 +120,29 @@ async function createListing(listing) {
   return { success: true };
 }
 
+async function editListing(id, listing) {
+  await dbutils.query(SQL_UPDATE_LISTING, [
+    listing.title,
+    listing.website,
+    listing.phone,
+    listing.email,
+    new Date().toISOString(), // TODO: Start date
+    new Date().toISOString(), // TODO: End date
+    listing.description,
+    listing.locationId,
+    listing.categoryId,
+    id,
+  ]);
+}
+
+async function deleteListing(id) {
+  await dbutils.query(SQL_DELETE_LISTING, [id]);
+}
+
 export default {
   getListingsByUser,
   getListing,
   createListing,
+  editListing,
+  deleteListing,
 };

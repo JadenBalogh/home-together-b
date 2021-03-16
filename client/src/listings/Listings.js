@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ListingList from './ListingList';
 import PaginationControlled from './Pagination';
 import { SearchClearSnackbar } from '../shared/snackbars';
+import Footer from '../footer/Footer';
 import './Listings.css';
 import LocationFilter from '../shared/LocationFilter';
 
@@ -177,21 +178,6 @@ function Listings(props) {
               autoFocus
             />
           </Grid>
-
-          <Grid item xs={3}>
-            <TextField
-              type='number'
-              variant='outlined'
-              margin='normal'
-              fullWidth
-              label='Maximum Rating'
-              name='maxRating'
-              value={filters['maxRating']}
-              placeholder='0.0 to 5.0'
-              onChange={handleFilterChange}
-              autoFocus
-            />
-          </Grid>
         </Grid>
       </form>
       <SearchClearSnackbar clear={reset} />
@@ -201,6 +187,7 @@ function Listings(props) {
       <Grid container direction='column' justify='center' alignItems='center'>
         <PaginationControlled PaginationControlled={PaginationControlled}></PaginationControlled>
       </Grid>
+      <Footer Footer={Footer}></Footer>
     </div>
   );
 }

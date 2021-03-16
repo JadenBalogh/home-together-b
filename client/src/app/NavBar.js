@@ -30,12 +30,12 @@ export default function NavBar() {
       <Toolbar className='navbar-toolbar'>
         <Grid container>
           <Grid item xs={3} container alignItems='center' justify='flex-start'>
-            <NavLink to='/' className='navbar-header'>
+            <NavLink to='/' className='navbar-header-home'>
               <Typography variant='h5'>HomeTogether.ca</Typography>
             </NavLink>
           </Grid>
           <Grid item xs={9} container alignItems='center' justify='flex-end'>
-            <NavItem path='/' label='About' />
+            <NavItem path='/about' label='About' />
             {sessionStorage.getItem('id') ? <NavItem path='/members' label='Members' /> : <></>}
             <NavItem path='/listings' label='Services' />
             {sessionStorage.getItem('id') ? (

@@ -49,11 +49,9 @@ export default function SignupForm(props) {
   const classes = useStyles();
   const [genderOptions, setGenderOptions] = useState([]);
   const [familyStatusOptions, setFamilyStatusOptions] = useState([]);
-  const [cityOptions, setCityOptions] = useState([]);
 
   useEffect(() => fetchGenderOptions(), []);
   useEffect(() => fetchFamilyStatusOptions(), []);
-  useEffect(() => fetchCityOptions(), []);
 
   function fetchGenderOptions() {
     const url = process.env.REACT_APP_LOCAL_URL || '';
@@ -76,18 +74,6 @@ export default function SignupForm(props) {
           return { value: x.id, label: x.name };
         });
         setFamilyStatusOptions(options);
-      });
-  }
-
-  function fetchCityOptions() {
-    const url = process.env.REACT_APP_LOCAL_URL || '';
-    fetch(url + '/api/get-locations')
-      .then((res) => res.json())
-      .then((json) => {
-        let options = json.map((x) => {
-          return { value: x.id, label: x.city };
-        });
-        setCityOptions(options);
       });
   }
 
@@ -368,11 +354,19 @@ export default function SignupForm(props) {
             </Grid>
             <SignupSelect
               label='Living Locations:'
-              name='locationIds'
-              options={cityOptions}
-              onChange={props.handleDropdownChange}
               tooltip='These are the places you are interested in living in.'
+              onChange={props.handleDropdownChange}
             />
+            <Grid item xs={12} container>
+              <TextField
+                variant='outlined'
+                fullWidth
+                id='locationText'
+                label='Additional location details (rural, country, etc)'
+                name='locationText'
+                onChange={props.handleInputChange}
+              />
+            </Grid>
             <Grid
               item
               xs={12}

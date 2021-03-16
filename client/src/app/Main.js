@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import Home from '../home/Home';
 import About from '../about/About';
 import Members from '../members/Members';
 import Listings from '../listings/Listings';
@@ -15,13 +16,19 @@ import Listing from '../manage-listings/Listing';
 import CreateListing from '../manage-listings/CreateListing';
 import BusinessProfile from '../business-profile/BusinessProfile';
 import EditBusinessProfile from '../edit-profile-business/EditBusinessProfile';
+import PrivacyPolicy from '../footer/PrivacyPolicy';
+import TermsOfService from '../footer/TermsOfService';
+import EditListing from '../manage-listings/EditListing';
 
 // Main component that renders all pages in our app
 class Main extends Component {
   render() {
     return (
       <Switch>
-        <Route exact path='/' component={About} />
+        <Route exact path='/' component={Home} />
+        <Route exact path='/about' component={About} />
+        <Route exact path='/terms-of-service' component={TermsOfService} />
+        <Route exact path='/privacy-policy' component={PrivacyPolicy} />
         <Route exact path='/members' component={Members} />
         <Route exact path='/listings' component={Listings} />
         <Route exact path='/signup-selection' component={SignupSelection} />
@@ -36,6 +43,7 @@ class Main extends Component {
         <Route exact path='/listing/:id' component={Listing} />
         <Route exact path='/business-profile' component={BusinessProfile} />
         <Route exact path='/edit-business-profile' component={EditBusinessProfile} />
+        <Route exact path='/edit-listing/:id' component={EditListing} />
       </Switch>
     );
   }

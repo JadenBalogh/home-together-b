@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import {
   Card,
   CardContent,
@@ -31,34 +31,42 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CreateListing() {
+export default function EditListing() {
   const classes = useStyles();
+  const { id } = useParams();
   let history = useHistory();
   let [listing, setListing] = useState({});
   let [categoryOptions, setCategoryOptions] = useState([]);
   let [subcategoryOptions, setSubcategoryOptions] = useState({});
 
-  let handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(listing);
-
-    listing.organizationId = sessionStorage.getItem('id') || 1;
-
+  let loadListing = () => {
     const url = process.env.REACT_APP_LOCAL_URL || '';
-    const route = '/api/create-listing?';
-    fetch(url + route, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ listing }),
-    })
+    const route = '/api/get-listing?';
+    const params = new URLSearchParams('id=' + id).toString();
+    fetch(url + route + params)
       .then((raw) => raw.json())
       .then((result) => {
         if (result.err) {
           window.alert(result.err);
           return;
         }
-        history.push('/manage-listings');
+        setListing({ ...result });
       });
+  };
+
+  let handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(listing);
+
+    const url = process.env.REACT_APP_LOCAL_URL || '';
+    const route = '/api/edit-listing?';
+    fetch(url + route, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, listing }),
+    }).then(() => {
+      history.push('/manage-listings');
+    });
   };
 
   let fetchCategoryOptions = () => {
@@ -86,6 +94,7 @@ export default function CreateListing() {
     });
   };
 
+  useEffect(loadListing, [id]);
   useEffect(fetchCategoryOptions, []);
 
   return (
@@ -97,19 +106,36 @@ export default function CreateListing() {
             <Grid container>
               <Grid item align='center' xs={12}>
                 <Typography component='h1' variant='h5'>
-                  {sessionStorage.getItem('accountType') === '1' ? 'New Listing' : 'New Home to Share'}
+                  {sessionStorage.getItem('accountType') === '1' ? 'Edit Listing' : 'Edit Home'}
                 </Typography>
               </Grid>
             </Grid>
             <Divider />
             <Grid container justify='space-between'>
               <Grid item xs={5}>
-                <TextField name='title' required fullWidth label='Title' autoFocus onChange={handleInputChange} />
+                <TextField
+                  name='title'
+                  required
+                  fullWidth
+                  label='Title'
+                  autoFocus
+                  value={`${listing.title}`}
+                  onChange={handleInputChange}
+                />
               </Grid>
               <Grid item xs={5}>
                 <FormControl fullWidth required onChange={handleInputChange}>
                   <InputLabel htmlFor='categoryId'>Category</InputLabel>
-                  <Select name='categoryId' native defaultValue='' id='categoryId'>
+                  <Select
+                    name='categoryId'
+                    native
+                    id='categoryId'
+                    value={`${listing.categoryId}`}
+                    inputProps={{
+                      name: 'categoryId',
+                      id: 'categoryId',
+                    }}
+                  >
                     <option value='' />
                     {categoryOptions.length > 0 && Object.keys(subcategoryOptions).length > 0 ? (
                       categoryOptions.map((cat) => (
@@ -142,6 +168,7 @@ export default function CreateListing() {
                     required
                     fullWidth
                     label='Description'
+                    value={`${listing.description}`}
                     onChange={handleInputChange}
                   />
                 </Grid>
@@ -156,6 +183,7 @@ export default function CreateListing() {
                     required
                     fullWidth
                     label='Location'
+                    value={`${listing.locationId}`}
                     onChange={handleInputChange}
                   />
                 </Grid>
@@ -163,13 +191,34 @@ export default function CreateListing() {
               <br />
               <Grid item container xs={12} justify='space-between'>
                 <Grid item container xs={3} justify='flex-start'>
-                  <TextField name='website' required fullWidth label='Website' onChange={handleInputChange} />
+                  <TextField
+                    name='website'
+                    required
+                    fullWidth
+                    label='Website'
+                    value={`${listing.website}`}
+                    onChange={handleInputChange}
+                  />
                 </Grid>
                 <Grid item container xs={3} justify='center'>
-                  <TextField name='email' required fullWidth label='Email' onChange={handleInputChange} />
+                  <TextField
+                    name='email'
+                    required
+                    fullWidth
+                    label='Email'
+                    value={`${listing.email}`}
+                    onChange={handleInputChange}
+                  />
                 </Grid>
                 <Grid item container xs={3} justify='flex-end'>
-                  <TextField name='phone' required fullWidth label='Phone Number' onChange={handleInputChange} />
+                  <TextField
+                    name='phone'
+                    required
+                    fullWidth
+                    label='Phone Number'
+                    value={`${listing.phone}`}
+                    onChange={handleInputChange}
+                  />
                 </Grid>
               </Grid>
             </Grid>

@@ -157,7 +157,7 @@ function getCategoryTypes() {
 }
 
 function getLocations() {
-  return dbutils.query(`SELECT id, city, province_name, postal FROM Location`);
+  return dbutils.query(`SELECT id, city, province_id, province_name, postal FROM Location`);
 }
 
 export default {

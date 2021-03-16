@@ -29,8 +29,9 @@ class Members extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
+    this.handleLocationsChange = this.handleLocationsChange.bind(this);
   }
-  
+
   updateMembers() {
     let filters = this.state.filters;
 
@@ -47,12 +48,10 @@ class Members extends Component {
           members: json,
         });
       });
-      console.log('Search for new members list attempted')
-      if(Members.members === undefined){
-        console.log('No results were successfully returned')
-      }
-      
-       
+    console.log('Search for new members list attempted');
+    if (Members.members === undefined) {
+      console.log('No results were successfully returned');
+    }
   }
 
   handleInputChange(event) {
@@ -92,6 +91,18 @@ class Members extends Component {
     );
   }
 
+  handleLocationsChange(event, options) {
+    this.setState(
+      (prevState) => ({
+        filters: {
+          ...prevState.filters,
+          locationIds: options.map((x) => x.value),
+        },
+      }),
+      this.updateMembers
+    );
+  }
+
   render() {
     return (
       <div className='members-container'>
@@ -102,6 +113,7 @@ class Members extends Component {
           dropdownHandler={this.handleDropdownChange}
           inputHandler={this.handleInputChange}
           checkboxHandler={this.handleCheckboxChange}
+          locationsHandler={this.handleLocationsChange}
           filters={this.state.filters}
         />
         <MemberList members={this.state.members} />

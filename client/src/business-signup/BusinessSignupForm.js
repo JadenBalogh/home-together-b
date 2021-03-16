@@ -62,6 +62,7 @@ export default function SignupForm(props) {
                 variant='outlined'
                 required
                 fullWidth
+                autoFocus
                 id='organizationName'
                 label='Business Name'
                 onChange={props.handleInputChange}
@@ -217,7 +218,6 @@ export default function SignupForm(props) {
                 fullWidth
                 id='contactFirstName'
                 label='Contact First Name'
-                autoFocus
                 onChange={props.handleInputChange}
               />
             </Grid>

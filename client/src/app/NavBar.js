@@ -48,7 +48,10 @@ export default function NavBar() {
                   path='/manage-listings'
                   label={sessionStorage.getItem('accountType') === '1' ? 'Manage Listings' : 'Manage Homes'}
                 />
-                <NavItem path='/profile' label='My Profile' />
+                <NavItem
+                  path={sessionStorage.getItem('accountType') === '1' ? '/business-profile' : '/profile'}
+                  label={sessionStorage.getItem('accountType') === '1' ? 'Account Details' : 'My Account'}
+                />
                 <Grid item className={classes.navItem}>
                   <Link href='#' onClick={logout}>
                     <Typography className='navbar-minis'>Logout</Typography>

@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
-import BusinessSignupForm from './BusinessSignupForm';
+import EditBusinessForm from './EditBusinessForm';
 
-class Signup extends Component {
+class EditProfile extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      confPassword: '', //check if same as password
       phoneExists: false,
       emailExists: false,
-      usernameExists: false,
-      passwordsMatch: true,
       formData: {
         verified: true,
         incorporated: false,
@@ -37,38 +34,49 @@ class Signup extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.checkPhoneExists = this.checkPhoneExists.bind(this);
     this.checkEmailExists = this.checkEmailExists.bind(this);
-    this.checkUsernameExists = this.checkUsernameExists.bind(this);
-    this.handleConfirm = this.handleConfirm.bind(this);
-    this.checkPasswordsMatch = this.checkPasswordsMatch.bind(this);
-    this.handleSignup = this.handleSignup.bind(this);
-    this.handleDropdownChange = this.handleDropdownChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.loadProfile = this.loadProfile.bind(this);
   }
 
-  handleSignup(event) {
-    event.preventDefault();
+  componentDidMount() {
+    this.loadProfile();
+  }
 
-    let formData = this.state.formData;
-    console.log(formData);
+  loadProfile() {
+    let id = sessionStorage.getItem('id') || 1;
 
     const url = process.env.REACT_APP_LOCAL_URL || '';
-    const route = '/api/business-signup?';
-    fetch(url + route, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ formData }),
-    })
+    const route = '/api/get-business?';
+    const params = new URLSearchParams('id=' + id).toString();
+    fetch(url + route + params)
       .then((raw) => raw.json())
       .then((result) => {
         if (result.err) {
           window.alert(result.err);
           return;
         }
-        this.props.history.push('/signin');
+        this.setState({ formData: { ...result } });
       });
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+
+    let id = sessionStorage.getItem('id') || 1;
+    let formData = this.state.formData;
+
+    const url = process.env.REACT_APP_LOCAL_URL || '';
+    const route = '/api/edit-business-profile?';
+    fetch(url + route, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, formData }),
+    }).then(() => {
+      this.props.history.push('/');
+    });
+  }
+
   handleInputChange(event, callback = () => {}) {
-    console.log(event);
     this.setState(
       (prevState) => ({
         formData: {
@@ -82,25 +90,6 @@ class Signup extends Component {
         callback();
       }
     );
-  }
-
-  handleDropdownChange(selection, action) {
-    let ids = selection ? selection.map((x) => x.value) : [];
-    this.setState((prevState) => ({
-      formData: {
-        ...prevState.formData,
-        [action.name]: ids,
-      },
-    }));
-  }
-
-  checkPasswordsMatch() {
-    let match = this.state.formData.password === this.state.confPassword;
-    this.setState({ passwordsMatch: match });
-  }
-
-  handleConfirm(event) {
-    this.setState({ confPassword: event.target.value });
   }
 
   checkPhoneExists() {
@@ -119,7 +108,7 @@ class Signup extends Component {
   checkEmailExists() {
     const url = process.env.REACT_APP_LOCAL_URL || '';
     const route = '/api/check-business-email-exists?';
-    const params = new URLSearchParams(`&email=${this.state.formData.organizationEmail}`).toString();
+    const params = new URLSearchParams(`&email=${this.state.formData.email}`).toString();
     fetch(url + route + params)
       .then((res) => res.json())
       .then((json) => {
@@ -129,42 +118,22 @@ class Signup extends Component {
       });
   }
 
-  checkUsernameExists() {
-    const url = process.env.REACT_APP_LOCAL_URL || '';
-    const route = '/api/check-username-exists?';
-    const params = new URLSearchParams(`&username=${this.state.formData.username}`).toString();
-    fetch(url + route + params)
-      .then((res) => res.json())
-      .then((json) => {
-        console.log('went through');
-        this.setState({
-          usernameExists: json.exists,
-        });
-      });
-  }
-
   render() {
     return (
       <div>
-        <BusinessSignupForm
+        <EditBusinessForm
           formData={this.state.formData}
-          confPassword={this.state.confPassword}
           phoneExists={this.state.phoneExists}
           emailExists={this.state.emailExists}
-          usernameExists={this.state.usernameExists}
-          passwordsMatch={this.state.passwordsMatch}
           handleConfirm={this.handleConfirm}
           handleInputChange={this.handleInputChange}
-          handleDropdownChange={this.handleDropdownChange}
-          checkPasswordsMatch={this.checkPasswordsMatch}
           checkPhoneExists={this.checkPhoneExists}
           checkEmailExists={this.checkEmailExists}
-          checkUsernameExists={this.checkUsernameExists}
-          handleSignup={this.handleSignup}
+          handleSubmit={this.handleSubmit}
         />
       </div>
     );
   }
 }
 
-export default Signup;
+export default EditProfile;

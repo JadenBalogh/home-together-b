@@ -14,6 +14,8 @@ import Member from '../view-member/Member';
 import ManageListings from '../manage-listings/ManageListings';
 import Listing from '../manage-listings/Listing';
 import CreateListing from '../manage-listings/CreateListing';
+import BusinessProfile from '../business-profile/BusinessProfile';
+import EditBusinessProfile from '../edit-profile-business/EditBusinessProfile';
 import PrivacyPolicy from '../footer/PrivacyPolicy';
 import TermsOfService from '../footer/TermsOfService';
 import EditListing from '../manage-listings/EditListing';
@@ -39,6 +41,8 @@ class Main extends Component {
         <Route exact path='/manage-listings' component={ManageListings} />
         <Route exact path='/create-listing' component={CreateListing} />
         <Route exact path='/listing/:id' component={Listing} />
+        <Route exact path='/business-profile' component={BusinessProfile} />
+        <Route exact path='/edit-business-profile' component={EditBusinessProfile} />
         <Route exact path='/edit-listing/:id' component={EditListing} />
       </Switch>
     );

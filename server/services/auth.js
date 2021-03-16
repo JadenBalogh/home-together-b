@@ -56,7 +56,7 @@ function checkPhoneExists(phoneNumber) {
 
 function checkBusinessPhoneExists(phoneNumber) {
   return new Promise((resolve, reject) => {
-    var sql = 'SELECT phoneNumber FROM Organization WHERE phoneNumber = ?';
+    var sql = 'SELECT organizationMainPhone FROM Organization WHERE organizationMainPhone = ?';
     dbutils
       .query(sql, [phoneNumber])
       .then((result) => {
@@ -86,7 +86,7 @@ function checkEmailExists(email) {
 
 function checkBusinessEmailExists(email) {
   return new Promise((resolve, reject) => {
-    var sql = 'SELECT email FROM Organization WHERE email = ?';
+    var sql = 'SELECT organizationEmail FROM Organization WHERE organizationEmail = ?';
     dbutils
       .query(sql, [email])
       .then((result) => {

@@ -13,6 +13,7 @@ import {
 } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import { makeStyles } from '@material-ui/core/styles';
+import LocationFilter from '../shared/LocationFilter';
 
 // Filter component for the members page
 const useStyles = makeStyles((theme) => ({
@@ -39,7 +40,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function MembersFilter(props) {
-  const [locationOptions, setLocationOptions] = useState([]);
   const [genderOptions, setGenderOptions] = useState([]);
   const [ageGroupOptions, setAgeGroupOptions] = useState([]);
   const [familyStatusOptions, setFamilyStatusOptions] = useState([]);
@@ -48,19 +48,6 @@ function MembersFilter(props) {
   useEffect(() => fetchGenderOptions(), []);
   useEffect(() => fetchAgeGroupOptions(), []);
   useEffect(() => fetchFamilyStatusOptions(), []);
-  useEffect(() => fetchLocationOptions(), []);
-
-  function fetchLocationOptions() {
-    const url = process.env.REACT_APP_LOCAL_URL || '';
-    fetch(url + '/api/get-locations')
-      .then((res) => res.json())
-      .then((json) => {
-        let options = json.map((x) => {
-          return { value: x.id, label: x.city };
-        });
-        setLocationOptions(options);
-      });
-  }
 
   function fetchGenderOptions() {
     const url = process.env.REACT_APP_LOCAL_URL || '';
@@ -111,12 +98,14 @@ function MembersFilter(props) {
         </AccordionSummary>
         <AccordionDetails>
           <Grid container spacing={2}>
-            <FilterSelect
-              label='Living Locations:'
-              name='locationIds'
-              options={locationOptions}
-              onChange={props.dropdownHandler}
-            />
+            <Grid item xs={6} container alignItems='center'>
+              <Grid item xs={5} container justify='flex-start'>
+                <InputLabel>Locations:</InputLabel>
+              </Grid>
+              <Grid item xs={7}>
+                <LocationFilter onChange={props.locationsHandler} />
+              </Grid>
+            </Grid>
             <FilterSelect label='Genders:' name='genderIds' options={genderOptions} onChange={props.dropdownHandler} />
             <FilterSelect
               label='Age Groups:'

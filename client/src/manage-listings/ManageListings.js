@@ -31,7 +31,6 @@ export default function ManageListings() {
   let [listings, setListings] = useState([]);
 
   let loadListings = () => {
-    console.log('yuh');
     let id = sessionStorage.getItem('id') || 1;
 
     const url = process.env.REACT_APP_LOCAL_URL || '';
@@ -53,13 +52,19 @@ export default function ManageListings() {
   };
 
   let handleEdit = (id) => {
-    // TODO: Load edit listing page
-    console.log('edit');
+    history.push('/edit-listing/' + id);
   };
 
   let handleDelete = (id) => {
-    // TODO: Delete listing
-    console.log('delete');
+    const url = process.env.REACT_APP_LOCAL_URL || '';
+    const route = '/api/delete-listing?';
+    fetch(url + route, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id }),
+    }).then(() => {
+      loadListings();
+    });
   };
 
   useEffect(loadListings, [setListings]);
@@ -67,7 +72,7 @@ export default function ManageListings() {
   return (
     <div className='list-container'>
       <Typography component='h1' variant='h5'>
-        My Listings
+        {sessionStorage.getItem('accountType') === '1' ? 'My Listings' : 'My Homes'}
       </Typography>
       <br />
       <Grid className={classes.table} container alignItems='center' justify='space-between'>
@@ -110,7 +115,7 @@ export default function ManageListings() {
       <Grid container>
         <Grid item align='center' xs={12}>
           <Button variant='contained' color='primary' onClick={handleCreate}>
-            New Listing
+            {sessionStorage.getItem('accountType') === '1' ? 'New Listing' : 'Add Home'}
           </Button>
         </Grid>
       </Grid>

@@ -1,7 +1,7 @@
 import React from 'react';
-import Select from 'react-select';
 import { InputLabel, Grid, Tooltip } from '@material-ui/core';
 import HelpIcon from '@material-ui/icons/Help';
+import LocationFilter from '../shared/LocationFilter';
 
 // Select box for filter panel
 function SignupSelect(props) {
@@ -16,7 +16,7 @@ function SignupSelect(props) {
         </Tooltip>
       </Grid>
       <Grid item xs={6}>
-        <Select isMulti isClearable={false} name={props.name} options={props.options} onChange={props.onChange} />
+        <LocationFilter onChange={props.onChange} />
       </Grid>
     </Grid>
   );

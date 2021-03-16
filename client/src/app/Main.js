@@ -16,6 +16,7 @@ import Listing from '../manage-listings/Listing';
 import CreateListing from '../manage-listings/CreateListing';
 import PrivacyPolicy from '../footer/PrivacyPolicy';
 import TermsOfService from '../footer/TermsOfService';
+import EditListing from '../manage-listings/EditListing';
 
 // Main component that renders all pages in our app
 class Main extends Component {
@@ -38,6 +39,7 @@ class Main extends Component {
         <Route exact path='/manage-listings' component={ManageListings} />
         <Route exact path='/create-listing' component={CreateListing} />
         <Route exact path='/listing/:id' component={Listing} />
+        <Route exact path='/edit-listing/:id' component={EditListing} />
       </Switch>
     );
   }

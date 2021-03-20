@@ -4,49 +4,11 @@
 }
 
 .about-block {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
   background-color: rgb(250, 245, 240);
   padding: 20px;
   margin: 20px 0;
   border: 1px solid #f2f2f2;
   border-radius: 20px;
-
-}
-
-
-.about-block-center {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
-  background-color: rgb(250, 245, 240);
-  padding: 20px;
-  margin: 20px 0;
-  border: 1px solid #f2f2f2;
-  border-radius: 20px;
-}
-
-.about-block-desc-left {
-  flex: 1;
-  padding-right: 20px;
-}
-
-.about-block-desc-right {
-  flex: 1;
-  padding-left: 20px;
-}
-
-.about-block-desc p {
-  line-height: 1.5;
-  color: #233f43;
-  margin-bottom: 20px;
-}
-
-.about-block-header {
-  text-align: center;
 }
 
 .about-block-img {

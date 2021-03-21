@@ -1,6 +1,5 @@
 import React from 'react';
 import './Footer.css';
-import Footer from './Footer.js';
 
 // Terms of Service
 function TermsOfService(props) {
@@ -168,7 +167,6 @@ If you choose to create an Account and register to become a member or advertiser
                 <h2>28. Contact</h2>
                 <p>If you have any questions or concerns about our Terms, please contact us by e-mail.  Our email can be found under contacts.</p>
             </div>
-            <Footer Footer={Footer}></Footer>
         </div>
         
     );

@@ -2,7 +2,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Grid, Link } from '@material-ui/core';
 import NavItem from './NavItem';
 import { makeStyles } from '@material-ui/core/styles';
-import '../shared/Styles.css';
+import './NavBar.css';
 
 const useStyles = makeStyles((theme) => ({
   navItem: {

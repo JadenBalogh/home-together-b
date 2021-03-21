@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import ListingList from './ListingList';
 import PaginationControlled from './Pagination';
 import { SearchClearSnackbar } from '../shared/snackbars';
-import Footer from '../footer/Footer';
 import './Listings.css';
 import LocationFilter from '../shared/LocationFilter';
 
@@ -187,7 +186,6 @@ function Listings(props) {
       <Grid container direction='column' justify='center' alignItems='center'>
         <PaginationControlled PaginationControlled={PaginationControlled}></PaginationControlled>
       </Grid>
-      <Footer Footer={Footer}></Footer>
     </div>
   );
 }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import Footer from '../footer/Footer';
 import Grid from '@material-ui/core/Grid';
-import '../footer/Footer.css';
+import './Home.css';
 
 // Home page
 class Home extends Component {
@@ -14,11 +13,21 @@ class Home extends Component {
           </Grid>
           <Grid item container item xs={12} direction='row' justify='center'>
             <Grid item xs>
-              <img className='roundimg' alt='Sample' width='500' src={require('../shared/bigstock-Beautiful-Middle-Aged-Business-147085658.jpg').default} />
+              <img
+                className='roundimg'
+                alt='Sample'
+                width='500'
+                src={require('../shared/bigstock-Beautiful-Middle-Aged-Business-147085658.jpg').default}
+              />
               <p>A Free Canadian Home-sharing website.</p>
             </Grid>
             <Grid item xs>
-              <img className='roundimg' alt='Sample' width='500' src={require('../shared/bigstock-Beautiful-Middle-Aged-Business-147085658.jpg').default} />
+              <img
+                className='roundimg'
+                alt='Sample'
+                width='500'
+                src={require('../shared/bigstock-Beautiful-Middle-Aged-Business-147085658.jpg').default}
+              />
               <p>Supporting the growth and success of shared living across the country!</p>
             </Grid>
           </Grid>
@@ -45,7 +54,6 @@ class Home extends Component {
             </Grid>
           </Grid>
         </Grid>
-        <Footer Footer={Footer}></Footer>
       </div>
     );
   }

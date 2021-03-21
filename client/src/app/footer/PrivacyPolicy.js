@@ -1,6 +1,5 @@
 import React from 'react';
 import './Footer.css';
-import Footer from './Footer.js';
 
 // Privacy Policy Page
 function PrivacyPolicy(props) {
@@ -80,7 +79,6 @@ Upon your request, we will close your Account.  Note however, that we attempt to
                 <h2>14. Contact</h2>
                 <p>If you have any questions or concerns about our Privacy Policy, or how we have handled your personal information please email us. You will find our email under contacts.</p>
             </div>
-        <Footer Footer={Footer}></Footer>
 
         </div>
 

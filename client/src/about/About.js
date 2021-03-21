@@ -2,11 +2,9 @@ import React from 'react';
 import AboutBlock from './AboutBlock';
 import bikeImg from './stock-bike.jpg';
 import blueprintsImg from './stock-blueprints.jpg';
-import Footer from '../footer/Footer';
 import './About.css';
 
-// About page
-function About(props) {
+function About() {
   return (
     <div className='about'>
       <AboutBlock
@@ -69,7 +67,6 @@ function About(props) {
         }
         image={blueprintsImg}
       />
-      <Footer Footer={Footer}></Footer>
     </div>
   );
 }

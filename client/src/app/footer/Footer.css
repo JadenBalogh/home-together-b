@@ -1,0 +1,30 @@
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: top;
+  text-align: top;
+  background-color: #5e5e5e;
+  color: rgb(255, 255, 255);
+  width: 80%;
+  /* margin: 20px; */
+  /* border-radius: 20px; */
+  /* box-shadow: 0px 0px 3px 3px gray; */
+}
+
+.footer-container h3 {
+  color: antiquewhite;
+}
+
+.footer-container a {
+  color: white;
+  text-decoration: underline;
+}
+
+.footer-container a:hover {
+  color: #f56476;
+  text-decoration: underline;
+}
+
+.container {
+  min-width: 100%;
+}

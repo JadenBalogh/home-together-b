@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 
-export default function LocationFilter({ onChange }) {
+export default function LocationFilter({ label, onChange }) {
   const [locationOptions, setLocationOptions] = useState([]);
 
   useEffect(() => fetchLocationOptions(), []);
@@ -34,7 +34,7 @@ export default function LocationFilter({ onChange }) {
       options={locationOptions}
       groupBy={(option) => option.province}
       getOptionLabel={(option) => `${option.label}, ${option.code}`}
-      renderInput={(params) => <TextField {...params} label='Select a city' variant='outlined' value='2' />}
+      renderInput={(params) => <TextField {...params} label={label} variant='outlined' value='2' />}
     />
   );
 }

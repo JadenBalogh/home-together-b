@@ -22,7 +22,7 @@ export default function ListingList({ listings }) {
               <Grid item container spacing={2} direction='row' alignItems='center' justify='flex-start' xs={10}>
                 <img className='listing-accordion-image' alt='Sample' src={require('../shared/img.png').default} />
                 <Grid item>
-                  <Typography variant='h5'>{listing.title}</Typography>
+                  <Typography variant='h6'>{listing.title}</Typography>
                 </Grid>
                 <Grid item>
                   <Typography variant='subtitle1'>({listing.categoryName})</Typography>

@@ -78,7 +78,7 @@ function MembersFilter(props) {
                 <InputLabel>Locations:</InputLabel>
               </Grid>
               <Grid item xs={7}>
-                <LocationFilter onChange={props.locationsHandler} />
+                <LocationFilter label='Select a city' onChange={props.locationsHandler} />
               </Grid>
             </Grid>
             <FilterSelect label='Genders:' name='genderIds' options={genderOptions} onChange={props.dropdownHandler} />

@@ -4,7 +4,7 @@ import bikeImg from './stock-bike.jpg';
 import blueprintsImg from './stock-blueprints.jpg';
 import './About.css';
 
-function About() {
+export default function About() {
   return (
     <Card className='page'>
       <Grid className='about' container direction='column' alignItems='center'>
@@ -67,5 +67,3 @@ function About() {
     </Card>
   );
 }
-
-export default About;

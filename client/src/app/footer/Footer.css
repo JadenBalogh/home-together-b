@@ -1,30 +1,37 @@
-.footer-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: top;
-  text-align: top;
-  background-color: #5e5e5e;
-  color: rgb(255, 255, 255);
+.footer {
+  color: white;
+  background-color: #39393d;
   width: 80%;
-  /* margin: 20px; */
-  /* border-radius: 20px; */
-  /* box-shadow: 0px 0px 3px 3px gray; */
+  margin: 0px auto 10px auto;
+  border-radius: 5px;
 }
 
-.footer-container h3 {
+.footer-content {
+  padding: 10px 20px;
+  text-align: left;
+  font-size: small;
+}
+
+.footer-text {
+  margin: 8px 0;
+}
+
+.footer-content h3 {
   color: antiquewhite;
+  margin: 0;
 }
 
-.footer-container a {
+.footer-content a {
   color: white;
   text-decoration: underline;
 }
 
-.footer-container a:hover {
+.footer-content a:hover {
   color: #f56476;
   text-decoration: underline;
 }
 
-.container {
-  min-width: 100%;
+.footer-endnote {
+  margin-top: 8px;
+  margin-bottom: 0;
 }

@@ -10,40 +10,15 @@ import {
   AccordionSummary,
   AccordionDetails,
   Typography,
+  Card,
 } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
-import { makeStyles } from '@material-ui/core/styles';
 import LocationFilter from '../shared/LocationFilter';
-
-// Filter component for the members page
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    maxWidth: '1000px',
-    paddingTop: '25px',
-  },
-  paper: {
-    padding: theme.spacing(2),
-    margin: 0,
-  },
-  img: {
-    maxWidth: '250px',
-    maxHeight: '250px',
-    borderRadius: '5%',
-  },
-  accordionImg: {
-    marginRight: '25px',
-    maxWidth: '75px',
-    maxHeight: '75px',
-    borderRadius: '50%',
-  },
-}));
 
 function MembersFilter(props) {
   const [genderOptions, setGenderOptions] = useState([]);
   const [ageGroupOptions, setAgeGroupOptions] = useState([]);
   const [familyStatusOptions, setFamilyStatusOptions] = useState([]);
-  const classes = useStyles();
 
   useEffect(() => fetchGenderOptions(), []);
   useEffect(() => fetchAgeGroupOptions(), []);
@@ -87,12 +62,12 @@ function MembersFilter(props) {
   }
 
   return (
-    <div className='filter-container'>
+    <Card>
       <Accordion>
         <AccordionSummary expandIcon={<SearchIcon />} aria-controls='panel1a-content' id='panel1a-header'>
           <Grid container spacing={2} direction='row' alignItems='center' justify='space-between'>
             <Grid item>
-              <Typography className={classes.heading}>Advanced Member Filter</Typography>
+              <Typography>Advanced Member Filter</Typography>
             </Grid>
           </Grid>
         </AccordionSummary>
@@ -224,7 +199,7 @@ function MembersFilter(props) {
           </Grid>
         </AccordionDetails>
       </Accordion>
-    </div>
+    </Card>
   );
 }
 

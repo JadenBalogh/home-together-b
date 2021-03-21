@@ -1,21 +1,10 @@
 import { NavLink, useHistory } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Grid, Link } from '@material-ui/core';
 import NavItem from './NavItem';
-import { makeStyles } from '@material-ui/core/styles';
 import './NavBar.css';
-
-const useStyles = makeStyles((theme) => ({
-  navItem: {
-    marginLeft: theme.spacing(3),
-    marginRight: theme.spacing(3),
-    display: 'flex',
-    alignItems: 'center',
-  },
-}));
 
 // Main navigation bar that is at the top of every page
 export default function NavBar() {
-  const classes = useStyles();
   let history = useHistory();
 
   let logout = (event) => {
@@ -52,11 +41,11 @@ export default function NavBar() {
                   path={sessionStorage.getItem('accountType') === '1' ? '/business-profile' : '/profile'}
                   label={sessionStorage.getItem('accountType') === '1' ? 'Account Details' : 'My Account'}
                 />
-                <Grid item className={classes.navItem}>
+                <div className='nav-item'>
                   <Link href='#' onClick={logout}>
                     <Typography className='navbar-minis'>Logout</Typography>
                   </Link>
-                </Grid>
+                </div>
               </>
             ) : (
               <>

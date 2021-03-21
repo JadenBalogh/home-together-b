@@ -8,10 +8,10 @@ class Home extends Component {
     return (
       <div className='homepage-container'>
         <Grid container className='homepage-container' direction='column'>
-          <Grid item container className='logo-container' item xs={12} direction='column'>
+          <Grid item container className='logo-container' xs={12} direction='column'>
             <img className='logoimg' alt='Sample' src={require('../shared/htlogo.png').default} />
           </Grid>
-          <Grid item container item xs={12} direction='row' justify='center'>
+          <Grid item container xs={12} direction='row' justify='center'>
             <Grid item xs>
               <img
                 className='roundimg'
@@ -35,7 +35,7 @@ class Home extends Component {
           <Grid item xs>
             <p>Our mandate is to facilitate the growth and success of shared living in Canada.</p>
           </Grid>
-          <Grid item container item xs={12} direction='row'>
+          <Grid item container xs={12} direction='row'>
             <Grid item xs>
               <h3>Our Mandate</h3>
               <p>

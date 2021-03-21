@@ -11,14 +11,14 @@ import SignIn from '../../signin/SignIn';
 import Profile from '../../profile/Profile';
 import EditProfile from '../../edit-profile/EditProfile';
 import Member from '../../view-member/Member';
-import ManageListings from '../../manage-listings/ManageListings';
-import Listing from '../../manage-listings/Listing';
-import CreateListing from '../../manage-listings/CreateListing';
+import ManageListings from '../../listings/ManageListings';
+import Listing from '../../listings/Listing';
+import CreateListing from '../../listings/CreateListing';
 import BusinessProfile from '../../business-profile/BusinessProfile';
 import EditBusinessProfile from '../../edit-profile-business/EditBusinessProfile';
 import PrivacyPolicy from '../footer/PrivacyPolicy';
 import TermsOfService from '../footer/TermsOfService';
-import EditListing from '../../manage-listings/EditListing';
+import EditListing from '../../listings/EditListing';
 import './Main.css';
 
 // Main component that renders all pages in our app

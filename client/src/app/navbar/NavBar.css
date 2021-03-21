@@ -25,3 +25,26 @@ nav ul li a {
 .nav-item {
   margin: 0px 20px;
 }
+
+.navbar-toolbar a {
+  text-decoration: none;
+}
+
+.navbar-toolbar .active {
+  color: #f56476;
+  text-decoration: underline;
+}
+
+.navbar-header-home {
+  text-decoration: none !important;
+  color: #f56476 !important;
+}
+
+.navbar-minis {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.navbar-minis:hover {
+  color: #f56476;
+}

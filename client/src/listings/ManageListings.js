@@ -1,32 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Typography, Grid, Button } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Typography, Grid, Button, Card } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import '../shared/List.css';
-
-const useStyles = makeStyles({
-  table: {
-    minWidth: 800,
-  },
-  row: {
-    position: 'relative',
-    border: 'solid 1px gray',
-    padding: 15,
-    margin: 1,
-    '&:hover': {
-      boxShadow: '3px 3px gray',
-      top: -2,
-      left: -2,
-    },
-  },
-  title: {
-    cursor: 'pointer',
-  },
-});
+import './Listings.css';
 
 export default function ManageListings() {
-  const classes = useStyles();
   let history = useHistory();
   let [listings, setListings] = useState([]);
 
@@ -70,16 +48,18 @@ export default function ManageListings() {
   useEffect(loadListings, [setListings]);
 
   return (
-    <div className='list-container'>
-      <Typography component='h1' variant='h5'>
-        {sessionStorage.getItem('accountType') === '1' ? 'My Listings' : 'My Homes'}
-      </Typography>
+    <Card className='page'>
+      <Grid container justify='center'>
+        <Typography component='h1' variant='h5'>
+          {sessionStorage.getItem('accountType') === '1' ? 'My Listings' : 'My Homes'}
+        </Typography>
+      </Grid>
       <br />
-      <Grid className={classes.table} container alignItems='center' justify='space-between'>
+      <Grid container alignItems='center' justify='space-between'>
         {listings.map((listing) => (
-          <Grid key={listing.id} className={classes.row} container alignItems='center' justify='space-between'>
+          <Grid key={listing.id} className='listing-row' container alignItems='center' justify='space-between'>
             <Grid
-              className={classes.title}
+              className='listing-title'
               item
               container
               spacing={2}
@@ -119,6 +99,6 @@ export default function ManageListings() {
           </Button>
         </Grid>
       </Grid>
-    </div>
+    </Card>
   );
 }

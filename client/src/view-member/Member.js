@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import { Card, CardContent, Button, Grid, Typography, Divider, CardActions } from '@material-ui/core';
+import { Card, Button, Grid, Typography, Divider } from '@material-ui/core';
 import ProfileField from '../shared/ProfileField';
 
 export default function Member() {

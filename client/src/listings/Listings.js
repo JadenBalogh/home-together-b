@@ -68,6 +68,7 @@ function Listings(props) {
     fetch(url + '/api/get-category-types')
       .then((res) => res.json())
       .then((options) => {
+        console.log("---options--", options)
         setCategoryOptions(options.filter((x) => !x.parentId));
         let subCats = {};
         for (var o of options.filter((x) => x.parentId)) {
@@ -102,6 +103,7 @@ function Listings(props) {
     });
   }
 
+  console.log("----setSubcategoryOptions---", subcategoryOptions)
   const classes = useStyles();
   return (
     <div className='listings-container'>
@@ -117,16 +119,28 @@ function Listings(props) {
               name='categoryId'
               value={categoryId}
               required
+              native
               onChange={handleCategoryChange}
             >
-              {categoryOptions.map((option) => (
-                <MenuItem key={option.id} value={option.id}>
-                  {option.name}
-                </MenuItem>
-              ))}
+              <option value='' />
+              {categoryOptions.length > 0 && Object.keys(subcategoryOptions).length > 0 ? (
+                categoryOptions.map((cat) => (
+                  <optgroup key={cat.id} label={`${cat.name}`}>
+                    {subcategoryOptions[cat.id] ? (
+                      subcategoryOptions[cat.id].map((subcat) => (
+                        <option key={subcat.id} value={subcat.id}>{`${subcat.name}`}</option>
+                      ))
+                    ) : (
+                      <></>
+                    )}
+                  </optgroup>
+                ))
+              ) : (
+                <option value='' />
+              )}
             </Select>
           </Grid>
-          <Grid item xs className={subcategoryOptions[categoryId] ? '' : classes.hidden}>
+          {/* <Grid item xs  >
             <InputLabel>Select a Sub-category:</InputLabel>
             <Select
               className='listing-select'
@@ -145,7 +159,7 @@ function Listings(props) {
                 <MenuItem key={-1}>-</MenuItem>
               )}
             </Select>
-          </Grid>
+          </Grid> */}
         </Grid>
         <Grid container spacing={2} justify='center' alignItems='center' wrap='wrap'>
           <Grid item xs={3}>

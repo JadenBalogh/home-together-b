@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Grid from '@material-ui/core/Grid';
+import { Grid, Card } from '@material-ui/core';
 import './Home.css';
 
 // Home page
 class Home extends Component {
   render() {
     return (
-      <div className='homepage-container'>
+      <Card className='page'>
         <Grid container className='homepage-container' direction='column'>
           <Grid item container className='logo-container' xs={12} direction='column'>
             <img className='logoimg' alt='Sample' src={require('../shared/htlogo.png').default} />
@@ -54,7 +54,7 @@ class Home extends Component {
             </Grid>
           </Grid>
         </Grid>
-      </div>
+      </Card>
     );
   }
 }

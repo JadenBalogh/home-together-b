@@ -498,6 +498,7 @@ export default function SignupForm(props) {
             />
           </Grid>
         </Grid>
+        <br />
         <Button type='submit' fullWidth variant='contained' color='primary'>
           Sign Up
         </Button>

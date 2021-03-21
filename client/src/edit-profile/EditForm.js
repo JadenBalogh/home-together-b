@@ -48,10 +48,11 @@ export default function EditForm(props) {
   }
 
   return (
-    <Card>
+    <Card className='page'>
       <Typography component='h1' variant='h5'>
         Edit Profile
       </Typography>
+      <br />
       <form onSubmit={props.handleSubmit} noValidate>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} container>
@@ -438,6 +439,7 @@ export default function EditForm(props) {
             />
           </Grid>
         </Grid>
+        <br />
         <Button type='submit' fullWidth variant='contained' color='primary'>
           Save Changes
         </Button>

@@ -14,7 +14,7 @@ import {
 
 export default function SignupForm(props) {
   return (
-    <Card>
+    <Card className='page'>
       <Typography component='h1' variant='h5'>
         Sign up
       </Typography>
@@ -287,6 +287,7 @@ export default function SignupForm(props) {
             />
           </Grid>
         </Grid>
+        <br />
         <Button type='submit' fullWidth variant='contained' color='primary'>
           Sign Up
         </Button>

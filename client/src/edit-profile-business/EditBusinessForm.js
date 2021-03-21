@@ -14,7 +14,7 @@ import IncText from './IncText';
 
 export default function EditForm(props) {
   return (
-    <Card>
+    <Card className='page'>
       <Typography component='h1' variant='h5'>
         Edit Business Profile
       </Typography>

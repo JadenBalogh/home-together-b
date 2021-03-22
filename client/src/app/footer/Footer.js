@@ -1,21 +1,18 @@
 import React from 'react';
 import { Grid, Divider } from '@material-ui/core';
+import './Footer.css';
 
 export default function Footer() {
   return (
     <div className='footer'>
       <Grid container direction='column' className='footer-content'>
         <Grid item container xs={12} direction='row' justify='space-between' alignItems='center'>
-          <Grid item xs={6} direction='column'>
+          <Grid item xs={6}>
             <h3>Contact:</h3>
             <p className='footer-text'>
-              <a href='mailto:contact@HomeTogether.ca' class='flink'>
-                Contact@hometogether.ca
-              </a>
+              <a href='mailto:contact@HomeTogether.ca'>Contact@hometogether.ca</a>
               <br />
-              <a href='tel:+12505551234' class='flink'>
-                (250) 555-1234
-              </a>
+              <a href='tel:+12505551234'>(250) 555-1234</a>
             </p>
             <p className='footer-text'>1234 Home Together Street, Vancouver, BC, Canada.</p>
           </Grid>

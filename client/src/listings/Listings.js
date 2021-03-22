@@ -128,10 +128,9 @@ function Listings() {
               <TextField
                 variant='outlined'
                 fullWidth
-                label='Search...'
                 name='title'
                 value={filters.title}
-                placeholder='Example'
+                placeholder='Search...'
                 onChange={handleFilterChange}
                 autoFocus
               />
@@ -142,7 +141,7 @@ function Listings() {
             <LocationOnIcon fontSize='large' />
             <InputLabel>Filter by city:</InputLabel>
             <Grid item xs={12}>
-              <LocationFilter label='Select your desired cities...' onChange={handleLocationsChange} />
+              <LocationFilter placeholder='Select your desired cities...' onChange={handleLocationsChange} />
             </Grid>
           </Grid>
           <br />

@@ -1,11 +1,9 @@
-import React from 'react';
-import './Footer.css';
+import { Card } from '@material-ui/core';
 
-// Privacy Policy Page
-function PrivacyPolicy(props) {
+export default function PrivacyPolicy() {
   return (
-    <div className='PrivacyPolicy'>
-      <div className='PrivacyPolicyTextContainer'>
+    <Card className='page'>
+      <div>
         <h1>Privacy Policy</h1>
         <p>
           Home Together Canada is an online platform that provides individuals, wishing to share a home with others, the
@@ -13,7 +11,7 @@ function PrivacyPolicy(props) {
           their endeavor to succeed at creating a shared living experience of their own making.
         </p>
       </div>
-      <div className='PrivacyPolicyTextContainer'>
+      <div>
         <h2>1. Definition of Personal Information.</h2>
         <p>
           Personal information is defined as information that can identify an individual and information about an
@@ -21,7 +19,7 @@ function PrivacyPolicy(props) {
           combination with other information.
         </p>
       </div>
-      <div className='PrivacyPolicyTextContainer'>
+      <div>
         <h2>2. Collection of Personal Information.</h2>
         <p>
           We collect your personal information as a way to ensure you are who you say you are, (a) to provide basic
@@ -39,7 +37,7 @@ function PrivacyPolicy(props) {
           only and does not cover the collection of personal information by any third-party ad companies.
         </p>
       </div>
-      <div className='PrivacyPolicyTextContainer'>
+      <div>
         <h2>3. Use of Personal Information.</h2>
         <p>
           We use the personal information we collect to: Provide, improve, and personalize our content and the Services,
@@ -47,7 +45,7 @@ function PrivacyPolicy(props) {
           activities; and enforce our Terms of Service and this Privacy Policy.
         </p>
       </div>
-      <div className='PrivacyPolicyTextContainer'>
+      <div>
         <h2>4. Security and Retention of Personal Information.</h2>
         <p>
           We retain your personal information as long as it is necessary and relevant for our operations. In addition,
@@ -61,14 +59,14 @@ function PrivacyPolicy(props) {
           obligations to protect your personal information, we endeavor to keep our website updated.
         </p>
       </div>
-      <div className='PrivacyPolicyTextContainer'>
+      <div>
         <h2>5. Location of Servers.</h2>
         <p>
           We create, maintain, and archive information on servers that are not located on our immediate premises and are
           located in Canada or the USA.
         </p>
       </div>
-      <div className='PrivacyPolicyTextContainer'>
+      <div>
         <h2>6. Minors.</h2>
         <p>
           The Website, Application, and Services are intended for general audiences and are not directed to individuals
@@ -78,7 +76,7 @@ function PrivacyPolicy(props) {
           the email address provided below, and we will delete that information.
         </p>
       </div>
-      <div className='PrivacyPolicyTextContainer'>
+      <div>
         <h2>7. Disclosure of Personal Information.</h2>
         <p>
           We do not disclose your personal information to third parties. There are, however, certain circumstances in
@@ -105,7 +103,7 @@ function PrivacyPolicy(props) {
           privacy and security of your data.
         </p>
       </div>
-      <div className='PrivacyPolicyTextContainer'>
+      <div>
         <h2>8. Consent for Collection, User, and Disclosure.</h2>
         <p>
           By accessing and using our Website, we consider you to have given us consent to the collection, use, and
@@ -114,14 +112,14 @@ function PrivacyPolicy(props) {
           Privacy Policy without obtaining further written or verbal consent to do so.{' '}
         </p>
       </div>
-      <div className='PrivacyPolicyTextContainer'>
+      <div>
         <h2>9. Cookies</h2>
         <p>
           We do not use cookies and this site was not created to use cookies. Note that this Privacy Policy covers the
           use of cookies by us only and does not cover the use of cookies by any third-party ad companies.
         </p>
       </div>
-      <div className='PrivacyPolicyTextContainer'>
+      <div>
         <h2>10. Third Party Services</h2>
         <p>
           Our Website includes links to other websites. We provide these links and information to you as a service, much
@@ -131,7 +129,7 @@ function PrivacyPolicy(props) {
           to providing your personal information in connection with such products or services.
         </p>
       </div>
-      <div className='PrivacyPolicyTextContainer'>
+      <div>
         <h2>11. Withdraw Consent</h2>
         <p>
           You can choose not to provide any personal information to us or to withdraw your consent for the collection,
@@ -139,7 +137,7 @@ function PrivacyPolicy(props) {
           do so, you will not have access to the membership portions of the Website or Application{' '}
         </p>
       </div>
-      <div className='PrivacyPolicyTextContainer'>
+      <div>
         <h2>12. Request to Access, Correct, or Delete</h2>
         <p>
           We take steps to ensure that the personal information we collect is accurate and up to date, and that you have
@@ -149,19 +147,17 @@ function PrivacyPolicy(props) {
           way to monitor and in some cases stop individuals or businesses from re-registering to the site.{' '}
         </p>
       </div>
-      <div className='PrivacyPolicyTextContainer'>
+      <div>
         <h2>13. Improper Collection and Misuse of Personal Information</h2>
         <p>If at any time you think your personal information has been accessed, please contact us immediately.</p>
       </div>
-      <div className='PrivacyPolicyTextContainer'>
+      <div>
         <h2>14. Contact</h2>
         <p>
           If you have any questions or concerns about our Privacy Policy, or how we have handled your personal
           information please email us. You will find our email under contacts.
         </p>
       </div>
-    </div>
+    </Card>
   );
 }
-
-export default PrivacyPolicy;

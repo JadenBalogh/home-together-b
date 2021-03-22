@@ -1,0 +1,37 @@
+.footer {
+  color: white;
+  background-color: #39393d;
+  width: 80%;
+  margin: 0px auto 10px auto;
+  border-radius: 5px;
+}
+
+.footer-content {
+  padding: 10px 20px;
+  text-align: left;
+  font-size: small;
+}
+
+.footer-text {
+  margin: 8px 0;
+}
+
+.footer-content h3 {
+  color: antiquewhite;
+  margin: 0;
+}
+
+.footer-content a {
+  color: white;
+  text-decoration: underline;
+}
+
+.footer-content a:hover {
+  color: #f56476;
+  text-decoration: underline;
+}
+
+.footer-endnote {
+  margin-top: 8px;
+  margin-bottom: 0;
+}

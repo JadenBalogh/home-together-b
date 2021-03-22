@@ -1,31 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Select, Grid, Typography, TextField, InputLabel, MenuItem } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Select, Grid, Typography, TextField, InputLabel, MenuItem, Card } from '@material-ui/core';
 import ListingList from './ListingList';
 import PaginationControlled from './Pagination';
 import { SearchClearSnackbar } from '../shared/snackbars';
-import Footer from '../footer/Footer';
-import './Listings.css';
 import LocationFilter from '../shared/LocationFilter';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    paddingTop: '25px',
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-  hidden: {
-    visibility: 'hidden',
-  },
-  multiLabel: {
-    marginTop: '15px',
-    marginBottom: '5px',
-  },
-}));
+import './Listings.css';
 
 // Search page for members
 function Listings(props) {
@@ -102,13 +81,12 @@ function Listings(props) {
     });
   }
 
-  const classes = useStyles();
   return (
-    <div className='listings-container'>
+    <Card className='page'>
       <Typography component='h1' variant='h5'>
         Find Services:
       </Typography>
-      <form className={classes.form} noValidate>
+      <form noValidate>
         <Grid container spacing={3} direction='row' justify='space-evenly' alignItems='flex-end'>
           <Grid item xs>
             <InputLabel>Select a Category:</InputLabel>
@@ -126,7 +104,7 @@ function Listings(props) {
               ))}
             </Select>
           </Grid>
-          <Grid item xs className={subcategoryOptions[categoryId] ? '' : classes.hidden}>
+          <Grid item xs>
             <InputLabel>Select a Sub-category:</InputLabel>
             <Select
               className='listing-select'
@@ -187,8 +165,7 @@ function Listings(props) {
       <Grid container direction='column' justify='center' alignItems='center'>
         <PaginationControlled PaginationControlled={PaginationControlled}></PaginationControlled>
       </Grid>
-      <Footer Footer={Footer}></Footer>
-    </div>
+    </Card>
   );
 }
 

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
+import { Typography, Card, Grid } from '@material-ui/core';
 import MemberList from './MemberList';
 import MembersFilter from './MembersFilter';
-import Typography from '@material-ui/core/Typography';
 import './Members.css';
 
-// Search page for members
 class Members extends Component {
   constructor(props) {
     super(props);
@@ -105,19 +104,22 @@ class Members extends Component {
 
   render() {
     return (
-      <div className='members-container'>
-        <Typography component='h1' variant='h5'>
-          Find other members looking to homeshare...
-        </Typography>
-        <MembersFilter
-          dropdownHandler={this.handleDropdownChange}
-          inputHandler={this.handleInputChange}
-          checkboxHandler={this.handleCheckboxChange}
-          locationsHandler={this.handleLocationsChange}
-          filters={this.state.filters}
-        />
-        <MemberList members={this.state.members} />
-      </div>
+      <Card className='page'>
+        <Grid container direction='column' alignItems='center' justify='space-between'>
+          <Typography component='h1' variant='h5'>
+            Find other members looking to homeshare...
+          </Typography>
+          <MembersFilter
+            dropdownHandler={this.handleDropdownChange}
+            inputHandler={this.handleInputChange}
+            checkboxHandler={this.handleCheckboxChange}
+            locationsHandler={this.handleLocationsChange}
+            filters={this.state.filters}
+          />
+          <br />
+          <MemberList members={this.state.members} />
+        </Grid>
+      </Card>
     );
   }
 }

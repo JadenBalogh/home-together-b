@@ -1,30 +1,19 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import '../shared/List.css';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Typography,
+  Card,
+} from '@material-ui/core';
 
 const year = new Date().getFullYear();
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-  row: {
-    cursor: 'pointer',
-    '&:hover': {
-      background: '#CFE5F8',
-    }
-  },
-});
 
-//Info stored: username, gender*, age*, status*, budget*
 function MemberList(props) {
   let history = useHistory();
 
@@ -32,15 +21,13 @@ function MemberList(props) {
     history.push('/member/' + id);
   };
 
-  const classes = useStyles();
   return (
-    <div className='list-container'>
+    <Card>
       <Typography component='h1' variant='h6'>
         Members Found:
       </Typography>
-      {/* <h3>Members Found:</h3> */}
       <TableContainer component={Paper}>
-        <Table className={classes.table} size='small' aria-label='a dense table'>
+        <Table size='small' aria-label='a dense table'>
           <TableHead>
             <TableRow>
               <TableCell>
@@ -62,7 +49,7 @@ function MemberList(props) {
           </TableHead>
           <TableBody>
             {props.members.map((member) => (
-              <TableRow className={classes.row} key={member.id} onClick={() => handleMemberClicked(member.id)}>
+              <TableRow className='member-row' key={member.id} onClick={() => handleMemberClicked(member.id)}>
                 <TableCell component='th' scope='row'>
                   {`${member.firstName} ${member.lastName}`}
                 </TableCell>
@@ -75,7 +62,7 @@ function MemberList(props) {
           </TableBody>
         </Table>
       </TableContainer>
-    </div>
+    </Card>
   );
 }
 

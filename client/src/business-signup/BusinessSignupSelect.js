@@ -3,7 +3,6 @@ import Select from 'react-select';
 import { InputLabel, Grid, Tooltip } from '@material-ui/core';
 import HelpIcon from '@material-ui/icons/Help';
 
-// Select box for filter panel
 function SignupSelect(props) {
   return (
     <Grid item xs={12} container alignItems='center'>

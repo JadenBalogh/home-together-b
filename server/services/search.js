@@ -30,7 +30,10 @@ const SQL_SELECT_MEMBERS = `
     s.smokingRestrictions = ? AND
     s.hasHousing = ? AND
     s.minHomeCapacity <= ? AND
-    s.maxHomeCapacity >= ?
+    s.maxHomeCapacity >= ? AND (
+      m.firstName LIKE ? OR
+      m.lastName LIKE ?
+    )
 `;
 
 const SQL_SELECT_LISTINGS = `
@@ -79,6 +82,8 @@ async function getMembers(filters) {
     filters.hasHousing,
     filters.maxHomeCapacity || Number.MAX_SAFE_INTEGER,
     filters.minHomeCapacity || 0,
+    `%${filters.firstName}%`,
+    `%${filters.lastName}%`,
   ]);
 
   // Manually do the filtering for the array-based parameters cause prepared statements suck at dealing with this

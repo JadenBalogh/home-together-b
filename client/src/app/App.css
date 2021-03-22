@@ -4,36 +4,3 @@
   flex-direction: column;
   align-items: center;
 }
-
-.navbar {
-  background: #434343;
-  margin: 5px;
-}
-
-.navbar-toolbar a {
-  text-decoration: none;
-}
-
-.navbar-header {
-  font-size: 40px;
-  color: #F56476;
-}
-
-.navbar-header-home {
-  text-decoration: none !important;
-  color: #F56476 !important;
-  
-}
-
-.navbar-minis {
-  text-decoration: none;
-  color: #FFFFFF;
-}
-.navbar-minis:hover {
-  color: #F56476;
-}
-.navbar-toolbar .active {
-  color:#F56476;
-  text-decoration: underline;
-  
-}

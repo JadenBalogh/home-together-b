@@ -16,7 +16,7 @@ function SignupSelect(props) {
         </Tooltip>
       </Grid>
       <Grid item xs={6}>
-        <LocationFilter onChange={props.onChange} />
+        <LocationFilter label='Select a city' onChange={props.onChange} />
       </Grid>
     </Grid>
   );

@@ -1,24 +1,33 @@
 import React, { Component } from 'react';
-import Footer from '../footer/Footer';
-import Grid from '@material-ui/core/Grid';
-import '../footer/Footer.css';
+import { Grid, Card } from '@material-ui/core';
+import './Home.css';
 
 // Home page
 class Home extends Component {
   render() {
     return (
-      <div className='homepage-container'>
+      <Card className='page'>
         <Grid container className='homepage-container' direction='column'>
-          <Grid item container className='logo-container' item xs={12} direction='column'>
+          <Grid item container className='logo-container' xs={12} direction='column'>
             <img className='logoimg' alt='Sample' src={require('../shared/htlogo.png').default} />
           </Grid>
-          <Grid item container item xs={12} direction='row' justify='center'>
+          <Grid item container xs={12} direction='row' justify='center'>
             <Grid item xs>
-              <img className='roundimg' alt='Sample' width='500' src={require('../shared/bigstock-Beautiful-Middle-Aged-Business-147085658.jpg').default} />
+              <img
+                className='roundimg'
+                alt='Sample'
+                width='500'
+                src={require('../shared/bigstock-Beautiful-Middle-Aged-Business-147085658.jpg').default}
+              />
               <p>A Free Canadian Home-sharing website.</p>
             </Grid>
             <Grid item xs>
-              <img className='roundimg' alt='Sample' width='500' src={require('../shared/bigstock-Beautiful-Middle-Aged-Business-147085658.jpg').default} />
+              <img
+                className='roundimg'
+                alt='Sample'
+                width='500'
+                src={require('../shared/bigstock-Beautiful-Middle-Aged-Business-147085658.jpg').default}
+              />
               <p>Supporting the growth and success of shared living across the country!</p>
             </Grid>
           </Grid>
@@ -26,7 +35,7 @@ class Home extends Component {
           <Grid item xs>
             <p>Our mandate is to facilitate the growth and success of shared living in Canada.</p>
           </Grid>
-          <Grid item container item xs={12} direction='row'>
+          <Grid item container xs={12} direction='row'>
             <Grid item xs>
               <h3>Our Mandate</h3>
               <p>
@@ -45,8 +54,7 @@ class Home extends Component {
             </Grid>
           </Grid>
         </Grid>
-        <Footer Footer={Footer}></Footer>
-      </div>
+      </Card>
     );
   }
 }

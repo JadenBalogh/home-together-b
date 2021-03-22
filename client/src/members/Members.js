@@ -1,125 +1,159 @@
-import React, { Component } from 'react';
+import { useState, useEffect } from 'react';
+import { Typography, Card, Grid, Divider, Tooltip, InputAdornment, TextField } from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
+import InfoIcon from '@material-ui/icons/Info';
+import ErrorIcon from '@material-ui/icons/Error';
 import MemberList from './MemberList';
 import MembersFilter from './MembersFilter';
-import Typography from '@material-ui/core/Typography';
+import PaginationControlled from '../shared/Pagination';
 import './Members.css';
 
-// Search page for members
-class Members extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      members: [],
-      filters: {
-        locationIds: [],
-        genderIds: [],
-        ageGroupIds: [],
-        familyStatusIds: [],
-        minHomeCapacity: 0,
-        maxHomeCapacity: 0,
-        minMonthlyBudget: 0,
-        maxMonthlyBudget: 0,
-        petRestrictions: false,
-        religionRestrictions: false,
-        smokingRestrictions: false,
-        hasHousing: false,
-      },
-    };
-    this.updateMembers = this.updateMembers.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
-    this.handleDropdownChange = this.handleDropdownChange.bind(this);
-    this.handleLocationsChange = this.handleLocationsChange.bind(this);
-  }
+export default function Members() {
+  const [members, setMembers] = useState([]);
+  const [filters, setFilters] = useState({
+    locationIds: [],
+    genderIds: [],
+    ageGroupIds: [],
+    familyStatusIds: [],
+    minHomeCapacity: 0,
+    maxHomeCapacity: 0,
+    minMonthlyBudget: 0,
+    maxMonthlyBudget: 0,
+    petRestrictions: false,
+    religionRestrictions: false,
+    smokingRestrictions: false,
+    hasHousing: false,
+  });
+  const [name, setName] = useState('');
 
-  updateMembers() {
-    let filters = this.state.filters;
+  function updateMembers() {
+    const body = {
+      ...filters,
+      firstName: name,
+      lastName: name,
+    };
 
     const url = process.env.REACT_APP_LOCAL_URL || '';
     const route = '/api/get-members?';
     fetch(url + route, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ filters }),
+      body: JSON.stringify({ filters: body }),
     })
       .then((res) => res.json())
       .then((json) => {
-        this.setState({
-          members: json,
-        });
+        setMembers(json);
       });
-    console.log('Search for new members list attempted');
-    if (Members.members === undefined) {
-      console.log('No results were successfully returned');
-    }
   }
 
-  handleInputChange(event) {
-    this.setState(
-      (prevState) => ({
-        filters: {
-          ...prevState.filters,
-          [event.target.name]: event.target.value,
-        },
-      }),
-      this.updateMembers
-    );
+  function handleInputChange(event) {
+    setFilters({
+      ...filters,
+      [event.target.name]: event.target.value,
+    });
   }
 
-  handleCheckboxChange(event) {
-    this.setState(
-      (prevState) => ({
-        filters: {
-          ...prevState.filters,
-          [event.target.name]: event.target.checked,
-        },
-      }),
-      this.updateMembers
-    );
+  function handleCheckboxChange(event) {
+    setFilters({
+      ...filters,
+      [event.target.name]: event.target.checked,
+    });
   }
 
-  handleDropdownChange(selection, action) {
-    let ids = selection ? selection.map((x) => x.value) : [];
-    this.setState(
-      (prevState) => ({
-        filters: {
-          ...prevState.filters,
-          [action.name]: ids,
-        },
-      }),
-      this.updateMembers
-    );
+  function handleSelectChange(name, values) {
+    setFilters({
+      ...filters,
+      [name]: values,
+    });
   }
 
-  handleLocationsChange(event, options) {
-    this.setState(
-      (prevState) => ({
-        filters: {
-          ...prevState.filters,
-          locationIds: options.map((x) => x.value),
-        },
-      }),
-      this.updateMembers
-    );
+  function handleLocationsChange(event, options) {
+    setFilters({
+      ...filters,
+      locationIds: options.map((x) => x.value),
+    });
   }
 
-  render() {
-    return (
-      <div className='members-container'>
-        <Typography component='h1' variant='h5'>
-          Find other members looking to homeshare...
-        </Typography>
-        <MembersFilter
-          dropdownHandler={this.handleDropdownChange}
-          inputHandler={this.handleInputChange}
-          checkboxHandler={this.handleCheckboxChange}
-          locationsHandler={this.handleLocationsChange}
-          filters={this.state.filters}
-        />
-        <MemberList members={this.state.members} />
-      </div>
-    );
-  }
+  useEffect(updateMembers, [filters, name]);
+
+  return (
+    <Card>
+      <Grid container direction='row'>
+        <Grid item xs={4} container direction='column' alignItems='center' className='page'>
+          <Typography component='h1' variant='h5' align='center'>
+            Find Members
+          </Typography>
+          <br />
+          <Grid item container direction='row'>
+            <Grid item xs={12}>
+              <Divider light />
+            </Grid>
+          </Grid>
+          <br />
+          <Grid item container direction='row' alignItems='center'>
+            <Tooltip title='Home Together requires all members to create an account before engaging with other members. This list is only visible to registered members.'>
+              <InfoIcon />
+            </Tooltip>
+            &ensp;
+            <Grid item xs>
+              Find other registered members using the search options below.
+            </Grid>
+          </Grid>
+          <br />
+          <Grid item container direction='row'>
+            <Grid item xs={12}>
+              <Divider light />
+            </Grid>
+          </Grid>
+          <br />
+          <MembersFilter
+            selectHandler={handleSelectChange}
+            inputHandler={handleInputChange}
+            checkboxHandler={handleCheckboxChange}
+            locationsHandler={handleLocationsChange}
+            filters={filters}
+          />
+        </Grid>
+        <br />
+        <Divider flexItem orientation='vertical' />
+        <Grid item xs container direction='column' alignItems='center' className='page'>
+          <Grid item container direction='row' justify='center'>
+            <Grid item>
+              <TextField
+                variant='outlined'
+                name='name'
+                value={name}
+                placeholder='Search...'
+                onChange={(event) => setName(event.target.value)}
+                autoFocus
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment>
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+          </Grid>
+          <br />
+          {members && members.length > 0 ? (
+            <>
+              <MemberList members={members} />
+              <br />
+              <Grid container direction='column' justify='center' alignItems='center'>
+                <PaginationControlled PaginationControlled={PaginationControlled}></PaginationControlled>
+              </Grid>
+            </>
+          ) : (
+            <Grid item container direction='row' alignItems='center' justify='center'>
+              <ErrorIcon />
+              &ensp;
+              <Typography variant='overline'>No search results found.</Typography>
+            </Grid>
+          )}
+        </Grid>
+      </Grid>
+    </Card>
+  );
 }
-
-export default Members;

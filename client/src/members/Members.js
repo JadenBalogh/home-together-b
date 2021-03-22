@@ -49,6 +49,8 @@ export default function Members() {
   }
 
   function handleInputChange(event) {
+    console.log(event.target.name);
+    console.log(event.target.value);
     setFilters({
       ...filters,
       [event.target.name]: event.target.value,
@@ -56,23 +58,19 @@ export default function Members() {
   }
 
   function handleCheckboxChange(event) {
+    console.log(event.target.name);
+    console.log(event.target.checked);
     setFilters({
       ...filters,
       [event.target.name]: event.target.checked,
     });
   }
 
-  function handleDropdownChange(selection, action) {
-    let ids = selection ? selection.map((x) => x.value) : [];
-    this.setState(
-      (prevState) => ({
-        filters: {
-          ...prevState.filters,
-          [action.name]: ids,
-        },
-      }),
-      this.updateMembers
-    );
+  function handleSelectChange(name, values) {
+    setFilters({
+      ...filters,
+      [name]: values,
+    });
   }
 
   function handleLocationsChange(event, options) {
@@ -115,7 +113,7 @@ export default function Members() {
           </Grid>
           <br />
           <MembersFilter
-            dropdownHandler={handleDropdownChange}
+            selectHandler={handleSelectChange}
             inputHandler={handleInputChange}
             checkboxHandler={handleCheckboxChange}
             locationsHandler={handleLocationsChange}

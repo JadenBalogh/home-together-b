@@ -1,24 +1,47 @@
-import React from 'react';
-import Select from 'react-select';
-import { InputLabel, Grid } from '@material-ui/core';
+import { useState, useEffect } from 'react';
+import { TextField } from '@material-ui/core';
+import { Autocomplete } from '@material-ui/lab';
 
 // Select box for filter panel
-function FilterSelect(props) {
+function FilterSelect({
+  fetchURL = '',
+  optionMap = (x) => x,
+  placeholder = '',
+  label = '',
+  name = '',
+  onChange = () => {},
+}) {
+  const [options, setOptions] = useState([]);
+
+  useEffect(fetchOptions, [fetchURL]);
+
+  function fetchOptions() {
+    const url = process.env.REACT_APP_LOCAL_URL || '';
+    fetch(url + fetchURL)
+      .then((res) => res.json())
+      .then((json) => {
+        let options = json.map(optionMap);
+        setOptions(options);
+      });
+  }
+
   return (
-    <Grid item xs={6} container alignItems='center'>
-      <Grid item xs={5} container justify='flex-start'>
-        <InputLabel>{props.label}</InputLabel>
-      </Grid>
-      <Grid item xs={7}>
-        <Select
-          isMulti
-          isClearable={false}
-          name={props.name}
-          options={props.options}
-          onChange={props.onChange}
-        />
-      </Grid>
-    </Grid>
+    <Autocomplete
+      multiple
+      disableCloseOnSelect
+      onChange={(event, values) =>
+        onChange(
+          name,
+          values.map((x) => x.value)
+        )
+      }
+      name={name}
+      options={options}
+      getOptionLabel={(option) => option.label}
+      renderInput={(params) => (
+        <TextField {...params} label={label} placeholder={placeholder} variant='outlined' name='test' />
+      )}
+    />
   );
 }
 

@@ -299,6 +299,7 @@ export default function EditForm(props) {
                 </RadioGroup>
               </FormControl>
               <RadioText
+                invertCheck
                 check={`${Boolean(Number(props.formData.petRestrictions))}`}
                 name='petRestrictionsText'
                 value={props.formData.petRestrictionsText}

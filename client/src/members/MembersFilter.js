@@ -180,6 +180,7 @@ function MembersFilter(props) {
                 <FormControlLabel
                   control={
                     <Checkbox
+                      invertCheck
                       checked={props.filters.petRestrictions}
                       onChange={props.checkboxHandler}
                       name='petRestrictions'

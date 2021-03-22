@@ -21,10 +21,17 @@
 
 .member-row {
   cursor: pointer;
+  position: relative;
+  border: solid 1px #d3d3d3;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 1px;
 }
 
 .member-row:hover {
-  background-color: #cfe5f8;
+  box-shadow: 3px 3px #d3d3d3;
+  top: -2px;
+  left: -2px;
 }
 
 .MuiPagination-ul {

@@ -94,7 +94,7 @@ function MembersFilter(props) {
               options={familyStatusOptions}
               onChange={props.dropdownHandler}
             />
-            <Grid item xs={6} container direction='rows' alignItems='center' justify='center'>
+            <Grid item xs={6} container direction='row' alignItems='center' justify='center'>
               <Grid item xs={5} container justify='flex-start'>
                 <InputLabel>Home Capacity:</InputLabel>
               </Grid>
@@ -122,7 +122,7 @@ function MembersFilter(props) {
                 />
               </Grid>
             </Grid>
-            <Grid item xs={6} container direction='rows' alignItems='center' justify='center'>
+            <Grid item xs={6} container direction='row' alignItems='center' justify='center'>
               <Grid item xs={5} container justify='flex-start'>
                 <InputLabel>Monthly Budget:</InputLabel>
               </Grid>

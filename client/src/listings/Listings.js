@@ -15,7 +15,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import ErrorIcon from '@material-ui/icons/Error';
 import ListingList from './ListingList';
-import PaginationControlled from './Pagination';
+import PaginationControlled from '../shared/Pagination';
 import { SearchClearSnackbar } from '../shared/snackbars';
 import LocationFilter from '../shared/LocationFilter';
 

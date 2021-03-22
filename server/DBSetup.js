@@ -395,6 +395,8 @@ insert('CategoryType(parentId, name, paymentRequired)', [
   [74, 'Agencies Serving the Homeless', false],
   [74, 'Agencies Serving other Individuals and Groups', false],
   [74, 'Home Care Agencies', false],
+  [84, 'Information & Services', false],
+  [94, 'Members with Homes to Share', false],
 ]);
 
 create(

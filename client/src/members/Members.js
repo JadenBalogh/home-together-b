@@ -33,8 +33,6 @@ export default function Members() {
       lastName: name,
     };
 
-    console.log(body);
-
     const url = process.env.REACT_APP_LOCAL_URL || '';
     const route = '/api/get-members?';
     fetch(url + route, {
@@ -49,8 +47,6 @@ export default function Members() {
   }
 
   function handleInputChange(event) {
-    console.log(event.target.name);
-    console.log(event.target.value);
     setFilters({
       ...filters,
       [event.target.name]: event.target.value,
@@ -58,8 +54,6 @@ export default function Members() {
   }
 
   function handleCheckboxChange(event) {
-    console.log(event.target.name);
-    console.log(event.target.checked);
     setFilters({
       ...filters,
       [event.target.name]: event.target.checked,

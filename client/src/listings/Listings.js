@@ -69,7 +69,6 @@ function Listings() {
   }
 
   function handleSubcategoryChange(event) {
-    console.log(event.target.value);
     let activeId = event.target.value;
     setSubcategoryId(activeId);
   }

@@ -26,7 +26,6 @@ export default function EditListing() {
 
   let handleSubmit = (event) => {
     event.preventDefault();
-    console.log(listing);
 
     const url = process.env.REACT_APP_LOCAL_URL || '';
     const route = '/api/edit-listing?';
@@ -55,7 +54,6 @@ export default function EditListing() {
   };
 
   let handleInputChange = (event) => {
-    console.log(event.target);
     setListing((prev) => {
       return {
         ...prev,

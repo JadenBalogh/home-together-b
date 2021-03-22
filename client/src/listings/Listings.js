@@ -13,6 +13,7 @@ import {
 import SearchIcon from '@material-ui/icons/Search';
 import InfoIcon from '@material-ui/icons/Info';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import ErrorIcon from '@material-ui/icons/Error';
 import ListingList from './ListingList';
 import PaginationControlled from './Pagination';
 import { SearchClearSnackbar } from '../shared/snackbars';
@@ -94,6 +95,7 @@ function Listings() {
           <Typography component='h1' variant='h5' align='center'>
             Classifieds and Home Share Links
           </Typography>
+          <br />
           <Grid item container direction='row'>
             <Grid item xs={12}>
               <Divider light />
@@ -110,6 +112,12 @@ function Listings() {
             &ensp;
             <Grid item xs>
               Find relevant home sharing services using the search options below.
+            </Grid>
+          </Grid>
+          <br />
+          <Grid item container direction='row'>
+            <Grid item xs={12}>
+              <Divider light />
             </Grid>
           </Grid>
           <br />
@@ -174,11 +182,21 @@ function Listings() {
             </FormControl>
           </Grid>
           <br />
-          <ListingList listings={listings}></ListingList>
-          <br />
-          <Grid container direction='column' justify='center' alignItems='center'>
-            <PaginationControlled PaginationControlled={PaginationControlled}></PaginationControlled>
-          </Grid>
+          {listings && listings.length > 0 ? (
+            <>
+              <ListingList listings={listings}></ListingList>
+              <br />
+              <Grid container direction='column' justify='center' alignItems='center'>
+                <PaginationControlled PaginationControlled={PaginationControlled}></PaginationControlled>
+              </Grid>
+            </>
+          ) : (
+            <Grid item container direction='row' alignItems='center' justify='center'>
+              <ErrorIcon />
+              &ensp;
+              <Typography variant='overline'>No search results found.</Typography>
+            </Grid>
+          )}
         </Grid>
       </Grid>
     </Card>

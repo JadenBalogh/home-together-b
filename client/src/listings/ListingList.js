@@ -30,7 +30,6 @@ export default function ListingList({ listings }) {
               </Grid>
               <Grid item container spacing={2} direction='row' alignItems='center' justify='flex-end' xs={2}>
                 <Grid item>
-                  {/* <Ratings Ratings={Ratings}></Ratings> */}
                   <Rating name='rating' value={listing.ratingAverage} defaultValue={5} precision={0.5} readOnly />
                 </Grid>
               </Grid>

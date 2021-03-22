@@ -355,6 +355,7 @@ export default function SignupForm(props) {
               </RadioGroup>
             </FormControl>
             <RadioText
+              invertCheck
               check={props.formData.petRestrictions}
               name='petRestrictionsText'
               value={props.formData.petRestrictionsText}

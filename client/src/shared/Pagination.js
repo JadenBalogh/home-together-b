@@ -1,5 +1,4 @@
 import React from 'react';
-import './Listings.css';
 import Pagination from '@material-ui/lab/Pagination';
 
 export default function PaginationControlled() {

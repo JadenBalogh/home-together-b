@@ -1,11 +1,9 @@
-import React from 'react';
-import './Footer.css';
+import { Card } from '@material-ui/core';
 
-// Terms of Service
-function TermsOfService(props) {
+export default function TermsOfService() {
   return (
-    <div className='TermsOfService'>
-      <div className='TermsOfServiceTextContainer'>
+    <Card className='page'>
+      <div>
         <h1>Terms of Service</h1>
         <p>
           Home Together Canada provides individuals who wish to enter into a shared living experience, the basic tools
@@ -22,7 +20,7 @@ function TermsOfService(props) {
           and, in such event, “you” and “your” will refer and apply to that company or other legal entity.
         </p>
       </div>
-      <div className='TermsOfServiceTextContainer'>
+      <div>
         <h2>1. Terms of Service Subject to Amendment</h2>
         <p>
           These Terms are subject to change without notice. By continuing to use or access the Website and Services, you
@@ -30,7 +28,7 @@ function TermsOfService(props) {
           that augment or enhance the Website or Services will be subject to these Terms.
         </p>
       </div>
-      <div className='TermsOfServiceTextContainer'>
+      <div>
         <h2>2. The Services</h2>
         <p>
           Home Together Canada Assoc. may compile and post sharing ideas and sharing options on the website for members
@@ -53,7 +51,7 @@ function TermsOfService(props) {
           maximum extent permitted by law.
         </p>
       </div>
-      <div className='TermsOfServiceTextContainer'>
+      <div>
         <h2>3. Account Registration</h2>
         <p>
           In order to access certain features on the site you must register to the site . If you choose to register to
@@ -72,7 +70,7 @@ function TermsOfService(props) {
           well as certain information about your preferences in relation to a Living Arrangement.
         </p>
       </div>
-      <div className='TermsOfServiceTextContainer'>
+      <div>
         <h2>4. Residential Tenancy Act and Regulations</h2>
         <p>
           You acknowledge that it is your responsibility to check with your province and or municipal or regional
@@ -81,14 +79,14 @@ function TermsOfService(props) {
           continue to change over time.
         </p>
       </div>
-      <div className='TermsOfServiceTextContainer'>
+      <div>
         <h2>5.</h2>
         <p>
           Home Together Canada requires all individuals, service providers and businesses wishing to use the
           hometogether.ca website to registration and agree to our terms of service and privacy policy.{' '}
         </p>
       </div>
-      <div className='TermsOfServiceTextContainer'>
+      <div>
         <h2>6.</h2>
         <p>
           Home Together Canada is an information only site and takes no part in the shared living agreements individuals
@@ -98,7 +96,7 @@ function TermsOfService(props) {
           maximum extent permitted by law.
         </p>
       </div>
-      <div className='TermsOfServiceTextContainer'>
+      <div>
         <h2>7. Feedback and Ratings</h2>
         <p>
           Home together Canada provides registered home share members the ability to post public comments and star
@@ -107,7 +105,7 @@ function TermsOfService(props) {
           Feedback or Ratings.{' '}
         </p>
       </div>
-      <div className='TermsOfServiceTextContainer'>
+      <div>
         <h2>8. Ownership of Content</h2>
         <p>
           All material on the Website and any related registered domains and sub-domains, and any other digital medium
@@ -117,7 +115,7 @@ function TermsOfService(props) {
           Reproduction of any part thereof, is prohibited except with our written consent or in accordance with the law
         </p>
       </div>
-      <div className='TermsOfServiceTextContainer'>
+      <div>
         <h2>9. Your Representations and Warranties</h2>
         <p>
           By submitting, posting, uploading, or transmitting content on or through the Website, Application, or Services
@@ -141,7 +139,7 @@ function TermsOfService(props) {
           such as viruses, that will disturb, destroy, or impair the use of the Website, Application, or Services.
         </p>
       </div>
-      <div className='TermsOfServiceTextContainer'>
+      <div>
         <h2>10. Responsibility for Content, Actions, and Compliance with Laws</h2>
         <p>
           You acknowledge and agree that you are responsible for your own acts and omissions and are also responsible
@@ -166,7 +164,7 @@ function TermsOfService(props) {
           strictly between the owner and home sharer(s) and we are not a party to it.
         </p>
       </div>
-      <div className='TermsOfServiceTextContainer'>
+      <div>
         <h2>11. Prohibited Activities</h2>
         <p>
           Members are prohibited from requesting, offering, negotiating, or engaging in any activities that: violate
@@ -177,7 +175,7 @@ function TermsOfService(props) {
           unsolicited services or products, or false, misleading, or fraudulent services or products.
         </p>
       </div>
-      <div className='TermsOfServiceTextContainer'>
+      <div>
         <h2>12. No Endorsement</h2>
         <p>
           We do not endorse any members, businesses, organization, services or other entities on the website, nor will
@@ -187,7 +185,7 @@ function TermsOfService(props) {
           applicable.
         </p>
       </div>
-      <div className='TermsOfServiceTextContainer'>
+      <div>
         <h2>13. Opinions Expressed on Website and Application</h2>
         <p>
           Opinions and other statements expressed by Members and third parties (including bloggers and feature
@@ -202,7 +200,7 @@ function TermsOfService(props) {
           right to block or remove communications, postings, or materials at any time in our sole discretion.
         </p>
       </div>
-      <div className='TermsOfServiceTextContainer'>
+      <div>
         <h2>14. Disclaimer</h2>
         <p>
           The information contained in the Website and Application is for general information purposes only. While we
@@ -219,7 +217,7 @@ function TermsOfService(props) {
           uninterrupted use by you of the Website or Services.
         </p>
       </div>
-      <div className='TermsOfServiceTextContainer'>
+      <div>
         <h2>15. Limitation of Liability</h2>
         <p>
           We take no responsibility for, and will not be liable for, any error or inaccuracies in any content or the
@@ -231,7 +229,7 @@ function TermsOfService(props) {
           for use of the Website, and Services.
         </p>
       </div>
-      <div className='TermsOfServiceTextContainer'>
+      <div>
         <h2>16. Third Party Websites</h2>
         <p>
           We provide information and links to other websites. These links are provided for your convenience to provide
@@ -241,7 +239,7 @@ function TermsOfService(props) {
           reliance on any content, goods or services available through such third parties.
         </p>
       </div>
-      <div className='TermsOfServiceTextContainer'>
+      <div>
         <h2>17. International Use</h2>
         <p>
           This is a Canada only website and is for the use of Canadians wishing to enter into a shared living
@@ -252,7 +250,7 @@ function TermsOfService(props) {
           actions and any consequences that may come about through your action.
         </p>
       </div>
-      <div className='TermsOfServiceTextContainer'>
+      <div>
         <h2>18. Changes to the Services</h2>
         <p>
           In connection with any purchase of Services from the Website or Application, we do not make any promise
@@ -261,7 +259,7 @@ function TermsOfService(props) {
           Website and Application.
         </p>
       </div>
-      <div className='TermsOfServiceTextContainer'>
+      <div>
         <h2>19. Discontinuation or Suspension of Website, Application, or Services</h2>
         <p>
           We reserve the right at any time and from time to time to modify, suspend, or discontinue, temporarily or
@@ -270,7 +268,7 @@ function TermsOfService(props) {
           suspension, or discontinuance of the Website, Application, or Services.
         </p>
       </div>
-      <div className='TermsOfServiceTextContainer'>
+      <div>
         <h2>20. Termination, Unauthorized Use</h2>
         <p>
           In the event that you breach these Terms, we have the right to terminate your access to the Website,
@@ -281,7 +279,7 @@ function TermsOfService(props) {
           that we, in our sole discretion, believe to be in the interest of us or our users as a whole.
         </p>
       </div>
-      <div className='TermsOfServiceTextContainer'>
+      <div>
         <h2>21. Indemnity</h2>
         <p>
           You agree to indemnify and hold harmless Home Together Canada Assoc. and their respective directors, officers,
@@ -294,7 +292,7 @@ function TermsOfService(props) {
           sole discretion. In such event, you must provide us with such cooperation as is reasonably requested by us.
         </p>
       </div>
-      <div className='TermsOfServiceTextContainer'>
+      <div>
         <h2>22. Relationship</h2>
         <p>
           These Terms do not create a joint venture, partnership, employment, or agency relationship between us and you.
@@ -308,14 +306,14 @@ function TermsOfService(props) {
           our intellectual property including terms, trademark, or branding.
         </p>
       </div>
-      <div className='TermsOfServiceTextContainer'>
+      <div>
         <h2>23. Privacy</h2>
         <p>
           Registration data and certain other information that we collect about you are subject to our Privacy Policy.
           See Privacy Policy{' '}
         </p>
       </div>
-      <div className='TermsOfServiceTextContainer'>
+      <div>
         <h2>24. Headings</h2>
         <p>
           The headings used in these Terms are inserted for convenience of reference only and will not affect the
@@ -323,7 +321,7 @@ function TermsOfService(props) {
           of any of the parties subject to these Terms.
         </p>
       </div>
-      <div className='TermsOfServiceTextContainer'>
+      <div>
         <h2>25. Severability</h2>
         <p>
           The invalidity or unenforceability of any provision of these Terms will not affect the validity or
@@ -331,7 +329,7 @@ function TermsOfService(props) {
           deemed to be severable.
         </p>
       </div>
-      <div className='TermsOfServiceTextContainer'>
+      <div>
         <h2>26. Waiver</h2>
         <p>
           No waiver of any breach of any provision of these Terms will constitute a waiver of any prior, concurrent, or
@@ -339,7 +337,7 @@ function TermsOfService(props) {
           writing and signed by the waiving party.
         </p>
       </div>
-      <div className='TermsOfServiceTextContainer'>
+      <div>
         <h2>27. Jurisdiction</h2>
         <p>
           The laws of the Provinces of Canada and the federal laws of Canada applicable therein govern these Terms and
@@ -349,15 +347,13 @@ function TermsOfService(props) {
           the courts of British Columbia, Canada.
         </p>
       </div>
-      <div className='TermsOfServiceTextContainer'>
+      <div>
         <h2>28. Contact</h2>
         <p>
           If you have any questions or concerns about our Terms, please contact us by e-mail. Our email can be found
           under contacts.
         </p>
       </div>
-    </div>
+    </Card>
   );
 }
-
-export default TermsOfService;

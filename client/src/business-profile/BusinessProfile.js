@@ -99,7 +99,6 @@ export default function BusinessProfile() {
               {/* <ProfileField label='Business Cellphone Number' value={business.organizationAltPhone} /> */}
               <ProfileField label='Business Street Address' value={business.organizationStreetAddress} />
               <ProfileField label='Business Mailing Address' value={business.organizationMailingAddress} />
-              <ProfileField label='Business Searchable Address' value={business.organizationPostalCode} />
             </Grid>
           </CardContent>
           <CardActions>

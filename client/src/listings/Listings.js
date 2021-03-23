@@ -1,34 +1,26 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Select, Grid, Typography, TextField, InputLabel, MenuItem } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import {
+  Grid,
+  Typography,
+  TextField,
+  Card,
+  Divider,
+  Tooltip,
+  InputLabel,
+  FormControl,
+  Select,
+} from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
+import InfoIcon from '@material-ui/icons/Info';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import ErrorIcon from '@material-ui/icons/Error';
 import ListingList from './ListingList';
-import PaginationControlled from './Pagination';
+import PaginationControlled from '../shared/Pagination';
 import { SearchClearSnackbar } from '../shared/snackbars';
-import Footer from '../footer/Footer';
-import './Listings.css';
 import LocationFilter from '../shared/LocationFilter';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    paddingTop: '25px',
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-  hidden: {
-    visibility: 'hidden',
-  },
-  multiLabel: {
-    marginTop: '15px',
-    marginBottom: '5px',
-  },
-}));
-
 // Search page for members
-function Listings(props) {
+function Listings() {
   const [listings, setListings] = useState([]);
   const [filters, setFilters] = useState({
     locationIds: [],
@@ -36,12 +28,10 @@ function Listings(props) {
     minRating: '',
     maxRating: '',
   });
-  const [categoryId, setCategoryId] = useState('');
   const [subcategoryId, setSubcategoryId] = useState('');
   const [categoryOptions, setCategoryOptions] = useState([]);
   const [subcategoryOptions, setSubcategoryOptions] = useState({});
   const reset = useCallback(() => {
-    setCategoryId('');
     setSubcategoryId('');
     setFilters({ locationIds: [], title: '', minRating: '', maxRating: '' });
   }, []);
@@ -78,11 +68,6 @@ function Listings(props) {
       });
   }
 
-  function handleCategoryChange(event) {
-    setCategoryId(event.target.value);
-    setSubcategoryId('');
-  }
-
   function handleSubcategoryChange(event) {
     let activeId = event.target.value;
     setSubcategoryId(activeId);
@@ -102,93 +87,117 @@ function Listings(props) {
     });
   }
 
-  const classes = useStyles();
   return (
-    <div className='listings-container'>
-      <Typography component='h1' variant='h5'>
-        Find Services:
-      </Typography>
-      <form className={classes.form} noValidate>
-        <Grid container spacing={3} direction='row' justify='space-evenly' alignItems='flex-end'>
-          <Grid item xs>
-            <InputLabel>Select a Category:</InputLabel>
-            <Select
-              className='listing-select'
-              name='categoryId'
-              value={categoryId}
-              required
-              onChange={handleCategoryChange}
-            >
-              {categoryOptions.map((option) => (
-                <MenuItem key={option.id} value={option.id}>
-                  {option.name}
-                </MenuItem>
-              ))}
-            </Select>
+    <Card>
+      <Grid container direction='row'>
+        <Grid item xs={4} container direction='column' alignItems='center' className='page'>
+          <Typography component='h1' variant='h5' align='center'>
+            Classifieds and Home Share Links
+          </Typography>
+          <br />
+          <Grid item container direction='row'>
+            <Grid item xs={12}>
+              <Divider light />
+            </Grid>
           </Grid>
-          <Grid item xs className={subcategoryOptions[categoryId] ? '' : classes.hidden}>
-            <InputLabel>Select a Sub-category:</InputLabel>
-            <Select
-              className='listing-select'
-              name='subcategoryId'
-              required
-              value={subcategoryId}
-              onChange={handleSubcategoryChange}
+          <br />
+          <Grid item container direction='row' alignItems='center'>
+            <Tooltip
+              title='Home Together offers free and fair promotion of all home sharing services to provide our users with easy
+              access to the information and services they need.'
             >
-              {subcategoryOptions[categoryId] ? (
-                subcategoryOptions[categoryId].map((option) => (
-                  <MenuItem key={option.id} value={option.id}>
-                    {option.name}
-                  </MenuItem>
-                ))
-              ) : (
-                <MenuItem key={-1}>-</MenuItem>
-              )}
-            </Select>
+              <InfoIcon />
+            </Tooltip>
+            &ensp;
+            <Grid item xs>
+              Find relevant home sharing services using the search options below.
+            </Grid>
+          </Grid>
+          <br />
+          <Grid item container direction='row'>
+            <Grid item xs={12}>
+              <Divider light />
+            </Grid>
+          </Grid>
+          <br />
+          <Grid item container direction='row' alignItems='center'>
+            <SearchIcon fontSize='large' />
+            <InputLabel>Search:</InputLabel>
+            <Grid item xs={12}>
+              <TextField
+                variant='outlined'
+                fullWidth
+                name='title'
+                value={filters.title}
+                placeholder='Search...'
+                onChange={handleFilterChange}
+                autoFocus
+              />
+            </Grid>
+          </Grid>
+          <br />
+          <Grid item container direction='row' alignItems='center'>
+            <LocationOnIcon fontSize='large' />
+            <InputLabel>Filter by city:</InputLabel>
+            <Grid item xs={12}>
+              <LocationFilter placeholder='Select your desired cities...' onChange={handleLocationsChange} />
+            </Grid>
+          </Grid>
+          <br />
+          <Grid item container direction='row' justify='center'>
+            <Grid item>
+              <SearchClearSnackbar clear={reset} />
+            </Grid>
           </Grid>
         </Grid>
-        <Grid container spacing={2} justify='center' alignItems='center' wrap='wrap'>
-          <Grid item xs={3}>
-            <LocationFilter onChange={handleLocationsChange} />
+        <Divider flexItem orientation='vertical' />
+        <Grid item xs container direction='column' alignItems='center' className='page'>
+          <Grid item container direction='row' justify='center' alignItems='baseline'>
+            <Typography variant='h6' align='center'>
+              Category:
+            </Typography>
+            &ensp;
+            <FormControl onChange={handleSubcategoryChange}>
+              {/* <InputLabel htmlFor='categoryId'>Select a category...</InputLabel> */}
+              <Select name='categoryId' native defaultValue='' id='categoryId'>
+                <option value=''>All</option>
+                {categoryOptions.length > 0 && Object.keys(subcategoryOptions).length > 0 ? (
+                  categoryOptions.map((cat) => (
+                    <optgroup key={cat.id} label={`${cat.name}`}>
+                      {subcategoryOptions[cat.id] ? (
+                        subcategoryOptions[cat.id].map((subcat) => (
+                          <option key={subcat.id} value={subcat.id}>{`${subcat.name}`}</option>
+                        ))
+                      ) : (
+                        <></>
+                      )}
+                    </optgroup>
+                  ))
+                ) : (
+                  <option value='' />
+                )}
+              </Select>
+            </FormControl>
           </Grid>
-          <Grid item xs={3}>
-            <TextField
-              variant='outlined'
-              margin='normal'
-              fullWidth
-              label='Listing Title'
-              name='title'
-              value={filters['title']}
-              placeholder='Example'
-              onChange={handleFilterChange}
-              autoFocus
-            />
-          </Grid>
-          <Grid item xs={3}>
-            <TextField
-              type='number'
-              variant='outlined'
-              margin='normal'
-              fullWidth
-              label='Minimum Rating'
-              value={filters['minRating']}
-              name='minRating'
-              placeholder='0.0 to 5.0'
-              onChange={handleFilterChange}
-              autoFocus
-            />
-          </Grid>
+          <br />
+          {listings && listings.length > 0 ? (
+            <>
+              <ListingList listings={listings}></ListingList>
+              <br />
+              <Grid container direction='column' justify='center' alignItems='center'>
+                <PaginationControlled PaginationControlled={PaginationControlled}></PaginationControlled>
+              </Grid>
+            </>
+          ) : (
+            <Grid item container direction='row' alignItems='center' justify='center'>
+              <ErrorIcon />
+              &ensp;
+              <Typography variant='overline'>No search results found.</Typography>
+            </Grid>
+          )}
         </Grid>
-      </form>
-      <SearchClearSnackbar clear={reset} />
-      <br />
-      <ListingList listings={listings}></ListingList>
-      <br />
-      <Grid container direction='column' justify='center' alignItems='center'>
-        <PaginationControlled PaginationControlled={PaginationControlled}></PaginationControlled>
       </Grid>
-      <Footer Footer={Footer}></Footer>
-    </div>
+    </Card>
   );
 }
 

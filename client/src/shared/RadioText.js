@@ -1,7 +1,7 @@
 import TextField from '@material-ui/core/TextField';
 
 export default function RadioText(props) {
-  if (props.check === 'true') {
+  if (props.invertCheck ? props.check === 'false' : props.check === 'true') {
     return (
       <TextField
         variant='outlined'

@@ -129,23 +129,6 @@ export default function EditBusinessForm(props) {
               <TextField
                 variant='outlined'
                 fullWidth
-                id='organizationAltPhone'
-                label='Business Cellphone Number'
-                name='organizationAltPhone'
-                type='tel'
-                autoComplete='phone'
-                value={props.formData.organizationAltPhone}
-                onBlur={(event) => {
-                  props.handleInputChange(event, props.checkPhoneExists);
-                }}
-                error={props.phoneExists} //checks if phone number was already used.
-                helperText={props.phoneExists ? 'This phone number was already used to sign up.' : ''}
-              />
-            </Grid>
-            <Grid item xs={12} container>
-              <TextField
-                variant='outlined'
-                fullWidth
                 id='organizationStreetAddress'
                 label='Business Street Address'
                 name='organizationStreetAddress'

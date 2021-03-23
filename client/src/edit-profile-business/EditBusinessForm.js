@@ -46,10 +46,10 @@ export default function EditBusinessForm(props) {
                 aria-label='incorporated'
                 name='incorporated'
                 id='incorporated'
-                value={props.formData.incorporated}
+                value={`${props.formData.incorporated}`}
               >
-                <FormControlLabel value='true' control={<Radio />} label='Yes' />
-                <FormControlLabel value='false' control={<Radio />} label='No' />
+                <FormControlLabel value='1' control={<Radio />} label='Yes' />
+                <FormControlLabel value='0' control={<Radio />} label='No' />
               </RadioGroup>
             </FormControl>
           </Grid>
@@ -64,6 +64,7 @@ export default function EditBusinessForm(props) {
               name='organizationEmail'
               autoComplete='email'
               value={props.formData.organizationEmail}
+              onChange={props.handleInputChange}
               onBlur={(event) => {
                 props.handleInputChange(event, props.checkEmailExists);
               }}
@@ -93,6 +94,7 @@ export default function EditBusinessForm(props) {
               type='tel'
               autoComplete='phone'
               value={props.formData.organizationMainPhone}
+              onChange={props.handleInputChange}
               onBlur={(event) => {
                 props.handleInputChange(event, props.checkPhoneExists);
               }}
@@ -133,9 +135,9 @@ export default function EditBusinessForm(props) {
           >
             <FormLabel component='legend'>Is this business nation wide?</FormLabel>
             <FormControl component='fieldset'>
-              <RadioGroup aria-label='national' name='national' id='national' value={props.formData.national}>
-                <FormControlLabel value='true' control={<Radio />} label='Yes' />
-                <FormControlLabel value='false' control={<Radio />} label='No' />
+              <RadioGroup aria-label='national' name='national' id='national' value={`${props.formData.national}`}>
+                <FormControlLabel value='1' control={<Radio />} label='Yes' />
+                <FormControlLabel value='0' control={<Radio />} label='No' />
               </RadioGroup>
             </FormControl>
           </Grid>
@@ -187,6 +189,7 @@ export default function EditBusinessForm(props) {
               name='contactEmail'
               autoComplete='email'
               value={props.formData.contactEmail}
+              onChange={props.handleInputChange}
               onBlur={(event) => {
                 props.handleInputChange(event, props.checkEmailExists);
               }}
@@ -205,6 +208,7 @@ export default function EditBusinessForm(props) {
               type='tel'
               autoComplete='phone'
               value={props.formData.contactPhone}
+              onChange={props.handleInputChange}
               onBlur={(event) => {
                 props.handleInputChange(event, props.checkPhoneExists);
               }}
@@ -213,6 +217,7 @@ export default function EditBusinessForm(props) {
             />
           </Grid>
         </Grid>
+        <br />
         <Button type='submit' fullWidth variant='contained' color='primary'>
           Save Changes
         </Button>

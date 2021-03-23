@@ -108,26 +108,24 @@ const SQL_UPDATE_SEARCHABLE_INFO = `
 const SQL_UPDATE_ORGANIZATION = `
   UPDATE Organization
   SET
-    verified,
-    incorporated,
-    incorporatedName,
-    incorporatedOwners,
-    contactFirstName,
-    contactLastName,
-    contactEmail,
-    contactPhone,
-    username,
-    password,
-    organizationName,
-    organizationWebsite,
-    organizationLogoURL,
-    organizationMainPhone,
-    organizationAltPhone,
-    organizationEmail,
-    national,
-    organizationStreetAddress,
-    organizationMailingAddress,
-    organizationPostalCode
+    verified = ?,
+    incorporated = ?,
+    incorporatedName = ?,
+    incorporatedOwners = ?,
+    contactFirstName = ?,
+    contactLastName = ?,
+    contactEmail = ?,
+    contactPhone = ?,
+    organizationName = ?,
+    organizationWebsite = ?,
+    organizationLogoURL = ?,
+    organizationMainPhone = ?,
+    organizationAltPhone = ?,
+    organizationEmail = ?,
+    national = ?,
+    organizationStreetAddress = ?,
+    organizationMailingAddress = ?,
+    organizationPostalCode = ?
   WHERE id = ?
 `;
 
@@ -212,8 +210,6 @@ async function editOrganization(id, data) {
     data.contactLastName,
     data.contactEmail,
     data.contactPhone,
-    data.username,
-    data.password,
     data.organizationName,
     data.organizationWebsite,
     data.organizationLogoURL,

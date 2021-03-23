@@ -280,8 +280,6 @@ create(
     'registrationDate DATE,' +
     // If incorporated is true, include the other information, if not leave it null
     'incorporated BOOLEAN,' +
-    'incorporatedName VARCHAR(300),' +
-    'incorporatedOwners VARCHAR(300),' +
     'contactFirstName VARCHAR(300),' +
     'contactLastName VARCHAR(300),' +
     'contactPhone VARCHAR(300),' +
@@ -294,14 +292,12 @@ create(
     'organizationWebsite VARCHAR(100),' + // Website is not required
     'organizationLogoURL VARCHAR(100),' + // May be internally hosted
     'organizationMainPhone VARCHAR(20),' +
-    'organizationAltPhone VARCHAR(20),' +
     'organizationEmail VARCHAR(100),' +
     // The "national" flag is only to be used with Home Sharing organizations and will cause them to show up in all reasons, it has no other purpose.
     'national BOOLEAN,' +
     // Address Information, Only postal-code is required
     'organizationStreetAddress VARCHAR (200),' +
-    'organizationMailingAddress VARCHAR(200),' +
-    'organizationPostalCode VARCHAR(30)' +
+    'organizationMailingAddress VARCHAR(200)' +
   ')'
 );
 
@@ -383,7 +379,7 @@ insert('CategoryType(parentId, name, paymentRequired)', [
   [44, 'Intergenerational Living', false],
   [44, 'Other', false],
   [54, 'Home Share Meetups & Get-togethers', false],
-  [54, 'Seminars and Workshops: (Shared &amp; Companion Living)', false],
+  [54, 'Seminars and Workshops: (Shared & Companion Living)', false],
   [54, 'Home Share Classes', false],
   [64, 'Home Sharing Groups and Organizations', false],
   [64, 'Home & Companion Finding/ Matching Businesses', false],
@@ -449,16 +445,16 @@ create(
 // ║ This is the example data that is insert into the DB for testing reasons, none of it is legitimate.                                   ║ 
 // ╚═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝
 
-insert('Organization(verified, organizationName, registrationDate, organizationWebsite, organizationMainPhone, organizationEmail, organizationStreetAddress, organizationPostalCode, incorporated)', [
-  [true,'Larry\'s Lizard Shack', '2010-10-1', 'larryzlizards.com', '250-555-1234', 'larry@larryzlizards.com', '1111 Alabama Way', 'V1X3P6', true],
-  [true,'The Grass Assassins', '2014-7-29', 'grassassassins.com', '250-555-0987', 'contact@grassassassins.com', '1234 Montreal Road, Armstrong, BC', 'V1Z 9P6', true],
-  [true,'Grass B Gone', '2018-3-6', 'grassbgone.ca', '413-555-1983', 'info@grassbgone.ca', 'Unit 400 1234 Apartment Street, Kelowna, BC, Canada', 'V1Z3PZ', false],
-  [false,'Dog Walking CORP', '2020-7-20', 'legitdogwalkingcomapany.xyz', '250-555-1111', 'walking@dogCorp.xyz', 'PO BOX 11113, Montreal CANADA', 'T4Xu8x', true],
-  [true,'BC Housing Assistance', '1957-1-15', 'housingassistance.gov.bc.ca', '250-555-1331', 'HousingAssistance@gov.bc.ca', '1234 Parliment Way, Ottowa, Canada, ', 'K1A 0A6', false],
-  [true,'Factorio Housings', '2018-6-12', 'factoriohousing.com', '778-583-1991', 'contact@factoriohousing.com', '555 Rutland Road South', 'V1X5F3', true],
-  [true,'Bobby\'s Rentals', '2020-1-1', '-', '250-373-9909', 'bobbyrental@gmail.com', '33 Lester Road', 'V1A3D3', false],
-  [false,'Sketchy Mat\'s Businesses', '2021-1-1', '-', '558-500-2121', 'qiweuh@gmail.com', '101 Lambda Way', 'A1Z3X3', false],
-  [true,'SUPER_MEGA_ORGANIZATION', '1900-1-1', 'SITE', 'PHONE', 'E-MAIL', 'ADDRESS', 'POSTAL_CODE', true],
+insert('Organization(verified, organizationName, registrationDate, organizationWebsite, organizationMainPhone, organizationEmail, organizationStreetAddress, incorporated)', [
+  [true,'Larry\'s Lizard Shack', '2010-10-1', 'larryzlizards.com', '250-555-1234', 'larry@larryzlizards.com', '1111 Alabama Way', true],
+  [true,'The Grass Assassins', '2014-7-29', 'grassassassins.com', '250-555-0987', 'contact@grassassassins.com', '1234 Montreal Road, Armstrong, BC', true],
+  [true,'Grass B Gone', '2018-3-6', 'grassbgone.ca', '413-555-1983', 'info@grassbgone.ca', 'Unit 400 1234 Apartment Street, Kelowna, BC, Canada', false],
+  [false,'Dog Walking CORP', '2020-7-20', 'legitdogwalkingcomapany.xyz', '250-555-1111', 'walking@dogCorp.xyz', 'PO BOX 11113, Montreal CANADA', true],
+  [true,'BC Housing Assistance', '1957-1-15', 'housingassistance.gov.bc.ca', '250-555-1331', 'HousingAssistance@gov.bc.ca', '1234 Parliment Way, Ottowa, Canada, ', false],
+  [true,'Factorio Housings', '2018-6-12', 'factoriohousing.com', '778-583-1991', 'contact@factoriohousing.com', '555 Rutland Road South', true],
+  [true,'Bobby\'s Rentals', '2020-1-1', '-', '250-373-9909', 'bobbyrental@gmail.com', '33 Lester Road', false],
+  [false,'Sketchy Mat\'s Businesses', '2021-1-1', '-', '558-500-2121', 'qiweuh@gmail.com', '101 Lambda Way', false],
+  [true,'SUPER_MEGA_ORGANIZATION', '1900-1-1', 'SITE', 'PHONE', 'E-MAIL', 'ADDRESS', true],
 ]);
 
 // Value Template

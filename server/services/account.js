@@ -22,8 +22,6 @@ const SQL_INSERT_BUSINESS = `
     verified,
     registrationDate,
     incorporated,
-    incorporatedName,
-    incorporatedOwners,
     contactFirstName,
     contactLastName,
     contactEmail,
@@ -34,13 +32,11 @@ const SQL_INSERT_BUSINESS = `
     organizationWebsite,
     organizationLogoURL,
     organizationMainPhone,
-    organizationAltPhone,
     organizationEmail,
     national,
     organizationStreetAddress,
-    organizationMailingAddress,
-    organizationPostalCode)
-  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    organizationMailingAddress)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 `;
 
 const SQL_INSERT_SEARCHABLE_INFO = `
@@ -152,8 +148,6 @@ async function businessSignup(data) {
     data.verified,
     new Date(),
     data.incorporated,
-    data.incorporatedName,
-    data.incorporatedOwners,
     data.contactFirstName,
     data.contactLastName,
     data.contactEmail,
@@ -164,12 +158,10 @@ async function businessSignup(data) {
     data.organizationWebsite,
     data.organizationLogoURL,
     data.organizationMainPhone,
-    data.organizationAltPhone,
     data.organizationEmail,
     data.national,
     data.organizationStreetAddress,
     data.organizationMailingAddress,
-    data.organizationPostalCode,
   ]);
 
   console.log('passed step 1');

@@ -9,10 +9,7 @@ class EditProfile extends Component {
       phoneExists: false,
       emailExists: false,
       formData: {
-        verified: true,
         incorporated: false,
-        incorporatedName: null,
-        incorporatedOwners: null,
         contactFirstName: '',
         contactLastName: '',
         contactEmail: '',
@@ -21,12 +18,10 @@ class EditProfile extends Component {
         organizationWebsite: '',
         organizationLogoURL: '',
         organizationMainPhone: '',
-        organizationAltPhone: '',
         organizationEmail: '',
         national: false,
         organizationStreetAddress: '',
         organizationMailingAddress: '',
-        organizationPostalCode: '',
       },
     };
     this.handleInputChange = this.handleInputChange.bind(this);

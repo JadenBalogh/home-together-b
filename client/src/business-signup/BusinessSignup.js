@@ -14,8 +14,6 @@ class Signup extends Component {
       formData: {
         verified: true,
         incorporated: false,
-        incorporatedName: null,
-        incorporatedOwners: null,
         contactFirstName: '',
         contactLastName: '',
         contactEmail: '',
@@ -26,12 +24,10 @@ class Signup extends Component {
         organizationWebsite: '',
         organizationLogoURL: '',
         organizationMainPhone: '',
-        organizationAltPhone: '',
         organizationEmail: '',
         national: false,
         organizationStreetAddress: '',
         organizationMailingAddress: '',
-        organizationPostalCode: '',
       },
     };
     this.handleInputChange = this.handleInputChange.bind(this);

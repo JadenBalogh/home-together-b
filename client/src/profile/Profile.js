@@ -35,7 +35,7 @@ export default function Profile() {
     <Card className='page'>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Typography variant='h5'>My Profile</Typography>
+          <Typography variant='h5'>My Account</Typography>
           <Divider />
         </Grid>
       </Grid>

@@ -17,8 +17,6 @@ class EditProfile extends Component {
         contactLastName: '',
         contactEmail: '',
         contactPhone: '',
-        username: '',
-        password: '',
         organizationName: '',
         organizationWebsite: '',
         organizationLogoURL: '',
@@ -72,7 +70,7 @@ class EditProfile extends Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id, formData }),
     }).then(() => {
-      this.props.history.push('/');
+      this.props.history.push('/business-profile');
     });
   }
 

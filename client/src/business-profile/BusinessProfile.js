@@ -42,7 +42,6 @@ export default function BusinessProfile() {
       <br />
       <Grid container spacing={2}>
         <ProfileField label='Incorporated' value={business.incorporated ? 'Yes' : 'No'} />
-        {/* <ProfileField label='Incorporated Name' value={business.incorporatedName} /> */}
         <ProfileField label='National Business' value={business.national ? 'Yes' : 'No'} />
         <ProfileField label='Business Logo URL' value={business.organizationLogoURL} />
         <ProfileField label='Contact Name' value={`${business.contactFirstName} ${business.contactLastName}`} />
@@ -58,10 +57,8 @@ export default function BusinessProfile() {
         <ProfileField label='Business Email Address' value={business.organizationEmail} />
         <ProfileField label='Business Website URL' value={business.organizationWebsite} />
         <ProfileField label='Business Phone Number' value={business.organizationMainPhone} />
-        {/* <ProfileField label='Business Cellphone Number' value={business.organizationAltPhone} /> */}
         <ProfileField label='Business Street Address' value={business.organizationStreetAddress} />
         <ProfileField label='Business Mailing Address' value={business.organizationMailingAddress} />
-        <ProfileField label='Business Searchable Address' value={business.organizationPostalCode} />
       </Grid>
       <Grid container spacing={2}>
         <Grid item align='center' xs={12}>

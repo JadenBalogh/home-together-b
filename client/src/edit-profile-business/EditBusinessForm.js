@@ -10,13 +10,12 @@ import {
   Typography,
   Card,
 } from '@material-ui/core';
-import IncText from './IncText';
 
-export default function EditForm(props) {
+export default function EditBusinessForm(props) {
   return (
     <Card className='page'>
       <Typography component='h1' variant='h5'>
-        Edit Business Profile
+        Edit Business Details
       </Typography>
       <form onSubmit={props.handleSubmit} noValidate>
         <Grid container spacing={2}>
@@ -28,6 +27,7 @@ export default function EditForm(props) {
               fullWidth
               id='organizationName'
               label='Business Name'
+              value={props.formData.organizationName}
               onChange={props.handleInputChange}
             />
           </Grid>
@@ -42,16 +42,15 @@ export default function EditForm(props) {
           >
             <FormLabel component='legend'>Is this an incorporated account?</FormLabel>
             <FormControl component='fieldset'>
-              <RadioGroup aria-label='incorporated' name='incorporated' id='incorporated'>
-                <FormControlLabel value='true' control={<Radio />} label='Yes' />
-                <FormControlLabel value='false' control={<Radio />} label='No' />
+              <RadioGroup
+                aria-label='incorporated'
+                name='incorporated'
+                id='incorporated'
+                value={`${props.formData.incorporated}`}
+              >
+                <FormControlLabel value='1' control={<Radio />} label='Yes' />
+                <FormControlLabel value='0' control={<Radio />} label='No' />
               </RadioGroup>
-              <IncText
-                check={props.formData.incorporated}
-                name='incorporatedName'
-                value={props.formData.incorporatedName}
-                text='Incorporated Name'
-              />
             </FormControl>
           </Grid>
           <Grid item xs={12} container>
@@ -64,6 +63,8 @@ export default function EditForm(props) {
               type='email'
               name='organizationEmail'
               autoComplete='email'
+              value={props.formData.organizationEmail}
+              onChange={props.handleInputChange}
               onBlur={(event) => {
                 props.handleInputChange(event, props.checkEmailExists);
               }}
@@ -78,6 +79,7 @@ export default function EditForm(props) {
               fullWidth
               id='organizationWebsite'
               label='Business Website URL'
+              value={props.formData.organizationWebsite}
               onChange={props.handleInputChange}
             />
           </Grid>
@@ -91,6 +93,8 @@ export default function EditForm(props) {
               name='organizationMainPhone'
               type='tel'
               autoComplete='phone'
+              value={props.formData.organizationMainPhone}
+              onChange={props.handleInputChange}
               onBlur={(event) => {
                 props.handleInputChange(event, props.checkPhoneExists);
               }}
@@ -107,6 +111,8 @@ export default function EditForm(props) {
               name='organizationAltPhone'
               type='tel'
               autoComplete='phone'
+              value={props.formData.organizationAltPhone}
+              onChange={props.handleInputChange}
               onBlur={(event) => {
                 props.handleInputChange(event, props.checkPhoneExists);
               }}
@@ -121,6 +127,7 @@ export default function EditForm(props) {
               id='organizationStreetAddress'
               label='Business Street Address'
               name='organizationStreetAddress'
+              value={props.formData.organizationStreetAddress}
               onChange={props.handleInputChange}
             />
           </Grid>
@@ -131,6 +138,7 @@ export default function EditForm(props) {
               id='organizationMailingAddress'
               label='Business Mailing Address'
               name='organizationMailingAddress'
+              value={props.formData.organizationMailingAddress}
               onChange={props.handleInputChange}
             />
           </Grid>
@@ -145,22 +153,11 @@ export default function EditForm(props) {
           >
             <FormLabel component='legend'>Is this business nation wide?</FormLabel>
             <FormControl component='fieldset'>
-              <RadioGroup aria-label='national' name='national' id='national'>
-                <FormControlLabel value='true' control={<Radio />} label='Yes' />
-                <FormControlLabel value='false' control={<Radio />} label='No' />
+              <RadioGroup aria-label='national' name='national' id='national' value={`${props.formData.national}`}>
+                <FormControlLabel value='1' control={<Radio />} label='Yes' />
+                <FormControlLabel value='0' control={<Radio />} label='No' />
               </RadioGroup>
             </FormControl>
-          </Grid>
-          <Grid item xs={12} container>
-            <TextField
-              variant='outlined'
-              required
-              fullWidth
-              id='organizationPostalCode'
-              label='Business Postal Code'
-              name='organizationPostalCode'
-              onChange={props.handleInputChange}
-            />
           </Grid>
           <Grid item xs={12} container>
             <TextField
@@ -169,6 +166,7 @@ export default function EditForm(props) {
               fullWidth
               id='organizationLogoURL'
               label='Business Logo URL'
+              value={props.formData.organizationLogoURL}
               onChange={props.handleInputChange}
             />
           </Grid>
@@ -181,7 +179,7 @@ export default function EditForm(props) {
               fullWidth
               id='contactFirstName'
               label='Contact First Name'
-              autoFocus
+              value={props.formData.contactFirstName}
               onChange={props.handleInputChange}
             />
           </Grid>
@@ -194,6 +192,7 @@ export default function EditForm(props) {
               label='Contact Last Name'
               name='contactLastName'
               autoComplete='lname'
+              value={props.formData.contactLastName}
               onChange={props.handleInputChange}
             />
           </Grid>
@@ -207,6 +206,8 @@ export default function EditForm(props) {
               type='email'
               name='contactEmail'
               autoComplete='email'
+              value={props.formData.contactEmail}
+              onChange={props.handleInputChange}
               onBlur={(event) => {
                 props.handleInputChange(event, props.checkEmailExists);
               }}
@@ -224,6 +225,8 @@ export default function EditForm(props) {
               name='contactPhone'
               type='tel'
               autoComplete='phone'
+              value={props.formData.contactPhone}
+              onChange={props.handleInputChange}
               onBlur={(event) => {
                 props.handleInputChange(event, props.checkPhoneExists);
               }}
@@ -232,6 +235,7 @@ export default function EditForm(props) {
             />
           </Grid>
         </Grid>
+        <br />
         <Button type='submit' fullWidth variant='contained' color='primary'>
           Save Changes
         </Button>

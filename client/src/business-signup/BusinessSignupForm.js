@@ -54,12 +54,6 @@ export default function SignupForm(props) {
                 <FormControlLabel value='true' control={<Radio />} label='Yes' />
                 <FormControlLabel value='false' control={<Radio />} label='No' />
               </RadioGroup>
-              {/* <IncText
-                  check={props.formData.incorporated}
-                  name='incorporatedName'
-                  value={props.formData.incorporatedName}
-                  text='Incorporated Name'
-                /> */}
             </FormControl>
           </Grid>
           <Grid item xs={12} container>
@@ -106,22 +100,6 @@ export default function SignupForm(props) {
               helperText={props.phoneExists ? 'This phone number was already used to sign up.' : ''}
             />
           </Grid>
-          {/* <Grid item xs={12} container>
-              <TextField
-                variant='outlined'
-                fullWidth
-                id='organizationAltPhone'
-                label='Cellphone Number'
-                name='organizationAltPhone'
-                type='tel'
-                autoComplete='phone'
-                onBlur={(event) => {
-                  props.handleInputChange(event, props.checkPhoneExists);
-                }}
-                error={props.phoneExists} //checks if phone number was already used.
-                helperText={props.phoneExists ? 'This phone number was already used to sign up.' : ''}
-              />
-            </Grid> */}
           <Grid item xs={12} container>
             <TextField
               variant='outlined'
@@ -158,17 +136,6 @@ export default function SignupForm(props) {
                 <FormControlLabel value='false' control={<Radio />} label='No' />
               </RadioGroup>
             </FormControl>
-          </Grid>
-          <Grid item xs={12} container>
-            <TextField
-              variant='outlined'
-              required
-              fullWidth
-              id='organizationPostalCode'
-              label='Postal Code/Searchable Address'
-              name='organizationPostalCode'
-              onChange={props.handleInputChange}
-            />
           </Grid>
           <Grid item xs={12} container>
             <TextField

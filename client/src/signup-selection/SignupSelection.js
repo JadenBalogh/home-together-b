@@ -1,117 +1,53 @@
-import React, { Component } from 'react';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import Link from '@material-ui/core/Link';
-import IconButton from '@material-ui/core/IconButton';
+import { Typography, Grid, Link, IconButton, Card } from '@material-ui/core';
 import WorkIcon from '@material-ui/icons/Work';
 import PersonIcon from '@material-ui/icons/Person';
 
-class SignupSelection extends Component {
-  constructor(props) {
-    super(props);
-
-  }
-
-  render() {
-    return (
-      <Container component='main'>
-        <div>
+export default function SignupSelection() {
+  return (
+    <Card className='page'>
+      <Grid container justify='center'>
+        <Typography component='h1' variant='h5'>
+          Select Account Type
+        </Typography>
+      </Grid>
+      <Grid container spacing={4}>
+        <Grid item xs={6} container direction='column' alignItems='center' justify='center'>
+          <Link href='/signup'>
+            <IconButton>
+              <PersonIcon style={{ fontSize: 200 }} />
+            </IconButton>
+          </Link>
+        </Grid>
+        <Grid item xs={6} container direction='column' alignItems='center' justify='center'>
+          <Link href='/business-signup'>
+            <IconButton>
+              <WorkIcon style={{ fontSize: 200 }} />
+            </IconButton>
+          </Link>
+        </Grid>
+        <Grid item xs={6} container direction='column' alignItems='center' justify='center'>
           <Typography component='h1' variant='h5'>
-            Select Account Type
+            Personal Account
           </Typography>
-          <Grid container spacing={4}>
-            <Grid
-              item
-              xs={12}
-              sm={6}
-              container
-              direction='column'
-              alignItems='center'
-              justify='center'
-            >
-              <Link href='/signup'>
-                <IconButton>
-                  <PersonIcon style={{ fontSize: 200 }}/>
-                </IconButton>
-              </Link>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              sm={6}
-              container
-              direction='column'
-              alignItems='center'
-              justify='center'
-            >
-              <Link href='/business-signup'>
-                <IconButton>
-                  <WorkIcon style={{ fontSize: 200 }}/>
-                </IconButton>
-              </Link>              
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              sm={6}
-              container
-              direction='column'
-              alignItems='center'
-              justify='center'
-            >
-              <Typography component='h1' variant='h5'>
-                Personal Account
-              </Typography>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              sm={6}
-              container
-              direction='column'
-              alignItems='center'
-              justify='center'
-            >
-              <Typography component='h1' variant='h5'>
-                Business Account
-              </Typography>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              sm={6}
-              container
-              direction='column'
-              alignItems='center'
-              justify='center'
-            >
-              <p>
-                <div>
-                  Accounts for users looking to homeshare. Users can look for other members to homeshare with and share their homes.
-                </div>
-              </p>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              sm={6}
-              container
-              direction='column'
-              alignItems='center'
-              justify='center'
-            >
-              <p>
-                <div>
-                  Accounts for users looking to create listings. Businesses can create and manage listings for services related to homesharing.
-                </div>
-              </p>
-            </Grid>
-          </Grid>
-        </div>
-      </Container>
-    );
-  }
+        </Grid>
+        <Grid item xs={6} container direction='column' alignItems='center' justify='center'>
+          <Typography component='h1' variant='h5'>
+            Business Account
+          </Typography>
+        </Grid>
+        <Grid item xs={6} container direction='column' alignItems='center' justify='center'>
+          <p>
+            Accounts for users looking to homeshare. Users can look for other members to homeshare with and share their
+            homes.
+          </p>
+        </Grid>
+        <Grid item xs={6} container direction='column' alignItems='center' justify='center'>
+          <p>
+            Accounts for users looking to create listings. Businesses can create and manage listings for services
+            related to homesharing.
+          </p>
+        </Grid>
+      </Grid>
+    </Card>
+  );
 }
-
-export default SignupSelection;

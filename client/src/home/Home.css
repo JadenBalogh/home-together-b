@@ -1,0 +1,22 @@
+.homepage-container h3 {
+  color: #5e5e5e;
+}
+
+.homepage-container {
+  width: 80%;
+}
+
+.roundimg {
+  border-radius: 20%;
+  max-width: 80%;
+}
+
+.logo-container {
+  align-content: center;
+  padding-bottom: 30px;
+}
+
+.logoimg {
+  max-height: 250px;
+  padding: 20px;
+}

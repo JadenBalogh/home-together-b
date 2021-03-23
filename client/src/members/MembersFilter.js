@@ -1,230 +1,171 @@
-import React, { useState, useEffect } from 'react';
-import FilterSelect from './FilterSelect';
-import {
-  Checkbox,
-  TextField,
-  InputLabel,
-  Grid,
-  FormControlLabel,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Typography,
-} from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
-import { makeStyles } from '@material-ui/core/styles';
+import { Checkbox, TextField, InputLabel, Grid, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
+import WcIcon from '@material-ui/icons/Wc';
+import FaceIcon from '@material-ui/icons/Face';
+import GroupAddIcon from '@material-ui/icons/GroupAdd';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import LocationFilter from '../shared/LocationFilter';
-
-// Filter component for the members page
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    maxWidth: '1000px',
-    paddingTop: '25px',
-  },
-  paper: {
-    padding: theme.spacing(2),
-    margin: 0,
-  },
-  img: {
-    maxWidth: '250px',
-    maxHeight: '250px',
-    borderRadius: '5%',
-  },
-  accordionImg: {
-    marginRight: '25px',
-    maxWidth: '75px',
-    maxHeight: '75px',
-    borderRadius: '50%',
-  },
-}));
+import FilterSelect from './FilterSelect';
 
 function MembersFilter(props) {
-  const [genderOptions, setGenderOptions] = useState([]);
-  const [ageGroupOptions, setAgeGroupOptions] = useState([]);
-  const [familyStatusOptions, setFamilyStatusOptions] = useState([]);
-  const classes = useStyles();
-
-  useEffect(() => fetchGenderOptions(), []);
-  useEffect(() => fetchAgeGroupOptions(), []);
-  useEffect(() => fetchFamilyStatusOptions(), []);
-
-  function fetchGenderOptions() {
-    const url = process.env.REACT_APP_LOCAL_URL || '';
-    fetch(url + '/api/get-gender-types')
-      .then((res) => res.json())
-      .then((json) => {
-        let options = json.map((x) => {
-          return { value: x.id, label: x.name };
-        });
-        setGenderOptions(options);
-      });
-  }
-
-  function fetchAgeGroupOptions() {
-    const url = process.env.REACT_APP_LOCAL_URL || '';
-    fetch(url + '/api/get-age-group-types')
-      .then((res) => res.json())
-      .then((json) => {
-        let options = json.map((x) => {
-          let name = `${x.name} (${x.minAge}-${x.maxAge})`;
-          return { value: x.id, label: name };
-        });
-        setAgeGroupOptions(options);
-      });
-  }
-
-  function fetchFamilyStatusOptions() {
-    const url = process.env.REACT_APP_LOCAL_URL || '';
-    fetch(url + '/api/get-family-status-types')
-      .then((res) => res.json())
-      .then((json) => {
-        let options = json.map((x) => {
-          return { value: x.id, label: x.name };
-        });
-        setFamilyStatusOptions(options);
-      });
-  }
-
   return (
-    <div className='filter-container'>
-      <Accordion>
-        <AccordionSummary expandIcon={<SearchIcon />} aria-controls='panel1a-content' id='panel1a-header'>
-          <Grid container spacing={2} direction='row' alignItems='center' justify='space-between'>
-            <Grid item>
-              <Typography className={classes.heading}>Advanced Member Filter</Typography>
-            </Grid>
+    <>
+      <Grid container spacing={2}>
+        <Grid item container direction='row' alignItems='center'>
+          <LocationOnIcon fontSize='large' />
+          &ensp;
+          <InputLabel>Filter by city:</InputLabel>
+          <Grid item xs={12}>
+            <LocationFilter placeholder='Enter a city...' onChange={props.locationsHandler} />
           </Grid>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Grid container spacing={2}>
-            <Grid item xs={6} container alignItems='center'>
-              <Grid item xs={5} container justify='flex-start'>
-                <InputLabel>Locations:</InputLabel>
-              </Grid>
-              <Grid item xs={7}>
-                <LocationFilter onChange={props.locationsHandler} />
-              </Grid>
-            </Grid>
-            <FilterSelect label='Genders:' name='genderIds' options={genderOptions} onChange={props.dropdownHandler} />
+        </Grid>
+        <Grid item container direction='row' alignItems='center'>
+          <EmojiPeopleIcon fontSize='large' />
+          &ensp;
+          <InputLabel>Filter by age groups:</InputLabel>
+          <Grid item xs={12}>
             <FilterSelect
-              label='Age Groups:'
+              fetchURL='/api/get-age-group-types'
+              optionMap={(x) => {
+                return { label: x.name, value: x.id };
+              }}
+              placeholder='Ages...'
               name='ageGroupIds'
-              options={ageGroupOptions}
-              onChange={props.dropdownHandler}
+              onChange={props.selectHandler}
             />
-            <FilterSelect
-              label='Family Status:'
-              name='familyStatusIds'
-              options={familyStatusOptions}
-              onChange={props.dropdownHandler}
-            />
-            <Grid item xs={6} container direction='rows' alignItems='center' justify='center'>
-              <Grid item xs={5} container justify='flex-start'>
-                <InputLabel>Home Capacity:</InputLabel>
-              </Grid>
-              <Grid item xs={3}>
-                <TextField
-                  fullWidth
-                  type='number'
-                  name='minHomeCapacity'
-                  autoComplete='minHomeCapacity'
-                  value={props.filters.minHomeCapacity}
-                  onChange={props.inputHandler}
-                />
-              </Grid>
-              <Grid item xs={1} container justify='center'>
-                -
-              </Grid>
-              <Grid item xs={3}>
-                <TextField
-                  fullWidth
-                  type='number'
-                  name='maxHomeCapacity'
-                  autoComplete='maxHomeCapacity'
-                  value={props.filters.maxHomeCapacity}
-                  onChange={props.inputHandler}
-                />
-              </Grid>
-            </Grid>
-            <Grid item xs={6} container direction='rows' alignItems='center' justify='center'>
-              <Grid item xs={5} container justify='flex-start'>
-                <InputLabel>Monthly Budget:</InputLabel>
-              </Grid>
-              <Grid item xs={3}>
-                <TextField
-                  fullWidth
-                  type='number'
-                  name='minMonthlyBudget'
-                  autoComplete='minMonthlyBudget'
-                  value={props.filters.minMonthlyBudget}
-                  onChange={props.inputHandler}
-                />
-              </Grid>
-              <Grid item xs={1} container justify='center'>
-                -
-              </Grid>
-              <Grid item xs={3}>
-                <TextField
-                  fullWidth
-                  type='number'
-                  name='maxMonthlyBudget'
-                  autoComplete='maxMonthlyBudget'
-                  value={props.filters.maxMonthlyBudget}
-                  onChange={props.inputHandler}
-                />
-              </Grid>
-            </Grid>
-            <Grid item xs={12} container>
-              <Grid item xs={3} container>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={props.filters.petRestrictions}
-                      onChange={props.checkboxHandler}
-                      name='petRestrictions'
-                    />
-                  }
-                  label='Pet Friendly'
-                />
-              </Grid>
-              <Grid item xs={3} container>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={props.filters.religionRestrictions}
-                      onChange={props.checkboxHandler}
-                      name='religionRestrictions'
-                    />
-                  }
-                  label='Religious'
-                />
-              </Grid>
-              <Grid item xs={3} container>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={props.filters.smokingRestrictions}
-                      onChange={props.checkboxHandler}
-                      name='smokingRestrictions'
-                    />
-                  }
-                  label='Smoking Friendly'
-                />
-              </Grid>
-              <Grid item xs={3} container>
-                <FormControlLabel
-                  control={
-                    <Checkbox checked={props.filters.hasHousing} onChange={props.checkboxHandler} name='hasHousing' />
-                  }
-                  label='Has Housing'
-                />
-              </Grid>
-            </Grid>
           </Grid>
-        </AccordionDetails>
-      </Accordion>
-    </div>
+        </Grid>
+        <Grid item container direction='row' alignItems='center'>
+          <WcIcon fontSize='large' />
+          &ensp;
+          <InputLabel>Filter by gender:</InputLabel>
+          <Grid item xs={12}>
+            <FilterSelect
+              fetchURL='/api/get-gender-types'
+              optionMap={(x) => {
+                return { label: x.name, value: x.id };
+              }}
+              placeholder='Genders...'
+              name='genderIds'
+              onChange={props.selectHandler}
+            />
+          </Grid>
+        </Grid>
+        <Grid item container direction='row' alignItems='center'>
+          <FaceIcon fontSize='large' />
+          &ensp;
+          <InputLabel>Filter by family status:</InputLabel>
+          <Grid item xs={12}>
+            <FilterSelect
+              fetchURL='/api/get-family-status-types'
+              optionMap={(x) => {
+                return { label: x.name, value: x.id };
+              }}
+              placeholder='Family status...'
+              name='familyStatusIds'
+              onChange={props.selectHandler}
+            />
+          </Grid>
+        </Grid>
+        <Grid item xs={12} container direction='row' alignItems='center'>
+          <Grid item xs>
+            <GroupAddIcon fontSize='large' />
+          </Grid>
+          <Grid item xs={5} container justify='flex-start'>
+            <InputLabel>Home Capacity:</InputLabel>
+          </Grid>
+          <Grid item xs={2}>
+            <TextField
+              fullWidth
+              type='number'
+              name='minHomeCapacity'
+              autoComplete='minHomeCapacity'
+              value={props.filters.minHomeCapacity}
+              onChange={props.inputHandler}
+            />
+          </Grid>
+          <Grid item xs container justify='center'>
+            -
+          </Grid>
+          <Grid item xs={2}>
+            <TextField
+              fullWidth
+              type='number'
+              name='maxHomeCapacity'
+              autoComplete='maxHomeCapacity'
+              value={props.filters.maxHomeCapacity}
+              onChange={props.inputHandler}
+            />
+          </Grid>
+        </Grid>
+        <Grid item xs={12} container direction='row' alignItems='center'>
+          <Grid item xs>
+            <AttachMoneyIcon fontSize='large' />
+          </Grid>
+          <Grid item xs={5} container justify='flex-start'>
+            <InputLabel>Monthly Budget:</InputLabel>
+          </Grid>
+          <Grid item xs={2}>
+            <TextField
+              fullWidth
+              type='number'
+              name='minMonthlyBudget'
+              autoComplete='minMonthlyBudget'
+              value={props.filters.minMonthlyBudget}
+              onChange={props.inputHandler}
+            />
+          </Grid>
+          <Grid item xs container justify='center'>
+            -
+          </Grid>
+          <Grid item xs={2}>
+            <TextField
+              fullWidth
+              type='number'
+              name='maxMonthlyBudget'
+              autoComplete='maxMonthlyBudget'
+              value={props.filters.maxMonthlyBudget}
+              onChange={props.inputHandler}
+            />
+          </Grid>
+        </Grid>
+        <Grid item container direction='row' alignItems='center'>
+          <PlaylistAddIcon fontSize='large' />
+          &ensp;
+          <InputLabel>Additional Filters:</InputLabel>
+          <Grid item xs={12}>
+            <List>
+              <ListItem dense disableGutters button onChange={props.checkboxHandler}>
+                <ListItemIcon>
+                  <Checkbox name='petRestrictions' checked={props.filters.petRestrictions} disableRipple />
+                </ListItemIcon>
+                <ListItemText primary='Pet Friendly' />
+              </ListItem>
+              <ListItem dense disableGutters button onChange={props.checkboxHandler}>
+                <ListItemIcon>
+                  <Checkbox name='religionRestrictions' checked={props.filters.religionRestrictions} disableRipple />
+                </ListItemIcon>
+                <ListItemText primary='Religious' />
+              </ListItem>
+              <ListItem dense disableGutters button onChange={props.checkboxHandler}>
+                <ListItemIcon>
+                  <Checkbox name='smokingRestrictions' checked={props.filters.smokingRestrictions} disableRipple />
+                </ListItemIcon>
+                <ListItemText primary='Smoking Friendly' />
+              </ListItem>
+              <ListItem dense disableGutters button onChange={props.checkboxHandler}>
+                <ListItemIcon>
+                  <Checkbox name='hasHousing' checked={props.filters.hasHousing} disableRipple />
+                </ListItemIcon>
+                <ListItemText primary='Has Housing' />
+              </ListItem>
+            </List>
+          </Grid>
+        </Grid>
+      </Grid>
+    </>
   );
 }
 

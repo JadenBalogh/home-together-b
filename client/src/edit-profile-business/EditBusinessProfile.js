@@ -9,7 +9,6 @@ class EditProfile extends Component {
       phoneExists: false,
       emailExists: false,
       formData: {
-        verified: true,
         incorporated: false,
         contactFirstName: '',
         contactLastName: '',

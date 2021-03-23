@@ -101,7 +101,6 @@ const SQL_UPDATE_SEARCHABLE_INFO = `
 const SQL_UPDATE_ORGANIZATION = `
   UPDATE Organization
   SET
-    verified = ?,
     incorporated = ?,
     contactFirstName = ?,
     contactLastName = ?,
@@ -191,7 +190,6 @@ async function editMember(id, data) {
 async function editOrganization(id, data) {
   // Update Organization
   await dbutils.query(SQL_UPDATE_ORGANIZATION, [
-    data.verified,
     data.incorporated,
     data.contactFirstName,
     data.contactLastName,

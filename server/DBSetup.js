@@ -298,7 +298,7 @@ create(
     'national BOOLEAN,' +
     // Address Information, Only postal-code is required
     'organizationStreetAddress VARCHAR (200),' +
-    'organizationMailingAddress VARCHAR(200),' +
+    'organizationMailingAddress VARCHAR(200)' +
   ')'
 );
 

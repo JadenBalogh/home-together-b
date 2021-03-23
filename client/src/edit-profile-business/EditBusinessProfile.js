@@ -65,8 +65,6 @@ class EditProfile extends Component {
 
     const url = process.env.REACT_APP_LOCAL_URL || '';
     const route = '/api/edit-business-profile?';
-    console.log('submitting...');
-    console.log(url+route);
     fetch(url + route, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

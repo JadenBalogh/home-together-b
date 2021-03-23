@@ -22,8 +22,6 @@ const SQL_INSERT_BUSINESS = `
     verified,
     registrationDate,
     incorporated,
-    incorporatedName,
-    incorporatedOwners,
     contactFirstName,
     contactLastName,
     contactEmail,
@@ -38,7 +36,7 @@ const SQL_INSERT_BUSINESS = `
     national,
     organizationStreetAddress,
     organizationMailingAddress)
-  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 `;
 
 const SQL_INSERT_SEARCHABLE_INFO = `
@@ -150,7 +148,6 @@ async function businessSignup(data) {
     data.verified,
     new Date(),
     data.incorporated,
-    data.incorporatedName,
     data.contactFirstName,
     data.contactLastName,
     data.contactEmail,

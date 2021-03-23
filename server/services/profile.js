@@ -41,14 +41,11 @@ const SQL_SELECT_MEMBER = `
 
 const SQL_SELECT_ORGANIZATION = `
   SELECT
-    verified,
     incorporated,
     contactFirstName,
     contactLastName,
     contactEmail,
     contactPhone,
-    username,
-    password,
     organizationName,
     organizationWebsite,
     organizationLogoURL,

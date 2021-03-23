@@ -379,7 +379,7 @@ insert('CategoryType(parentId, name, paymentRequired)', [
   [44, 'Intergenerational Living', false],
   [44, 'Other', false],
   [54, 'Home Share Meetups & Get-togethers', false],
-  [54, 'Seminars and Workshops: (Shared &amp; Companion Living)', false],
+  [54, 'Seminars and Workshops: (Shared & Companion Living)', false],
   [54, 'Home Share Classes', false],
   [64, 'Home Sharing Groups and Organizations', false],
   [64, 'Home & Companion Finding/ Matching Businesses', false],

@@ -43,8 +43,6 @@ const SQL_SELECT_ORGANIZATION = `
   SELECT
     verified,
     incorporated,
-    incorporatedName,
-    incorporatedOwners,
     contactFirstName,
     contactLastName,
     contactEmail,
@@ -55,12 +53,10 @@ const SQL_SELECT_ORGANIZATION = `
     organizationWebsite,
     organizationLogoURL,
     organizationMainPhone,
-    organizationAltPhone,
     organizationEmail,
     national,
     organizationStreetAddress,
-    organizationMailingAddress,
-    organizationPostalCode
+    organizationMailingAddress
   FROM Organization
   WHERE id = ?
 `;
@@ -110,8 +106,6 @@ const SQL_UPDATE_ORGANIZATION = `
   SET
     verified = ?,
     incorporated = ?,
-    incorporatedName = ?,
-    incorporatedOwners = ?,
     contactFirstName = ?,
     contactLastName = ?,
     contactEmail = ?,
@@ -120,12 +114,10 @@ const SQL_UPDATE_ORGANIZATION = `
     organizationWebsite = ?,
     organizationLogoURL = ?,
     organizationMainPhone = ?,
-    organizationAltPhone = ?,
     organizationEmail = ?,
     national = ?,
     organizationStreetAddress = ?,
-    organizationMailingAddress = ?,
-    organizationPostalCode = ?
+    organizationMailingAddress = ?
   WHERE id = ?
 `;
 
@@ -204,8 +196,6 @@ async function editOrganization(id, data) {
   await dbutils.query(SQL_UPDATE_ORGANIZATION, [
     data.verified,
     data.incorporated,
-    data.incorporatedName,
-    data.incorporatedOwners,
     data.contactFirstName,
     data.contactLastName,
     data.contactEmail,
@@ -214,12 +204,10 @@ async function editOrganization(id, data) {
     data.organizationWebsite,
     data.organizationLogoURL,
     data.organizationMainPhone,
-    data.organizationAltPhone,
     data.organizationEmail,
     data.national,
     data.organizationStreetAddress,
     data.organizationMailingAddress,
-    data.organizationPostalCode,
     id,
   ]);
 }

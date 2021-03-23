@@ -280,7 +280,6 @@ create(
     'registrationDate DATE,' +
     // If incorporated is true, include the other information, if not leave it null
     'incorporated BOOLEAN,' +
-    'incorporatedName VARCHAR(300),' +
     'contactFirstName VARCHAR(300),' +
     'contactLastName VARCHAR(300),' +
     'contactPhone VARCHAR(300),' +

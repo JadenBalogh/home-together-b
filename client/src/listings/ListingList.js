@@ -12,10 +12,25 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Rating from '@material-ui/lab/Rating';
 import './Listings.css';
 
-export default function ListingList({ listings }) {
+export default function ListingList({ listings,pageSize,page }) {
+ 
+
+  const getPaganationList=(data,size)=>{
+    return data.reduce((total,current,index)=>{
+      if(index%size===0){
+        return [...total,[current]]
+      }else{
+        return [...total.slice(0,total.length-1),[...total.slice(total.length-1)[0],current]]
+      }
+    },[])
+  }
+
+  const getCurrentList=(dataListOfPagination,current)=>{
+    return dataListOfPagination && dataListOfPagination[current-1] ?dataListOfPagination[current-1]:[]
+  }
   return (
     <Card>
-      {listings.map((listing) => (
+      {getCurrentList(getPaganationList(listings,pageSize),page).map((listing) => (
         <Accordion key={listing.id}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls='panel1a-content' id='panel1a-header'>
             <Grid container spacing={2} direction='row' alignItems='center' justify='space-between'>

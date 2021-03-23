@@ -15,9 +15,10 @@ import InfoIcon from '@material-ui/icons/Info';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import ErrorIcon from '@material-ui/icons/Error';
 import ListingList from './ListingList';
-import PaginationControlled from '../shared/Pagination';
+import PaginationControlled from './Pagination';
 import { SearchClearSnackbar } from '../shared/snackbars';
 import LocationFilter from '../shared/LocationFilter';
+
 
 // Search page for members
 function Listings() {
@@ -31,13 +32,28 @@ function Listings() {
   const [subcategoryId, setSubcategoryId] = useState('');
   const [categoryOptions, setCategoryOptions] = useState([]);
   const [subcategoryOptions, setSubcategoryOptions] = useState({});
+  const [pageNum, setPageNum] = useState(0)
+  const [page, setPage] = useState(1)
+  const [pageSize, setPageSize] = useState(10)
   const reset = useCallback(() => {
     setSubcategoryId('');
     setFilters({ locationIds: [], title: '', minRating: '', maxRating: '' });
   }, []);
 
+  const getCount = (total, pageSize) => {
+    if (total <= pageSize) {
+      return 1;
+    } else if (total > pageSize) {
+      if (total % pageSize) {
+        return Math.floor(total / pageSize) + 1
+      } else {
+        return Math.floor(total / pageSize)
+      }
+    }
+  }
+
   useEffect(fetchCategoryOptions, []);
-  useEffect(updateListings, [subcategoryId, filters]);
+  useEffect(updateListings, [subcategoryId, filters, page, pageSize]);
 
   function updateListings() {
     const url = process.env.REACT_APP_LOCAL_URL || '';
@@ -49,6 +65,7 @@ function Listings() {
     })
       .then((res) => res.json())
       .then((json) => {
+        setPageNum(json.pageNum)
         setListings(json);
       });
   }
@@ -86,7 +103,9 @@ function Listings() {
       locationIds: options.map((x) => x.value),
     });
   }
-
+  const handlePageChange = useCallback(current => {
+    setPage(current)
+  }, []);
   return (
     <Card>
       <Grid container direction='row'>
@@ -180,12 +199,13 @@ function Listings() {
             </FormControl>
           </Grid>
           <br />
+          <br />
           {listings && listings.length > 0 ? (
             <>
-              <ListingList listings={listings}></ListingList>
+              <ListingList listings={listings} pageSize={pageSize} page={page}></ListingList>
               <br />
               <Grid container direction='column' justify='center' alignItems='center'>
-                <PaginationControlled PaginationControlled={PaginationControlled}></PaginationControlled>
+                <PaginationControlled count={getCount(listings.length, pageSize)} pageChange={handlePageChange} pageNum={pageNum} page={page}></PaginationControlled>
               </Grid>
             </>
           ) : (

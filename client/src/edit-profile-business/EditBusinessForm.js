@@ -64,6 +64,7 @@ export default function EditBusinessForm(props) {
               name='organizationEmail'
               autoComplete='email'
               value={props.formData.organizationEmail}
+              onChange={props.handleInputChange}
               onBlur={(event) => {
                 props.handleInputChange(event, props.checkEmailExists);
               }}
@@ -93,6 +94,7 @@ export default function EditBusinessForm(props) {
               type='tel'
               autoComplete='phone'
               value={props.formData.organizationMainPhone}
+              onChange={props.handleInputChange}
               onBlur={(event) => {
                 props.handleInputChange(event, props.checkPhoneExists);
               }}
@@ -110,6 +112,7 @@ export default function EditBusinessForm(props) {
               type='tel'
               autoComplete='phone'
               value={props.formData.organizationAltPhone}
+              onChange={props.handleInputChange}
               onBlur={(event) => {
                 props.handleInputChange(event, props.checkPhoneExists);
               }}
@@ -204,6 +207,7 @@ export default function EditBusinessForm(props) {
               name='contactEmail'
               autoComplete='email'
               value={props.formData.contactEmail}
+              onChange={props.handleInputChange}
               onBlur={(event) => {
                 props.handleInputChange(event, props.checkEmailExists);
               }}
@@ -222,6 +226,7 @@ export default function EditBusinessForm(props) {
               type='tel'
               autoComplete='phone'
               value={props.formData.contactPhone}
+              onChange={props.handleInputChange}
               onBlur={(event) => {
                 props.handleInputChange(event, props.checkPhoneExists);
               }}
@@ -230,6 +235,7 @@ export default function EditBusinessForm(props) {
             />
           </Grid>
         </Grid>
+        <br />
         <Button type='submit' fullWidth variant='contained' color='primary'>
           Save Changes
         </Button>

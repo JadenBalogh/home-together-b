@@ -50,7 +50,7 @@ export default function EditForm(props) {
   return (
     <Card className='page'>
       <Typography component='h1' variant='h5'>
-        Edit Profile
+        Edit Account
       </Typography>
       <br />
       <form onSubmit={props.handleSubmit} noValidate>
@@ -138,6 +138,7 @@ export default function EditForm(props) {
               name='email'
               value={props.formData.email}
               autoComplete='email'
+              onChange={props.handleInputChange}
               onBlur={(event) => {
                 props.handleInputChange(event, props.checkEmailExists);
               }}
@@ -155,6 +156,7 @@ export default function EditForm(props) {
               name='phoneNumber'
               value={props.formData.phoneNumber}
               autoComplete='phone'
+              onChange={props.handleInputChange}
               onBlur={(event) => {
                 props.handleInputChange(event, props.checkPhoneExists);
               }}

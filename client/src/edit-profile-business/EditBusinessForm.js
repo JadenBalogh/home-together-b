@@ -46,10 +46,10 @@ export default function EditBusinessForm(props) {
                 aria-label='incorporated'
                 name='incorporated'
                 id='incorporated'
-                value={props.formData.incorporated}
+                value={`${props.formData.incorporated}`}
               >
-                <FormControlLabel value={1} control={<Radio />} label='Yes' />
-                <FormControlLabel value={0} control={<Radio />} label='No' />
+                <FormControlLabel value='1' control={<Radio />} label='Yes' />
+                <FormControlLabel value='0' control={<Radio />} label='No' />
               </RadioGroup>
             </FormControl>
           </Grid>
@@ -153,9 +153,9 @@ export default function EditBusinessForm(props) {
           >
             <FormLabel component='legend'>Is this business nation wide?</FormLabel>
             <FormControl component='fieldset'>
-              <RadioGroup aria-label='national' name='national' id='national' value={props.formData.national}>
-                <FormControlLabel value={1} control={<Radio />} label='Yes' />
-                <FormControlLabel value={0} control={<Radio />} label='No' />
+              <RadioGroup aria-label='national' name='national' id='national' value={`${props.formData.national}`}>
+                <FormControlLabel value='1' control={<Radio />} label='Yes' />
+                <FormControlLabel value='0' control={<Radio />} label='No' />
               </RadioGroup>
             </FormControl>
           </Grid>

@@ -210,8 +210,6 @@ async function editOrganization(id, data) {
     data.contactLastName,
     data.contactEmail,
     data.contactPhone,
-    data.username,
-    data.password,
     data.organizationName,
     data.organizationWebsite,
     data.organizationLogoURL,

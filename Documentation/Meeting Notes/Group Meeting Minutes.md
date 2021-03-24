@@ -138,6 +138,7 @@ Updating rules:
 
 ## November 3rd, 2020
 
+
 ###### 1:30-2:00pm:
 
 Reviewing each other's work
@@ -199,17 +200,24 @@ Virtual Standup - due by 1 PM on Saturdays
 
   All team members should send a text summary to the #group-b-general channel of what've worked on so far, along with the branch and changes that require review
   
+  
+  
 ###### 2:00-2:33pm: 
 
 Creating issues and assigning parts
+
+
 
 ###### 2:33-2:37pm:
 
 Closing a pull request
 
+
 ###### 2:37-2:46pm:
 
 Discussing the tasks of front-end static page
+
+
 
 ###### 2:46-2:34pm:
 
@@ -217,11 +225,15 @@ Discussing UI design of front-end static page
 
 
 
+
+
 ## November 17th, 2020
+
 
 ###### 1:30-1:57pm: 
 
 Reviewing the work from past week
+
 
 ###### 1:57-3:15pm: 
 
@@ -249,7 +261,9 @@ The issues are:
 
 
 
+
 ## November 24th, 2020
+
 
 ###### 1:30-2:10pm: 
 
@@ -268,31 +282,34 @@ Creating issues and assigning parts:
 
 The issues are:
 
-  Report: Review and submit
+   Report: Review and submit
 
-  Report: Average and graph the quantitative eval results
+   Report: Average and graph the quantitative eval results
 
-  Report: Create list of issues from eval notes and prioritize them 
+   Report: Create list of issues from eval notes and prioritize them 
 
-  Report: Compile list of all group B eval recordings
+   Report: Compile list of all group B eval recordings
  
-  Report: Compile list of user tasks used in evaluations
+   Report: Compile list of user tasks used in evaluations
 
-  Report: Compile participant information into table
+   Report: Compile participant information into table
 
-  Report: System description and feature list
+   Report: System description and feature list
 
-  Write peer evals
+   Write peer evals
 
-  Create the demo video for milestone 1
+   Create the demo video for milestone 1
+
 
 
 
 ## December 1st, 2020
 
+
 ###### 1:30-1:43pm:
 
 Closing the issues from past week
+
 
 ###### 1:43-2:12pm:
 
@@ -300,25 +317,28 @@ Discussing the plan during the winter break, creating issues and assigning parts
 
 The issues are:
 
- Research and determine the front-end library to use
+  Research and determine the front-end library to use
 
- Research google maps implementation with React
+  Research google maps implementation with React
 
- Create front-end design prototypes
+  Create front-end design prototypes
 
- Complete database backend
+  Complete database backend
 
- Add linting and code formatting project settings
+  Add linting and code formatting project settings
+
 
 
 
 ## January 12th, 2021
+
 
 ###### 1:30-1:44pm:
 
 Dicussing the issues done in the winter break (the UI design and the research of map feature)
 
 closing these issues
+
 
 ###### 1:43-2:22pm:
 
@@ -330,21 +350,26 @@ Discussing the meeting times and the content of discussion for the meetings
 
 The current way is to have a scrum meeting every Tuesday at 1:30 pm, and have a work meeting every Saturday at 1:00 pm
 
+
 ###### 2:22-2:37pm:
 
 Discussing the plan for this week and creating new issues
 
 
 
+
 ## January 16th, 2021
+
 
 ###### 1:00-1:16pm:
 
 Discussing the progress of UI design
 
+
 ###### 1:16-1:21pm:
 
 Discussing the plan before next Tuesday and nest week
+
 
 ###### 1:21-1:28pm:
 
@@ -365,6 +390,7 @@ Assigning parts
 
 ## January 19th, 2021
 
+ 
 ###### 1:30-1:40pm:
 
 Discussing Alvin's progress (signup/login form) and Jaden's progress (database implementation)
@@ -376,11 +402,11 @@ Discussing Athena's progress (UI design)
 
 a few points to think about:
 
-  moving the search shortcuts to a top navbar above the specific page itself
+   moving the search shortcuts to a top navbar above the specific page itself
 
-  expand feature for advanced filters
+   expand feature for advanced filters
 
-  navbar: about, member search, service search, profile OR login
+   navbar: about, member search, service search, profile OR login
   
 
 ###### 1:52-1:56pm:
@@ -410,6 +436,7 @@ Discussing the plan during the winter break, creating issues and assigning parts
 
 
 
+
 ## January 23th
 
 ###### 1:00-1:30pm
@@ -423,6 +450,7 @@ Athena's progress (user account)
 
 
 ## January 26th
+
 
 ###### 1:30-1:48pm:
 
@@ -445,25 +473,25 @@ Distributing issues
 
 The issues are:
 
- Finish front end of login and signup
+  Finish front end of login and signup
 
- Fix database conflicts
+  Fix database conflicts
 
- Create UI design
-
- Update documentation 
-
- Setup Google Maps 
+  Create UI design
  
- Setup heroku hosting
+  Update documentation 
 
- Setup server-side routes for view account and edit account 
+  Setup Google Maps 
+ 
+  Setup heroku hosting
 
- Fix DB field names and confirm DB setup with Twila
+  Setup server-side routes for view account and edit account 
 
- Add fields to server signup route 
+  Fix DB field names and confirm DB setup with Twila
 
- Front-end to Back-end connection for signin/signup
+  Add fields to server signup route 
+
+  Front-end to Back-end connection for signin/signup
  
 
 ###### 3:34-3:40pm:
@@ -480,6 +508,7 @@ Discussing plan of next week
 
 ## January 30th
 
+
 ###### 1:00-1:30pm:
 
 Discusing the process done:
@@ -493,14 +522,17 @@ Reviewing the front end implementation (new design)(Athena)
 
 ## January 26th
 
+
 ###### 1:30-2:05pm:
 
 Reviewing the process of each teammate
 
 Discussing the question to Twila
 
+
 ###### 2:32-2:43pm:
- Organizing questions for Twila
+Organizing questions for Twila
+ 
  
  ###### 2:43-2:58pm:
 DIscussing issues and assign the tasks
@@ -511,6 +543,7 @@ DIscussing issues and assign the tasks
 
 ## January 30th
 
+
 ###### 1:00-1:30pm:
 Discussing the map feature and progress from last half of the week
 
@@ -519,31 +552,37 @@ Discussing the map feature and progress from last half of the week
 
 ## February 2nd
 
+
 ###### 1:30-2:06pm:
 Discuss what to show and discuss with Twila
+
 
 ###### 2:06-2:32pm:
 Review the progress of each team member
 
+
 ###### 2:32-2:53pm:
 Create issues and assign the tasks:
 
-Fix listings filters
+ Fix listings filters
 
-Write down list of user tasks to use during evaluations
+ Write down list of user tasks to use during evaluations
 
-Write down system description to read during evaluations
+ Write down system description to read during evaluations
 
 
 
 
 ## February 6th
 
+
 ###### 1:00-1:13pm:
 Discuss the requirement of Twila
 
+
 ###### 1:13-1:38pm:
 Discuss what to do with the back end 
+
 
 ###### 1:38-1:59pm:
 Discuss the progress and what to do before next Tuesday
@@ -553,31 +592,37 @@ Discuss the progress and what to do before next Tuesday
 
 ## February 16th
 
+
 ###### 1:30-1:41pm:
 Discuss the progress
+
 
 ###### 1:41-2:03pm:
 Discuss the future plan
 
+
 ###### 2:03-2:21pm:
 Create issues and assign the tasks:
 
-REPORT: Heuristic Analysis
+ REPORT: Heuristic Analysis
 
-REPORT: Issues discovered
+ REPORT: Issues discovered
 
-REPORT: Complete milestone features
+ REPORT: Complete milestone features
 
 
 
 
 ## February 23th
 
+
 ###### 1:30-1:42pm:
 Discuss and reviewthe progress 
 
+
 ###### 1:42-1:56pm:
 Discuss the requirement of the milestone report and how to do them
+
 
 ###### 1:56-2:07pm:
 Create issues and assign them
@@ -587,31 +632,106 @@ Create issues and assign them
 
 ## March 2nd
 
+
 ###### 1:30-1:44pm:
 Review the heuristic report
+
 
 ###### 1:44-1:53pm:
 List the remainning tasks waiting for Twila to prioritize
 
+
 ###### 1:53-2:01pm:
 List the questions for Twila
 
+
 ###### 2:01-2:09pm:
-Dscuss the remaining task
+Discuss the remaining task
+
 
 ###### 2:09-2:30pm:
 Create isssues and assign tasks:
 
-Fix Clear Filters button in the Services page
+  Fix Clear Filters button in the Services page
 
-Fix listings pagination OR remove pagination and allow the listing to grow infinitely
+  Fix listings pagination OR remove pagination and allow the listing to grow infinitely
 
-View member details page 
+  View member details page 
 
-Manage listings page
+  Manage listings page
 
-Edit business profile
+  Edit business profile
 
-View business profile 
+  View business profile 
 
-Business signup and storing account type
+  Business signup and storing account type
+
+
+
+
+## March 8th
+
+###### 1:30-1:42pm:
+Discusss the progress of the team members
+
+
+###### 1:42-1:58pm:
+Discuss the questions for Twila
+
+
+###### 1:58-2:23pm:
+DIscuss the future tasks and assign parts
+
+
+
+
+## March 16th
+
+Review of this week's tasks
+
+Review of text/wordings on the website for demo
+
+Deciding tasks for this week:
+
+ Clean unused fields out of DB 
+ 
+ Clean up DBSetup.js file
+ 
+ Add helper text for each page at the top to explain the use of the page
+ 
+ Add helper text for form fields on focus
+ 
+ Organize and add all site images into a specific folde
+ 
+ Update images used in the site to Twila's provided options
+
+ Revamp content of home page based on Twila's feedback
+ 
+ Fix issues in business signup page
+ 
+ Add Twila's requested content changes
+ 
+ Review all pages in the site to ensure everything works
+
+ Fix issues in business signup page
+
+ Pagination
+ 
+ Add error messaging when no search results are found
+ 
+ Update search pages to have a distinct filter section
+ 
+ Update CSS coding used to be consistent (makeStyles vs external CSS)
+ 
+ 
+ 
+## March 16th
+
+###### 1:30-1:47pm:
+Review Alvin's work
+
+###### 1:47-1:55pm:
+Close the past issues, figure out the plan next week
+
+###### 1:55-2:10pm:
+figure out what we need to show to Twila

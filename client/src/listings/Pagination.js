@@ -1,28 +1,27 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import './Listings.css';
+import { useEffect, useState } from 'react';
 import Pagination from '@material-ui/lab/Pagination';
+import './Listings.css';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > * + *': {
-      marginTop: theme.spacing(2),
+export default function PaginationControlled({ total, pageSize, page, onPageChange }) {
+  const [count, setCount] = useState(1);
 
-
-    },
-  },
-}));
-
-export default function PaginationControlled({count,page,pageChange}) {
-  const classes = useStyles();
-   
-  const handleChange = (event, value) => {
-    pageChange(value);
+  const calculateCount = () => {
+    let result = 1;
+    if (total > pageSize) {
+      if (total % pageSize) {
+        result = Math.floor(total / pageSize) + 1;
+      } else {
+        result = Math.floor(total / pageSize);
+      }
+    }
+    setCount(result);
   };
 
+  useEffect(calculateCount, [total, pageSize]);
+
   return (
-    <div className={classes.pagination}>
-      <Pagination count={count} color="primary" page={page} onChange={handleChange} />
+    <div>
+      <Pagination color='primary' count={count} page={page} onChange={(event, value) => onPageChange(value)} />
     </div>
   );
 }

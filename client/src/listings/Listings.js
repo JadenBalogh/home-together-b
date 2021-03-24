@@ -15,7 +15,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import ErrorIcon from '@material-ui/icons/Error';
 import ListingList from './ListingList';
-import PaginationControlled from '../shared/Pagination';
+import PaginationControlled from './Pagination';
 import { SearchClearSnackbar } from '../shared/snackbars';
 import LocationFilter from '../shared/LocationFilter';
 
@@ -31,9 +31,17 @@ function Listings() {
   const [subcategoryId, setSubcategoryId] = useState('');
   const [categoryOptions, setCategoryOptions] = useState([]);
   const [subcategoryOptions, setSubcategoryOptions] = useState({});
+  const [page, setPage] = useState(1);
+
+  const pageSize = 10;
+
   const reset = useCallback(() => {
     setSubcategoryId('');
     setFilters({ locationIds: [], title: '', minRating: '', maxRating: '' });
+  }, []);
+
+  const handlePageChange = useCallback((current) => {
+    setPage(current);
   }, []);
 
   useEffect(fetchCategoryOptions, []);
@@ -180,12 +188,18 @@ function Listings() {
             </FormControl>
           </Grid>
           <br />
+          <br />
           {listings && listings.length > 0 ? (
             <>
-              <ListingList listings={listings}></ListingList>
+              <ListingList listings={listings} pageSize={pageSize} page={page}></ListingList>
               <br />
               <Grid container direction='column' justify='center' alignItems='center'>
-                <PaginationControlled PaginationControlled={PaginationControlled}></PaginationControlled>
+                <PaginationControlled
+                  total={listings.length}
+                  pageSize={pageSize}
+                  page={page}
+                  onPageChange={handlePageChange}
+                ></PaginationControlled>
               </Grid>
             </>
           ) : (

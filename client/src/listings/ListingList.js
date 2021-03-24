@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {
   Grid,
   Paper,
@@ -12,10 +13,26 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Rating from '@material-ui/lab/Rating';
 import './Listings.css';
 
-export default function ListingList({ listings }) {
+export default function ListingList({ listings, pageSize, page }) {
+  const [pageListings, setPageListings] = useState([]);
+
+  const updatePageListings = () => {
+    let pages = listings.reduce((total, current, index) => {
+      if (index % pageSize === 0) {
+        return [...total, [current]];
+      } else {
+        return [...total.slice(0, total.length - 1), [...total.slice(total.length - 1)[0], current]];
+      }
+    }, []);
+
+    setPageListings(pages[page - 1]);
+  };
+
+  useEffect(updatePageListings, [listings, pageSize, page]);
+
   return (
     <Card>
-      {listings.map((listing) => (
+      {pageListings.map((listing) => (
         <Accordion key={listing.id}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls='panel1a-content' id='panel1a-header'>
             <Grid container spacing={2} direction='row' alignItems='center' justify='space-between'>
@@ -30,7 +47,7 @@ export default function ListingList({ listings }) {
               </Grid>
               <Grid item container spacing={2} direction='row' alignItems='center' justify='flex-end' xs={2}>
                 <Grid item>
-                  <Rating name='rating' value={listing.ratingAverage} defaultValue={5} precision={0.5} readOnly />
+                  <Rating name='rating' value={Number(listing.ratingAverage)} precision={0.5} readOnly />
                 </Grid>
               </Grid>
             </Grid>

@@ -10,6 +10,7 @@ function FilterSelect({
   label = '',
   name = '',
   onChange = () => {},
+  value
 }) {
   const [options, setOptions] = useState([]);
 
@@ -29,15 +30,11 @@ function FilterSelect({
     <Autocomplete
       multiple
       disableCloseOnSelect
-      onChange={(event, values) =>
-        onChange(
-          name,
-          values.map((x) => x.value)
-        )
-      }
+      onChange={onChange}
       name={name}
       options={options}
       getOptionLabel={(option) => option.label}
+      value={value}
       renderInput={(params) => (
         <TextField {...params} label={label} placeholder={placeholder} variant='outlined' name='test' />
       )}

@@ -9,7 +9,19 @@ import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import LocationFilter from '../shared/LocationFilter';
 import FilterSelect from './FilterSelect';
 
+
 function MembersFilter(props) {
+
+  function changeNumber(e){ 
+    if(e.target.value<0){
+      return ;
+    } 
+    const { inputHandler }=props;
+    if(inputHandler){
+      inputHandler(e)
+    }
+  }
+
   return (
     <>
       <Grid container spacing={2}>
@@ -18,7 +30,11 @@ function MembersFilter(props) {
           &ensp;
           <InputLabel>Filter by city:</InputLabel>
           <Grid item xs={12}>
-            <LocationFilter placeholder='Enter a city...' onChange={props.locationsHandler} />
+            <LocationFilter  
+              placeholder='Enter a city...' 
+              onChange={props.locationsHandler} 
+              value={props.filters.locationValues}
+            />
           </Grid>
         </Grid>
         <Grid item container direction='row' alignItems='center'>
@@ -30,10 +46,11 @@ function MembersFilter(props) {
               fetchURL='/api/get-age-group-types'
               optionMap={(x) => {
                 return { label: x.name, value: x.id };
-              }}
+              }} 
               placeholder='Ages...'
               name='ageGroupIds'
               onChange={props.selectHandler}
+              value={props.filters.ageGroupValues}
             />
           </Grid>
         </Grid>
@@ -49,7 +66,8 @@ function MembersFilter(props) {
               }}
               placeholder='Genders...'
               name='genderIds'
-              onChange={props.selectHandler}
+              onChange={props.selectGender}
+              value={props.filters.genderValues}
             />
           </Grid>
         </Grid>
@@ -65,7 +83,8 @@ function MembersFilter(props) {
               }}
               placeholder='Family status...'
               name='familyStatusIds'
-              onChange={props.selectHandler}
+              onChange={props.familyHandler}
+              value={props.filters.familyStatusValues}
             />
           </Grid>
         </Grid>
@@ -80,10 +99,11 @@ function MembersFilter(props) {
             <TextField
               fullWidth
               type='number'
+              min={0}
               name='minHomeCapacity'
               autoComplete='minHomeCapacity'
               value={props.filters.minHomeCapacity}
-              onChange={props.inputHandler}
+              onChange={changeNumber}
             />
           </Grid>
           <Grid item xs container justify='center'>
@@ -93,10 +113,11 @@ function MembersFilter(props) {
             <TextField
               fullWidth
               type='number'
+              min={0}
               name='maxHomeCapacity'
               autoComplete='maxHomeCapacity'
               value={props.filters.maxHomeCapacity}
-              onChange={props.inputHandler}
+              onChange={changeNumber}
             />
           </Grid>
         </Grid>
@@ -114,7 +135,7 @@ function MembersFilter(props) {
               name='minMonthlyBudget'
               autoComplete='minMonthlyBudget'
               value={props.filters.minMonthlyBudget}
-              onChange={props.inputHandler}
+              onChange={changeNumber}
             />
           </Grid>
           <Grid item xs container justify='center'>
@@ -127,7 +148,7 @@ function MembersFilter(props) {
               name='maxMonthlyBudget'
               autoComplete='maxMonthlyBudget'
               value={props.filters.maxMonthlyBudget}
-              onChange={props.inputHandler}
+              onChange={changeNumber}
             />
           </Grid>
         </Grid>

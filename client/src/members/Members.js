@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Typography, Card, Grid, Divider, Tooltip, InputAdornment, TextField } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import InfoIcon from '@material-ui/icons/Info';
@@ -6,15 +6,20 @@ import ErrorIcon from '@material-ui/icons/Error';
 import MemberList from './MemberList';
 import MembersFilter from './MembersFilter';
 import PaginationControlled from '../shared/Pagination';
+import { SearchClearSnackbar } from '../shared/snackbars';
 import './Members.css';
 
 export default function Members() {
   const [members, setMembers] = useState([]);
   const [filters, setFilters] = useState({
     locationIds: [],
+    locationValues: [],
     genderIds: [],
+    genderValues: [],
     ageGroupIds: [],
+    ageGroupValues: [],
     familyStatusIds: [],
+    familyStatusValues: [],
     minHomeCapacity: 0,
     maxHomeCapacity: 0,
     minMonthlyBudget: 0,
@@ -25,6 +30,11 @@ export default function Members() {
     hasHousing: false,
   });
   const [name, setName] = useState('');
+
+  function filterMy(list) {
+    const id = sessionStorage.getItem('id');
+    return list.filter(item => item.id != id)
+  }
 
   function updateMembers() {
     const body = {
@@ -42,7 +52,7 @@ export default function Members() {
     })
       .then((res) => res.json())
       .then((json) => {
-        setMembers(json);
+        setMembers(filterMy(json));
       });
   }
 
@@ -60,17 +70,59 @@ export default function Members() {
     });
   }
 
-  function handleSelectChange(name, values) {
+  const reset = useCallback(() => {
+    setFilters({
+      locationIds: [],
+      locationValues: [],
+      genderIds: [],
+      genderValues: [],
+      ageGroupIds: [],
+      ageGroupValues: [],
+      familyStatusIds: [],
+      familyStatusValues: [],
+      minHomeCapacity: 0,
+      maxHomeCapacity: 0,
+      minMonthlyBudget: 0,
+      maxMonthlyBudget: 0,
+      petRestrictions: false,
+      religionRestrictions: false,
+      smokingRestrictions: false,
+      hasHousing: false,
+    });
+  }, []);
+
+  console.log("---setFilters---", filters)
+
+  function handleSelectChange(name, options) {
     setFilters({
       ...filters,
-      [name]: values,
+      ageGroupIds:options.map((x) => x.value),
+      ageGroupValues: options,
     });
   }
+
+  function handleGenderChange(name, options) {
+    setFilters({
+      ...filters,
+      genderIds:options.map((x) => x.value),
+      genderValues: options,
+    });
+  }
+
 
   function handleLocationsChange(event, options) {
     setFilters({
       ...filters,
+      locationValues: options,
       locationIds: options.map((x) => x.value),
+    });
+  }
+
+  function handleFamilyChange(event, options) {
+    setFilters({
+      ...filters,
+      familyStatusValues: options,
+      familyStatusIds: options.map((x) => x.value),
     });
   }
 
@@ -108,11 +160,18 @@ export default function Members() {
           <br />
           <MembersFilter
             selectHandler={handleSelectChange}
+            familyHandler={handleFamilyChange}
+            selectGender={handleGenderChange}
             inputHandler={handleInputChange}
             checkboxHandler={handleCheckboxChange}
             locationsHandler={handleLocationsChange}
             filters={filters}
           />
+          <Grid item container direction='row' justify='center'>
+            <Grid item>
+              <SearchClearSnackbar clear={reset} />
+            </Grid>
+          </Grid>
         </Grid>
         <br />
         <Divider flexItem orientation='vertical' />

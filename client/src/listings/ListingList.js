@@ -37,7 +37,7 @@ export default function ListingList({ listings, pageSize, page }) {
           <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls='panel1a-content' id='panel1a-header'>
             <Grid container spacing={2} direction='row' alignItems='center' justify='space-between'>
               <Grid item container spacing={2} direction='row' alignItems='center' justify='flex-start' xs={10}>
-                <img className='listing-accordion-image' alt='Sample' src={require('../shared/img.png').default} />
+                <img className='listing-accordion-image' alt='Sample' src={require('../images/placeholder.png').default} />
                 <Grid item>
                   <Typography variant='h6'>{listing.title}</Typography>
                 </Grid>
@@ -55,7 +55,7 @@ export default function ListingList({ listings, pageSize, page }) {
           <AccordionDetails>
             <Grid container spacing={2}>
               <Grid item>
-                <img className='listing-image' alt='Sample' src={require('../shared/img.png').default} />
+                <img className='listing-image' alt='Sample' src={require('../images/placeholder.png').default} />
               </Grid>
               <Grid item xs container>
                 <Grid item xs container direction='column' spacing={1}>

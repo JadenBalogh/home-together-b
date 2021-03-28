@@ -34,7 +34,7 @@ function FilterSelect({
       name={name}
       options={options}
       getOptionLabel={(option) => option.label}
-      value={options.find((x) => x.value === value)}
+      value={options.filter((option) => value.some((x) => option.value === x))}
       renderInput={(params) => <TextField {...params} label={label} placeholder={placeholder} variant='outlined' />}
     />
   );

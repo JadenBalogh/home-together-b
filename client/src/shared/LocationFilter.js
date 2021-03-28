@@ -32,9 +32,9 @@ export default function LocationFilter({ value, label = '', placeholder = '', on
       disableCloseOnSelect
       onChange={onChange}
       options={locationOptions}
-      value={locationOptions.find((x) => x.value === value)}
       groupBy={(option) => option.province}
       getOptionLabel={(option) => `${option.label}, ${option.code}`}
+      value={locationOptions.filter((option) => value.some((x) => option.value === x))}
       renderInput={(params) => <TextField {...params} label={label} placeholder={placeholder} variant='outlined' />}
     />
   );

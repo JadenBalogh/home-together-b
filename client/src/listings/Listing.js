@@ -50,7 +50,7 @@ export default function Listing() {
       <Grid container direction='column'>
         <Grid item container xs={12}>
           <Grid item xs={4}>
-            <img className='listing-image' alt='Sample' src={require('../shared/img.png').default} />
+            <img className='listing-image' alt='Sample' src={require('../images/placeholder.png').default} />
           </Grid>
           <Grid item xs={8}>
             <Typography variant='body1'>

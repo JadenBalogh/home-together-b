@@ -9,7 +9,7 @@ class Home extends Component {
       <Card className='page'>
         <Grid container className='homepage-container' direction='column'>
           <Grid item container className='logo-container' xs={12} direction='column'>
-            <img className='logoimg' alt='Sample' src={require('../shared/htlogo.png').default} />
+            <img className='logoimg' alt='Sample' src={require('../images/image3.jpg').default} />
           </Grid>
           <Grid item container xs={12} direction='row' justify='center'>
             <Grid item xs>
@@ -17,7 +17,7 @@ class Home extends Component {
                 className='roundimg'
                 alt='Sample'
                 width='500'
-                src={require('../shared/bigstock-Beautiful-Middle-Aged-Business-147085658.jpg').default}
+                src={require('../images/image4.jpg').default}
               />
               <p>A Free Canadian Home-sharing website.</p>
             </Grid>
@@ -26,7 +26,7 @@ class Home extends Component {
                 className='roundimg'
                 alt='Sample'
                 width='500'
-                src={require('../shared/bigstock-Beautiful-Middle-Aged-Business-147085658.jpg').default}
+                src={require('../images/image5.jpg').default}
               />
               <p>Supporting the growth and success of shared living across the country!</p>
             </Grid>

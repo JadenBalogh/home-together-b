@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Divider, Grid } from '@material-ui/core';
-import bikeImg from './stock-bike.jpg';
-import blueprintsImg from './stock-blueprints.jpg';
+import bikeImg from '../images/image1.jpg';
+import blueprintsImg from '../images/image2.jpg';
 import './About.css';
 
 export default function About() {

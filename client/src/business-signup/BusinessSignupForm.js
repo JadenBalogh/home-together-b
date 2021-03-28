@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   FormControl,
   FormControlLabel,
@@ -10,9 +11,12 @@ import {
   Grid,
   Card,
   Typography,
+  Switch,
 } from '@material-ui/core';
 
 export default function SignupForm(props) {
+  const [isMailAddrSame, setIsMailAddrSame] = useState(false);
+
   return (
     <Card className='page'>
       <Typography component='h1' variant='h5'>
@@ -111,15 +115,26 @@ export default function SignupForm(props) {
             />
           </Grid>
           <Grid item xs={12} container>
-            <TextField
-              variant='outlined'
-              fullWidth
-              id='organizationMailingAddress'
-              label='Mailing Address'
-              name='organizationMailingAddress'
-              onChange={props.handleInputChange}
-            />
+            <FormControlLabel
+              onChange={(event) => setIsMailAddrSame(event.target.checked)}
+              control={<Switch name='checkedA' color='primary' />}
+              label='Mailing Address is the same as Street Address'
+            ></FormControlLabel>
           </Grid>
+          {isMailAddrSame ? (
+            ''
+          ) : (
+            <Grid item xs={12} container>
+              <TextField
+                variant='outlined'
+                fullWidth
+                id='organizationMailingAddress'
+                label='Mailing Address'
+                name='organizationMailingAddress'
+                onChange={props.handleInputChange}
+              />
+            </Grid>
+          )}
           <Grid
             item
             xs={12}
@@ -137,15 +152,10 @@ export default function SignupForm(props) {
               </RadioGroup>
             </FormControl>
           </Grid>
-          <Grid item xs={12} container>
-            <TextField
-              name='organizationLogoURL'
-              variant='outlined'
-              fullWidth
-              id='organizationLogoURL'
-              label='Logo URL'
-              onChange={props.handleInputChange}
-            />
+          <Grid item xs={12} container alignItems='center'>
+            <FormLabel component='legend'>Business logo:</FormLabel>
+            &ensp;
+            <input type='file' />
           </Grid>
           <Grid item xs={12} sm={6} container>
             <TextField
@@ -206,6 +216,9 @@ export default function SignupForm(props) {
             />
           </Grid>
           <Grid item xs={12} container>
+            <FormLabel component='legend'>
+              <i>This is the username you will use to sign into the site.</i>
+            </FormLabel>
             <TextField
               variant='outlined'
               required

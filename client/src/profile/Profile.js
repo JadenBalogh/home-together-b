@@ -35,8 +35,11 @@ export default function Profile() {
     <Card className='page'>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Typography variant='h5'>My Account</Typography>
+          <Typography variant='h5'>Registration and Contact Information</Typography>
           <Divider />
+          <Typography variant='subtitle2'>
+            <i>This information is for registration purposes and is not shared with others.</i>
+          </Typography>
         </Grid>
       </Grid>
       <br />
@@ -48,8 +51,11 @@ export default function Profile() {
         <ProfileField label='Email' value={member.email} />
       </Grid>
       <br />
-      <Typography variant='h6'>Public Information</Typography>
+      <Typography variant='h6'>My Public Information</Typography>
       <Divider />
+      <Typography variant='subtitle2'>
+        <i>This information is used to search for other compatible members on the site.</i>
+      </Typography>
       <br />
       <Grid container spacing={2}>
         <ProfileField label='Gender' value={member.gender} />

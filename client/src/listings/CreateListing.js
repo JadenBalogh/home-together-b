@@ -64,7 +64,7 @@ export default function CreateListing() {
         <Grid container>
           <Grid item align='center' xs={12}>
             <Typography component='h1' variant='h5'>
-              {sessionStorage.getItem('accountType') === '1' ? 'New Listing' : 'New Home to Share'}
+              {sessionStorage.getItem('accountType') === '1' ? 'New Listing' : 'Member Home to Share'}
             </Typography>
           </Grid>
         </Grid>
@@ -73,29 +73,33 @@ export default function CreateListing() {
           <Grid item xs={5}>
             <TextField name='title' required fullWidth label='Title' autoFocus onChange={handleInputChange} />
           </Grid>
-          <Grid item xs={5}>
-            <FormControl fullWidth required onChange={handleInputChange}>
-              <InputLabel htmlFor='categoryId'>Category</InputLabel>
-              <Select name='categoryId' native defaultValue='' id='categoryId'>
-                <option value='' />
-                {categoryOptions.length > 0 && Object.keys(subcategoryOptions).length > 0 ? (
-                  categoryOptions.map((cat) => (
-                    <optgroup key={cat.id} label={`${cat.name}`}>
-                      {subcategoryOptions[cat.id] ? (
-                        subcategoryOptions[cat.id].map((subcat) => (
-                          <option key={subcat.id} value={subcat.id}>{`${subcat.name}`}</option>
-                        ))
-                      ) : (
-                        <></>
-                      )}
-                    </optgroup>
-                  ))
-                ) : (
+          {sessionStorage.getItem('accountType') === '1' ? (
+            <Grid item xs={5}>
+              <FormControl fullWidth required onChange={handleInputChange}>
+                <InputLabel htmlFor='categoryId'>Category</InputLabel>
+                <Select name='categoryId' native defaultValue='' id='categoryId'>
                   <option value='' />
-                )}
-              </Select>
-            </FormControl>
-          </Grid>
+                  {categoryOptions.length > 0 && Object.keys(subcategoryOptions).length > 0 ? (
+                    categoryOptions.map((cat) => (
+                      <optgroup key={cat.id} label={`${cat.name}`}>
+                        {subcategoryOptions[cat.id] ? (
+                          subcategoryOptions[cat.id].map((subcat) => (
+                            <option key={subcat.id} value={subcat.id}>{`${subcat.name}`}</option>
+                          ))
+                        ) : (
+                          <></>
+                        )}
+                      </optgroup>
+                    ))
+                  ) : (
+                    <option value='' />
+                  )}
+                </Select>
+              </FormControl>
+            </Grid>
+          ) : (
+            ''
+          )}
         </Grid>
         <br />
         <Grid container direction='column'>

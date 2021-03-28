@@ -1,14 +1,14 @@
 import React from 'react';
-import { Card, Divider, Grid } from '@material-ui/core';
-import bikeImg from '../images/image1.jpg';
-import blueprintsImg from '../images/image2.jpg';
+import { Card, Grid } from '@material-ui/core';
+import image1 from '../images/image1.jpg';
+import image2 from '../images/image2.jpg';
 import './About.css';
 
 export default function About() {
   return (
     <Card className='page'>
       <Grid className='about' container direction='column' alignItems='center'>
-        <img className='about-block-img' alt='' src={bikeImg} />
+        <img className='about-block-img' alt='' src={image1} />
         <h1>About Us</h1>
         <p>
           In late 2015 Home Together Canada&#39;s founding member placed an online ad in search of others to share her
@@ -27,7 +27,6 @@ export default function About() {
           It became apparent that it was not only the individuals that were having difficulties finding success, but
           also the businesses and groups trying to provide for this large and diverse group.
         </p>
-        <Divider />
         <h2>
           In early 2017, a volunteer Board was formed and Home Together Canada became an incorporated, non-profit
           association.
@@ -62,7 +61,23 @@ export default function About() {
           As a volunteer board we facilitate the growth and success of shared living in Canada by freely providing
           hometogether.ca across the nation.
         </p>
-        <img className='about-block-img' alt='' src={blueprintsImg} />
+        <h2>Our Mandate</h2>
+        <p>
+          Home Together Canada is a volunteer-run, non-profit Association. Our mandate is to facilitate the growth and
+          success of shared living in Canada.
+          <br />
+          <br />
+          We do this by freely providing the two fundamental needs necessary to the success of both the individuals
+          wishing to share homes, and the service providers and businesses wishing to serve this burgeoning and diverse
+          group. We accomplish the first need - to maximize the number of individuals available to each other- by
+          providing a single non-competitive, non-profit site with the basic preliminary tools individuals require to
+          find others of similar mind. We accomplish the second need - for individuals to find and access sharing and
+          matching services, businesses, housing and organizations - by providing free and equal descriptive listings
+          with website links to all Canadian sharing providers. This provides individuals immediate information and
+          access to the services they are in search of, and in turn, provides the businesses and services maximum and
+          immediate exposure to this large and diverse group.
+        </p>
+        <img className='about-block-img' alt='' src={image2} />
       </Grid>
     </Card>
   );

@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/static/css/main.bd30bde5.chunk.css",
-    "main.js": "/static/js/main.2fc03c1f.chunk.js",
-    "main.js.map": "/static/js/main.2fc03c1f.chunk.js.map",
+    "main.css": "/static/css/main.8974a74f.chunk.css",
+    "main.js": "/static/js/main.9013641a.chunk.js",
+    "main.js.map": "/static/js/main.9013641a.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.900dd88b.js",
     "runtime-main.js.map": "/static/js/runtime-main.900dd88b.js.map",
-    "static/js/2.d34e18b0.chunk.js": "/static/js/2.d34e18b0.chunk.js",
-    "static/js/2.d34e18b0.chunk.js.map": "/static/js/2.d34e18b0.chunk.js.map",
+    "static/js/2.d9880293.chunk.js": "/static/js/2.d9880293.chunk.js",
+    "static/js/2.d9880293.chunk.js.map": "/static/js/2.d9880293.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.bd30bde5.chunk.css.map": "/static/css/main.bd30bde5.chunk.css.map",
-    "static/js/2.d34e18b0.chunk.js.LICENSE.txt": "/static/js/2.d34e18b0.chunk.js.LICENSE.txt",
-    "static/media/bigstock-Beautiful-Middle-Aged-Business-147085658.jpg": "/static/media/bigstock-Beautiful-Middle-Aged-Business-147085658.48e2e145.jpg",
-    "static/media/htlogo.png": "/static/media/htlogo.c2ada39a.png",
-    "static/media/img.png": "/static/media/img.f62d0da8.png",
-    "static/media/stock-bike.fab04cd9.jpg": "/static/media/stock-bike.fab04cd9.jpg",
-    "static/media/stock-blueprints.0f2c2b28.jpg": "/static/media/stock-blueprints.0f2c2b28.jpg",
+    "static/css/main.8974a74f.chunk.css.map": "/static/css/main.8974a74f.chunk.css.map",
+    "static/js/2.d9880293.chunk.js.LICENSE.txt": "/static/js/2.d9880293.chunk.js.LICENSE.txt",
+    "static/media/image1.ed7a910c.jpg": "/static/media/image1.ed7a910c.jpg",
+    "static/media/image10.7a562113.jpg": "/static/media/image10.7a562113.jpg",
+    "static/media/image2.ca0cfddd.jpg": "/static/media/image2.ca0cfddd.jpg",
+    "static/media/image8.df1d95c4.jpg": "/static/media/image8.df1d95c4.jpg",
+    "static/media/placeholder.png": "/static/media/placeholder.f62d0da8.png",
     "static/media/Main.css": "/static/media/wood-background.c4d32bba.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.900dd88b.js",
-    "static/js/2.d34e18b0.chunk.js",
-    "static/css/main.bd30bde5.chunk.css",
-    "static/js/main.2fc03c1f.chunk.js"
+    "static/js/2.d9880293.chunk.js",
+    "static/css/main.8974a74f.chunk.css",
+    "static/js/main.9013641a.chunk.js"
   ]
 }

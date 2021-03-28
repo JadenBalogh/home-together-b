@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Divider, Grid } from '@material-ui/core';
+import { Card, Grid } from '@material-ui/core';
 import image1 from '../images/image1.jpg';
 import image2 from '../images/image2.jpg';
 import './About.css';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Grid, Card, Divider, Button, Box } from '@material-ui/core';
+import { Grid, Card, Divider, Button } from '@material-ui/core';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import headerImg from '../images/image10.jpg';
 import mandateImg from '../images/image8.jpg';

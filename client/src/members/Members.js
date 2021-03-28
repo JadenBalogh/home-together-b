@@ -13,13 +13,9 @@ export default function Members() {
   const [members, setMembers] = useState([]);
   const [filters, setFilters] = useState({
     locationIds: [],
-    locationValues: [],
     genderIds: [],
-    genderValues: [],
     ageGroupIds: [],
-    ageGroupValues: [],
     familyStatusIds: [],
-    familyStatusValues: [],
     minHomeCapacity: 0,
     maxHomeCapacity: 0,
     minMonthlyBudget: 0,
@@ -31,9 +27,26 @@ export default function Members() {
   });
   const [name, setName] = useState('');
 
-  function filterMy(list) {
+  const reset = useCallback(() => {
+    setFilters({
+      locationIds: [],
+      genderIds: [],
+      ageGroupIds: [],
+      familyStatusIds: [],
+      minHomeCapacity: 0,
+      maxHomeCapacity: 0,
+      minMonthlyBudget: 0,
+      maxMonthlyBudget: 0,
+      petRestrictions: false,
+      religionRestrictions: false,
+      smokingRestrictions: false,
+      hasHousing: false,
+    });
+  }, []);
+
+  function filterSelf(list) {
     const id = sessionStorage.getItem('id');
-    return list.filter(item => item.id != id)
+    return list.filter((item) => item.id !== id);
   }
 
   function updateMembers() {
@@ -52,7 +65,7 @@ export default function Members() {
     })
       .then((res) => res.json())
       .then((json) => {
-        setMembers(filterMy(json));
+        setMembers(filterSelf(json));
       });
   }
 
@@ -70,59 +83,17 @@ export default function Members() {
     });
   }
 
-  const reset = useCallback(() => {
-    setFilters({
-      locationIds: [],
-      locationValues: [],
-      genderIds: [],
-      genderValues: [],
-      ageGroupIds: [],
-      ageGroupValues: [],
-      familyStatusIds: [],
-      familyStatusValues: [],
-      minHomeCapacity: 0,
-      maxHomeCapacity: 0,
-      minMonthlyBudget: 0,
-      maxMonthlyBudget: 0,
-      petRestrictions: false,
-      religionRestrictions: false,
-      smokingRestrictions: false,
-      hasHousing: false,
-    });
-  }, []);
-
-  console.log("---setFilters---", filters)
-
   function handleSelectChange(name, options) {
     setFilters({
       ...filters,
-      ageGroupIds:options.map((x) => x.value),
-      ageGroupValues: options,
+      [name]: options.map((x) => x.value),
     });
   }
-
-  function handleGenderChange(name, options) {
-    setFilters({
-      ...filters,
-      genderIds:options.map((x) => x.value),
-      genderValues: options,
-    });
-  }
-
 
   function handleLocationsChange(event, options) {
     setFilters({
       ...filters,
-      locationValues: options,
       locationIds: options.map((x) => x.value),
-    });
-  }
-
-  function handleFamilyChange(event, options) {
-    setFilters({
-      ...filters,
-      familyStatusValues: options,
-      familyStatusIds: options.map((x) => x.value),
     });
   }
 
@@ -160,8 +131,6 @@ export default function Members() {
           <br />
           <MembersFilter
             selectHandler={handleSelectChange}
-            familyHandler={handleFamilyChange}
-            selectGender={handleGenderChange}
             inputHandler={handleInputChange}
             checkboxHandler={handleCheckboxChange}
             locationsHandler={handleLocationsChange}

@@ -9,19 +9,7 @@ import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import LocationFilter from '../shared/LocationFilter';
 import FilterSelect from './FilterSelect';
 
-
 function MembersFilter(props) {
-
-  function changeNumber(e){ 
-    if(e.target.value<0){
-      return ;
-    } 
-    const { inputHandler }=props;
-    if(inputHandler){
-      inputHandler(e)
-    }
-  }
-
   return (
     <>
       <Grid container spacing={2}>
@@ -30,10 +18,10 @@ function MembersFilter(props) {
           &ensp;
           <InputLabel>Filter by city:</InputLabel>
           <Grid item xs={12}>
-            <LocationFilter  
-              placeholder='Enter a city...' 
-              onChange={props.locationsHandler} 
-              value={props.filters.locationValues}
+            <LocationFilter
+              placeholder='Enter a city...'
+              onChange={props.locationsHandler}
+              value={props.filters.locationIds}
             />
           </Grid>
         </Grid>
@@ -46,11 +34,11 @@ function MembersFilter(props) {
               fetchURL='/api/get-age-group-types'
               optionMap={(x) => {
                 return { label: x.name, value: x.id };
-              }} 
+              }}
               placeholder='Ages...'
               name='ageGroupIds'
               onChange={props.selectHandler}
-              value={props.filters.ageGroupValues}
+              value={props.filters.ageGroupIds}
             />
           </Grid>
         </Grid>
@@ -66,8 +54,8 @@ function MembersFilter(props) {
               }}
               placeholder='Genders...'
               name='genderIds'
-              onChange={props.selectGender}
-              value={props.filters.genderValues}
+              onChange={props.selectHandler}
+              value={props.filters.genderIds}
             />
           </Grid>
         </Grid>
@@ -83,8 +71,8 @@ function MembersFilter(props) {
               }}
               placeholder='Family status...'
               name='familyStatusIds'
-              onChange={props.familyHandler}
-              value={props.filters.familyStatusValues}
+              onChange={props.selectHandler}
+              value={props.filters.familyStatusIds}
             />
           </Grid>
         </Grid>
@@ -103,7 +91,11 @@ function MembersFilter(props) {
               name='minHomeCapacity'
               autoComplete='minHomeCapacity'
               value={props.filters.minHomeCapacity}
-              onChange={changeNumber}
+              onChange={(event) => {
+                if (event.target.value >= 0) {
+                  props.inputHandler(event);
+                }
+              }}
             />
           </Grid>
           <Grid item xs container justify='center'>
@@ -117,7 +109,11 @@ function MembersFilter(props) {
               name='maxHomeCapacity'
               autoComplete='maxHomeCapacity'
               value={props.filters.maxHomeCapacity}
-              onChange={changeNumber}
+              onChange={(event) => {
+                if (event.target.value >= 0) {
+                  props.inputHandler(event);
+                }
+              }}
             />
           </Grid>
         </Grid>
@@ -135,7 +131,11 @@ function MembersFilter(props) {
               name='minMonthlyBudget'
               autoComplete='minMonthlyBudget'
               value={props.filters.minMonthlyBudget}
-              onChange={changeNumber}
+              onChange={(event) => {
+                if (event.target.value >= 0) {
+                  props.inputHandler(event);
+                }
+              }}
             />
           </Grid>
           <Grid item xs container justify='center'>
@@ -148,7 +148,11 @@ function MembersFilter(props) {
               name='maxMonthlyBudget'
               autoComplete='maxMonthlyBudget'
               value={props.filters.maxMonthlyBudget}
-              onChange={changeNumber}
+              onChange={(event) => {
+                if (event.target.value >= 0) {
+                  props.inputHandler(event);
+                }
+              }}
             />
           </Grid>
         </Grid>

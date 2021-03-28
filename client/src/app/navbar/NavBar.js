@@ -31,11 +31,11 @@ export default function NavBar() {
               <>
                 <NavItem
                   path='/create-listing'
-                  label={sessionStorage.getItem('accountType') === '1' ? 'New Listing' : 'Add Home'}
+                  label={sessionStorage.getItem('accountType') === '1' ? 'New Listing' : 'List Member Home'}
                 />
                 <NavItem
                   path='/manage-listings'
-                  label={sessionStorage.getItem('accountType') === '1' ? 'Manage Listings' : 'Manage Homes'}
+                  label={sessionStorage.getItem('accountType') === '1' ? 'Manage Listings' : 'Manage Listing'}
                 />
                 <NavItem
                   path={sessionStorage.getItem('accountType') === '1' ? '/business-profile' : '/profile'}

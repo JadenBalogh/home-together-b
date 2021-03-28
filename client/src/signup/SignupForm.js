@@ -24,6 +24,7 @@ import './Signup.css';
 export default function SignupForm(props) {
   const [genderOptions, setGenderOptions] = useState([]);
   const [familyStatusOptions, setFamilyStatusOptions] = useState([]);
+  const [isMailAddrSame, setIsMailAddrSame] = useState(false);
 
   useEffect(() => fetchGenderOptions(), []);
   useEffect(() => fetchFamilyStatusOptions(), []);
@@ -125,23 +126,28 @@ export default function SignupForm(props) {
           </Grid>
           <Grid item xs={12} container>
             <FormControlLabel
+              onChange={(event) => setIsMailAddrSame(event.target.checked)}
               control={<Switch name='checkedA' color='primary' />}
-              label='Mailing Address and Home Address are the same'
+              label='Mailing Address is the same as Home Address'
             ></FormControlLabel>
           </Grid>
-          <Grid item xs={12} container>
-            <TextField
-              variant='outlined'
-              required
-              fullWidth
-              id='mailAddress'
-              label='Mailing Address'
-              name='mailAddress'
-              autoComplete='mailAddress'
-              helperText='If you do not have one, use the address of a friend, relative, or verifiable organization.'
-              onChange={props.handleInputChange}
-            />
-          </Grid>
+          {isMailAddrSame ? (
+            ''
+          ) : (
+            <Grid item xs={12} container>
+              <TextField
+                variant='outlined'
+                required
+                fullWidth
+                id='mailAddress'
+                label='Mailing Address'
+                name='mailAddress'
+                autoComplete='mailAddress'
+                helperText='If you do not have one, use the address of a friend, relative, or verifiable organization.'
+                onChange={props.handleInputChange}
+              />
+            </Grid>
+          )}
           <Grid item xs={12} container>
             <TextField
               variant='outlined'

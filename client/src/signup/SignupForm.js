@@ -384,7 +384,7 @@ export default function SignupForm(props) {
                 <FormControlLabel value='false' control={<Radio />} label='No' />
               </RadioGroup>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} onChange={props.handleInputChange}>
               <RadioText
                 invertCheck
                 check={props.formData.petRestrictions}
@@ -403,7 +403,7 @@ export default function SignupForm(props) {
                 <FormControlLabel value='false' control={<Radio />} label='No' />
               </RadioGroup>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} onChange={props.handleInputChange}>
               <RadioText
                 check={props.formData.healthRestrictions}
                 name='healthRestrictionsText'
@@ -421,7 +421,7 @@ export default function SignupForm(props) {
                 <FormControlLabel value='false' control={<Radio />} label='No' />
               </RadioGroup>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} onChange={props.handleInputChange}>
               <RadioText check='true' name='religionRestrictionsText' value={props.formData.religionRestrictionsText} />
             </Grid>
           </FormBox>
@@ -435,7 +435,7 @@ export default function SignupForm(props) {
                 <FormControlLabel value='false' control={<Radio />} label='No' />
               </RadioGroup>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} onChange={props.handleInputChange}>
               <RadioText
                 invertCheck
                 check={props.formData.smokingRestrictions}
@@ -454,7 +454,7 @@ export default function SignupForm(props) {
                 <FormControlLabel value='false' control={<Radio />} label='No' />
               </RadioGroup>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} onChange={props.handleInputChange}>
               <RadioText check={props.formData.allergies} name='allergiesText' value={props.formData.allergiesText} />
             </Grid>
           </FormBox>
@@ -468,7 +468,7 @@ export default function SignupForm(props) {
                 <FormControlLabel value='false' control={<Radio />} label='No' />
               </RadioGroup>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} onChange={props.handleInputChange}>
               <RadioText
                 check={props.formData.dietRestrictions}
                 name='dietRestrictionsText'
@@ -490,7 +490,7 @@ export default function SignupForm(props) {
                 <FormControlLabel value='false' control={<Radio />} label='No' />
               </RadioGroup>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} onChange={props.handleInputChange}>
               <RadioText
                 check={props.formData.hasHousing}
                 name='housingDescription'

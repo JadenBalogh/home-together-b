@@ -18,7 +18,11 @@ function MembersFilter(props) {
           &ensp;
           <InputLabel>Filter by city:</InputLabel>
           <Grid item xs={12}>
-            <LocationFilter placeholder='Enter a city...' onChange={props.locationsHandler} />
+            <LocationFilter
+              placeholder='Enter a city...'
+              onChange={props.locationsHandler}
+              value={props.filters.locationIds}
+            />
           </Grid>
         </Grid>
         <Grid item container direction='row' alignItems='center'>
@@ -34,6 +38,7 @@ function MembersFilter(props) {
               placeholder='Ages...'
               name='ageGroupIds'
               onChange={props.selectHandler}
+              value={props.filters.ageGroupIds}
             />
           </Grid>
         </Grid>
@@ -50,6 +55,7 @@ function MembersFilter(props) {
               placeholder='Genders...'
               name='genderIds'
               onChange={props.selectHandler}
+              value={props.filters.genderIds}
             />
           </Grid>
         </Grid>
@@ -66,6 +72,7 @@ function MembersFilter(props) {
               placeholder='Family status...'
               name='familyStatusIds'
               onChange={props.selectHandler}
+              value={props.filters.familyStatusIds}
             />
           </Grid>
         </Grid>
@@ -80,10 +87,15 @@ function MembersFilter(props) {
             <TextField
               fullWidth
               type='number'
+              min={0}
               name='minHomeCapacity'
               autoComplete='minHomeCapacity'
               value={props.filters.minHomeCapacity}
-              onChange={props.inputHandler}
+              onChange={(event) => {
+                if (event.target.value >= 0) {
+                  props.inputHandler(event);
+                }
+              }}
             />
           </Grid>
           <Grid item xs container justify='center'>
@@ -93,10 +105,15 @@ function MembersFilter(props) {
             <TextField
               fullWidth
               type='number'
+              min={0}
               name='maxHomeCapacity'
               autoComplete='maxHomeCapacity'
               value={props.filters.maxHomeCapacity}
-              onChange={props.inputHandler}
+              onChange={(event) => {
+                if (event.target.value >= 0) {
+                  props.inputHandler(event);
+                }
+              }}
             />
           </Grid>
         </Grid>
@@ -114,7 +131,11 @@ function MembersFilter(props) {
               name='minMonthlyBudget'
               autoComplete='minMonthlyBudget'
               value={props.filters.minMonthlyBudget}
-              onChange={props.inputHandler}
+              onChange={(event) => {
+                if (event.target.value >= 0) {
+                  props.inputHandler(event);
+                }
+              }}
             />
           </Grid>
           <Grid item xs container justify='center'>
@@ -127,7 +148,11 @@ function MembersFilter(props) {
               name='maxMonthlyBudget'
               autoComplete='maxMonthlyBudget'
               value={props.filters.maxMonthlyBudget}
-              onChange={props.inputHandler}
+              onChange={(event) => {
+                if (event.target.value >= 0) {
+                  props.inputHandler(event);
+                }
+              }}
             />
           </Grid>
         </Grid>

@@ -41,6 +41,17 @@ export default function SignupForm(props) {
       });
   }
 
+  function changeNumber(e){ 
+    console.log(e.target.value)
+    if(e.target.value<0){
+      return ;
+    } 
+    const { handleInputChange }=props;
+    if(handleInputChange){
+      handleInputChange(e)
+    }
+  }
+
   function fetchFamilyStatusOptions() {
     const url = process.env.REACT_APP_LOCAL_URL || '';
     fetch(url + '/api/get-family-status-types')
@@ -286,7 +297,8 @@ export default function SignupForm(props) {
                 label='Min Living Capacity'
                 name='minHomeCapacity'
                 type='number'
-                onChange={props.handleInputChange}
+                value={props.formData.minHomeCapacity}
+                onChange={changeNumber}
               />
             </Tooltip>
           </Grid>
@@ -300,7 +312,8 @@ export default function SignupForm(props) {
                 label='Max Living Capacity'
                 name='maxHomeCapacity'
                 type='number'
-                onChange={props.handleInputChange}
+                value={props.formData.maxHomeCapacity}
+                onChange={changeNumber}
               />
             </Tooltip>
           </Grid>
@@ -313,7 +326,8 @@ export default function SignupForm(props) {
               label='Min Monthly Budget'
               name='minMonthlyBudget'
               type='number'
-              onChange={props.handleInputChange}
+              value={props.formData.minMonthlyBudget}
+              onChange={changeNumber}
             />
           </Grid>
           <Grid item xs={12} container>
@@ -325,8 +339,9 @@ export default function SignupForm(props) {
               label='Max Monthly Budget'
               name='maxMonthlyBudget'
               type='number'
+              value={props.formData.maxMonthlyBudget}
               autoComplete='budget'
-              onChange={props.handleInputChange}
+              onChange={changeNumber}
             />
           </Grid>
           <SignupSelect

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Typography, Card, Grid, Divider, Tooltip, InputAdornment, TextField } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import InfoIcon from '@material-ui/icons/Info';
@@ -6,6 +6,7 @@ import ErrorIcon from '@material-ui/icons/Error';
 import MemberList from './MemberList';
 import MembersFilter from './MembersFilter';
 import PaginationControlled from '../shared/Pagination';
+import { SearchClearSnackbar } from '../shared/snackbars';
 import './Members.css';
 
 export default function Members() {
@@ -26,6 +27,28 @@ export default function Members() {
   });
   const [name, setName] = useState('');
 
+  const reset = useCallback(() => {
+    setFilters({
+      locationIds: [],
+      genderIds: [],
+      ageGroupIds: [],
+      familyStatusIds: [],
+      minHomeCapacity: 0,
+      maxHomeCapacity: 0,
+      minMonthlyBudget: 0,
+      maxMonthlyBudget: 0,
+      petRestrictions: false,
+      religionRestrictions: false,
+      smokingRestrictions: false,
+      hasHousing: false,
+    });
+  }, []);
+
+  function filterSelf(list) {
+    const id = sessionStorage.getItem('id');
+    return list.filter((item) => item.id !== id);
+  }
+
   function updateMembers() {
     const body = {
       ...filters,
@@ -42,7 +65,7 @@ export default function Members() {
     })
       .then((res) => res.json())
       .then((json) => {
-        setMembers(json);
+        setMembers(filterSelf(json));
       });
   }
 
@@ -60,10 +83,10 @@ export default function Members() {
     });
   }
 
-  function handleSelectChange(name, values) {
+  function handleSelectChange(name, options) {
     setFilters({
       ...filters,
-      [name]: values,
+      [name]: options.map((x) => x.value),
     });
   }
 
@@ -113,6 +136,11 @@ export default function Members() {
             locationsHandler={handleLocationsChange}
             filters={filters}
           />
+          <Grid item container direction='row' justify='center'>
+            <Grid item>
+              <SearchClearSnackbar clear={reset} />
+            </Grid>
+          </Grid>
         </Grid>
         <br />
         <Divider flexItem orientation='vertical' />

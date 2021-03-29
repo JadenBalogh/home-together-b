@@ -314,7 +314,12 @@ export default function SignupForm(props) {
                 label='Min Living Capacity'
                 name='minHomeCapacity'
                 type='number'
-                onChange={props.handleInputChange}
+                value={props.formData.minHomeCapacity}
+                onChange={(event) => {
+                  if (event.target.value >= 0) {
+                    props.handleInputChange(event);
+                  }
+                }}
               />
             </Grid>
             <Grid item xs>
@@ -326,7 +331,12 @@ export default function SignupForm(props) {
                 label='Max Living Capacity'
                 name='maxHomeCapacity'
                 type='number'
-                onChange={props.handleInputChange}
+                value={props.formData.maxHomeCapacity}
+                onChange={(event) => {
+                  if (event.target.value >= 0) {
+                    props.handleInputChange(event);
+                  }
+                }}
               />
             </Grid>
           </FormBox>
@@ -340,7 +350,11 @@ export default function SignupForm(props) {
                 label='Min Monthly Budget'
                 name='minMonthlyBudget'
                 type='number'
-                onChange={props.handleInputChange}
+                onChange={(event) => {
+                  if (event.target.value >= 0) {
+                    props.handleInputChange(event);
+                  }
+                }}
               />
             </Grid>
             <Grid item xs>
@@ -353,7 +367,11 @@ export default function SignupForm(props) {
                 name='maxMonthlyBudget'
                 type='number'
                 autoComplete='budget'
-                onChange={props.handleInputChange}
+                onChange={(event) => {
+                  if (event.target.value >= 0) {
+                    props.handleInputChange(event);
+                  }
+                }}
               />
             </Grid>
           </FormBox>

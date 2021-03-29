@@ -27,15 +27,29 @@ export default function LocationFilter({ value, label = '', placeholder = '', on
   }
 
   return (
-    <Autocomplete
-      multiple
-      disableCloseOnSelect
-      onChange={onChange}
-      options={locationOptions}
-      groupBy={(option) => option.province}
-      getOptionLabel={(option) => `${option.label}, ${option.code}`}
-      value={locationOptions.filter((option) => value.some((x) => option.value === x))}
-      renderInput={(params) => <TextField {...params} label={label} placeholder={placeholder} variant='outlined' />}
-    />
+    <>
+      {value === undefined ? (
+        <Autocomplete
+          multiple
+          disableCloseOnSelect
+          onChange={onChange}
+          options={locationOptions}
+          groupBy={(option) => option.province}
+          getOptionLabel={(option) => `${option.label}, ${option.code}`}
+          renderInput={(params) => <TextField {...params} label={label} placeholder={placeholder} variant='outlined' />}
+        />
+      ) : (
+        <Autocomplete
+          multiple
+          disableCloseOnSelect
+          onChange={onChange}
+          options={locationOptions}
+          groupBy={(option) => option.province}
+          getOptionLabel={(option) => `${option.label}, ${option.code}`}
+          value={locationOptions.filter((option) => value.some((x) => option.value === x))}
+          renderInput={(params) => <TextField {...params} label={label} placeholder={placeholder} variant='outlined' />}
+        />
+      )}
+    </>
   );
 }

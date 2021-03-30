@@ -42,13 +42,13 @@ if (process.env.NODE_ENV !== 'production') {
   // dbutils
   //   .query('SELECT * FROM SearchableInfo m')
   //   .then((result) => console.log(result));
-  dbutils
-    .query('SELECT * FROM Organization')
-    .then((result) => console.log(result));
+  // dbutils
+  //   .query('SELECT * FROM Organization')
+  //   .then((result) => console.log(result));
   // dbutils
   //   .query('SELECT * FROM Member m JOIN SearchableInfo s ON m.id = s.memberId')
   //   .then((result) => console.log(result));
-  // dbutils
-  //   .query('SELECT * FROM CategoryType')
-  //   .then((result) => console.log(result));
+  dbutils
+    .query('SELECT * FROM CategoryType')
+    .then((result) => console.log(result));
 }

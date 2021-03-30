@@ -108,7 +108,7 @@ export default function CreateListing() {
               </Select>
             </FormControl>
           </Grid>
-          ) : ( '' )}
+          ) : ( listing.categoryId='664' )}
           <Grid item xs={6}>
             <TextField name='subDescription' required fullWidth label='Short Description' onChange={handleInputChange} />
           </Grid>

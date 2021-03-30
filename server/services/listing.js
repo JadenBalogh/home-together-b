@@ -55,6 +55,21 @@ const SQL_INSERT_LISTING = `
     approvalStatus,
     creationDate,
     title,
+    subDescription,
+    groupName,
+    price,
+    eventDate,
+    eventTime,
+    bedroomCount,
+    bathroomCount,
+    utilities,
+    furnished,
+    petFriendly,
+    smoking,
+    forSale,
+    forRent,
+    streetAddress,
+    postalCode,
     website,
     phone,
     email,
@@ -66,7 +81,7 @@ const SQL_INSERT_LISTING = `
     locationId,
     categoryId,
     organizationId)
-  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 `;
 
 const SQL_UPDATE_LISTING = `
@@ -104,6 +119,21 @@ async function createListing(listing) {
     true, // TODO: implement approval by admins
     new Date().toISOString(),
     listing.title,
+    listing.subDescription,
+    listing.groupName,
+    listing.price,
+    listing.eventDate,
+    listing.eventTime,
+    listing.bedroomCount,
+    listing.bathroomCount,
+    listing.utilities,
+    listing.furnished,
+    listing.petFriendly,
+    listing.smoking,
+    listing.forSale,
+    listing.forRent,
+    listing.streetAddress,
+    listing.postalCode,
     listing.website,
     listing.phone,
     listing.email,

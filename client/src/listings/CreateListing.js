@@ -80,7 +80,7 @@ export default function CreateListing() {
           </Grid>
         </Grid>
         <Divider />
-        <Grid container justify='space-between'>
+        <Grid container justify='space-between' spacing={2}>
           <Grid item xs={6}>
             <TextField name='title' required fullWidth label='Title' autoFocus onChange={handleInputChange} />
           </Grid>
@@ -224,7 +224,7 @@ export default function CreateListing() {
               </Grid>
               ) : (<></>)}
               {['414', '424', '434', '444', '454'].includes(listing.categoryId) ? (
-                <Grid container xs={7} justify='center' spacing={2}>
+                <Grid container xs={7} justify='space-between' spacing={2}>
                   <Grid item xs={5}>
                     <TextField
                       name='eventDate'
@@ -268,7 +268,7 @@ export default function CreateListing() {
               />
             </Grid>
             {['104', '114', '124', '134', '144', '154', '164', '174', '664'].includes(listing.categoryId) ? (
-                <Grid container xs={12} justify='center' spacing={2}>
+                <Grid container xs={12} justify='space-between' spacing={2}>
                   <Grid item xs={6}>
                     <TextField
                       name='bedroomCount'
@@ -338,7 +338,7 @@ export default function CreateListing() {
                 </Grid>
               ) : (<></>)}
               {['464', '474', '484', '494', '504', '514'].includes(listing.categoryId) ? (
-                <Grid container xs={12} justify='center' spacing={2}>
+                <Grid container xs={12} justify='space-between' spacing={2}>
                   <FormBox helperText='Are there units for sale?'>
                     <Grid item xs>
                       <FormLabel component='legend'>For Sale</FormLabel>
@@ -372,7 +372,7 @@ export default function CreateListing() {
             {['184', '194', '204', '214', '214', '224', '234', '244', '254', '264', '274', '284', '294', '304', '314', '324',
              '334', '344', '354', '364', '374', '384', '394', '404', '414', '424', '434', '444', '454', '464', '474', '484',
               '494', '504', '514', '524', '534', '544', '554', '564', '574', '584', '594', '604', '614', '624', '634', '644', '654'].includes(listing.categoryId) ? (
-                <Grid container xs={7} justify='center' spacing={2}>
+                <Grid container xs={7} justify='space-between' spacing={2}>
                   <Grid item xs={8}>
                     <TextField
                       name='streetAddress'

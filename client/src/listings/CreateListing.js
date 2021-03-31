@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Card, Button, Grid, Typography, TextField, Select, FormControl, FormControlLabel,
   FormLabel, Radio, RadioGroup, InputLabel, Divider } from '@material-ui/core';
-import LocationFilter from '../shared/LocationFilter';
+import LocationField from '../shared/LocationField';
 import FormBox from '../shared/FormBox';
 
 export default function CreateListing() {
@@ -59,10 +59,10 @@ export default function CreateListing() {
     });
   };
 
-  function handleLocationsChange(event, options) {
+  function handleLocationsChange(event, selected) {
     setListing({
       ...listing,
-      locationId: options.map((x) => x.value),
+      locationId: selected.value,
     });
   }
 
@@ -366,7 +366,7 @@ export default function CreateListing() {
           <br />
           <Grid item container xs={12} spacing={2}>
             <Grid item xs={4}>
-              <LocationFilter label='Location' onChange={handleLocationsChange} />
+              <LocationField label='Location' onChange={handleLocationsChange} />
             </Grid>
             {['184', '194', '204', '214', '214', '224', '234', '244', '254', '264', '274', '284', '294', '304', '314', '324',
              '334', '344', '354', '364', '374', '384', '394', '404', '414', '424', '434', '444', '454', '464', '474', '484',

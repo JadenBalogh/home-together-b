@@ -523,7 +523,7 @@ insert('LocationPreference(memberId, locationId)', [
   [74, [1, 11, 21, 31, 41]],
 ]);
 
-simpleSelect('*', 'CategoryType');
+simpleSelect('*', 'Listing');
 
 // Close the DB connection
 con.end();

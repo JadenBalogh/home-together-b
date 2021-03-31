@@ -78,10 +78,11 @@ const SQL_INSERT_LISTING = `
     startDate,
     endDate,
     description,
+    imageURLs,
     locationId,
     categoryId,
     organizationId)
-  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 `;
 
 const SQL_UPDATE_LISTING = `
@@ -96,6 +97,13 @@ const SQL_UPDATE_LISTING = `
     description = ?,
     locationId = ?,
     categoryId = ?
+  WHERE id = ?
+`;
+
+const SQL_TEST_LISTING = `
+  SELECT 
+    city
+  FROM Location
   WHERE id = ?
 `;
 
@@ -115,38 +123,43 @@ async function getListing(id) {
 }
 
 async function createListing(listing) {
+  console.log(listing)
+  await dbutils.query(SQL_TEST_LISTING, [
+    listing.organizationId,
+  ]);
+  console.log("exists");
   await dbutils.query(SQL_INSERT_LISTING, [
     true, // TODO: implement approval by admins
     new Date().toISOString(),
-    listing.title,
-    listing.subDescription,
-    listing.groupName,
-    listing.price,
-    listing.eventDate,
-    listing.eventTime,
-    listing.bedroomCount,
-    listing.bathroomCount,
-    listing.utilities,
-    listing.furnished,
-    listing.petFriendly,
-    listing.smoking,
-    listing.forSale,
-    listing.forRent,
-    listing.streetAddress,
-    listing.postalCode,
-    listing.website,
-    listing.phone,
-    listing.email,
+    listing.title || '',
+    listing.subDescription || '',
+    listing.groupName || '',
+    listing.price || 0,
+    listing.eventDate || new Date().toISOString(),
+    listing.eventTime || 0,
+    listing.bedroomCount || 0,
+    listing.bathroomCount || 0,
+    listing.utilities || false,
+    listing.furnished || false,
+    listing.petFriendly || false,
+    listing.smoking || false,
+    listing.forSale || false,
+    listing.forRent || false,
+    listing.streetAddress || '',
+    listing.postalCode || '',
+    listing.website || '',
+    listing.phone || '',
+    listing.email || '',
     0,
     0,
     new Date().toISOString(), // TODO: Start date
     new Date().toISOString(), // TODO: End date
-    listing.description,
-    listing.locationId,
-    listing.categoryId,
+    '',
+    listing.description || '',
+    listing.locationId || 1,
+    listing.categoryId || '4',
     listing.organizationId,
   ]);
-
   return { success: true };
 }
 

@@ -49,6 +49,6 @@ if (process.env.NODE_ENV !== 'production') {
   //   .query('SELECT * FROM Member m JOIN SearchableInfo s ON m.id = s.memberId')
   //   .then((result) => console.log(result));
   dbutils
-    .query('SELECT * FROM CategoryType')
+    .query('SELECT * FROM Location WHERE id=8581')
     .then((result) => console.log(result));
 }

@@ -13,8 +13,6 @@ export default function CreateListing() {
 
   let handleSubmit = (event) => {
     event.preventDefault();
-    console.log(listing);
-
     listing.organizationId = sessionStorage.getItem('id') || 1;
 
     const url = process.env.REACT_APP_LOCAL_URL || '';
@@ -53,6 +51,7 @@ export default function CreateListing() {
     console.log(event.target);
     setListing((prev) => {
       console.log(event.target.value); //REMOVE ME BEFORE PR
+      console.log(listing)
       return {
         ...prev,
         [event.target.name]: event.target.value,
@@ -263,7 +262,7 @@ export default function CreateListing() {
                 rows={5}
                 required
                 fullWidth
-                label='Extra Info'
+                label='Extra Information'
                 onChange={handleInputChange}
               />
             </Grid>
@@ -292,10 +291,10 @@ export default function CreateListing() {
                     <br/>
                   </Grid>
                   <FormBox helperText='Are utilities included within the pricing?'>
-                    <Grid item xs>
-                      <FormLabel component='legend'>Utlities</FormLabel>
+                    <Grid item>
+                      <FormLabel component='legend'>Utilities</FormLabel>
                     </Grid>
-                    <Grid item xs onChange={handleInputChange}>
+                    <Grid item onChange={handleInputChange}>
                       <RadioGroup name='utilities' id='utilities' row>
                         <FormControlLabel value='true' control={<Radio />} label='Yes' />
                         <FormControlLabel value='false' control={<Radio />} label='No' />
@@ -303,10 +302,10 @@ export default function CreateListing() {
                     </Grid>
                   </FormBox>
                   <FormBox helperText='Is furniture included/prepared?'>
-                    <Grid item xs>
+                    <Grid item>
                       <FormLabel component='legend'>Furnished</FormLabel>
                     </Grid>
-                    <Grid item xs onChange={handleInputChange}>
+                    <Grid item onChange={handleInputChange}>
                       <RadioGroup name='furnished' id='furnished' row>
                         <FormControlLabel value='true' control={<Radio />} label='Yes' />
                         <FormControlLabel value='false' control={<Radio />} label='No' />
@@ -314,10 +313,10 @@ export default function CreateListing() {
                     </Grid>
                   </FormBox>
                   <FormBox helperText='Is smoking allowed inside?'>
-                    <Grid item xs>
+                    <Grid item>
                       <FormLabel component='legend'>Smoking</FormLabel>
                     </Grid>
-                    <Grid item xs onChange={handleInputChange}>
+                    <Grid item onChange={handleInputChange}>
                       <RadioGroup name='smoking' id='smoking' row>
                         <FormControlLabel value='true' control={<Radio />} label='Yes' />
                         <FormControlLabel value='false' control={<Radio />} label='No' />
@@ -325,10 +324,10 @@ export default function CreateListing() {
                     </Grid>
                   </FormBox>
                   <FormBox helperText='Are pets allowed?'>
-                    <Grid item xs>
+                    <Grid item>
                       <FormLabel component='legend'>Pet Friendly</FormLabel>
                     </Grid>
-                    <Grid item xs onChange={handleInputChange}>
+                    <Grid item onChange={handleInputChange}>
                       <RadioGroup name='petRestrictions' id='petRestrictions' row>
                         <FormControlLabel value='true' control={<Radio />} label='Yes' />
                         <FormControlLabel value='false' control={<Radio />} label='No' />
@@ -340,10 +339,10 @@ export default function CreateListing() {
               {['464', '474', '484', '494', '504', '514'].includes(listing.categoryId) ? (
                 <Grid container xs={12} justify='space-between' spacing={2}>
                   <FormBox helperText='Are there units for sale?'>
-                    <Grid item xs>
+                    <Grid item >
                       <FormLabel component='legend'>For Sale</FormLabel>
                     </Grid>
-                    <Grid item xs onChange={handleInputChange}>
+                    <Grid item onChange={handleInputChange}>
                       <RadioGroup name='forSale' id='forSale' row>
                         <FormControlLabel value='true' control={<Radio />} label='Yes' />
                         <FormControlLabel value='false' control={<Radio />} label='No' />
@@ -351,10 +350,10 @@ export default function CreateListing() {
                     </Grid>
                   </FormBox>
                   <FormBox helperText='Are there units for rent?'>
-                    <Grid item xs>
+                    <Grid item >
                       <FormLabel component='legend'>For Rent</FormLabel>
                     </Grid>
-                    <Grid item xs onChange={handleInputChange}>
+                    <Grid item onChange={handleInputChange}>
                       <RadioGroup name='forRent' id='forRent' row>
                         <FormControlLabel value='true' control={<Radio />} label='Yes' />
                         <FormControlLabel value='false' control={<Radio />} label='No' />

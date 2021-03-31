@@ -296,7 +296,7 @@ export default function EditListing() {
                 rows={5}
                 required
                 fullWidth
-                label='Description'
+                label='Additional Information'
                 value={`${listing.description}`}
                 onChange={handleInputChange}
               />

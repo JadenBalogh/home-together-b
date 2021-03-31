@@ -82,7 +82,7 @@ export default function CreateListing() {
             <TextField name='title' required fullWidth label='Title' autoFocus onChange={handleInputChange} />
           </Grid>
           {sessionStorage.getItem('accountType') === '1' ? (
-            <Grid item xs={5}>
+          <Grid item xs={5}>
             <FormControl fullWidth required onChange={handleInputChange}>
               <InputLabel htmlFor='categoryId'>Category</InputLabel>
               <Select name='categoryId' native defaultValue='' id='categoryId'>

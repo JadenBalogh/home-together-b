@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import { Card, Button, Grid, Typography, TextField, Select, FormControl, InputLabel, Divider } from '@material-ui/core';
+import { Card, Button, Grid, Typography, TextField, Select, FormControl, FormControlLabel,
+  FormLabel, Radio, RadioGroup, InputLabel, Divider } from '@material-ui/core';
+import FormBox from '../shared/FormBox';
+import LocationField from '../shared/LocationField';
 
 export default function EditListing() {
   const { id } = useParams();
@@ -55,6 +58,7 @@ export default function EditListing() {
 
   let handleInputChange = (event) => {
     setListing((prev) => {
+      console.log(listing);
       return {
         ...prev,
         [event.target.name]: event.target.value,
@@ -62,8 +66,16 @@ export default function EditListing() {
     });
   };
 
+  function handleLocationsChange(event, selected) {
+    setListing({
+      ...listing,
+      locationId: selected.value,
+    });
+  }
+
   useEffect(loadListing, [id]);
   useEffect(fetchCategoryOptions, []);
+  listing.categoryId = `${listing.categoryId}`;
 
   return (
     <Card className='page'>
@@ -77,7 +89,7 @@ export default function EditListing() {
         </Grid>
         <Divider />
         <Grid container justify='space-between'>
-          <Grid item xs={5}>
+          <Grid item xs={6}>
             <TextField
               name='title'
               required
@@ -120,8 +132,160 @@ export default function EditListing() {
               </Select>
             </FormControl>
           </Grid>
+          <Grid item xs={6}>
+            <TextField name='subDescription' required fullWidth label='Short Description' onChange={handleInputChange} value={`${listing.subDescription}`}/>
+          </Grid>
         </Grid>
         <br />
+        {sessionStorage.getItem('accountType') === '1' ? (
+            <Grid container xs={12}>
+              <br/>
+              {['104', '114', '124', '134', '144', '154', '164', '174'].includes(listing.categoryId) ? (
+                <Grid item xs={12}>
+                  <TextField
+                    name='groupName'
+                    variant='outlined'
+                    required
+                    fullWidth
+                    label='Contact Name'
+                    value={`${listing.groupName}`}
+                    onChange={handleInputChange}
+                  />
+                  <br/>
+              </Grid>
+              ) : (<></>)}
+              {['184', '194', '204', '214', '214', '224', '234', '244', '254', '264', '274', '284', '294',
+                '304', '314', '324', '334', '344', '354', '364', '374', '384', '394', '404', '524', '534',
+                '544', '554', '564', '574', '584'].includes(listing.categoryId) ? (
+                <Grid item xs={12}>
+                  <TextField
+                    name='groupName'
+                    variant='outlined'
+                    required
+                    fullWidth
+                    label='Company Name'
+                    value={`${listing.groupName}`}
+                    onChange={handleInputChange}
+                  />
+                  <br/>
+              </Grid>
+              ) : (<></>)}
+              {['414', '424', '434', '444', '454'].includes(listing.categoryId) ? (
+                <Grid item xs={12}>
+                  <TextField
+                    name='groupName'
+                    variant='outlined'
+                    required
+                    fullWidth
+                    label='Organization Name'
+                    value={`${listing.groupName}`}
+                    onChange={handleInputChange}
+                  />
+                  <br/>
+              </Grid>
+              ) : (<></>)}
+              {['464', '474', '484', '494', '504', '514'].includes(listing.categoryId) ? (
+                <Grid item xs={12}>
+                  <TextField
+                    name='groupName'
+                    variant='outlined'
+                    required
+                    fullWidth
+                    label='Housing Group Name'
+                    value={`${listing.groupName}`}
+                    onChange={handleInputChange}
+                  />
+                  <br/>
+              </Grid>
+              ) : (<></>)}
+              {['594', '604', '614', '624', '634', '644', '654'].includes(listing.categoryId) ? (
+                <Grid item xs={12}>
+                  <TextField
+                    name='groupName'
+                    variant='outlined'
+                    required
+                    fullWidth
+                    label='Agency Name'
+                    value={`${listing.groupName}`}
+                    onChange={handleInputChange}
+                  />
+                  <br/>
+              </Grid>
+              ) : (<></>)}
+              {['104', '114', '124', '134', '144', '154', '164', '174', '414', '424', '434', '444', '454'].includes(listing.categoryId) ? (
+                <Grid item xs={5}>
+                  <TextField
+                    name='price'
+                    variant='outlined'
+                    required
+                    fullWidth
+                    label='Pricing'
+                    value={`${listing.price}`}
+                    onChange={handleInputChange}
+                  />
+                  <br/>
+              </Grid>
+              ) : (<></>)}
+              {['344', '354', '364', '374', '384', '394', '404', '524', '534', '544', '554', '564', '574', '584'].includes(listing.categoryId) ? (
+                <Grid item xs={5}>
+                  <TextField
+                    name='price'
+                    variant='outlined'
+                    required
+                    fullWidth
+                    label='Rates and Fees'
+                    value={`${listing.price}`}
+                    onChange={handleInputChange}
+                  />
+                  <br/>
+              </Grid>
+              ) : (<></>)}
+              {['664'].includes(listing.categoryId) ? (
+                <Grid item xs={5}>
+                  <TextField
+                    name='price'
+                    variant='outlined'
+                    required
+                    fullWidth
+                    label='Monthly Cost'
+                    value={`${listing.price}`}
+                    onChange={handleInputChange}
+                  />
+                  <br/>
+              </Grid>
+              ) : (<></>)}
+              {['414', '424', '434', '444', '454'].includes(listing.categoryId) ? (
+                <Grid container xs={7} justify='space-between' spacing={2}>
+                  <Grid item xs={5}>
+                    <TextField
+                      name='eventDate'
+                      type='date'
+                      required
+                      fullWidth
+                      label='Event Date'
+                      value={listing.eventDate}
+                      onChange={handleInputChange}
+                    />
+                    <br/>
+                  </Grid>
+                  <Grid item xs={5}>
+                    <TextField
+                      name='eventTime'
+                      type='time'
+                      required
+                      fullWidth
+                      label='Event Time'
+                      value={listing.eventTime}
+                      onChange={handleInputChange}
+                    />
+                    <br/>
+                  </Grid>
+                </Grid>
+              ) : (<></>)}
+            </Grid>
+          ) : (
+            ''
+          )}
         <Grid container direction='column'>
           <Grid item container xs={12}>
             <Grid item xs={12}>
@@ -137,21 +301,139 @@ export default function EditListing() {
                 onChange={handleInputChange}
               />
             </Grid>
+            {['104', '114', '124', '134', '144', '154', '164', '174', '664'].includes(listing.categoryId) ? (
+                <Grid container xs={12} justify='space-between' spacing={2}>
+                  <Grid item xs={6}>
+                    <TextField
+                      name='bedroomCount'
+                      type='number'
+                      required
+                      fullWidth
+                      label='Number of Bedrooms'
+                      value={listing.bedroomCount}
+                      onChange={handleInputChange}
+                    />
+                    <br/>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <TextField
+                      name='bathroomCount'
+                      type='number'
+                      required
+                      fullWidth
+                      label='Number of Bathrooms'
+                      value={listing.bathroomCount}
+                      onChange={handleInputChange}
+                    />
+                    <br/>
+                  </Grid>
+                  <FormBox helperText='Are utilities included within the pricing?'>
+                    <Grid item>
+                      <FormLabel component='legend'>Utilities</FormLabel>
+                    </Grid>
+                    <Grid item onChange={handleInputChange}>
+                      <RadioGroup name='utilities' id='utilities' row value={`${listing.utilities}`}>
+                        <FormControlLabel value='1' control={<Radio />} label='Yes' />
+                        <FormControlLabel value='0' control={<Radio />} label='No' />
+                      </RadioGroup>
+                    </Grid>
+                  </FormBox>
+                  <FormBox helperText='Is furniture included/prepared?'>
+                    <Grid item>
+                      <FormLabel component='legend'>Furnished</FormLabel>
+                    </Grid>
+                    <Grid item onChange={handleInputChange}>
+                      <RadioGroup name='furnished' id='furnished' row value={`${listing.furnished}`}>
+                        <FormControlLabel value='1' control={<Radio />} label='Yes' />
+                        <FormControlLabel value='0' control={<Radio />} label='No' />
+                      </RadioGroup>
+                    </Grid>
+                  </FormBox>
+                  <FormBox helperText='Is smoking allowed inside?'>
+                    <Grid item>
+                      <FormLabel component='legend'>Smoking</FormLabel>
+                    </Grid>
+                    <Grid item onChange={handleInputChange}>
+                      <RadioGroup name='smoking' id='smoking' row value={`${listing.smoking}`}>
+                        <FormControlLabel value='1' control={<Radio />} label='Yes' />
+                        <FormControlLabel value='0' control={<Radio />} label='No' />
+                      </RadioGroup>
+                    </Grid>
+                  </FormBox>
+                  <FormBox helperText='Are pets allowed?'>
+                    <Grid item>
+                      <FormLabel component='legend'>Pet Friendly</FormLabel>
+                    </Grid>
+                    <Grid item onChange={handleInputChange}>
+                      <RadioGroup name='petRestrictions' id='petRestrictions' row value={`${listing.petRestrictions}`}>
+                        <FormControlLabel value='1' control={<Radio />} label='Yes' />
+                        <FormControlLabel value='0' control={<Radio />} label='No' />
+                      </RadioGroup>
+                    </Grid>
+                  </FormBox>
+                </Grid>
+              ) : (<></>)}
+              {['464', '474', '484', '494', '504', '514'].includes(listing.categoryId) ? (
+                <Grid container xs={12} justify='space-between' spacing={2}>
+                  <FormBox helperText='Are there units for sale?'>
+                    <Grid item >
+                      <FormLabel component='legend'>For Sale</FormLabel>
+                    </Grid>
+                    <Grid item onChange={handleInputChange}>
+                      <RadioGroup name='forSale' id='forSale' row value={`${listing.forSale}`}>
+                        <FormControlLabel value='1' control={<Radio />} label='Yes' />
+                        <FormControlLabel value='0' control={<Radio />} label='No' />
+                      </RadioGroup>
+                    </Grid>
+                  </FormBox>
+                  <FormBox helperText='Are there units for rent?'>
+                    <Grid item >
+                      <FormLabel component='legend'>For Rent</FormLabel>
+                    </Grid>
+                    <Grid item onChange={handleInputChange}>
+                      <RadioGroup name='forRent' id='forRent' row value={`${listing.forRent}`}>
+                        <FormControlLabel value='1' control={<Radio />} label='Yes' />
+                        <FormControlLabel value='0' control={<Radio />} label='No' />
+                      </RadioGroup>
+                    </Grid>
+                  </FormBox>
+                </Grid>
+              ) : (<></>)}
           </Grid>
           <br />
           <Grid item container xs={12} spacing={4}>
             {/* TODO: Replace this with the updated Locations field */}
             <Grid item xs={4}>
-              <TextField
-                name='locationId'
-                variant='outlined'
-                required
-                fullWidth
-                label='Location'
-                value={`${listing.locationId}`}
-                onChange={handleInputChange}
-              />
+              <LocationField label='Location' onChange={handleLocationsChange}/>
             </Grid>
+            {['184', '194', '204', '214', '214', '224', '234', '244', '254', '264', '274', '284', '294', '304', '314', '324',
+             '334', '344', '354', '364', '374', '384', '394', '404', '414', '424', '434', '444', '454', '464', '474', '484',
+              '494', '504', '514', '524', '534', '544', '554', '564', '574', '584', '594', '604', '614', '624', '634', '644', '654'].includes(listing.categoryId) ? (
+                <Grid container xs={7} justify='space-between' spacing={2}>
+                  <Grid item xs={8}>
+                    <TextField
+                      name='streetAddress'
+                      required
+                      fullWidth
+                      label='Street Address'
+                      value={`${listing.streetAddress}`}
+                      onChange={handleInputChange}
+                    />
+                    <br/>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <TextField
+                      name='postalCode'
+                      required
+                      fullWidth
+                      label='Postal Code'
+                      value={`${listing.postalCode}`}
+                      onChange={handleInputChange}
+                    />
+                    <br/>
+                  </Grid>
+                </Grid>
+              ) : (<></>)}
           </Grid>
           <br />
           <Grid item container xs={12} justify='space-between'>

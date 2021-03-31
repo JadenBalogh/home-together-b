@@ -411,7 +411,7 @@ create(
     'bathroomCount INT,' +
     'utilities BOOLEAN,' +
     'furnished BOOLEAN,' +
-    'petFriendly BOOLEAN,' +
+    'petRestrictions BOOLEAN,' +
     'smoking BOOLEAN,' +
     'forSale BOOLEAN,' +
     'forRent BOOLEAN,' +

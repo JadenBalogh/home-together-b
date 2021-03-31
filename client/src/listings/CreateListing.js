@@ -50,8 +50,6 @@ export default function CreateListing() {
   let handleInputChange = (event) => {
     console.log(event.target);
     setListing((prev) => {
-      console.log(event.target.value); //REMOVE ME BEFORE PR
-      console.log(listing)
       return {
         ...prev,
         [event.target.name]: event.target.value,

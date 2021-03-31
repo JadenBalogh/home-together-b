@@ -31,6 +31,21 @@ const SQL_SELECT_LISTING = `
     approvalStatus,
     creationDate,
     title,
+    subDescription,
+    groupName,
+    price,
+    eventDate,
+    eventTime,
+    bedroomCount,
+    bathroomCount,
+    utilities,
+    furnished,
+    petRestrictions,
+    smoking,
+    forSale,
+    forRent,
+    streetAddress,
+    postalCode,
     website,
     phone,
     email,
@@ -64,7 +79,7 @@ const SQL_INSERT_LISTING = `
     bathroomCount,
     utilities,
     furnished,
-    petFriendly,
+    petRestrictions,
     smoking,
     forSale,
     forRent,
@@ -123,11 +138,9 @@ async function getListing(id) {
 }
 
 async function createListing(listing) {
-  console.log(listing)
   await dbutils.query(SQL_TEST_LISTING, [
     listing.organizationId,
   ]);
-  console.log("exists");
   await dbutils.query(SQL_INSERT_LISTING, [
     true, // TODO: implement approval by admins
     new Date().toISOString(),
@@ -141,7 +154,7 @@ async function createListing(listing) {
     listing.bathroomCount || 0,
     listing.utilities || false,
     listing.furnished || false,
-    listing.petFriendly || false,
+    listing.petRestrictions || false,
     listing.smoking || false,
     listing.forSale || false,
     listing.forRent || false,
@@ -154,10 +167,10 @@ async function createListing(listing) {
     0,
     new Date().toISOString(), // TODO: Start date
     new Date().toISOString(), // TODO: End date
-    '',
     listing.description || '',
-    listing.locationId || 1,
-    listing.categoryId || '4',
+    '',
+    listing.locationId,
+    listing.categoryId,
     listing.organizationId,
   ]);
   return { success: true };

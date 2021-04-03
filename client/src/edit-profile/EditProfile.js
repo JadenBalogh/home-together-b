@@ -41,6 +41,7 @@ class EditProfile extends Component {
       },
     };
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleDropdownChange = this.handleDropdownChange.bind(this);
     this.checkPhoneExists = this.checkPhoneExists.bind(this);
     this.checkEmailExists = this.checkEmailExists.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -101,6 +102,15 @@ class EditProfile extends Component {
     );
   }
 
+  handleDropdownChange(event, options) {
+    this.setState((prevState) => ({
+      formData: {
+        ...prevState.formData,
+        locationIds: options.map((x) => x.value),
+      },
+    }));
+  }
+
   checkPhoneExists() {
     const url = process.env.REACT_APP_LOCAL_URL || '';
     const route = '/api/check-phone-exists?';
@@ -136,6 +146,7 @@ class EditProfile extends Component {
           emailExists={this.state.emailExists}
           handleConfirm={this.handleConfirm}
           handleInputChange={this.handleInputChange}
+          handleDropdownChange={this.handleDropdownChange}
           checkPhoneExists={this.checkPhoneExists}
           checkEmailExists={this.checkEmailExists}
           handleSubmit={this.handleSubmit}

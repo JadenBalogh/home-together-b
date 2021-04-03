@@ -378,7 +378,7 @@ export default function SignupForm(props) {
           <br />
           <FormBox helperText='Select the cities you would like to live in. You can also specify additional details about your area requirements.'>
             <Grid item xs={12}>
-              <LocationFilter label='Desired cities' onChange={props.onChange} />
+              <LocationFilter label='Desired cities' onChange={props.handleDropdownChange} />
             </Grid>
             <Grid item xs={12}>
               <TextField

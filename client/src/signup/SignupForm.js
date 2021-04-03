@@ -17,7 +17,7 @@ import {
   MenuItem,
   Divider,
 } from '@material-ui/core';
-import FormBox from './FormBox';
+import FormBox from '../shared/FormBox';
 import RadioText from '../shared/RadioText';
 import LocationFilter from '../shared/LocationFilter';
 import './Signup.css';

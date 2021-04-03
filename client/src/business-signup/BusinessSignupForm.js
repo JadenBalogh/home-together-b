@@ -171,7 +171,7 @@ export default function SignupForm(props) {
           </Grid>
           <br />
           <FormBox
-            helperText='This information is used as individual contact information and for account verification purposess.'
+            helperText='This information is used as individual contact information and for account verification purposes.'
             persist
           >
             <Grid item container direction='column'>

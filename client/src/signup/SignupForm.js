@@ -17,7 +17,7 @@ import {
   MenuItem,
   Divider,
 } from '@material-ui/core';
-import FormBox from './FormBox';
+import FormBox from '../shared/FormBox';
 import RadioText from '../shared/RadioText';
 import LocationFilter from '../shared/LocationFilter';
 import './Signup.css';
@@ -378,7 +378,7 @@ export default function SignupForm(props) {
           <br />
           <FormBox helperText='Select the cities you would like to live in. You can also specify additional details about your area requirements.'>
             <Grid item xs={12}>
-              <LocationFilter label='Desired cities' onChange={props.onChange} />
+              <LocationFilter label='Desired cities' onChange={props.handleDropdownChange} />
             </Grid>
             <Grid item xs={12}>
               <TextField

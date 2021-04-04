@@ -1,4 +1,3 @@
-import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Typography, Grid } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';

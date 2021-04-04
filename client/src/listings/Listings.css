@@ -32,15 +32,3 @@
   top: -2px;
   left: -2px;
 }
-
-.MuiPaper-root {
-  text-align: left;
-}
-
-.ratingAlign {
-  align-content: right;
-}
-
-.MuiAccordionSummary-content.Mui-expanded {
-  margin: 0;
-}

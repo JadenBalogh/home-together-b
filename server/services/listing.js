@@ -31,6 +31,21 @@ const SQL_SELECT_LISTING = `
     approvalStatus,
     creationDate,
     title,
+    subDescription,
+    groupName,
+    price,
+    eventDate,
+    eventTime,
+    bedroomCount,
+    bathroomCount,
+    utilities,
+    furnished,
+    petRestrictions,
+    smoking,
+    forSale,
+    forRent,
+    streetAddress,
+    postalCode,
     website,
     phone,
     email,
@@ -55,6 +70,21 @@ const SQL_INSERT_LISTING = `
     approvalStatus,
     creationDate,
     title,
+    subDescription,
+    groupName,
+    price,
+    eventDate,
+    eventTime,
+    bedroomCount,
+    bathroomCount,
+    utilities,
+    furnished,
+    petRestrictions,
+    smoking,
+    forSale,
+    forRent,
+    streetAddress,
+    postalCode,
     website,
     phone,
     email,
@@ -63,16 +93,32 @@ const SQL_INSERT_LISTING = `
     startDate,
     endDate,
     description,
+    imageURLs,
     locationId,
     categoryId,
     organizationId)
-  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 `;
 
 const SQL_UPDATE_LISTING = `
   UPDATE Listing
   SET
     title = ?,
+    subDescription = ?,
+    groupName = ?,
+    price = ?,
+    eventDate = ?,
+    eventTime = ?,
+    bedroomCount = ?,
+    bathroomCount = ?,
+    utilities = ?,
+    furnished = ?,
+    petRestrictions = ?,
+    smoking = ?,
+    forSale = ?,
+    forRent = ?,
+    streetAddress = ?,
+    postalCode = ?,
     website = ?,
     phone = ?,
     email = ?,
@@ -81,6 +127,13 @@ const SQL_UPDATE_LISTING = `
     description = ?,
     locationId = ?,
     categoryId = ?
+  WHERE id = ?
+`;
+
+const SQL_TEST_LISTING = `
+  SELECT 
+    city
+  FROM Location
   WHERE id = ?
 `;
 
@@ -100,29 +153,62 @@ async function getListing(id) {
 }
 
 async function createListing(listing) {
+  await dbutils.query(SQL_TEST_LISTING, [
+    listing.organizationId,
+  ]);
   await dbutils.query(SQL_INSERT_LISTING, [
     true, // TODO: implement approval by admins
     new Date().toISOString(),
-    listing.title,
-    listing.website,
-    listing.phone,
-    listing.email,
+    listing.title || '',
+    listing.subDescription || '',
+    listing.groupName || '',
+    listing.price || 0,
+    listing.eventDate || new Date().toISOString(),
+    listing.eventTime || 0,
+    listing.bedroomCount || 0,
+    listing.bathroomCount || 0,
+    listing.utilities || false,
+    listing.furnished || false,
+    listing.petRestrictions || false,
+    listing.smoking || false,
+    listing.forSale || false,
+    listing.forRent || false,
+    listing.streetAddress || '',
+    listing.postalCode || '',
+    listing.website || '',
+    listing.phone || '',
+    listing.email || '',
     0,
     0,
     new Date().toISOString(), // TODO: Start date
     new Date().toISOString(), // TODO: End date
-    listing.description,
+    listing.description || '',
+    '',
     listing.locationId,
     listing.categoryId,
     listing.organizationId,
   ]);
-
   return { success: true };
 }
 
 async function editListing(id, listing) {
   await dbutils.query(SQL_UPDATE_LISTING, [
     listing.title,
+    listing.subDescription,
+    listing.groupName,
+    listing.price,
+    listing.eventDate,
+    listing.eventTime,
+    listing.bedroomCount,
+    listing.bathroomCount,
+    listing.utilities,
+    listing.furnished,
+    listing.petRestrictions,
+    listing.smoking,
+    listing.forSale,
+    listing.forRent,
+    listing.streetAddress,
+    listing.postalCode,
     listing.website,
     listing.phone,
     listing.email,

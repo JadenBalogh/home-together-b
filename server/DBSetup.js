@@ -402,6 +402,21 @@ create(
     // Public information
     'creationDate DATE,' +
     'title VARCHAR(200),' +
+    'subDescription VARCHAR(400),' +
+    'groupName VARCHAR(200),' +
+    'price DECIMAL(3,2),' +
+    'eventDate DATE,' +
+    'eventTime TIME,' +
+    'bedroomCount INT,' +
+    'bathroomCount INT,' +
+    'utilities BOOLEAN,' +
+    'furnished BOOLEAN,' +
+    'petRestrictions BOOLEAN,' +
+    'smoking BOOLEAN,' +
+    'forSale BOOLEAN,' +
+    'forRent BOOLEAN,' +
+    'streetAddress VARCHAR(200),' +
+    'postalCode VARCHAR(20),' +
     'website VARCHAR(100),' +
     'phone VARCHAR(20),' +
     'email VARCHAR(100),' +
@@ -508,7 +523,7 @@ insert('LocationPreference(memberId, locationId)', [
   [74, [1, 11, 21, 31, 41]],
 ]);
 
-simpleSelect('*', 'CategoryType');
+simpleSelect('*', 'Listing');
 
 // Close the DB connection
 con.end();

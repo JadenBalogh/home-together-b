@@ -66,46 +66,7 @@ export default function CreateListingForm(props) {
                   <br/>
               </Grid>
               ) : (<></>)}
-              {props.categoryDirectory[14].includes(props.listing.categoryId) ? (
-                <Grid item xs={12}>
-                  <TextField
-                    name='groupName'
-                    variant='outlined'
-                    required
-                    fullWidth
-                    label='Company Name'
-                    onChange={props.handleInputChange}
-                  />
-                  <br/>
-              </Grid>
-              ) : (<></>)}
-              {props.categoryDirectory[24].includes(props.listing.categoryId) ? (
-                <Grid item xs={12}>
-                  <TextField
-                    name='groupName'
-                    variant='outlined'
-                    required
-                    fullWidth
-                    label='Company Name'
-                    onChange={props.handleInputChange}
-                  />
-                  <br/>
-              </Grid>
-              ) : (<></>)}
-              {props.categoryDirectory[54].includes(props.listing.categoryId) ? (
-                <Grid item xs={12}>
-                  <TextField
-                    name='groupName'
-                    variant='outlined'
-                    required
-                    fullWidth
-                    label='Company Name'
-                    onChange={props.handleInputChange}
-                  />
-                  <br/>
-              </Grid>
-              ) : (<></>)}
-              {props.categoryDirectory[64].includes(props.listing.categoryId) ? (
+              {props.categoryDirectory[14].concat(props.categoryDirectory[24],props.categoryDirectory[54],props.categoryDirectory[64]).includes(props.listing.categoryId) ? (
                 <Grid item xs={12}>
                   <TextField
                     name='groupName'
@@ -144,7 +105,7 @@ export default function CreateListingForm(props) {
                   <br/>
               </Grid>
               ) : (<></>)}
-              {props.categoryDirectory[74].includes(props.listing.categoryId) ? (
+              {props.categoryDirectory[74].concat(props.categoryDirectory[84]).includes(props.listing.categoryId) ? (
                 <Grid item xs={12}>
                   <TextField
                     name='groupName'
@@ -157,20 +118,7 @@ export default function CreateListingForm(props) {
                   <br/>
               </Grid>
               ) : (<></>)}
-              {props.categoryDirectory[84].includes(props.listing.categoryId) ? (
-                <Grid item xs={12}>
-                  <TextField
-                    name='groupName'
-                    variant='outlined'
-                    required
-                    fullWidth
-                    label='Agency Name'
-                    onChange={props.handleInputChange}
-                  />
-                  <br/>
-              </Grid>
-              ) : (<></>)}
-              {props.categoryDirectory[4].includes(props.listing.categoryId) ? (
+              {props.categoryDirectory[4].concat(props.categoryDirectory[34]).includes(props.listing.categoryId) ? (
                 <Grid item xs={5}>
                   <TextField
                     name='price'
@@ -183,46 +131,7 @@ export default function CreateListingForm(props) {
                   <br/>
               </Grid>
               ) : (<></>)}
-              {props.categoryDirectory[34].includes(props.listing.categoryId) ? (
-                <Grid item xs={5}>
-                  <TextField
-                    name='price'
-                    variant='outlined'
-                    required
-                    fullWidth
-                    label='Pricing'
-                    onChange={props.handleInputChange}
-                  />
-                  <br/>
-              </Grid>
-              ) : (<></>)}
-              {props.categoryDirectory[24].includes(props.listing.categoryId) ? (
-                <Grid item xs={5}>
-                  <TextField
-                    name='price'
-                    variant='outlined'
-                    required
-                    fullWidth
-                    label='Rates and Fees'
-                    onChange={props.handleInputChange}
-                  />
-                  <br/>
-              </Grid>
-              ) : (<></>)}
-              {props.categoryDirectory[54].includes(props.listing.categoryId) ? (
-                <Grid item xs={5}>
-                  <TextField
-                    name='price'
-                    variant='outlined'
-                    required
-                    fullWidth
-                    label='Rates and Fees'
-                    onChange={props.handleInputChange}
-                  />
-                  <br/>
-              </Grid>
-              ) : (<></>)}
-              {props.categoryDirectory[64].includes(props.listing.categoryId) ? (
+              {props.categoryDirectory[24].concat(props.categoryDirectory[54],props.categoryDirectory[64]).includes(props.listing.categoryId) ? (
                 <Grid item xs={5}>
                   <TextField
                     name='price'
@@ -292,77 +201,7 @@ export default function CreateListingForm(props) {
                 onChange={props.handleInputChange}
               />
             </Grid>
-            {props.categoryDirectory[4].includes(props.listing.categoryId) ? (
-                <Grid container xs={12} justify='space-between' spacing={2}>
-                  <Grid item xs={6}>
-                    <TextField
-                      name='bedroomCount'
-                      type='number'
-                      required
-                      fullWidth
-                      label='Number of Bedrooms'
-                      onChange={props.handleInputChange}
-                    />
-                    <br/>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <TextField
-                      name='bathroomCount'
-                      type='number'
-                      required
-                      fullWidth
-                      label='Number of Bathrooms'
-                      onChange={props.handleInputChange}
-                    />
-                    <br/>
-                  </Grid>
-                  <FormBox helperText='Are utilities included within the pricing?'>
-                    <Grid item>
-                      <FormLabel component='legend'>Utilities</FormLabel>
-                    </Grid>
-                    <Grid item onChange={props.handleInputChange}>
-                      <RadioGroup name='utilities' id='utilities' row>
-                        <FormControlLabel value='true' control={<Radio />} label='Yes' />
-                        <FormControlLabel value='false' control={<Radio />} label='No' />
-                      </RadioGroup>
-                    </Grid>
-                  </FormBox>
-                  <FormBox helperText='Is furniture included/prepared?'>
-                    <Grid item>
-                      <FormLabel component='legend'>Furnished</FormLabel>
-                    </Grid>
-                    <Grid item onChange={props.handleInputChange}>
-                      <RadioGroup name='furnished' id='furnished' row>
-                        <FormControlLabel value='true' control={<Radio />} label='Yes' />
-                        <FormControlLabel value='false' control={<Radio />} label='No' />
-                      </RadioGroup>
-                    </Grid>
-                  </FormBox>
-                  <FormBox helperText='Is smoking allowed inside?'>
-                    <Grid item>
-                      <FormLabel component='legend'>Smoking</FormLabel>
-                    </Grid>
-                    <Grid item onChange={props.handleInputChange}>
-                      <RadioGroup name='smoking' id='smoking' row>
-                        <FormControlLabel value='true' control={<Radio />} label='Yes' />
-                        <FormControlLabel value='false' control={<Radio />} label='No' />
-                      </RadioGroup>
-                    </Grid>
-                  </FormBox>
-                  <FormBox helperText='Are pets allowed?'>
-                    <Grid item>
-                      <FormLabel component='legend'>Pet Friendly</FormLabel>
-                    </Grid>
-                    <Grid item onChange={props.handleInputChange}>
-                      <RadioGroup name='petRestrictions' id='petRestrictions' row>
-                        <FormControlLabel value='true' control={<Radio />} label='Yes' />
-                        <FormControlLabel value='false' control={<Radio />} label='No' />
-                      </RadioGroup>
-                    </Grid>
-                  </FormBox>
-                </Grid>
-              ) : (<></>)}
-              {props.categoryDirectory[94].includes(props.listing.categoryId) ? (
+            {props.categoryDirectory[4].concat(props.categoryDirectory[94]).includes(props.listing.categoryId) ? (
                 <Grid container xs={12} justify='space-between' spacing={2}>
                   <Grid item xs={6}>
                     <TextField
@@ -464,175 +303,7 @@ export default function CreateListingForm(props) {
             <Grid item xs={4}>
               <LocationField label='Location' onChange={props.handleLocationsChange} />
             </Grid>
-            {props.categoryDirectory[14].includes(props.listing.categoryId) ? (
-                <Grid container xs={7} justify='space-between' spacing={2}>
-                  <Grid item xs={8}>
-                    <TextField
-                      name='streetAddress'
-                      required
-                      fullWidth
-                      label='Street Address'
-                      onChange={props.handleInputChange}
-                    />
-                    <br/>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <TextField
-                      name='postalCode'
-                      required
-                      fullWidth
-                      label='Postal Code'
-                      onChange={props.handleInputChange}
-                    />
-                    <br/>
-                  </Grid>
-                </Grid>
-              ) : (<></>)}
-              {props.categoryDirectory[24].includes(props.listing.categoryId) ? (
-                <Grid container xs={7} justify='space-between' spacing={2}>
-                  <Grid item xs={8}>
-                    <TextField
-                      name='streetAddress'
-                      required
-                      fullWidth
-                      label='Street Address'
-                      onChange={props.handleInputChange}
-                    />
-                    <br/>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <TextField
-                      name='postalCode'
-                      required
-                      fullWidth
-                      label='Postal Code'
-                      onChange={props.handleInputChange}
-                    />
-                    <br/>
-                  </Grid>
-                </Grid>
-              ) : (<></>)}
-              {props.categoryDirectory[34].includes(props.listing.categoryId) ? (
-                <Grid container xs={7} justify='space-between' spacing={2}>
-                  <Grid item xs={8}>
-                    <TextField
-                      name='streetAddress'
-                      required
-                      fullWidth
-                      label='Street Address'
-                      onChange={props.handleInputChange}
-                    />
-                    <br/>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <TextField
-                      name='postalCode'
-                      required
-                      fullWidth
-                      label='Postal Code'
-                      onChange={props.handleInputChange}
-                    />
-                    <br/>
-                  </Grid>
-                </Grid>
-              ) : (<></>)}
-              {props.categoryDirectory[44].includes(props.listing.categoryId) ? (
-                <Grid container xs={7} justify='space-between' spacing={2}>
-                  <Grid item xs={8}>
-                    <TextField
-                      name='streetAddress'
-                      required
-                      fullWidth
-                      label='Street Address'
-                      onChange={props.handleInputChange}
-                    />
-                    <br/>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <TextField
-                      name='postalCode'
-                      required
-                      fullWidth
-                      label='Postal Code'
-                      onChange={props.handleInputChange}
-                    />
-                    <br/>
-                  </Grid>
-                </Grid>
-              ) : (<></>)}
-              {props.categoryDirectory[54].includes(props.listing.categoryId) ? (
-                <Grid container xs={7} justify='space-between' spacing={2}>
-                  <Grid item xs={8}>
-                    <TextField
-                      name='streetAddress'
-                      required
-                      fullWidth
-                      label='Street Address'
-                      onChange={props.handleInputChange}
-                    />
-                    <br/>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <TextField
-                      name='postalCode'
-                      required
-                      fullWidth
-                      label='Postal Code'
-                      onChange={props.handleInputChange}
-                    />
-                    <br/>
-                  </Grid>
-                </Grid>
-              ) : (<></>)}
-              {props.categoryDirectory[64].includes(props.listing.categoryId) ? (
-                <Grid container xs={7} justify='space-between' spacing={2}>
-                  <Grid item xs={8}>
-                    <TextField
-                      name='streetAddress'
-                      required
-                      fullWidth
-                      label='Street Address'
-                      onChange={props.handleInputChange}
-                    />
-                    <br/>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <TextField
-                      name='postalCode'
-                      required
-                      fullWidth
-                      label='Postal Code'
-                      onChange={props.handleInputChange}
-                    />
-                    <br/>
-                  </Grid>
-                </Grid>
-              ) : (<></>)}
-              {props.categoryDirectory[74].includes(props.listing.categoryId) ? (
-                <Grid container xs={7} justify='space-between' spacing={2}>
-                  <Grid item xs={8}>
-                    <TextField
-                      name='streetAddress'
-                      required
-                      fullWidth
-                      label='Street Address'
-                      onChange={props.handleInputChange}
-                    />
-                    <br/>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <TextField
-                      name='postalCode'
-                      required
-                      fullWidth
-                      label='Postal Code'
-                      onChange={props.handleInputChange}
-                    />
-                    <br/>
-                  </Grid>
-                </Grid>
-              ) : (<></>)}
-              {props.categoryDirectory[84].includes(props.listing.categoryId) ? (
+            {props.categoryDirectory[14].concat(props.categoryDirectory[24],props.categoryDirectory[34],props.categoryDirectory[44],props.categoryDirectory[54],props.categoryDirectory[64],props.categoryDirectory[74],props.categoryDirectory[84]).includes(props.listing.categoryId) ? (
                 <Grid container xs={7} justify='space-between' spacing={2}>
                   <Grid item xs={8}>
                     <TextField

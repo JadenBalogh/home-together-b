@@ -42,37 +42,7 @@ export default function ListingForm(props) {
                 </Grid>
               </Grid>
             ) : (<></>)}
-            {props.categoryDirectory[14].includes(props.listing.categoryId) ? (
-                <Grid container columns xs={12}>
-                  <Grid xs={12}>
-                    <Typography variant='body1'> <b>Company Name</b> </Typography>
-                  </Grid>
-                  <Grid xs={12}>
-                    <Typography variant='body1'>{props.listing.groupName}</Typography>
-                  </Grid>
-                </Grid>
-            ) : (<></>)}
-            {props.categoryDirectory[24].includes(props.listing.categoryId) ? (
-                <Grid container columns xs={12}>
-                  <Grid xs={12}>
-                    <Typography variant='body1'> <b>Company Name</b> </Typography>
-                  </Grid>
-                  <Grid xs={12}>
-                    <Typography variant='body1'>{props.listing.groupName}</Typography>
-                  </Grid>
-                </Grid>
-            ) : (<></>)}
-            {props.categoryDirectory[54].includes(props.listing.categoryId) ? (
-                <Grid container columns xs={12}>
-                  <Grid xs={12}>
-                    <Typography variant='body1'> <b>Company Name</b> </Typography>
-                  </Grid>
-                  <Grid xs={12}>
-                    <Typography variant='body1'>{props.listing.groupName}</Typography>
-                  </Grid>
-                </Grid>
-            ) : (<></>)}
-            {props.categoryDirectory[64].includes(props.listing.categoryId) ? (
+            {props.categoryDirectory[14].concat(props.categoryDirectory[24],props.categoryDirectory[54],props.categoryDirectory[64]).includes(props.listing.categoryId) ? (
                 <Grid container columns xs={12}>
                   <Grid xs={12}>
                     <Typography variant='body1'> <b>Company Name</b> </Typography>
@@ -95,14 +65,14 @@ export default function ListingForm(props) {
             {props.categoryDirectory[44].includes(props.listing.categoryId) ? (
                 <Grid container columns xs={12}>
                   <Grid xs={12}>
-                    <Typography variant='body1'> <b>Organization Name</b> </Typography>
+                    <Typography variant='body1'> <b>Housing Group Name</b> </Typography>
                   </Grid>
                   <Grid xs={12}>
                     <Typography variant='body1'>{props.listing.groupName}</Typography>
                   </Grid>
                 </Grid>
             ) : (<></>)}
-            {props.categoryDirectory[34].includes(props.listing.categoryId) ? (
+            {props.categoryDirectory[74].concat(props.categoryDirectory[84]).includes(props.listing.categoryId) ? (
                 <Grid container columns xs={12}>
                   <Grid xs={12}>
                     <Typography variant='body1'> <b>Agency Name</b> </Typography>
@@ -112,17 +82,7 @@ export default function ListingForm(props) {
                   </Grid>
                 </Grid>
             ) : (<></>)}
-            {props.categoryDirectory[34].includes(props.listing.categoryId) ? (
-                <Grid container columns xs={12}>
-                  <Grid xs={12}>
-                    <Typography variant='body1'> <b>Agency Name</b> </Typography>
-                  </Grid>
-                  <Grid xs={12}>
-                    <Typography variant='body1'>{props.listing.groupName}</Typography>
-                  </Grid>
-                </Grid>
-            ) : (<></>)}
-            {props.categoryDirectory[4].includes(props.listing.categoryId) ? (
+            {props.categoryDirectory[4].concat(props.categoryDirectory[34]).includes(props.listing.categoryId) ? (
               <Grid container columns xs={12}>
                 <Grid xs={8}>
                   <Typography variant='body1'> <b>Pricing</b> </Typography>
@@ -132,37 +92,7 @@ export default function ListingForm(props) {
                 </Grid>
               </Grid>
             ) : (<></>)}
-            {props.categoryDirectory[34].includes(props.listing.categoryId) ? (
-              <Grid container columns xs={12}>
-                <Grid xs={8}>
-                  <Typography variant='body1'> <b>Pricing</b> </Typography>
-                </Grid>
-                <Grid xs={4}>
-                  <Typography variant='body1'>{'$'+props.listing.price}</Typography>
-                </Grid>
-              </Grid>
-            ) : (<></>)}
-            {props.categoryDirectory[24].includes(props.listing.categoryId) ? (
-              <Grid container columns xs={12}>
-                <Grid xs={8}>
-                  <Typography variant='body1'> <b>Rates and Fees</b> </Typography>
-                </Grid>
-                <Grid xs={4}>
-                  <Typography variant='body1'>{'$'+props.listing.price}</Typography>
-                </Grid>
-              </Grid>
-            ) : (<></>)}
-            {props.categoryDirectory[54].includes(props.listing.categoryId) ? (
-              <Grid container columns xs={12}>
-                <Grid xs={8}>
-                  <Typography variant='body1'> <b>Rates and Fees</b> </Typography>
-                </Grid>
-                <Grid xs={4}>
-                  <Typography variant='body1'>{'$'+props.listing.price}</Typography>
-                </Grid>
-              </Grid>
-            ) : (<></>)}
-            {props.categoryDirectory[64].includes(props.listing.categoryId) ? (
+            {props.categoryDirectory[24].concat(props.categoryDirectory[54],props.categoryDirectory[64]).includes(props.listing.categoryId) ? (
               <Grid container columns xs={12}>
                 <Grid xs={8}>
                   <Typography variant='body1'> <b>Rates and Fees</b> </Typography>
@@ -200,47 +130,7 @@ export default function ListingForm(props) {
             ) : (<></>)}
             <Typography variant='body1'> <b>Additional Information</b> </Typography>
             <Typography variant='body1'>{props.listing.description}</Typography>
-            {props.categoryDirectory[4].includes(props.listing.categoryId) ? (
-              <Grid container columns xs={12}>
-                <Grid xs={8}>
-                  <Typography variant='body1'> <b>Utilities</b> </Typography>
-                </Grid>
-                <Grid xs={4}>
-                  {props.listing.utilities === 1 ? (
-                  <Typography variant='body1'>Yes</Typography>) : (
-                  <Typography variant='body1'>No</Typography>
-                  )}
-                </Grid>
-                <Grid xs={8}>
-                  <Typography variant='body1'> <b>Furnished</b> </Typography>
-                </Grid>
-                <Grid xs={4}>
-                  {props.listing.furnished === 1 ? (
-                  <Typography variant='body1'>Yes</Typography>) : (
-                  <Typography variant='body1'>No</Typography>
-                  )}
-                </Grid>
-                <Grid xs={8}>
-                  <Typography variant='body1'> <b>Pet Friendly</b> </Typography>
-                </Grid>
-                <Grid xs={4}>
-                  {props.listing.petRestrictions === 1 ? (
-                  <Typography variant='body1'>Yes</Typography>) : (
-                  <Typography variant='body1'>No</Typography>
-                  )}
-                </Grid>
-                <Grid xs={8}>
-                  <Typography variant='body1'> <b>Smoking Friendly</b> </Typography>
-                </Grid>
-                <Grid xs={4}>
-                  {props.listing.smoking === 1 ? (
-                  <Typography variant='body1'>Yes</Typography>) : (
-                  <Typography variant='body1'>No</Typography>
-                  )}
-                </Grid>
-              </Grid>
-              ) : (<></>)}
-              {props.categoryDirectory[94].includes(props.listing.categoryId) ? (
+            {props.categoryDirectory[4].concat(props.categoryDirectory[94]).includes(props.listing.categoryId) ? (
               <Grid container columns xs={12}>
                 <Grid xs={8}>
                   <Typography variant='body1'> <b>Utilities</b> </Typography>
@@ -302,119 +192,7 @@ export default function ListingForm(props) {
                   </Grid>
                 </Grid>
               ) : (<></>)}
-              {props.categoryDirectory[14].includes(props.listing.categoryId) ? (
-                <Grid container columns xs={12}>
-                  <Grid xs={8}>
-                    <Typography variant='body1'> <b>Street Address</b> </Typography>
-                  </Grid>
-                  <Grid xs={4}>
-                    <Typography variant='body1'>{props.listing.streetAddress}</Typography>
-                  </Grid>
-                  <Grid xs={8}>
-                    <Typography variant='body1'> <b>Postal Code</b> </Typography>
-                  </Grid>
-                  <Grid xs={4}>
-                    <Typography variant='body1'>{props.listing.postalCode}</Typography>
-                  </Grid>
-                </Grid>
-              ) : (<></>)}
-              {props.categoryDirectory[24].includes(props.listing.categoryId) ? (
-                <Grid container columns xs={12}>
-                  <Grid xs={8}>
-                    <Typography variant='body1'> <b>Street Address</b> </Typography>
-                  </Grid>
-                  <Grid xs={4}>
-                    <Typography variant='body1'>{props.listing.streetAddress}</Typography>
-                  </Grid>
-                  <Grid xs={8}>
-                    <Typography variant='body1'> <b>Postal Code</b> </Typography>
-                  </Grid>
-                  <Grid xs={4}>
-                    <Typography variant='body1'>{props.listing.postalCode}</Typography>
-                  </Grid>
-                </Grid>
-              ) : (<></>)}
-              {props.categoryDirectory[34].includes(props.listing.categoryId) ? (
-                <Grid container columns xs={12}>
-                  <Grid xs={8}>
-                    <Typography variant='body1'> <b>Street Address</b> </Typography>
-                  </Grid>
-                  <Grid xs={4}>
-                    <Typography variant='body1'>{props.listing.streetAddress}</Typography>
-                  </Grid>
-                  <Grid xs={8}>
-                    <Typography variant='body1'> <b>Postal Code</b> </Typography>
-                  </Grid>
-                  <Grid xs={4}>
-                    <Typography variant='body1'>{props.listing.postalCode}</Typography>
-                  </Grid>
-                </Grid>
-              ) : (<></>)}
-              {props.categoryDirectory[44].includes(props.listing.categoryId) ? (
-                <Grid container columns xs={12}>
-                  <Grid xs={8}>
-                    <Typography variant='body1'> <b>Street Address</b> </Typography>
-                  </Grid>
-                  <Grid xs={4}>
-                    <Typography variant='body1'>{props.listing.streetAddress}</Typography>
-                  </Grid>
-                  <Grid xs={8}>
-                    <Typography variant='body1'> <b>Postal Code</b> </Typography>
-                  </Grid>
-                  <Grid xs={4}>
-                    <Typography variant='body1'>{props.listing.postalCode}</Typography>
-                  </Grid>
-                </Grid>
-              ) : (<></>)}
-              {props.categoryDirectory[54].includes(props.listing.categoryId) ? (
-                <Grid container columns xs={12}>
-                  <Grid xs={8}>
-                    <Typography variant='body1'> <b>Street Address</b> </Typography>
-                  </Grid>
-                  <Grid xs={4}>
-                    <Typography variant='body1'>{props.listing.streetAddress}</Typography>
-                  </Grid>
-                  <Grid xs={8}>
-                    <Typography variant='body1'> <b>Postal Code</b> </Typography>
-                  </Grid>
-                  <Grid xs={4}>
-                    <Typography variant='body1'>{props.listing.postalCode}</Typography>
-                  </Grid>
-                </Grid>
-              ) : (<></>)}
-              {props.categoryDirectory[64].includes(props.listing.categoryId) ? (
-                <Grid container columns xs={12}>
-                  <Grid xs={8}>
-                    <Typography variant='body1'> <b>Street Address</b> </Typography>
-                  </Grid>
-                  <Grid xs={4}>
-                    <Typography variant='body1'>{props.listing.streetAddress}</Typography>
-                  </Grid>
-                  <Grid xs={8}>
-                    <Typography variant='body1'> <b>Postal Code</b> </Typography>
-                  </Grid>
-                  <Grid xs={4}>
-                    <Typography variant='body1'>{props.listing.postalCode}</Typography>
-                  </Grid>
-                </Grid>
-              ) : (<></>)}
-              {props.categoryDirectory[74].includes(props.listing.categoryId) ? (
-                <Grid container columns xs={12}>
-                  <Grid xs={8}>
-                    <Typography variant='body1'> <b>Street Address</b> </Typography>
-                  </Grid>
-                  <Grid xs={4}>
-                    <Typography variant='body1'>{props.listing.streetAddress}</Typography>
-                  </Grid>
-                  <Grid xs={8}>
-                    <Typography variant='body1'> <b>Postal Code</b> </Typography>
-                  </Grid>
-                  <Grid xs={4}>
-                    <Typography variant='body1'>{props.listing.postalCode}</Typography>
-                  </Grid>
-                </Grid>
-              ) : (<></>)}
-              {props.categoryDirectory[84].includes(props.listing.categoryId) ? (
+              {props.categoryDirectory[14].concat(props.categoryDirectory[24],props.categoryDirectory[34],props.categoryDirectory[44],props.categoryDirectory[54],props.categoryDirectory[64],props.categoryDirectory[74],props.categoryDirectory[84]).includes(props.listing.categoryId) ? (
                 <Grid container columns xs={12}>
                   <Grid xs={8}>
                     <Typography variant='body1'> <b>Street Address</b> </Typography>

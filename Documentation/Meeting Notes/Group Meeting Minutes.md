@@ -725,13 +725,72 @@ Deciding tasks for this week:
  
  
  
-## March 16th
+ 
+## March 23th
 
 ###### 1:30-1:47pm:
 Review Alvin's work
 
+
 ###### 1:47-1:55pm:
 Close the past issues, figure out the plan next week
 
+
 ###### 1:55-2:10pm:
 figure out what we need to show to Twila
+
+The issues for this week including:
+
+  Update listing pages to have specific fields based on the selected category type
+  
+  Number fields should not go negative
+  
+  Members filter panel should have a “clear filters” button
+  
+  Members should not be able to see themselves in the search page
+  
+  Add Twila's requested content changes
+  
+  Revamp content of home page based on Twila's feedback
+  
+  
+  Update images used in the site to Twila's provided options 
+  
+  Organize and add all site images into a specific folder
+  
+  
+
+
+
+## March 30th
+
+###### 1:30-1:41pm:
+
+Discuss the issues and the ways to implement them
+
+
+###### 1:41-2:00pm:
+Discuss what to show Twila and assign tasks for upcoming week
+
+Think about the final deliverable deadlines
+
+
+###### 2:00-2:15pm:
+Discuss the detail plan for this week, such as the detail of reviewing website issue
+
+The issues of this week including:
+  Review all pages in the site to ensure everything works
+
+  Add helper text to Edit Member Account form
+  
+  Add helper text to Business Signup form
+  
+  Add helper text to Edit Business Account Form
+  
+  Add helper text and update format of Create Listing page
+  
+  Add helper text and update format of Edit Listing page
+  
+  Change the listing search page to have direct links to Listing pages rather than accordions
+  
+  Update format of View Listing page

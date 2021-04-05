@@ -36,7 +36,11 @@ export default function CreateListing() {
     const url = process.env.REACT_APP_LOCAL_URL || '';
     fetch(url + '/api/get-category-types')
       .then((res) => res.json())
-      .then((options) => {
+      .then((data) => {
+        let options = data;
+        if (sessionStorage.getItem('accountType') === '1') {
+          options = options.filter((x) => x.name !== 'Members with Homes to Share');
+        }
         setCategoryOptions(options.filter((x) => !x.parentId));
         let subCats = {};
         for (var o of options.filter((x) => x.parentId)) {

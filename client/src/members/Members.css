@@ -1,0 +1,47 @@
+.filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  border: 1px solid #cfe5f8;
+  width: 750px;
+  padding: 15px;
+  margin: 5px;
+  background-color: #cfe5f8;
+  border: 1px solid #f2f2f2;
+  border-radius: 20px;
+}
+
+.filter-select-container {
+  display: flex;
+  align-items: center;
+  padding: 4px 6px;
+  margin: 2px;
+}
+
+.member-row {
+  cursor: pointer;
+  position: relative;
+  border: solid 1px #d3d3d3;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 1px;
+}
+
+.member-row:hover {
+  box-shadow: 3px 3px #d3d3d3;
+  top: -2px;
+  left: -2px;
+}
+
+.MuiPagination-ul {
+  background-color: #ffffff;
+}
+
+.MuiPaper-root {
+  text-align: left;
+}
+
+.MuiAccordionSummary-content.Mui-expanded {
+  margin: 0;
+}

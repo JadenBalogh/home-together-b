@@ -1,0 +1,10 @@
+.about {
+  text-align: center;
+}
+
+.about-block-img {
+  width: 100%;
+  max-height: 250px;
+  border-radius: 50px;
+  object-fit: cover;
+}

@@ -25,7 +25,7 @@ export default function NavBar() {
           </Grid>
           <Grid item xs={9} container alignItems='center' justify='flex-end'>
             <NavItem path='/about' label='About' />
-            {sessionStorage.getItem('id') ? <NavItem path='/members' label='Members' /> : <></>}
+            {sessionStorage.getItem('accountType') === '0' ? <NavItem path='/members' label='Members' /> : <></>}
             <NavItem path='/listings' label='Classifieds & Home Share Links' />
             {sessionStorage.getItem('id') ? (
               <>

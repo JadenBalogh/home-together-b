@@ -36,7 +36,12 @@ export default function CreateListing() {
     const url = process.env.REACT_APP_LOCAL_URL || '';
     fetch(url + '/api/get-category-types')
       .then((res) => res.json())
-      .then((options) => {
+      .then((data) => {
+        let options = data;
+        if (sessionStorage.getItem('accountType') === '1') {
+          options = options.filter((x) => x.name !== 'Members with Homes to Share');
+        }
+
         setCategoryOptions(options.filter((x) => !x.parentId));
         let subCats = {};
         for (var o of options.filter((x) => x.parentId)) {
@@ -44,6 +49,15 @@ export default function CreateListing() {
           subCats[o.parentId] = arr ? [...arr, o] : [o];
         }
         setSubcategoryOptions(subCats);
+
+        if (sessionStorage.getItem('accountType') === '0') {
+          setListing((prev) => {
+            return {
+              ...prev,
+              categoryId: '664',
+            };
+          });
+        }
       });
   };
 
@@ -105,7 +119,7 @@ export default function CreateListing() {
               </Select>
             </FormControl>
           </Grid>
-          ) : ( listing.categoryId='664' )}
+          ) : <></>}
           <Grid item xs={6}>
             <TextField name='subDescription' required fullWidth label='Short Description' onChange={handleInputChange} />
           </Grid>

@@ -37,6 +37,7 @@ class Signup extends Component {
     this.handleConfirm = this.handleConfirm.bind(this);
     this.checkPasswordsMatch = this.checkPasswordsMatch.bind(this);
     this.handleSignup = this.handleSignup.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
   }
 
@@ -59,7 +60,32 @@ class Signup extends Component {
           window.alert(result.err);
           return;
         }
-        this.props.history.push('/signin');
+        this.handleLogin();
+      });
+  }
+
+  handleLogin() {
+    const route = '/api/login?';
+    const url = process.env.REACT_APP_LOCAL_URL || '';
+    fetch(url + route, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        username: this.state.formData.username,
+        password: this.state.formData.password,
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.err) {
+          window.alert(json.err);
+          return;
+        }
+        sessionStorage.setItem('id', json.id);
+        sessionStorage.setItem('accountType', json.accountType);
+        sessionStorage.setItem('token', json.accessToken);
+        this.props.history.push('/');
+        window.location.reload();
       });
   }
 

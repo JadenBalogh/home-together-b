@@ -3,68 +3,14 @@ Steps required to setup and run the app in your local development environment.
 
 ## First-Time Installations
 These steps are only required once for each computer you are working on.  
-### Install Visual Studio Code: https://code.visualstudio.com/  
+#### Install Visual Studio Code: https://code.visualstudio.com/  
 
-### Install Node.js: https://nodejs.org/en/
+#### Install Node.js: https://nodejs.org/en/
 
-### Install MySQL: https://www.mysql.com/products/community/ - Download "Community Server" I'd use the windows installer but you can install manually.
-1. Use the config type: Development Computer
+*NOTE: Pull from github if you haven't already, the following setup instructions presume you have a local copy of the code.*
 
-2. Use the default ports.
-If either of these ports is taken by something already message the group and we can discuss changing ports. As per this [List of TCP & UDP Port Numbers](https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers) it should be free. 
-
-3. Use Strong Password Encryption for Authentication (The Default).
-
-4. Setup your MySQL Root Password. 
-
-5. Setup a "dev" user, this is the account we should be using to test our development setup.
-
-NOTE: Pull from github if you haven't already, the following setup instructions presume you have a local copy of the code.
-
-6. Create a file in "/server" named ".env.local", this file is ignored by git and will not be pulled/pushed to github. Copy the code below into that file.
-```
-HOST='localhost'
-USER='YOUR_USERNAME'
-PASSWORD='YOUR_PASSWORD'
-DATABASE='YOUR_DB_NAME'
-``` 
-replace "YOUR_USERNAME" & "YOUR_PASSWORD" with the information from your "Dev" user.
-
-7. Configure MySQL as a windows service.
-NOTE: This guide will only cover running MySQL as a service but it's not technically required.
-
-8. Navigate to the mySQL install directory via `CMD`(Not required if MySQL is in your PATH):
-```cmd
-cd C:\Program Files\MySQL\MySQL Server 8.0\bin\
-``` 
-
-9. Sign into your MySQL Server via CMD with your ROOT password:
-```cmd
-mysql -u root -p
-``` 
-
-10. As the root DB user create a database, replace "YOUR_DATABASE_NAME" with the name for your DB.
-```cmd
-CREATE DATABASE YOUR_DATABASE_NAME; 
-``` 
-
-11. Replace "YOUR_DATABASE_NAME" in ".env.local" with whatever you used above.
-
-12. Start the console in your home-together-b directory in VScode, CD to the server directory and then run npm install for the MySQL Driver to be installed.
-```cmd
-cd server
-npm install
-```
-
-13. To test that everything working run the DBSetup.js file with node: 
-```cmd
-node DBSetup.js
-``` 
-If everything is setup properly you will see the DBSetup output in your Terminal. 
-
-### Install the MySQL2 Node.js Driver
-The mySQL2 node.js driver is included in the server package.json and should be grabbed when doing npm install. [An Absolute Beginner's Guide to Using npm](https://nodesource.com/blog/an-absolute-beginners-guide-to-using-npm/) is linked if you're unfamiliar. We have to use the MySQL2 because the mySQL driver doesn't support the new MySQL 8 Secure DB authentication. See [StackOverflow Discussion](https://stackoverflow.com/questions/50093144/mysql-8-0-client-does-not-support-authentication-protocol-requested-by-server) and [GitHub MySQL Issue](https://github.com/mysqljs/mysql/pull/1962).
-
+### Setup environment variables
+Create a file in "/server" named ".env.local". This file is ignored by git and will not be pulled/pushed to github. Copy the **secret** code from the Transition Guide into this file.
 
 ## Updating your Local Version
 Every time you pull new changes into your local branch or do a first-time installation, you should do the following steps.

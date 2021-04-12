@@ -47,3 +47,16 @@ cd server
 npm start
 ```
 You can cancel this process by using `ctrl + c` in the Terminal window.
+
+## Updating the Live Server
+Once you have completed a set of changes, you can publish these to the live development server on Heroku using the following steps:
+1. Open VS Code and open a new Terminal window. In the terminal, change to the `/client` directory and create a build using `npm`:
+```cmd
+cd client
+npm run build
+```
+2. Navigate to the project folder in your file explorer, and locate the newly created `build` directory in the `client` folder.
+3. Cut the entire `build` folder from this directory, and navigate to the `server` directory. Delete any existing `build` folder in `server` and replace it with the new one.
+4. Commit these changes to the `dev` branch.
+5. Go to the [Heroku dashboard](https://dashboard.heroku.com/apps/home-together-b) and sign into `home-together-b` with your admin credentials. (See the transition document for details about becoming an admin).
+6. The site should automatically deploy these changes. However, to manually deploy, go to the deploy tab, scroll down to Manual Deploy, select the `dev` branch, and press Deploy Branch. After a short while, the site should be fully up to date!
